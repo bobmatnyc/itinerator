@@ -147,7 +147,7 @@ describe('Real-world Usage Examples', () => {
         location: { name: 'Location' },
         checkInDate: '2025-06-03',
         checkOutDate: '2025-06-01', // Before check-in ✗
-      }),
+      })
     ).toThrow();
   });
 
