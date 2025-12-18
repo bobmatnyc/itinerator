@@ -1,4 +1,7 @@
 import { Command } from 'commander';
+import { demoCommand } from './cli/commands/demo.command.js';
+import { doctorCommand } from './cli/commands/doctor.command.js';
+import { setupCommand } from './cli/commands/setup.command.js';
 import { VERSION } from './utils/version.js';
 
 /**
@@ -12,15 +15,11 @@ program
   .version(VERSION, '-v, --version', 'Display version information');
 
 /**
- * Setup command - Initialize itinerizer configuration
+ * Register top-level commands
  */
-program
-  .command('setup')
-  .description('Initialize itinerizer configuration')
-  .action(() => {
-    console.log('Setting up itinerizer...');
-    console.log('TODO: Implement setup command');
-  });
+program.addCommand(setupCommand());
+program.addCommand(doctorCommand());
+program.addCommand(demoCommand());
 
 /**
  * Itinerary command - Manage travel itineraries
@@ -52,29 +51,6 @@ itineraryCmd
   .action((id: string) => {
     console.log(`Showing itinerary: ${id}`);
     console.log('TODO: Implement itinerary show command');
-  });
-
-/**
- * Demo command - Run interactive demo
- */
-program
-  .command('demo')
-  .description('Run an interactive demo of itinerizer')
-  .action(() => {
-    console.log('Running demo...');
-    console.log('TODO: Implement demo command');
-  });
-
-/**
- * Doctor command - Diagnose installation and configuration
- */
-program
-  .command('doctor')
-  .description('Check itinerizer installation and configuration')
-  .action(() => {
-    console.log('Running diagnostics...');
-    console.log(`Version: ${VERSION}`);
-    console.log('TODO: Implement doctor command');
   });
 
 /**

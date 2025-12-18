@@ -215,17 +215,19 @@ export class ItineraryService {
     }
 
     // Remove traveler
+    const filteredTravelers = existing.travelers.filter((t) => t.id !== travelerId);
+
+    // Clear primary traveler if it was the removed traveler
+    const shouldClearPrimary = existing.primaryTravelerId === travelerId;
+    const { primaryTravelerId: _removed, ...baseItinerary } = existing;
+
     const updated: Itinerary = {
-      ...existing,
-      travelers: existing.travelers.filter((t) => t.id !== travelerId),
+      ...baseItinerary,
+      ...(shouldClearPrimary ? {} : { primaryTravelerId: existing.primaryTravelerId }),
+      travelers: filteredTravelers,
       version: existing.version + 1,
       updatedAt: new Date(),
     };
-
-    // Clear primary traveler if it was the removed traveler
-    if (updated.primaryTravelerId === travelerId) {
-      updated.primaryTravelerId = undefined;
-    }
 
     // Save updated itinerary
     return this.storage.save(updated);
