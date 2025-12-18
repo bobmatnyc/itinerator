@@ -5,7 +5,7 @@
 
 import * as p from '@clack/prompts';
 import { Command } from 'commander';
-import { createItineraryId, type ItineraryId } from '../../../domain/types/branded.js';
+import { type ItineraryId, createItineraryId } from '../../../domain/types/branded.js';
 import { WorkingContextService } from '../../../services/working-context.service.js';
 import { ConfigStorage } from '../../../storage/config-storage.js';
 import { JsonItineraryStorage } from '../../../storage/json-storage.js';

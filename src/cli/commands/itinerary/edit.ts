@@ -5,7 +5,7 @@
 
 import * as p from '@clack/prompts';
 import { Command } from 'commander';
-import { createItineraryId, type ItineraryId } from '../../../domain/types/branded.js';
+import { type ItineraryId, createItineraryId } from '../../../domain/types/branded.js';
 import type { Itinerary } from '../../../domain/types/itinerary.js';
 import { ItineraryService } from '../../../services/itinerary.service.js';
 import { WorkingContextService } from '../../../services/working-context.service.js';

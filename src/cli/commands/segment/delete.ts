@@ -5,7 +5,7 @@
 
 import * as p from '@clack/prompts';
 import { Command } from 'commander';
-import { createSegmentId, type SegmentId } from '../../../domain/types/branded.js';
+import { type SegmentId, createSegmentId } from '../../../domain/types/branded.js';
 import { SegmentService } from '../../../services/segment.service.js';
 import { WorkingContextService } from '../../../services/working-context.service.js';
 import { ConfigStorage } from '../../../storage/config-storage.js';

@@ -102,10 +102,7 @@ export async function promptOptionalText(
  * @param initialValue - Optional initial value (default: false)
  * @returns True if confirmed, false otherwise
  */
-export async function promptConfirm(
-  message: string,
-  initialValue = false
-): Promise<boolean> {
+export async function promptConfirm(message: string, initialValue = false): Promise<boolean> {
   const confirmed = await p.confirm({
     message,
     initialValue,

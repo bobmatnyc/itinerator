@@ -5,7 +5,7 @@
 
 import * as p from '@clack/prompts';
 import { Command } from 'commander';
-import { createItineraryId, type ItineraryId } from '../../../domain/types/branded.js';
+import { type ItineraryId, createItineraryId } from '../../../domain/types/branded.js';
 import { JsonItineraryStorage } from '../../../storage/json-storage.js';
 import { printError, printSuccess } from '../../output/colors.js';
 import { handleCancel } from '../../prompts/index.js';
