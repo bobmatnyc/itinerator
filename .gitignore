@@ -128,10 +128,9 @@ venv/
 virtualenv/
 wheels/
 
-# Claude MPM - ignore except memories and agents
+# Claude MPM - ignore except memories (agents deployed at runtime)
 .claude-mpm/*
 !.claude-mpm/memories/
-!.claude-mpm/agents/
 
 # Large files
 *.pdf
@@ -139,3 +138,6 @@ wheels/
 # Vercel build outputs
 .vercel
 .vercel/
+
+# Added by Claude MPM /mpm-init
+kuzu-memories/
