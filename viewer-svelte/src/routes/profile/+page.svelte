@@ -2,12 +2,14 @@
   import { settingsStore } from '$lib/stores/settings.svelte';
   import { authStore } from '$lib/stores/auth.svelte';
   import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import { onMount } from 'svelte';
 
   let apiKey = $state('');
   let showKey = $state(false);
   let saveSuccess = $state(false);
   let saveError = $state('');
+  let isOnboarding = $state(false);
 
   onMount(() => {
     // Check authentication
@@ -15,6 +17,10 @@
       goto('/login');
       return;
     }
+
+    // Check if this is onboarding flow
+    const urlParams = new URLSearchParams(window.location.search);
+    isOnboarding = urlParams.get('onboarding') === 'true';
 
     // Load current API key
     apiKey = settingsStore.getApiKey();
@@ -32,6 +38,13 @@
       setTimeout(() => {
         saveSuccess = false;
       }, 3000);
+
+      // If onboarding, redirect to itineraries after save
+      if (isOnboarding) {
+        setTimeout(() => {
+          goto('/itineraries');
+        }, 1500);
+      }
     } catch (err) {
       saveError = 'Failed to save API key. Please try again.';
       console.error('Save error:', err);
@@ -45,6 +58,11 @@
   function handleLogout() {
     authStore.logout();
     goto('/login');
+  }
+
+  function handleSkip() {
+    // Allow users to skip API key setup during onboarding
+    goto('/itineraries');
   }
 
   // Mask API key for display
@@ -74,6 +92,25 @@
 
   <!-- Main Content -->
   <div class="profile-content">
+    <!-- Onboarding Banner -->
+    {#if isOnboarding}
+      <div class="onboarding-banner">
+        <div class="banner-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <div class="banner-content">
+          <h3 class="banner-title">Welcome to Itinerizer!</h3>
+          <p class="banner-text">
+            To unlock AI-powered itinerary generation and travel suggestions, please configure your OpenRouter API key below.
+            You can skip this step and add it later if needed.
+          </p>
+        </div>
+      </div>
+    {/if}
+
     <div class="settings-card">
       <!-- API Key Section -->
       <div class="setting-section">
@@ -143,14 +180,25 @@
           </div>
         {/if}
 
-        <!-- Save Button -->
-        <button
-          class="save-button"
-          onclick={handleSave}
-          disabled={!apiKey}
-        >
-          Save API Key
-        </button>
+        <!-- Action Buttons -->
+        <div class="button-group">
+          <button
+            class="save-button"
+            onclick={handleSave}
+            disabled={!apiKey}
+          >
+            {isOnboarding ? 'Save and Continue' : 'Save API Key'}
+          </button>
+
+          {#if isOnboarding}
+            <button
+              class="skip-button"
+              onclick={handleSkip}
+            >
+              Skip for now
+            </button>
+          {/if}
+        </div>
       </div>
 
       <!-- Additional Settings Section (placeholder for future) -->
@@ -234,6 +282,46 @@
     max-width: 800px;
     margin: 2rem auto;
     padding: 0 1.5rem;
+  }
+
+  .onboarding-banner {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  }
+
+  .banner-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+  }
+
+  .banner-content {
+    flex: 1;
+  }
+
+  .banner-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .banner-text {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    line-height: 1.5;
   }
 
   .settings-card {
@@ -378,7 +466,15 @@
     margin-bottom: 1rem;
   }
 
+  .button-group {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
   .save-button {
+    flex: 1;
+    min-width: 150px;
     padding: 0.75rem 1.5rem;
     font-size: 0.875rem;
     font-weight: 600;
@@ -399,6 +495,26 @@
     opacity: 0.5;
     cursor: not-allowed;
     transform: none;
+  }
+
+  .skip-button {
+    flex: 1;
+    min-width: 150px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #6b7280;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .skip-button:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+    color: #374151;
   }
 
   .account-info {
@@ -447,6 +563,15 @@
       justify-content: space-between;
     }
 
+    .onboarding-banner {
+      flex-direction: column;
+      padding: 1.25rem;
+    }
+
+    .banner-icon {
+      align-self: center;
+    }
+
     .setting-section {
       padding: 1.5rem;
     }
@@ -456,6 +581,15 @@
     }
 
     .toggle-button {
+      width: 100%;
+    }
+
+    .button-group {
+      flex-direction: column;
+    }
+
+    .save-button,
+    .skip-button {
       width: 100%;
     }
   }

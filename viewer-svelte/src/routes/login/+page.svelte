@@ -1,6 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
+  import { settingsStore } from '$lib/stores/settings.svelte';
 
   let password = $state('');
   let error = $state('');
@@ -33,8 +34,16 @@
       const data = await response.json();
 
       if (response.ok && data.success) {
-        // Redirect to home on successful login
-        await goto('/');
+        // Check if OpenRouter API key is configured
+        const apiKey = settingsStore.getApiKey();
+
+        if (!apiKey) {
+          // Redirect to profile with onboarding message
+          await goto('/profile?onboarding=true');
+        } else {
+          // Redirect to home on successful login
+          await goto('/');
+        }
       } else {
         error = data.error || 'Login failed. Please try again.';
         password = '';

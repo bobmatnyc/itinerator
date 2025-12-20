@@ -5,15 +5,16 @@
  */
 
 import type { RequestHandler } from './$types';
-import { PUBLIC_AUTH_MODE } from '$env/static/public';
+import * as env from '$env/static/public';
 
 /**
  * Determine authentication mode based on environment
  */
 function getAuthMode(): 'password' | 'open' {
 	// Explicit override via PUBLIC_AUTH_MODE env var
-	if (PUBLIC_AUTH_MODE === 'password' || PUBLIC_AUTH_MODE === 'open') {
-		return PUBLIC_AUTH_MODE;
+	const authMode = env.PUBLIC_AUTH_MODE;
+	if (authMode === 'password' || authMode === 'open') {
+		return authMode;
 	}
 
 	// Auto-detect: production requires password, development is open
