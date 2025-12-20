@@ -127,7 +127,11 @@ venv.bak/
 venv/
 virtualenv/
 wheels/
-.claude-mpm/
+
+# Claude MPM - ignore except memories and agents
+.claude-mpm/*
+!.claude-mpm/memories/
+!.claude-mpm/agents/
 
 # Large files
 *.pdf
