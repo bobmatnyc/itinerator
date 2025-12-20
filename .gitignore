@@ -118,7 +118,7 @@ ehthumbs.db
 env.bak/
 env/
 htmlcov/
-kuzu-memories/
+# kuzu-memories/ - now tracked
 pip-wheel-metadata/
 site/
 temp/
