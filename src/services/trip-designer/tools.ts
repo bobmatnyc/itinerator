@@ -775,6 +775,103 @@ export const SEARCH_TRANSFERS_TOOL: ToolDefinition = {
 };
 
 /**
+ * Tool: store_travel_intelligence
+ * Store seasonal/event information in the vector knowledge base
+ */
+export const STORE_TRAVEL_INTELLIGENCE_TOOL: ToolDefinition = {
+  type: 'function',
+  function: {
+    name: 'store_travel_intelligence',
+    description: 'Store travel intelligence (seasonal info, events, advisories, closures) in the knowledge base for future reference. Call this after every web search about a destination to build up knowledge.',
+    parameters: {
+      type: 'object',
+      properties: {
+        destination: {
+          type: 'string',
+          description: 'Destination name (city or country, e.g., "Portugal", "Lisbon", "Tokyo")',
+        },
+        dates: {
+          type: 'string',
+          description: 'Relevant time period (e.g., "January 2025", "Summer 2025", "Year-round")',
+        },
+        category: {
+          type: 'string',
+          description: 'Category of intelligence',
+          enum: ['weather', 'events', 'festivals', 'closures', 'advisory', 'crowds', 'prices', 'opportunities', 'warnings', 'tips'],
+        },
+        level: {
+          type: 'string',
+          description: 'Geographic level of the information',
+          enum: ['country', 'region', 'city', 'neighborhood', 'attraction'],
+        },
+        findings: {
+          type: 'string',
+          description: 'Summary of the key findings from research (2-5 sentences)',
+        },
+        impact: {
+          type: 'string',
+          description: 'How this affects travel planning',
+          enum: ['positive', 'negative', 'neutral', 'opportunity'],
+        },
+        confidence: {
+          type: 'string',
+          description: 'Confidence level of the information',
+          enum: ['high', 'medium', 'low'],
+        },
+        source: {
+          type: 'string',
+          description: 'Where this information came from (e.g., "web search", "official tourism site")',
+        },
+        tags: {
+          type: 'array',
+          description: 'Relevant tags for retrieval (e.g., ["cherry-blossom", "crowds", "spring"])',
+          items: { type: 'string' },
+        },
+      },
+      required: ['destination', 'category', 'findings'],
+    },
+  },
+};
+
+/**
+ * Tool: retrieve_travel_intelligence
+ * Retrieve stored seasonal/event information from the knowledge base
+ */
+export const RETRIEVE_TRAVEL_INTELLIGENCE_TOOL: ToolDefinition = {
+  type: 'function',
+  function: {
+    name: 'retrieve_travel_intelligence',
+    description: 'Retrieve stored travel intelligence from the knowledge base. Use before making recommendations to check for known seasonal factors, events, or advisories.',
+    parameters: {
+      type: 'object',
+      properties: {
+        destination: {
+          type: 'string',
+          description: 'Destination to query (city or country)',
+        },
+        dates: {
+          type: 'string',
+          description: 'Time period to query (e.g., "January 2025")',
+        },
+        categories: {
+          type: 'array',
+          description: 'Categories to retrieve (leave empty for all)',
+          items: {
+            type: 'string',
+            enum: ['weather', 'events', 'festivals', 'closures', 'advisory', 'crowds', 'prices', 'opportunities', 'warnings', 'tips'],
+          },
+        },
+        query: {
+          type: 'string',
+          description: 'Natural language query to search the knowledge base (e.g., "festivals in January", "weather warnings")',
+        },
+      },
+      required: ['destination'],
+    },
+  },
+};
+
+/**
  * All available tools for the Trip Designer Agent
  */
 export const ALL_TOOLS: ToolDefinition[] = [
@@ -795,6 +892,8 @@ export const ALL_TOOLS: ToolDefinition[] = [
   SEARCH_FLIGHTS_TOOL,
   SEARCH_HOTELS_TOOL,
   SEARCH_TRANSFERS_TOOL,
+  STORE_TRAVEL_INTELLIGENCE_TOOL,
+  RETRIEVE_TRAVEL_INTELLIGENCE_TOOL,
 ];
 
 /**
@@ -818,6 +917,8 @@ export const ToolName = {
   SEARCH_FLIGHTS: 'search_flights',
   SEARCH_HOTELS: 'search_hotels',
   SEARCH_TRANSFERS: 'search_transfers',
+  STORE_TRAVEL_INTELLIGENCE: 'store_travel_intelligence',
+  RETRIEVE_TRAVEL_INTELLIGENCE: 'retrieve_travel_intelligence',
 } as const;
 
 export type ToolName = (typeof ToolName)[keyof typeof ToolName];

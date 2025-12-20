@@ -5,11 +5,17 @@
  * @module prompts
  */
 
-// Import prompts as raw strings using Vite's ?raw feature
-// These are bundled at build time, not loaded from filesystem at runtime
-import tripDesignerSystem from './trip-designer/system.md?raw';
-import tripDesignerCompaction from './trip-designer/compaction.md?raw';
-import tripDesignerProfileExtraction from './trip-designer/profile-extraction.md?raw';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Load prompts from filesystem for Node.js runtime
+// In production builds (Vite), these would use ?raw imports instead
+const tripDesignerSystem = readFileSync(path.join(__dirname, 'trip-designer/system.md'), 'utf-8');
+const tripDesignerCompaction = readFileSync(path.join(__dirname, 'trip-designer/compaction.md'), 'utf-8');
+const tripDesignerProfileExtraction = readFileSync(path.join(__dirname, 'trip-designer/profile-extraction.md'), 'utf-8');
 
 /**
  * Pre-loaded prompts for Trip Designer Agent

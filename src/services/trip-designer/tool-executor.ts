@@ -14,6 +14,23 @@ import type { Segment } from '../../domain/types/segment.js';
 import type { SegmentService } from '../segment.service.js';
 import type { ItineraryService } from '../itinerary.service.js';
 import type { DependencyService } from '../dependency.service.js';
+import type { KnowledgeService } from '../knowledge.service.js';
+
+/**
+ * Travel intelligence entry for knowledge base storage
+ */
+export interface TravelIntelligence {
+  destination: string;
+  dates?: string;
+  category: 'weather' | 'events' | 'festivals' | 'closures' | 'advisory' | 'crowds' | 'prices' | 'opportunities' | 'warnings' | 'tips';
+  level?: 'country' | 'region' | 'city' | 'neighborhood' | 'attraction';
+  findings: string;
+  impact?: 'positive' | 'negative' | 'neutral' | 'opportunity';
+  confidence?: 'high' | 'medium' | 'low';
+  source?: string;
+  tags?: string[];
+  storedAt: Date;
+}
 
 /**
  * Tool executor dependencies
@@ -22,6 +39,7 @@ export interface ToolExecutorDependencies {
   itineraryService?: ItineraryService;
   segmentService?: SegmentService;
   dependencyService?: DependencyService;
+  knowledgeService?: KnowledgeService;
 }
 
 /**
@@ -113,6 +131,14 @@ export class ToolExecutor {
 
         case 'search_transfers':
           result = await this.handleSearchTransfers(args);
+          break;
+
+        case 'store_travel_intelligence':
+          result = await this.handleStoreTravelIntelligence(args);
+          break;
+
+        case 'retrieve_travel_intelligence':
+          result = await this.handleRetrieveTravelIntelligence(args);
           break;
 
         default:
@@ -728,6 +754,126 @@ export class ToolExecutor {
     return {
       note: 'Transfer search not yet implemented',
       params,
+    };
+  }
+
+  /**
+   * Store travel intelligence in the knowledge base
+   * Stores seasonal info, events, advisories, etc. for future retrieval
+   */
+  private async handleStoreTravelIntelligence(params: any): Promise<unknown> {
+    const intelligence: TravelIntelligence = {
+      destination: params.destination,
+      dates: params.dates,
+      category: params.category,
+      level: params.level || 'country',
+      findings: params.findings,
+      impact: params.impact || 'neutral',
+      confidence: params.confidence || 'medium',
+      source: params.source || 'web search',
+      tags: params.tags || [],
+      storedAt: new Date(),
+    };
+
+    // Create a searchable document from the intelligence
+    const documentContent = `
+Travel Intelligence: ${intelligence.destination}
+Category: ${intelligence.category}
+Time Period: ${intelligence.dates || 'Year-round'}
+Level: ${intelligence.level}
+Impact: ${intelligence.impact}
+
+Findings:
+${intelligence.findings}
+
+Tags: ${intelligence.tags?.join(', ') || 'none'}
+Source: ${intelligence.source}
+Confidence: ${intelligence.confidence}
+Stored: ${intelligence.storedAt.toISOString()}
+    `.trim();
+
+    // Store in knowledge service if available
+    if (this.deps.knowledgeService) {
+      try {
+        // Store as a document in the knowledge base
+        await this.deps.knowledgeService.storeMessages([
+          {
+            content: documentContent,
+            role: 'system',
+            sessionId: `travel-intelligence-${intelligence.destination.toLowerCase().replace(/\s+/g, '-')}` as any,
+          },
+        ]);
+      } catch (error) {
+        console.warn('Failed to store travel intelligence in knowledge base:', error);
+        // Continue anyway - the response will still be useful
+      }
+    }
+
+    return {
+      success: true,
+      stored: intelligence,
+      message: `Stored ${intelligence.category} intelligence for ${intelligence.destination}${intelligence.dates ? ` (${intelligence.dates})` : ''}`,
+    };
+  }
+
+  /**
+   * Retrieve travel intelligence from the knowledge base
+   * Queries stored seasonal info, events, advisories for a destination
+   */
+  private async handleRetrieveTravelIntelligence(params: any): Promise<unknown> {
+    const { destination, dates, categories, query } = params;
+
+    // Build search query
+    const searchParts: string[] = [
+      `Travel Intelligence: ${destination}`,
+    ];
+
+    if (dates) {
+      searchParts.push(`Time Period: ${dates}`);
+    }
+
+    if (categories && categories.length > 0) {
+      searchParts.push(`Categories: ${categories.join(', ')}`);
+    }
+
+    if (query) {
+      searchParts.push(query);
+    }
+
+    const searchQuery = searchParts.join(' ');
+
+    // Query knowledge service if available
+    if (this.deps.knowledgeService) {
+      try {
+        const result = await this.deps.knowledgeService.retrieveContext(searchQuery, {
+          type: 'chat',
+        });
+
+        if (result.success && result.value.documents.length > 0) {
+          return {
+            success: true,
+            destination,
+            dates,
+            intelligence: result.value.documents.map(doc => ({
+              content: doc.content,
+              relevance: doc.score,
+            })),
+            context: result.value.context,
+            message: `Found ${result.value.documents.length} relevant intelligence entries for ${destination}`,
+          };
+        }
+      } catch (error) {
+        console.warn('Failed to retrieve travel intelligence from knowledge base:', error);
+      }
+    }
+
+    return {
+      success: true,
+      destination,
+      dates,
+      intelligence: [],
+      context: null,
+      message: `No stored intelligence found for ${destination}. Consider running web searches to gather information.`,
     };
   }
 }

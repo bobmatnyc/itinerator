@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { authStore } from '$lib/stores/auth';
+  import { authStore } from '$lib/stores/auth.svelte';
   import { goto } from '$app/navigation';
 
   let password = $state('');

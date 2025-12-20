@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { authStore } from '$lib/stores/auth';
+  import { authStore } from '$lib/stores/auth.svelte';
 </script>
 
 <div class="header">
