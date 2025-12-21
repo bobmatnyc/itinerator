@@ -49,7 +49,6 @@
         {#if errorMessage}
           <p class="text-error-500">{errorMessage}</p>
         {/if}
-        <p class="text-sm text-surface-600">Demo password: travel2025</p>
       </div>
     {/if}
   </div>
@@ -60,7 +59,7 @@
 
     <div class="space-y-2">
       <p class="text-sm">
-        Current API Key: {settingsStore.apiKey || '(not set)'}
+        Current API Key: {settingsStore.openRouterKey || '(not set)'}
       </p>
 
       <input

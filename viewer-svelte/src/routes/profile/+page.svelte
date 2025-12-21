@@ -5,11 +5,16 @@
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
 
+  let firstName = $state('');
+  let lastName = $state('');
+  let nickname = $state('');
   let apiKey = $state('');
+  let homeAirport = $state('');
   let showKey = $state(false);
   let saveSuccess = $state(false);
   let saveError = $state('');
   let isOnboarding = $state(false);
+  let airportError = $state('');
 
   onMount(() => {
     // Check authentication
@@ -22,16 +27,48 @@
     const urlParams = new URLSearchParams(window.location.search);
     isOnboarding = urlParams.get('onboarding') === 'true';
 
-    // Load current API key
+    // Load current settings
+    firstName = settingsStore.firstName;
+    lastName = settingsStore.lastName;
+    nickname = settingsStore.nickname;
     apiKey = settingsStore.getApiKey();
+    homeAirport = settingsStore.homeAirport;
   });
+
+  function validateHomeAirport(airport: string): boolean {
+    if (!airport) return true; // Optional field
+    if (airport.length !== 3) {
+      airportError = 'Airport code must be exactly 3 letters';
+      return false;
+    }
+    if (!/^[A-Z]{3}$/.test(airport.toUpperCase())) {
+      airportError = 'Airport code must contain only letters';
+      return false;
+    }
+    airportError = '';
+    return true;
+  }
 
   function handleSave() {
     saveSuccess = false;
     saveError = '';
+    airportError = '';
+
+    // Validate home airport if provided
+    if (homeAirport && !validateHomeAirport(homeAirport)) {
+      return;
+    }
 
     try {
-      settingsStore.updateApiKey(apiKey);
+      // Use bulk update for efficiency
+      settingsStore.updateSettings({
+        firstName,
+        lastName,
+        nickname,
+        openRouterKey: apiKey,
+        homeAirport
+      });
+
       saveSuccess = true;
 
       // Clear success message after 3 seconds
@@ -46,7 +83,7 @@
         }, 1500);
       }
     } catch (err) {
-      saveError = 'Failed to save API key. Please try again.';
+      saveError = 'Failed to save settings. Please try again.';
       console.error('Save error:', err);
     }
   }
@@ -104,15 +141,94 @@
         <div class="banner-content">
           <h3 class="banner-title">Welcome to Itinerizer!</h3>
           <p class="banner-text">
-            To unlock AI-powered itinerary generation and travel suggestions, please configure your OpenRouter API key below.
-            You can skip this step and add it later if needed.
+            Let's get your profile set up. At minimum, we'd love to know what to call you and your OpenRouter API key to unlock AI-powered features.
+            You can always update these settings later.
           </p>
         </div>
       </div>
     {/if}
 
     <div class="settings-card">
-      <!-- API Key Section -->
+      <!-- Profile Information Section -->
+      <div class="setting-section">
+        <h2 class="section-title">Profile Information</h2>
+        <p class="section-description">
+          Tell us a bit about yourself to personalize your experience.
+        </p>
+
+        <div class="form-group">
+          <label for="firstName" class="form-label">First Name</label>
+          <input
+            id="firstName"
+            type="text"
+            class="form-input text-input"
+            bind:value={firstName}
+            placeholder="John"
+            autocomplete="given-name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input
+            id="lastName"
+            type="text"
+            class="form-input text-input"
+            bind:value={lastName}
+            placeholder="Doe"
+            autocomplete="family-name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="nickname" class="form-label">Nickname</label>
+          <input
+            id="nickname"
+            type="text"
+            class="form-input text-input"
+            bind:value={nickname}
+            placeholder="What should we call you?"
+            autocomplete="nickname"
+          />
+          <p class="input-hint">
+            What should we call you? This is how we'll greet you throughout the app.
+          </p>
+        </div>
+      </div>
+
+      <!-- Travel Preferences Section -->
+      <div class="setting-section">
+        <h2 class="section-title">Travel Preferences</h2>
+        <p class="section-description">
+          Help us personalize your travel experience with your preferences.
+        </p>
+
+        <div class="form-group">
+          <label for="homeAirport" class="form-label">Home Airport</label>
+          <input
+            id="homeAirport"
+            type="text"
+            class="form-input text-input airport-input"
+            bind:value={homeAirport}
+            placeholder="LAX"
+            maxlength="3"
+            autocomplete="off"
+            oninput={(e) => {
+              const target = e.target as HTMLInputElement;
+              target.value = target.value.toUpperCase();
+              homeAirport = target.value;
+            }}
+          />
+          <p class="input-hint">
+            3-letter IATA code (e.g., LAX, JFK, ORD)
+          </p>
+          {#if airportError}
+            <p class="error-text">{airportError}</p>
+          {/if}
+        </div>
+      </div>
+
+      <!-- API Settings Section -->
       <div class="setting-section">
         <h2 class="section-title">OpenRouter API Key</h2>
         <p class="section-description">
@@ -185,9 +301,9 @@
           <button
             class="save-button"
             onclick={handleSave}
-            disabled={!apiKey}
+            disabled={isOnboarding && !nickname && !apiKey}
           >
-            {isOnboarding ? 'Save and Continue' : 'Save API Key'}
+            {isOnboarding ? 'Save and Continue' : 'Save Settings'}
           </button>
 
           {#if isOnboarding}
@@ -198,19 +314,6 @@
               Skip for now
             </button>
           {/if}
-        </div>
-      </div>
-
-      <!-- Additional Settings Section (placeholder for future) -->
-      <div class="setting-section">
-        <h2 class="section-title">Account</h2>
-        <div class="account-info">
-          <div class="info-row">
-            <span class="info-label">Status:</span>
-            <span class="info-value">
-              <span class="status-badge">Active</span>
-            </span>
-          </div>
         </div>
       </div>
     </div>
@@ -401,13 +504,32 @@
     border-radius: 0.5rem;
     background-color: #ffffff;
     transition: all 0.2s;
+  }
+
+  .form-input.text-input {
+    font-family: inherit;
+  }
+
+  .form-input.airport-input {
     font-family: monospace;
+    text-transform: uppercase;
+    width: 120px;
   }
 
   .form-input:focus {
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+
+  .input-with-button .form-input {
+    font-family: monospace;
+  }
+
+  .error-text {
+    font-size: 0.75rem;
+    color: #dc2626;
+    margin: 0.5rem 0 0 0;
   }
 
   .toggle-button {

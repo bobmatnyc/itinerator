@@ -2,6 +2,7 @@
   import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
   import { settingsStore } from '$lib/stores/settings.svelte';
+  import { authStore } from '$lib/stores/auth.svelte';
 
   let password = $state('');
   let error = $state('');
@@ -34,6 +35,10 @@
       const data = await response.json();
 
       if (response.ok && data.success) {
+        // Sync client-side auth store with server state
+        // Don't call authStore.login() - server already validated
+        authStore.isAuthenticated = true;
+
         // Check if OpenRouter API key is configured
         const apiKey = settingsStore.getApiKey();
 
