@@ -1,9 +1,30 @@
 import type { Itinerary, ItineraryListItem, ModelConfig, AgentResponse, ChatStreamEvent } from './types';
-import { settingsStore } from './stores/settings.svelte';
 
 // For SvelteKit deployment, use relative URLs (same origin)
 // For standalone Express server, use VITE_API_URL (defaults to localhost:5177)
 const API_BASE_URL = import.meta.env.VITE_API_URL || '';
+
+/**
+ * Get OpenRouter API key from localStorage
+ * Reads directly to avoid issues with Svelte 5 runes in non-component context
+ */
+function getOpenRouterApiKey(): string | null {
+  if (typeof window === 'undefined') return null;
+
+  try {
+    // Try new unified storage first
+    const settings = localStorage.getItem('itinerizer_settings');
+    if (settings) {
+      const parsed = JSON.parse(settings);
+      if (parsed.openRouterKey) return parsed.openRouterKey;
+    }
+
+    // Fall back to legacy storage
+    return localStorage.getItem('itinerizer_api_key');
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Get headers for AI-powered API requests
@@ -14,7 +35,7 @@ function getAIHeaders(): HeadersInit {
     'Content-Type': 'application/json',
   };
 
-  const apiKey = settingsStore.getApiKey();
+  const apiKey = getOpenRouterApiKey();
   if (apiKey) {
     headers['X-OpenRouter-API-Key'] = apiKey;
   }
