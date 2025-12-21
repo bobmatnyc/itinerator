@@ -279,42 +279,43 @@
             Get your API key from <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer" class="external-link">openrouter.ai/keys</a>
           </p>
         </div>
+      </div>
+    </div>
 
-        <!-- Success/Error Messages -->
-        {#if saveSuccess}
-          <div class="success-message">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            API key saved successfully!
-          </div>
-        {/if}
-
-        {#if saveError}
-          <div class="error-message">
-            {saveError}
-          </div>
-        {/if}
-
-        <!-- Action Buttons -->
-        <div class="button-group">
-          <button
-            class="save-button"
-            onclick={handleSave}
-            disabled={isOnboarding && !nickname && !apiKey}
-          >
-            {isOnboarding ? 'Save and Continue' : 'Save Settings'}
-          </button>
-
-          {#if isOnboarding}
-            <button
-              class="skip-button"
-              onclick={handleSkip}
-            >
-              Skip for now
-            </button>
-          {/if}
+    <!-- Action Buttons - Outside the card for visibility -->
+    <div class="form-actions">
+      {#if saveSuccess}
+        <div class="success-message">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          Settings saved successfully!
         </div>
+      {/if}
+
+      {#if saveError}
+        <div class="error-message">
+          {saveError}
+        </div>
+      {/if}
+
+      <div class="button-group">
+        <button
+          class="save-button"
+          onclick={handleSave}
+          disabled={isOnboarding && !nickname && !apiKey}
+        >
+          {isOnboarding ? 'Save and Continue' : 'Save Settings'}
+        </button>
+
+        {#if isOnboarding}
+          <button
+            class="skip-button"
+            onclick={handleSkip}
+          >
+            Skip for now
+          </button>
+        {/if}
       </div>
     </div>
   </div>
@@ -586,6 +587,15 @@
     color: #dc2626;
     font-size: 0.875rem;
     margin-bottom: 1rem;
+  }
+
+  .form-actions {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.03);
   }
 
   .button-group {
