@@ -317,5 +317,29 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 };
 
+/**
+ * Create a TripDesignerService on-demand with a custom API key
+ * Used when client provides API key in request headers
+ */
+export async function createTripDesignerWithKey(
+	apiKey: string,
+	services: Services
+): Promise<TripDesignerService> {
+	const { TripDesignerService: TripDesignerServiceClass } = await import(
+		'../../src/services/trip-designer/trip-designer.service.js'
+	);
+
+	const config: TripDesignerConfig = {
+		apiKey,
+	};
+
+	return new TripDesignerServiceClass(config, undefined, {
+		itineraryService: services.itineraryService,
+		segmentService: services.segmentService,
+		dependencyService: services.dependencyService,
+		travelAgentFacade: services.travelAgentFacade,
+	});
+}
+
 // Export type for use in +server.ts files
 export type { Services };

@@ -2,23 +2,32 @@
  * Trip Designer - Individual session routes
  * GET /api/v1/designer/sessions/:sessionId - Get session details
  * DELETE /api/v1/designer/sessions/:sessionId - End chat session
+ * Headers: X-OpenRouter-API-Key (optional, overrides env var)
  */
 
 import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import type { SessionId } from '$domain/types/branded.js';
+import { createTripDesignerWithKey } from '$hooks/hooks.server.js';
 
 /**
  * GET /api/v1/designer/sessions/:sessionId
  * Get session details
  * Response: TripDesignerSession
  */
-export const GET: RequestHandler = async ({ params, locals }) => {
-	const { tripDesignerService } = locals.services;
+export const GET: RequestHandler = async ({ params, request, locals }) => {
+	// Get API key from header or use cached service
+	const headerApiKey = request.headers.get('X-OpenRouter-API-Key');
+	let tripDesignerService = locals.services.tripDesignerService;
+
+	// Create on-demand service if header key provided
+	if (headerApiKey) {
+		tripDesignerService = await createTripDesignerWithKey(headerApiKey, locals.services);
+	}
 
 	if (!tripDesignerService) {
 		throw error(503, {
-			message: 'Trip Designer disabled: OPENROUTER_API_KEY not configured'
+			message: 'Trip Designer disabled: No API key provided. Set your OpenRouter API key in Profile settings.'
 		});
 	}
 
@@ -39,12 +48,19 @@ export const GET: RequestHandler = async ({ params, locals }) => {
  * DELETE /api/v1/designer/sessions/:sessionId
  * End a chat session
  */
-export const DELETE: RequestHandler = async ({ params, locals }) => {
-	const { tripDesignerService } = locals.services;
+export const DELETE: RequestHandler = async ({ params, request, locals }) => {
+	// Get API key from header or use cached service
+	const headerApiKey = request.headers.get('X-OpenRouter-API-Key');
+	let tripDesignerService = locals.services.tripDesignerService;
+
+	// Create on-demand service if header key provided
+	if (headerApiKey) {
+		tripDesignerService = await createTripDesignerWithKey(headerApiKey, locals.services);
+	}
 
 	if (!tripDesignerService) {
 		throw error(503, {
-			message: 'Trip Designer disabled: OPENROUTER_API_KEY not configured'
+			message: 'Trip Designer disabled: No API key provided. Set your OpenRouter API key in Profile settings.'
 		});
 	}
 

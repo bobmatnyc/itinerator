@@ -13,7 +13,8 @@ const config = {
 		}),
 		alias: {
 			$services: '../src/services',
-			$domain: '../src/domain'
+			$domain: '../src/domain',
+			$hooks: './src'
 		}
 	}
 };

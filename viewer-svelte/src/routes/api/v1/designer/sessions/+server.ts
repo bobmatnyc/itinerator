@@ -6,19 +6,30 @@
 import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import type { ItineraryId } from '$domain/types/branded.js';
+import { createTripDesignerWithKey } from '$hooks/hooks.server.js';
 
 /**
  * POST /api/v1/designer/sessions
  * Create a new chat session for an itinerary
  * Body: { itineraryId: string }
  * Response: { sessionId: string }
+ * Headers: X-OpenRouter-API-Key (optional, overrides env var)
  */
 export const POST: RequestHandler = async ({ request, locals }) => {
-	const { tripDesignerService, itineraryService } = locals.services;
+	const { itineraryService } = locals.services;
+
+	// Get API key from header or use cached service
+	const headerApiKey = request.headers.get('X-OpenRouter-API-Key');
+	let tripDesignerService = locals.services.tripDesignerService;
+
+	// Create on-demand service if header key provided
+	if (headerApiKey) {
+		tripDesignerService = await createTripDesignerWithKey(headerApiKey, locals.services);
+	}
 
 	if (!tripDesignerService) {
 		throw error(503, {
-			message: 'Trip Designer disabled: OPENROUTER_API_KEY not configured - chat functionality is disabled'
+			message: 'Trip Designer disabled: No API key provided. Set your OpenRouter API key in Profile settings.'
 		});
 	}
 

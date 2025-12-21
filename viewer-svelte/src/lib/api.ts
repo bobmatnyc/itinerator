@@ -1,8 +1,26 @@
 import type { Itinerary, ItineraryListItem, ModelConfig, AgentResponse, ChatStreamEvent } from './types';
+import { settingsStore } from './stores/settings.svelte';
 
 // For SvelteKit deployment, use relative URLs (same origin)
 // For standalone Express server, use VITE_API_URL (defaults to localhost:5177)
 const API_BASE_URL = import.meta.env.VITE_API_URL || '';
+
+/**
+ * Get headers for AI-powered API requests
+ * Includes OpenRouter API key from user settings
+ */
+function getAIHeaders(): HeadersInit {
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+  };
+
+  const apiKey = settingsStore.getApiKey();
+  if (apiKey) {
+    headers['X-OpenRouter-API-Key'] = apiKey;
+  }
+
+  return headers;
+}
 
 // API v1 route constants
 const API_V1 = {
@@ -178,11 +196,11 @@ export const apiClient = {
     return handleResponse(response);
   },
 
-  // Chat endpoints
+  // Chat endpoints (AI-powered - use getAIHeaders for API key)
   async createChatSession(itineraryId: string): Promise<{ sessionId: string }> {
     const response = await fetch(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAIHeaders(),
       body: JSON.stringify({ itineraryId }),
     });
     return handleResponse<{ sessionId: string }>(response);
@@ -191,21 +209,23 @@ export const apiClient = {
   async sendChatMessage(sessionId: string, message: string): Promise<AgentResponse> {
     const response = await fetch(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}/${sessionId}/messages`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAIHeaders(),
       body: JSON.stringify({ message }),
     });
     return handleResponse<AgentResponse>(response);
   },
 
   async getChatSession(sessionId: string): Promise<unknown> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}/${sessionId}`);
+    const response = await fetch(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}/${sessionId}`, {
+      headers: getAIHeaders(),
+    });
     return handleResponse(response);
   },
 
   async *sendChatMessageStream(sessionId: string, message: string): AsyncGenerator<ChatStreamEvent> {
     const response = await fetch(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}/${sessionId}/messages/stream`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAIHeaders(),
       body: JSON.stringify({ message }),
     });
 

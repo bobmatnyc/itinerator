@@ -3,22 +3,31 @@
  * POST /api/v1/designer/sessions/:sessionId/messages/stream
  * Body: { message: string }
  * Response: SSE stream
+ * Headers: X-OpenRouter-API-Key (optional, overrides env var)
  */
 
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import type { SessionId } from '$domain/types/branded.js';
+import { createTripDesignerWithKey } from '$hooks/hooks.server.js';
 
 /**
  * POST /api/v1/designer/sessions/:sessionId/messages/stream
  * Send a message to a chat session with SSE streaming
  */
 export const POST: RequestHandler = async ({ params, request, locals }) => {
-	const { tripDesignerService } = locals.services;
+	// Get API key from header or use cached service
+	const headerApiKey = request.headers.get('X-OpenRouter-API-Key');
+	let tripDesignerService = locals.services.tripDesignerService;
+
+	// Create on-demand service if header key provided
+	if (headerApiKey) {
+		tripDesignerService = await createTripDesignerWithKey(headerApiKey, locals.services);
+	}
 
 	if (!tripDesignerService) {
 		throw error(503, {
-			message: 'Trip Designer disabled: OPENROUTER_API_KEY not configured'
+			message: 'Trip Designer disabled: No API key provided. Set your OpenRouter API key in Profile settings.'
 		});
 	}
 
