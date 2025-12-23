@@ -1,0 +1,19 @@
+{
+  "name": "Alex Chen",
+  "description": "Solo traveler, tech professional, flexible budget",
+  "email": "alex.chen@example.com",
+  "preferences": {
+    "travelStyle": "moderate",
+    "pace": "balanced",
+    "interests": ["culture", "food", "technology", "photography"],
+    "budgetFlexibility": 0.8,
+    "origin": "San Francisco",
+    "accommodationPreference": "boutique hotels or nice Airbnb",
+    "activityPreferences": ["walking tours", "local food markets", "museums"],
+    "avoidances": ["large tour groups", "cruise ships"]
+  },
+  "metadata": {
+    "persona_type": "solo-traveler",
+    "test_use": "baseline solo traveler scenarios"
+  }
+}

@@ -9,10 +9,17 @@ dist/
 coverage/
 .nyc_output/
 
+# Test evaluation results
+tests/eval/results/*.json
+tests/eval/results/*.md
+
 # Environment files
 .env
 .env.local
 .env.*.local
+.env.test
+# But include example files for documentation
+!.env.*.example
 
 # Application config (contains API keys)
 .itinerizer/
@@ -87,6 +94,7 @@ $RECYCLE.BIN/
 .coverage.*
 .eggs/
 .env.*
+!.env.*.example
 .hypothesis/
 .kuzu-memory/
 .mcp-vector-search/

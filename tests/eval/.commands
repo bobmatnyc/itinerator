@@ -1,0 +1,59 @@
+# Model Evaluation Framework - Commands
+
+## Quick Commands
+
+```bash
+# Run full evaluation
+npm run eval
+
+# Run example/demo
+npm run eval:example
+
+# Show help
+npm run eval -- --help
+```
+
+## Evaluation Options
+
+```bash
+# Specific agent
+npm run eval -- --agent trip-designer
+npm run eval -- --agent help
+npm run eval -- --agent travel-agent
+
+# Specific models
+npm run eval -- --models claude-sonnet-4,gpt-4o
+npm run eval -- --models claude-3-haiku
+
+# Skip quality judge (faster, cheaper)
+npm run eval -- --no-judge
+
+# Combine options
+npm run eval -- --agent trip-designer --models claude-sonnet-4,gpt-4o --no-judge
+```
+
+## Setup
+
+```bash
+# Set API key (required)
+export OPENROUTER_API_KEY="your-key-here"
+```
+
+## Output Files
+
+Results are saved to `tests/eval/results/`:
+- `eval-TIMESTAMP.json` - Raw evaluation data
+- `eval-TIMESTAMP.md` - Markdown report
+- `recommendations.md` - Model recommendations
+
+## Programmatic Usage
+
+```typescript
+import { evaluateFormatCompliance, calculateCost } from './tests/eval';
+
+// Evaluate response
+const result = evaluateFormatCompliance(response);
+
+// Calculate cost
+const cost = calculateCost('anthropic/claude-sonnet-4', 500, 300);
+```

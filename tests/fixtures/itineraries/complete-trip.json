@@ -1,0 +1,575 @@
+{
+  "id": "c3d4e5f6-a7b8-4901-c234-56789abcdef0",
+  "version": 8,
+  "createdAt": "2025-10-01T10:00:00.000Z",
+  "updatedAt": "2025-12-15T18:30:00.000Z",
+  "title": "Complete Japan Journey: Tokyo & Kyoto",
+  "description": "A comprehensive two-week journey through Japan's cultural heartlands, featuring Tokyo's modern energy and Kyoto's timeless traditions.",
+  "status": "CONFIRMED",
+  "startDate": "2025-06-10T00:00:00.000Z",
+  "endDate": "2025-06-24T00:00:00.000Z",
+  "origin": {
+    "name": "Los Angeles International Airport",
+    "code": "LAX",
+    "coordinates": {
+      "latitude": 33.9416,
+      "longitude": -118.4085
+    }
+  },
+  "destinations": [
+    {
+      "name": "Tokyo, Narita International Airport",
+      "code": "NRT",
+      "coordinates": {
+        "latitude": 35.7720,
+        "longitude": 140.3929
+      }
+    },
+    {
+      "name": "Kyoto",
+      "coordinates": {
+        "latitude": 35.0116,
+        "longitude": 135.7681
+      }
+    }
+  ],
+  "travelers": [
+    {
+      "id": "traveler-201",
+      "type": "ADULT",
+      "firstName": "Emma",
+      "lastName": "Thompson",
+      "email": "emma.t@example.com",
+      "phone": "+1-555-0123",
+      "dateOfBirth": "1988-05-15T00:00:00.000Z",
+      "passportNumber": "P12345678",
+      "passportExpiry": "2030-03-20T00:00:00.000Z",
+      "passportCountry": "US",
+      "loyaltyPrograms": [
+        {
+          "carrier": "AA",
+          "number": "AA9876543",
+          "tier": "Platinum"
+        }
+      ],
+      "specialRequests": [],
+      "metadata": {}
+    }
+  ],
+  "primaryTravelerId": "traveler-201",
+  "segments": [
+    {
+      "id": "flight-outbound-001",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-10T11:30:00.000Z",
+      "endDatetime": "2025-06-11T15:45:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-11-15T10:00:00.000Z"
+      },
+      "confirmationNumber": "JAL456789",
+      "bookingReference": "ABCDEF",
+      "provider": {
+        "name": "Japan Airlines",
+        "code": "JL"
+      },
+      "totalPrice": {
+        "amount": 1200,
+        "currency": "USD"
+      },
+      "notes": "Direct flight to Tokyo",
+      "metadata": {},
+      "type": "FLIGHT",
+      "airline": {
+        "name": "Japan Airlines",
+        "code": "JL"
+      },
+      "flightNumber": "JL062",
+      "origin": {
+        "name": "Los Angeles International Airport",
+        "code": "LAX",
+        "coordinates": {
+          "latitude": 33.9416,
+          "longitude": -118.4085
+        }
+      },
+      "destination": {
+        "name": "Narita International Airport",
+        "code": "NRT",
+        "coordinates": {
+          "latitude": 35.7720,
+          "longitude": 140.3929
+        }
+      },
+      "departureTerminal": "TBIT",
+      "arrivalTerminal": "2",
+      "aircraft": "Boeing 787-8",
+      "cabinClass": "ECONOMY",
+      "bookingClass": "Y",
+      "seatAssignments": {
+        "traveler-201": "45K"
+      },
+      "durationMinutes": 735,
+      "baggageAllowance": "2 pieces, 23kg each"
+    },
+    {
+      "id": "transfer-001",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-11T16:00:00.000Z",
+      "endDatetime": "2025-06-11T17:30:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-11-20T14:00:00.000Z"
+      },
+      "notes": "Narita Express train to Tokyo Station",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "RAIL",
+      "pickupLocation": {
+        "name": "Narita Airport Terminal 2 Station",
+        "coordinates": {
+          "latitude": 35.7720,
+          "longitude": 140.3929
+        }
+      },
+      "dropoffLocation": {
+        "name": "Tokyo Station",
+        "coordinates": {
+          "latitude": 35.6812,
+          "longitude": 139.7671
+        }
+      }
+    },
+    {
+      "id": "hotel-tokyo-001",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-11T22:00:00.000Z",
+      "endDatetime": "2025-06-17T18:00:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-11-22T09:00:00.000Z"
+      },
+      "confirmationNumber": "HOTEL123456",
+      "totalPrice": {
+        "amount": 1800,
+        "currency": "USD"
+      },
+      "notes": "6 nights in central Tokyo with easy access to subway",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "The Prince Gallery Tokyo Kioicho",
+        "code": "TPGTK"
+      },
+      "location": {
+        "name": "1-2 Kioicho, Chiyoda-ku",
+        "coordinates": {
+          "latitude": 35.6822,
+          "longitude": 139.7366
+        }
+      },
+      "checkInDate": "2025-06-11T00:00:00.000Z",
+      "checkOutDate": "2025-06-17T00:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "12:00",
+      "roomType": "Superior Room",
+      "roomCount": 1,
+      "boardBasis": "BED_BREAKFAST",
+      "cancellationPolicy": "Free cancellation until 7 days before arrival",
+      "amenities": ["wifi", "gym", "pool", "spa", "restaurant", "bar", "room-service"]
+    },
+    {
+      "id": "activity-tokyo-001",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-12T09:00:00.000Z",
+      "endDatetime": "2025-06-12T12:00:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-11-25T11:00:00.000Z"
+      },
+      "notes": "Morning visit to historic temple",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Senso-ji Temple & Asakusa Walking Tour",
+      "description": "Guided tour of Tokyo's oldest temple, including Nakamise shopping street and traditional craft shops.",
+      "location": {
+        "name": "Senso-ji Temple",
+        "coordinates": {
+          "latitude": 35.7148,
+          "longitude": 139.7967
+        }
+      },
+      "category": "Cultural/Historical"
+    },
+    {
+      "id": "activity-tokyo-002",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-13T10:00:00.000Z",
+      "endDatetime": "2025-06-13T15:00:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-11-26T10:00:00.000Z"
+      },
+      "voucherNumber": "TOUR789456",
+      "totalPrice": {
+        "amount": 120,
+        "currency": "USD"
+      },
+      "notes": "Half-day guided tour",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Tsukiji Outer Market Food Tour",
+      "description": "Explore the vibrant Tsukiji Outer Market with a local guide, tasting fresh sushi, street food, and traditional Japanese delicacies.",
+      "location": {
+        "name": "Tsukiji Outer Market",
+        "coordinates": {
+          "latitude": 35.6654,
+          "longitude": 139.7707
+        }
+      },
+      "category": "Food & Culinary"
+    },
+    {
+      "id": "activity-tokyo-003",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-14T14:00:00.000Z",
+      "endDatetime": "2025-06-14T18:00:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-11-27T09:00:00.000Z"
+      },
+      "notes": "Afternoon in trendy Harajuku and Shibuya",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Harajuku & Shibuya District Exploration",
+      "description": "Explore Harajuku's fashion streets, visit Meiji Shrine, experience Shibuya Crossing, and shop in trendy boutiques.",
+      "location": {
+        "name": "Harajuku",
+        "coordinates": {
+          "latitude": 35.6702,
+          "longitude": 139.7027
+        }
+      },
+      "category": "Shopping/Culture"
+    },
+    {
+      "id": "activity-tokyo-004",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-15T09:00:00.000Z",
+      "endDatetime": "2025-06-15T17:00:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-11-28T10:00:00.000Z"
+      },
+      "voucherNumber": "MTFUJI123",
+      "totalPrice": {
+        "amount": 150,
+        "currency": "USD"
+      },
+      "notes": "Full day trip with transport and lunch included",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Mount Fuji & Lake Kawaguchi Day Trip",
+      "description": "Full-day excursion to Mount Fuji's 5th station and Lake Kawaguchi with scenic views and lunch.",
+      "location": {
+        "name": "Mount Fuji 5th Station",
+        "coordinates": {
+          "latitude": 35.3606,
+          "longitude": 138.7274
+        }
+      },
+      "category": "Nature/Sightseeing"
+    },
+    {
+      "id": "transfer-002",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-17T10:00:00.000Z",
+      "endDatetime": "2025-06-17T12:15:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-11-29T10:00:00.000Z"
+      },
+      "confirmationNumber": "SHINKANSEN456",
+      "totalPrice": {
+        "amount": 130,
+        "currency": "USD"
+      },
+      "notes": "Nozomi Shinkansen bullet train to Kyoto",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "RAIL",
+      "pickupLocation": {
+        "name": "Tokyo Station",
+        "coordinates": {
+          "latitude": 35.6812,
+          "longitude": 139.7671
+        }
+      },
+      "dropoffLocation": {
+        "name": "Kyoto Station",
+        "coordinates": {
+          "latitude": 34.9858,
+          "longitude": 135.7584
+        }
+      }
+    },
+    {
+      "id": "hotel-kyoto-001",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-17T22:00:00.000Z",
+      "endDatetime": "2025-06-23T18:00:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-12-01T09:00:00.000Z"
+      },
+      "confirmationNumber": "KYOTOHTL789",
+      "totalPrice": {
+        "amount": 1500,
+        "currency": "USD"
+      },
+      "notes": "6 nights in traditional ryokan-style hotel in Gion district",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "The Ritz-Carlton Kyoto",
+        "code": "RCKYOTO"
+      },
+      "location": {
+        "name": "Kamogawa Nijo-Ohashi Hotori, Nakagyo-ku",
+        "coordinates": {
+          "latitude": 35.0116,
+          "longitude": 135.7681
+        }
+      },
+      "checkInDate": "2025-06-17T00:00:00.000Z",
+      "checkOutDate": "2025-06-23T00:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "12:00",
+      "roomType": "Deluxe Garden View",
+      "roomCount": 1,
+      "boardBasis": "BED_BREAKFAST",
+      "cancellationPolicy": "Free cancellation until 7 days before arrival",
+      "amenities": ["wifi", "gym", "spa", "restaurant", "bar", "garden", "traditional-bath"]
+    },
+    {
+      "id": "activity-kyoto-001",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-18T09:00:00.000Z",
+      "endDatetime": "2025-06-18T12:00:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-12-02T10:00:00.000Z"
+      },
+      "notes": "Morning visit to famous golden temple",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Kinkaku-ji (Golden Pavilion) Visit",
+      "description": "Visit the iconic Golden Pavilion temple with its stunning gold-leaf covered facade and beautiful gardens.",
+      "location": {
+        "name": "Kinkaku-ji Temple",
+        "coordinates": {
+          "latitude": 35.0394,
+          "longitude": 135.7292
+        }
+      },
+      "category": "Cultural/Historical"
+    },
+    {
+      "id": "activity-kyoto-002",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-19T14:00:00.000Z",
+      "endDatetime": "2025-06-19T17:00:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-12-03T10:00:00.000Z"
+      },
+      "notes": "Walk through thousands of torii gates",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Fushimi Inari Shrine Hike",
+      "description": "Hike through the iconic thousands of red torii gates at Fushimi Inari Shrine.",
+      "location": {
+        "name": "Fushimi Inari Taisha",
+        "coordinates": {
+          "latitude": 34.9671,
+          "longitude": 135.7727
+        }
+      },
+      "category": "Cultural/Nature"
+    },
+    {
+      "id": "activity-kyoto-003",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-20T10:00:00.000Z",
+      "endDatetime": "2025-06-20T13:00:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-12-04T10:00:00.000Z"
+      },
+      "notes": "Historic geisha district exploration",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Gion District & Traditional Tea House",
+      "description": "Explore the historic Gion geisha district and experience a traditional tea ceremony.",
+      "location": {
+        "name": "Gion District",
+        "coordinates": {
+          "latitude": 35.0036,
+          "longitude": 135.7750
+        }
+      },
+      "category": "Cultural/Traditional"
+    },
+    {
+      "id": "activity-kyoto-004",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-21T09:00:00.000Z",
+      "endDatetime": "2025-06-21T15:00:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-12-05T10:00:00.000Z"
+      },
+      "voucherNumber": "ARASHIYAMA123",
+      "totalPrice": {
+        "amount": 100,
+        "currency": "USD"
+      },
+      "notes": "Half-day guided tour of Arashiyama",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Arashiyama Bamboo Grove & Monkey Park",
+      "description": "Visit the famous bamboo grove, Tenryu-ji Temple, and Iwatayama Monkey Park with scenic views.",
+      "location": {
+        "name": "Arashiyama Bamboo Grove",
+        "coordinates": {
+          "latitude": 35.0171,
+          "longitude": 135.6719
+        }
+      },
+      "category": "Nature/Cultural"
+    },
+    {
+      "id": "transfer-003",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-23T10:00:00.000Z",
+      "endDatetime": "2025-06-23T11:30:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-12-10T10:00:00.000Z"
+      },
+      "confirmationNumber": "HARUKA789",
+      "totalPrice": {
+        "amount": 35,
+        "currency": "USD"
+      },
+      "notes": "Haruka Express train to Kansai Airport",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "RAIL",
+      "pickupLocation": {
+        "name": "Kyoto Station",
+        "coordinates": {
+          "latitude": 34.9858,
+          "longitude": 135.7584
+        }
+      },
+      "dropoffLocation": {
+        "name": "Kansai International Airport",
+        "coordinates": {
+          "latitude": 34.4348,
+          "longitude": 135.2440
+        }
+      }
+    },
+    {
+      "id": "flight-return-001",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-23T17:00:00.000Z",
+      "endDatetime": "2025-06-23T11:30:00.000Z",
+      "travelerIds": ["traveler-201"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2025-11-15T10:05:00.000Z"
+      },
+      "confirmationNumber": "JAL987654",
+      "bookingReference": "GHIJKL",
+      "provider": {
+        "name": "Japan Airlines",
+        "code": "JL"
+      },
+      "totalPrice": {
+        "amount": 1200,
+        "currency": "USD"
+      },
+      "notes": "Direct return flight to Los Angeles",
+      "metadata": {},
+      "type": "FLIGHT",
+      "airline": {
+        "name": "Japan Airlines",
+        "code": "JL"
+      },
+      "flightNumber": "JL061",
+      "origin": {
+        "name": "Kansai International Airport",
+        "code": "KIX",
+        "coordinates": {
+          "latitude": 34.4348,
+          "longitude": 135.2440
+        }
+      },
+      "destination": {
+        "name": "Los Angeles International Airport",
+        "code": "LAX",
+        "coordinates": {
+          "latitude": 33.9416,
+          "longitude": -118.4085
+        }
+      },
+      "departureTerminal": "1",
+      "arrivalTerminal": "TBIT",
+      "aircraft": "Boeing 787-8",
+      "cabinClass": "ECONOMY",
+      "bookingClass": "Y",
+      "seatAssignments": {
+        "traveler-201": "46A"
+      },
+      "durationMinutes": 630,
+      "baggageAllowance": "2 pieces, 23kg each"
+    }
+  ],
+  "totalPrice": {
+    "amount": 6235,
+    "currency": "USD"
+  },
+  "currency": "USD",
+  "tripType": "LEISURE",
+  "tripPreferences": {
+    "travelStyle": "luxury",
+    "pace": "balanced",
+    "interests": ["culture", "food", "history", "nature", "photography"],
+    "budgetFlexibility": 4,
+    "origin": "Los Angeles",
+    "accommodationPreference": "hotel",
+    "activityPreferences": ["temples", "gardens", "food tours", "historical sites", "nature"]
+  },
+  "tags": ["japan", "tokyo", "kyoto", "culture", "luxury", "complete"],
+  "metadata": {
+    "planningNotes": "Fully confirmed trip with all bookings made",
+    "lastReviewedDate": "2025-12-15T00:00:00.000Z"
+  },
+  "createdBy": "emma.t@example.com"
+}

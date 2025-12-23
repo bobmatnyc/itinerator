@@ -1,0 +1,35 @@
+{
+  "id": "fixture-planning-001",
+  "title": "Tokyo Adventure",
+  "description": "Planning a trip to Japan",
+  "startDate": "2025-06-15T00:00:00.000Z",
+  "endDate": "2025-06-22T00:00:00.000Z",
+  "tripType": "LEISURE",
+  "status": "DRAFT",
+  "segments": [],
+  "destinations": [
+    {
+      "name": "Tokyo",
+      "city": "Tokyo",
+      "country": "Japan",
+      "type": "CITY"
+    }
+  ],
+  "travelers": [
+    {
+      "id": "traveler-001",
+      "type": "ADULT",
+      "firstName": "Jane",
+      "lastName": "Doe"
+    }
+  ],
+  "tripPreferences": {
+    "travelStyle": "moderate",
+    "pace": "balanced",
+    "interests": ["culture", "food", "technology"],
+    "budgetFlexibility": 0.7
+  },
+  "tags": ["test", "planning", "japan"],
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "updatedAt": "2025-01-01T00:00:00.000Z"
+}

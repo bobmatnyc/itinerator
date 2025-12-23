@@ -19,7 +19,12 @@
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
     "test": "vitest",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
     "test:coverage": "vitest --coverage",
+    "test:e2e": "vitest --config vitest.config.e2e.ts",
+    "eval": "tsx tests/eval/model-comparison.ts",
+    "eval:example": "tsx tests/eval/example.ts",
     "typecheck": "tsc --noEmit",
     "version:bump": "node scripts/bump-version.js"
   },

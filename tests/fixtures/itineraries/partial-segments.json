@@ -1,0 +1,80 @@
+{
+  "id": "fixture-partial-001",
+  "title": "Paris Weekend",
+  "description": "Weekend getaway to Paris - partially planned",
+  "startDate": "2025-05-10T00:00:00.000Z",
+  "endDate": "2025-05-13T00:00:00.000Z",
+  "tripType": "LEISURE",
+  "status": "DRAFT",
+  "segments": [
+    {
+      "id": "segment-001",
+      "type": "FLIGHT",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-05-10T08:00:00.000Z",
+      "endDatetime": "2025-05-10T11:30:00.000Z",
+      "travelerIds": ["traveler-001"],
+      "source": "manual",
+      "airline": {
+        "name": "Air France",
+        "code": "AF"
+      },
+      "flightNumber": "AF1234",
+      "origin": {
+        "name": "John F Kennedy International",
+        "city": "New York",
+        "country": "USA",
+        "code": "JFK",
+        "type": "AIRPORT"
+      },
+      "destination": {
+        "name": "Charles de Gaulle",
+        "city": "Paris",
+        "country": "France",
+        "code": "CDG",
+        "type": "AIRPORT"
+      },
+      "cabin": "Economy"
+    },
+    {
+      "id": "segment-002",
+      "type": "HOTEL",
+      "status": "TENTATIVE",
+      "startDatetime": "2025-05-10T15:00:00.000Z",
+      "endDatetime": "2025-05-13T11:00:00.000Z",
+      "travelerIds": ["traveler-001"],
+      "source": "manual",
+      "property": {
+        "name": "Hotel de Paris"
+      },
+      "location": {
+        "name": "Hotel de Paris",
+        "city": "Paris",
+        "country": "France",
+        "type": "HOTEL",
+        "address": "123 Rue de Rivoli"
+      },
+      "checkInDate": "2025-05-10",
+      "checkOutDate": "2025-05-13"
+    }
+  ],
+  "destinations": [
+    {
+      "name": "Paris",
+      "city": "Paris",
+      "country": "France",
+      "type": "CITY"
+    }
+  ],
+  "travelers": [
+    {
+      "id": "traveler-001",
+      "type": "ADULT",
+      "firstName": "John",
+      "lastName": "Smith"
+    }
+  ],
+  "tags": ["test", "partial", "europe"],
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "updatedAt": "2025-01-02T00:00:00.000Z"
+}

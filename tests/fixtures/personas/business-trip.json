@@ -1,0 +1,21 @@
+{
+  "name": "Marcus Williams",
+  "description": "Business traveler, executive, premium preferences",
+  "email": "marcus.williams@globalcorp.com",
+  "preferences": {
+    "travelStyle": "luxury",
+    "pace": "packed",
+    "interests": ["efficiency", "networking", "premium dining", "hotel amenities"],
+    "budgetFlexibility": 1.0,
+    "origin": "New York City",
+    "accommodationPreference": "5-star business hotels near city center",
+    "activityPreferences": ["business meetings", "upscale restaurants", "hotel spa", "quick city highlights"],
+    "avoidances": ["public transportation", "budget accommodations", "time-consuming activities"]
+  },
+  "metadata": {
+    "persona_type": "business-trip",
+    "test_use": "business travel scenarios with time constraints and premium requirements",
+    "typical_trip_length": "2-4 days",
+    "priority": "time efficiency and productivity"
+  }
+}

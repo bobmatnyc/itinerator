@@ -1,0 +1,22 @@
+{
+  "name": "Adventure Friends Group",
+  "description": "Group of 6 friends, adventure seekers, budget-conscious",
+  "email": "adventures@friendgroup.com",
+  "preferences": {
+    "travelStyle": "budget",
+    "pace": "packed",
+    "interests": ["outdoor adventures", "hiking", "water sports", "local culture", "nightlife"],
+    "budgetFlexibility": 0.3,
+    "origin": "Denver",
+    "accommodationPreference": "hostels, shared vacation rentals, camping",
+    "activityPreferences": ["hiking", "kayaking", "surfing", "rock climbing", "snorkeling", "local bars", "street food"],
+    "avoidances": ["expensive restaurants", "luxury hotels", "sedentary activities", "shopping"]
+  },
+  "metadata": {
+    "persona_type": "group-adventure",
+    "test_use": "group travel scenarios with outdoor focus and budget constraints",
+    "group_size": 6,
+    "age_range": "25-32",
+    "priority": "adventure activities and social experiences"
+  }
+}

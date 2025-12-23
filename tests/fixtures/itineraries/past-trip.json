@@ -1,0 +1,434 @@
+{
+  "id": "d4e5f6a7-b8c9-4012-d345-6789abcdef01",
+  "version": 5,
+  "createdAt": "2024-01-15T09:00:00.000Z",
+  "updatedAt": "2024-03-15T20:45:00.000Z",
+  "title": "Barcelona City Break",
+  "description": "A memorable week exploring Barcelona's architecture, beaches, and vibrant food scene.",
+  "status": "COMPLETED",
+  "startDate": "2024-03-01T00:00:00.000Z",
+  "endDate": "2024-03-10T00:00:00.000Z",
+  "origin": {
+    "name": "London Heathrow Airport",
+    "code": "LHR",
+    "coordinates": {
+      "latitude": 51.4700,
+      "longitude": -0.4543
+    }
+  },
+  "destinations": [
+    {
+      "name": "Barcelona, El Prat Airport",
+      "code": "BCN",
+      "coordinates": {
+        "latitude": 41.2971,
+        "longitude": 2.0785
+      }
+    }
+  ],
+  "travelers": [
+    {
+      "id": "traveler-301",
+      "type": "ADULT",
+      "firstName": "James",
+      "lastName": "Wilson",
+      "email": "james.w@example.com",
+      "phone": "+44-7700-900123",
+      "loyaltyPrograms": [
+        {
+          "carrier": "BA",
+          "number": "BA123456789",
+          "tier": "Silver"
+        }
+      ],
+      "specialRequests": [],
+      "metadata": {}
+    },
+    {
+      "id": "traveler-302",
+      "type": "ADULT",
+      "firstName": "Sophie",
+      "lastName": "Wilson",
+      "email": "sophie.w@example.com",
+      "phone": "+44-7700-900124",
+      "loyaltyPrograms": [],
+      "specialRequests": ["gluten-free meal"],
+      "metadata": {}
+    }
+  ],
+  "primaryTravelerId": "traveler-301",
+  "segments": [
+    {
+      "id": "flight-bcn-001",
+      "status": "COMPLETED",
+      "startDatetime": "2024-03-01T06:45:00.000Z",
+      "endDatetime": "2024-03-01T10:05:00.000Z",
+      "travelerIds": ["traveler-301", "traveler-302"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2024-02-01T10:00:00.000Z"
+      },
+      "confirmationNumber": "BA987654",
+      "bookingReference": "WILSON1",
+      "totalPrice": {
+        "amount": 280,
+        "currency": "GBP"
+      },
+      "notes": "Early morning flight to Barcelona",
+      "metadata": {},
+      "type": "FLIGHT",
+      "airline": {
+        "name": "British Airways",
+        "code": "BA"
+      },
+      "flightNumber": "BA478",
+      "origin": {
+        "name": "London Heathrow Airport",
+        "code": "LHR",
+        "coordinates": {
+          "latitude": 51.4700,
+          "longitude": -0.4543
+        }
+      },
+      "destination": {
+        "name": "Barcelona El Prat Airport",
+        "code": "BCN",
+        "coordinates": {
+          "latitude": 41.2971,
+          "longitude": 2.0785
+        }
+      },
+      "departureTerminal": "5",
+      "arrivalTerminal": "1",
+      "aircraft": "Airbus A320",
+      "cabinClass": "ECONOMY",
+      "bookingClass": "M",
+      "seatAssignments": {
+        "traveler-301": "12A",
+        "traveler-302": "12B"
+      },
+      "durationMinutes": 140,
+      "baggageAllowance": "1 piece, 23kg"
+    },
+    {
+      "id": "transfer-bcn-001",
+      "status": "COMPLETED",
+      "startDatetime": "2024-03-01T10:30:00.000Z",
+      "endDatetime": "2024-03-01T11:00:00.000Z",
+      "travelerIds": ["traveler-301", "traveler-302"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2024-02-05T14:00:00.000Z"
+      },
+      "totalPrice": {
+        "amount": 15,
+        "currency": "EUR"
+      },
+      "notes": "Aerobus from airport to city center",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "SHUTTLE",
+      "pickupLocation": {
+        "name": "Barcelona El Prat Airport Terminal 1",
+        "coordinates": {
+          "latitude": 41.2971,
+          "longitude": 2.0785
+        }
+      },
+      "dropoffLocation": {
+        "name": "Plaça de Catalunya",
+        "coordinates": {
+          "latitude": 41.3874,
+          "longitude": 2.1686
+        }
+      }
+    },
+    {
+      "id": "hotel-bcn-001",
+      "status": "COMPLETED",
+      "startDatetime": "2024-03-01T22:00:00.000Z",
+      "endDatetime": "2024-03-09T18:00:00.000Z",
+      "travelerIds": ["traveler-301", "traveler-302"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2024-02-01T11:00:00.000Z"
+      },
+      "confirmationNumber": "BCN-HOTEL-789",
+      "totalPrice": {
+        "amount": 1200,
+        "currency": "EUR"
+      },
+      "notes": "8 nights in Gothic Quarter, excellent location for sightseeing",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Hotel Neri Relais & Chateaux",
+        "code": "HNERI"
+      },
+      "location": {
+        "name": "Carrer de Sant Sever 5, Gothic Quarter",
+        "coordinates": {
+          "latitude": 41.3838,
+          "longitude": 2.1760
+        }
+      },
+      "checkInDate": "2024-03-01T00:00:00.000Z",
+      "checkOutDate": "2024-03-09T00:00:00.000Z",
+      "checkInTime": "14:00",
+      "checkOutTime": "12:00",
+      "roomType": "Superior Double Room",
+      "roomCount": 1,
+      "boardBasis": "BED_BREAKFAST",
+      "cancellationPolicy": "Free cancellation until 3 days before arrival",
+      "amenities": ["wifi", "restaurant", "bar", "terrace", "room-service"]
+    },
+    {
+      "id": "activity-bcn-001",
+      "status": "COMPLETED",
+      "startDatetime": "2024-03-02T10:00:00.000Z",
+      "endDatetime": "2024-03-02T12:00:00.000Z",
+      "travelerIds": ["traveler-301", "traveler-302"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2024-02-10T09:00:00.000Z"
+      },
+      "voucherNumber": "SAGRADA123",
+      "totalPrice": {
+        "amount": 66,
+        "currency": "EUR"
+      },
+      "notes": "Skip-the-line tickets with audio guide",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Sagrada Familia Tour",
+      "description": "Visit Gaudi's iconic unfinished masterpiece with skip-the-line access and audio guide.",
+      "location": {
+        "name": "Sagrada Familia",
+        "coordinates": {
+          "latitude": 41.4036,
+          "longitude": 2.1744
+        }
+      },
+      "category": "Architecture/Cultural"
+    },
+    {
+      "id": "activity-bcn-002",
+      "status": "COMPLETED",
+      "startDatetime": "2024-03-03T15:00:00.000Z",
+      "endDatetime": "2024-03-03T17:30:00.000Z",
+      "travelerIds": ["traveler-301", "traveler-302"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2024-02-10T10:00:00.000Z"
+      },
+      "voucherNumber": "PARKGUELL456",
+      "totalPrice": {
+        "amount": 40,
+        "currency": "EUR"
+      },
+      "notes": "Afternoon visit to Gaudi's park",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Park Güell Visit",
+      "description": "Explore Gaudi's colorful mosaic park with stunning city views.",
+      "location": {
+        "name": "Park Güell",
+        "coordinates": {
+          "latitude": 41.4145,
+          "longitude": 2.1527
+        }
+      },
+      "category": "Architecture/Nature"
+    },
+    {
+      "id": "activity-bcn-003",
+      "status": "COMPLETED",
+      "startDatetime": "2024-03-04T18:00:00.000Z",
+      "endDatetime": "2024-03-04T21:00:00.000Z",
+      "travelerIds": ["traveler-301", "traveler-302"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2024-02-12T11:00:00.000Z"
+      },
+      "voucherNumber": "TAPAS789",
+      "totalPrice": {
+        "amount": 85,
+        "currency": "EUR"
+      },
+      "notes": "Evening tapas tour in El Born district",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Tapas Walking Tour",
+      "description": "Guided evening tapas tour visiting 4 authentic bars in El Born and Gothic Quarter.",
+      "location": {
+        "name": "El Born District",
+        "coordinates": {
+          "latitude": 41.3846,
+          "longitude": 2.1823
+        }
+      },
+      "category": "Food & Culinary"
+    },
+    {
+      "id": "activity-bcn-004",
+      "status": "COMPLETED",
+      "startDatetime": "2024-03-05T10:00:00.000Z",
+      "endDatetime": "2024-03-05T13:00:00.000Z",
+      "travelerIds": ["traveler-301", "traveler-302"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2024-02-15T10:00:00.000Z"
+      },
+      "notes": "Morning beach walk and brunch",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Barceloneta Beach & Seafood Lunch",
+      "description": "Relaxing morning at Barceloneta beach followed by fresh seafood lunch at beachfront restaurant.",
+      "location": {
+        "name": "Barceloneta Beach",
+        "coordinates": {
+          "latitude": 41.3794,
+          "longitude": 2.1897
+        }
+      },
+      "category": "Beach/Food"
+    },
+    {
+      "id": "activity-bcn-005",
+      "status": "COMPLETED",
+      "startDatetime": "2024-03-06T14:00:00.000Z",
+      "endDatetime": "2024-03-06T17:00:00.000Z",
+      "travelerIds": ["traveler-301", "traveler-302"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2024-02-16T09:00:00.000Z"
+      },
+      "voucherNumber": "MONTJUIC123",
+      "totalPrice": {
+        "amount": 50,
+        "currency": "EUR"
+      },
+      "notes": "Afternoon on Montjuic hill",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Montjuïc Castle & Magic Fountain",
+      "description": "Visit historic Montjuïc Castle with panoramic views, explore Olympic Park, and see the Magic Fountain show.",
+      "location": {
+        "name": "Montjuïc Castle",
+        "coordinates": {
+          "latitude": 41.3644,
+          "longitude": 2.1669
+        }
+      },
+      "category": "Historical/Cultural"
+    },
+    {
+      "id": "transfer-bcn-002",
+      "status": "COMPLETED",
+      "startDatetime": "2024-03-09T15:00:00.000Z",
+      "endDatetime": "2024-03-09T15:30:00.000Z",
+      "travelerIds": ["traveler-301", "traveler-302"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2024-02-05T14:05:00.000Z"
+      },
+      "totalPrice": {
+        "amount": 15,
+        "currency": "EUR"
+      },
+      "notes": "Aerobus to airport for return flight",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "SHUTTLE",
+      "pickupLocation": {
+        "name": "Plaça de Catalunya",
+        "coordinates": {
+          "latitude": 41.3874,
+          "longitude": 2.1686
+        }
+      },
+      "dropoffLocation": {
+        "name": "Barcelona El Prat Airport Terminal 1",
+        "coordinates": {
+          "latitude": 41.2971,
+          "longitude": 2.0785
+        }
+      }
+    },
+    {
+      "id": "flight-bcn-002",
+      "status": "COMPLETED",
+      "startDatetime": "2024-03-09T18:30:00.000Z",
+      "endDatetime": "2024-03-09T19:50:00.000Z",
+      "travelerIds": ["traveler-301", "traveler-302"],
+      "source": "user",
+      "sourceDetails": {
+        "timestamp": "2024-02-01T10:05:00.000Z"
+      },
+      "confirmationNumber": "BA654321",
+      "bookingReference": "WILSON2",
+      "totalPrice": {
+        "amount": 280,
+        "currency": "GBP"
+      },
+      "notes": "Evening return flight to London",
+      "metadata": {},
+      "type": "FLIGHT",
+      "airline": {
+        "name": "British Airways",
+        "code": "BA"
+      },
+      "flightNumber": "BA479",
+      "origin": {
+        "name": "Barcelona El Prat Airport",
+        "code": "BCN",
+        "coordinates": {
+          "latitude": 41.2971,
+          "longitude": 2.0785
+        }
+      },
+      "destination": {
+        "name": "London Heathrow Airport",
+        "code": "LHR",
+        "coordinates": {
+          "latitude": 51.4700,
+          "longitude": -0.4543
+        }
+      },
+      "departureTerminal": "1",
+      "arrivalTerminal": "5",
+      "aircraft": "Airbus A320",
+      "cabinClass": "ECONOMY",
+      "bookingClass": "M",
+      "seatAssignments": {
+        "traveler-301": "15A",
+        "traveler-302": "15B"
+      },
+      "durationMinutes": 140,
+      "baggageAllowance": "1 piece, 23kg"
+    }
+  ],
+  "totalPrice": {
+    "amount": 2031,
+    "currency": "EUR"
+  },
+  "currency": "EUR",
+  "tripType": "LEISURE",
+  "tripPreferences": {
+    "travelStyle": "moderate",
+    "pace": "balanced",
+    "interests": ["architecture", "food", "culture", "beaches", "history"],
+    "budgetFlexibility": 3,
+    "dietaryRestrictions": "Sophie: gluten-free",
+    "origin": "London",
+    "accommodationPreference": "boutique",
+    "activityPreferences": ["architecture tours", "food tours", "beaches", "museums"]
+  },
+  "tags": ["barcelona", "spain", "completed", "architecture", "gaudi", "food"],
+  "metadata": {
+    "tripReview": "Fantastic trip! Loved the architecture and food. Weather was perfect.",
+    "photoAlbumUrl": "https://photos.example.com/barcelona-2024",
+    "completedDate": "2024-03-10T00:00:00.000Z"
+  },
+  "createdBy": "james.w@example.com"
+}

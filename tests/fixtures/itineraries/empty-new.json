@@ -1,0 +1,11 @@
+{
+  "id": "fixture-empty-001",
+  "title": "New Trip",
+  "description": "A brand new itinerary with no segments",
+  "status": "DRAFT",
+  "segments": [],
+  "destinations": [],
+  "tags": ["test", "empty"],
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "updatedAt": "2025-01-01T00:00:00.000Z"
+}

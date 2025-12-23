@@ -1,0 +1,22 @@
+{
+  "name": "Sarah Johnson",
+  "description": "Family of 4 with young children, moderate budget",
+  "email": "sarah.johnson@example.com",
+  "preferences": {
+    "travelStyle": "moderate",
+    "pace": "leisurely",
+    "interests": ["family-friendly activities", "beaches", "nature", "educational experiences"],
+    "budgetFlexibility": 0.5,
+    "dietaryRestrictions": "one child vegetarian",
+    "origin": "Chicago",
+    "accommodationPreference": "family-friendly hotels or vacation rentals",
+    "activityPreferences": ["theme parks", "aquariums", "interactive museums", "beach time"],
+    "avoidances": ["late nights", "intense hiking", "fine dining"]
+  },
+  "metadata": {
+    "persona_type": "family-vacation",
+    "test_use": "family travel scenarios with children",
+    "family_size": 4,
+    "children_ages": [6, 9]
+  }
+}
