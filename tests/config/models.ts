@@ -5,10 +5,22 @@
  * EVAL_MODELS: Models available for evaluation and experimentation
  */
 
+/**
+ * LOCKED_MODELS - Production model assignments based on evaluation
+ *
+ * Evaluation Date: 2025-12-23
+ * Key Findings:
+ * - Claude 3 Haiku outperformed Sonnet 4 on all agents
+ * - Perfect ONE question rule compliance (1.00) for both
+ * - Haiku: 7-10x cheaper, 20-40% faster
+ * - Format compliance: Haiku >= Sonnet 4
+ *
+ * See: tests/eval/results/EVALUATION_SUMMARY.md
+ */
 export const LOCKED_MODELS = {
   'trip-designer': {
-    model: 'anthropic/claude-sonnet-4',
-    description: 'Best balance of reasoning, tool use, and cost',
+    model: 'anthropic/claude-3-haiku',
+    description: 'Fast, excellent format compliance, perfect ONE question rule',
     maxTokens: 4096,
   },
   'help': {
@@ -17,8 +29,8 @@ export const LOCKED_MODELS = {
     maxTokens: 2048,
   },
   'travel-agent': {
-    model: 'anthropic/claude-sonnet-4',
-    description: 'Needs reasoning for search synthesis',
+    model: 'anthropic/claude-3-haiku',
+    description: 'Fast synthesis with perfect question compliance',
     maxTokens: 4096,
   },
 } as const;

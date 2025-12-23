@@ -3,7 +3,7 @@ import { BUILD_NUMBER, SEMVER, VERSION, getVersionInfo } from '../../src/utils/v
 
 describe('Version utilities', () => {
   it('should export SEMVER from package.json', () => {
-    expect(SEMVER).toBe('0.1.0');
+    expect(SEMVER).toBe('0.2.0');
   });
 
   it('should export BUILD_NUMBER as a number', () => {

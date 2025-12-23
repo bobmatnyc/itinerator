@@ -35,18 +35,22 @@ import { summarizeItineraryMinimal, summarizeItinerary } from './itinerary-summa
 
 /**
  * Default model for Trip Designer
- * Note: Using claude-sonnet-4 for best coding/tool use performance
- * Previously used claude-3.5-sonnet:online but :online suffix can cause issues
+ *
+ * Evaluation (2025-12-23) Results:
+ * - Claude 3 Haiku: Better format compliance, perfect ONE question rule, 7-10x cheaper
+ * - See: tests/eval/results/EVALUATION_SUMMARY.md
+ *
+ * Can be overridden via TripDesignerConfig.model
  */
-const DEFAULT_MODEL = 'anthropic/claude-sonnet-4';
+const DEFAULT_MODEL = 'anthropic/claude-3-haiku';
 
 /**
- * Claude Sonnet 4 pricing (USD per 1M tokens)
- * See: https://openrouter.ai/anthropic/claude-sonnet-4
+ * Claude 3 Haiku pricing (USD per 1M tokens)
+ * See: https://openrouter.ai/anthropic/claude-3-haiku
  */
 const CLAUDE_PRICING = {
-  inputCostPer1M: 3.0,
-  outputCostPer1M: 15.0,
+  inputCostPer1M: 0.25,
+  outputCostPer1M: 1.25,
 };
 
 /**
