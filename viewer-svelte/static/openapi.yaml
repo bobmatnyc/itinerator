@@ -1,0 +1,1487 @@
+openapi: 3.0.3
+info:
+  title: Itinerizer API
+  description: |
+    A modern travel itinerary management system with AI-powered trip planning.
+
+    ## Authentication
+
+    All endpoints require authentication via API key in the `X-API-Key` header.
+    Some endpoints also accept `X-OpenRouter-API-Key` for AI features.
+
+    ## Base URL
+
+    - Local Development: `http://localhost:5176/api/v1`
+    - Production: `https://your-domain.vercel.app/api/v1`
+
+    ## Streaming Endpoints
+
+    Endpoints marked with `[SSE]` return Server-Sent Events streams.
+
+  version: 1.0.0
+  contact:
+    name: Itinerizer Support
+    url: https://github.com/yourusername/itinerizer-ts
+
+servers:
+  - url: http://localhost:5176/api/v1
+    description: Local development
+  - url: /api/v1
+    description: Current environment
+
+tags:
+  - name: Itineraries
+    description: Itinerary collection management
+  - name: Segments
+    description: Trip segment operations (flights, hotels, etc.)
+  - name: Trip Designer
+    description: AI-powered trip planning chat sessions
+  - name: Import
+    description: Import itineraries from various formats
+
+security:
+  - ApiKeyAuth: []
+
+paths:
+  # ==========================================
+  # Itineraries
+  # ==========================================
+
+  /itineraries:
+    get:
+      tags: [Itineraries]
+      summary: List all itineraries
+      description: Get all itineraries for the authenticated user (filtered by createdBy)
+      operationId: listItineraries
+      responses:
+        '200':
+          description: List of itineraries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Itinerary'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    post:
+      tags: [Itineraries]
+      summary: Create new itinerary
+      description: Create a blank itinerary with user ownership. Dates are optional - Trip Designer will collect them.
+      operationId: createItinerary
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItineraryCreate'
+      responses:
+        '201':
+          description: Itinerary created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Itinerary'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /itineraries/{id}:
+    parameters:
+      - $ref: '#/components/parameters/ItineraryId'
+
+    get:
+      tags: [Itineraries]
+      summary: Get itinerary by ID
+      description: Get full itinerary with all segments (ownership verified)
+      operationId: getItinerary
+      responses:
+        '200':
+          description: Itinerary details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Itinerary'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      tags: [Itineraries]
+      summary: Update itinerary metadata
+      description: Update title, description, dates, status, or tags (ownership verified)
+      operationId: updateItinerary
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItineraryUpdate'
+      responses:
+        '200':
+          description: Updated itinerary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Itinerary'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags: [Itineraries]
+      summary: Delete itinerary
+      description: Delete itinerary and clean up associated chat sessions (ownership verified)
+      operationId: deleteItinerary
+      responses:
+        '204':
+          description: Itinerary deleted successfully
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ==========================================
+  # Segments
+  # ==========================================
+
+  /itineraries/{id}/segments:
+    parameters:
+      - $ref: '#/components/parameters/ItineraryId'
+
+    get:
+      tags: [Segments]
+      summary: List all segments
+      description: Get all segments for an itinerary
+      operationId: listSegments
+      responses:
+        '200':
+          description: List of segments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Segment'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    post:
+      tags: [Segments]
+      summary: Add new segment
+      description: Add a new segment (flight, hotel, activity, etc.) to an itinerary
+      operationId: createSegment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Segment'
+      responses:
+        '201':
+          description: Segment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /itineraries/{id}/segments/{segmentId}:
+    parameters:
+      - $ref: '#/components/parameters/ItineraryId'
+      - $ref: '#/components/parameters/SegmentId'
+
+    get:
+      tags: [Segments]
+      summary: Get segment by ID
+      description: Get a single segment
+      operationId: getSegment
+      responses:
+        '200':
+          description: Segment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      tags: [Segments]
+      summary: Update segment
+      description: Update segment details
+      operationId: updateSegment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Partial segment update
+      responses:
+        '200':
+          description: Updated segment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags: [Segments]
+      summary: Delete segment
+      description: Remove a segment from an itinerary
+      operationId: deleteSegment
+      responses:
+        '200':
+          description: Segment deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Itinerary'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /itineraries/{id}/segments/reorder:
+    parameters:
+      - $ref: '#/components/parameters/ItineraryId'
+
+    post:
+      tags: [Segments]
+      summary: Reorder segments
+      description: Reorder segments by providing new order of segment IDs
+      operationId: reorderSegments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - segmentIds
+              properties:
+                segmentIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  description: Array of segment IDs in desired order
+      responses:
+        '200':
+          description: Segments reordered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Itinerary'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ==========================================
+  # Trip Designer (AI Chat Sessions)
+  # ==========================================
+
+  /designer/sessions:
+    post:
+      tags: [Trip Designer]
+      summary: Create chat session
+      description: Create a new AI chat session for trip planning or help
+      operationId: createSession
+      parameters:
+        - name: X-OpenRouter-API-Key
+          in: header
+          description: OpenRouter API key (overrides env var)
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                itineraryId:
+                  type: string
+                  format: uuid
+                  description: Itinerary ID (required for trip-designer mode)
+                mode:
+                  type: string
+                  enum: [trip-designer, help]
+                  default: trip-designer
+                  description: Chat mode
+      responses:
+        '201':
+          description: Session created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sessionId:
+                    type: string
+                    format: uuid
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+
+  /designer/sessions/{sessionId}:
+    parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+
+    get:
+      tags: [Trip Designer]
+      summary: Get session details
+      description: Get chat session details and message history
+      operationId: getSession
+      parameters:
+        - name: X-OpenRouter-API-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Session details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TripDesignerSession'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+
+    delete:
+      tags: [Trip Designer]
+      summary: Delete session
+      description: Delete a chat session (used when switching itineraries or cleanup)
+      operationId: deleteSession
+      parameters:
+        - name: X-OpenRouter-API-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Session deleted successfully
+        '500':
+          $ref: '#/components/responses/InternalError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+
+  /designer/sessions/{sessionId}/messages:
+    parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+
+    post:
+      tags: [Trip Designer]
+      summary: Send message (non-streaming)
+      description: Send a message to the AI and get a complete response
+      operationId: sendMessage
+      parameters:
+        - name: X-OpenRouter-API-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  description: User message text
+      responses:
+        '200':
+          description: AI response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          description: Cost limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+
+  /designer/sessions/{sessionId}/messages/stream:
+    parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+
+    post:
+      tags: [Trip Designer]
+      summary: Send message (streaming) [SSE]
+      description: |
+        Send a message to the AI and receive a streaming Server-Sent Events response.
+
+        **Event Types:**
+        - `connected` - Initial connection confirmation
+        - `text` - Text chunk from AI response
+        - `tool_call` - AI is calling a tool (e.g., add_segment)
+        - `tool_result` - Tool execution result
+        - `structured_questions` - AI asking structured questions
+        - `done` - Response complete (includes tokens and cost)
+        - `error` - Error occurred
+      operationId: sendMessageStream
+      parameters:
+        - name: X-OpenRouter-API-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  description: User message text
+      responses:
+        '200':
+          description: Server-Sent Events stream
+          content:
+            text/event-stream:
+              schema:
+                type: string
+                description: SSE stream with events (connected, text, tool_call, tool_result, structured_questions, done, error)
+              examples:
+                text:
+                  summary: Text event
+                  value: |
+                    event: text
+                    data: {"content":"Let me help you with that..."}
+
+                tool_call:
+                  summary: Tool call event
+                  value: |
+                    event: tool_call
+                    data: {"name":"add_segment","arguments":{"type":"FLIGHT",...}}
+
+                done:
+                  summary: Done event
+                  value: |
+                    event: done
+                    data: {"itineraryUpdated":true,"segmentsModified":["seg-123"],"tokens":1500,"cost":0.0025}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+
+  # ==========================================
+  # Import
+  # ==========================================
+
+  /import/text:
+    post:
+      tags: [Import]
+      summary: Import from text
+      description: Import travel itinerary from plain text (emails, notes, confirmations) using AI parsing
+      operationId: importText
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - text
+                - apiKey
+              properties:
+                title:
+                  type: string
+                  description: Itinerary title
+                text:
+                  type: string
+                  description: Plain text to parse (email, confirmation, etc.)
+                apiKey:
+                  type: string
+                  description: OpenRouter API key for LLM parsing
+      responses:
+        '200':
+          description: Import successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  itineraryId:
+                    type: string
+                    format: uuid
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+# ==========================================
+# Components
+# ==========================================
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key for authentication
+
+  parameters:
+    ItineraryId:
+      name: id
+      in: path
+      required: true
+      description: Itinerary UUID
+      schema:
+        type: string
+        format: uuid
+
+    SegmentId:
+      name: segmentId
+      in: path
+      required: true
+      description: Segment UUID
+      schema:
+        type: string
+        format: uuid
+
+  schemas:
+    # ==========================================
+    # Itinerary Schemas
+    # ==========================================
+
+    Itinerary:
+      type: object
+      required:
+        - id
+        - version
+        - createdAt
+        - updatedAt
+        - title
+        - status
+        - startDate
+        - endDate
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique itinerary identifier
+        version:
+          type: integer
+          minimum: 1
+          description: Version number for optimistic locking
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Itinerary title
+        description:
+          type: string
+          description: Trip description
+        status:
+          $ref: '#/components/schemas/ItineraryStatus'
+        startDate:
+          type: string
+          format: date-time
+          description: Trip start date
+        endDate:
+          type: string
+          format: date-time
+          description: Trip end date
+        origin:
+          $ref: '#/components/schemas/Location'
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+        travelers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Traveler'
+        primaryTravelerId:
+          type: string
+          format: uuid
+          description: Primary traveler ID
+        createdBy:
+          type: string
+          description: User who created the itinerary
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        totalPrice:
+          $ref: '#/components/schemas/Money'
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          description: Default currency (ISO 4217)
+        tripType:
+          $ref: '#/components/schemas/TripType'
+        costCenter:
+          type: string
+          description: Cost center for business trips
+        projectCode:
+          type: string
+          description: Project code for business trips
+        preferences:
+          $ref: '#/components/schemas/TravelPreferences'
+        tags:
+          type: array
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties: true
+
+    ItineraryCreate:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+        description:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+          description: Optional - Trip Designer will collect if not provided
+        endDate:
+          type: string
+          format: date-time
+          description: Optional - Trip Designer will collect if not provided
+        tripType:
+          $ref: '#/components/schemas/TripType'
+        origin:
+          $ref: '#/components/schemas/Location'
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+        tags:
+          type: array
+          items:
+            type: string
+
+    ItineraryUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+        description:
+          type: string
+        status:
+          $ref: '#/components/schemas/ItineraryStatus'
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        origin:
+          $ref: '#/components/schemas/Location'
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+        primaryTravelerId:
+          type: string
+          format: uuid
+        totalPrice:
+          $ref: '#/components/schemas/Money'
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+        tripType:
+          $ref: '#/components/schemas/TripType'
+        costCenter:
+          type: string
+        projectCode:
+          type: string
+        preferences:
+          $ref: '#/components/schemas/TravelPreferences'
+        tags:
+          type: array
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties: true
+
+    ItineraryStatus:
+      type: string
+      enum:
+        - DRAFT
+        - PLANNED
+        - CONFIRMED
+        - IN_PROGRESS
+        - COMPLETED
+        - CANCELLED
+
+    TripType:
+      type: string
+      enum:
+        - LEISURE
+        - BUSINESS
+        - MIXED
+
+    # ==========================================
+    # Segment Schemas
+    # ==========================================
+
+    Segment:
+      oneOf:
+        - $ref: '#/components/schemas/FlightSegment'
+        - $ref: '#/components/schemas/HotelSegment'
+        - $ref: '#/components/schemas/MeetingSegment'
+        - $ref: '#/components/schemas/ActivitySegment'
+        - $ref: '#/components/schemas/TransferSegment'
+        - $ref: '#/components/schemas/CustomSegment'
+      discriminator:
+        propertyName: type
+        mapping:
+          FLIGHT: '#/components/schemas/FlightSegment'
+          HOTEL: '#/components/schemas/HotelSegment'
+          MEETING: '#/components/schemas/MeetingSegment'
+          ACTIVITY: '#/components/schemas/ActivitySegment'
+          TRANSFER: '#/components/schemas/TransferSegment'
+          CUSTOM: '#/components/schemas/CustomSegment'
+
+    BaseSegment:
+      type: object
+      required:
+        - id
+        - type
+        - status
+        - startDatetime
+        - endDatetime
+      properties:
+        id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/SegmentStatus'
+        startDatetime:
+          type: string
+          format: date-time
+        endDatetime:
+          type: string
+          format: date-time
+        travelerIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: IDs of travelers for this segment (empty = all travelers)
+        source:
+          type: string
+          enum: [import, user, agent]
+          description: Source of segment
+        sourceDetails:
+          $ref: '#/components/schemas/SegmentSourceDetails'
+        confirmationNumber:
+          type: string
+        bookingReference:
+          type: string
+        provider:
+          $ref: '#/components/schemas/Company'
+        price:
+          $ref: '#/components/schemas/Money'
+        taxes:
+          $ref: '#/components/schemas/Money'
+        fees:
+          $ref: '#/components/schemas/Money'
+        totalPrice:
+          $ref: '#/components/schemas/Money'
+        notes:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        dependsOn:
+          type: array
+          items:
+            type: string
+            format: uuid
+        inferred:
+          type: boolean
+          description: True if auto-generated to fill gap
+        inferredReason:
+          type: string
+          description: Explanation of why segment was inferred
+
+    FlightSegment:
+      allOf:
+        - $ref: '#/components/schemas/BaseSegment'
+        - type: object
+          required:
+            - airline
+            - flightNumber
+            - origin
+            - destination
+          properties:
+            type:
+              type: string
+              enum: [FLIGHT]
+            airline:
+              $ref: '#/components/schemas/Company'
+            flightNumber:
+              type: string
+              pattern: '^[A-Z0-9]{2,3}\d{1,4}$'
+              description: Flight number (e.g., AA123)
+            origin:
+              $ref: '#/components/schemas/Location'
+            destination:
+              $ref: '#/components/schemas/Location'
+            departureTerminal:
+              type: string
+            arrivalTerminal:
+              type: string
+            aircraft:
+              type: string
+            cabinClass:
+              $ref: '#/components/schemas/CabinClass'
+            bookingClass:
+              type: string
+            seatAssignments:
+              type: object
+              additionalProperties:
+                type: string
+            durationMinutes:
+              type: integer
+              minimum: 1
+            baggageAllowance:
+              type: string
+
+    HotelSegment:
+      allOf:
+        - $ref: '#/components/schemas/BaseSegment'
+        - type: object
+          required:
+            - property
+            - location
+            - checkInDate
+            - checkOutDate
+          properties:
+            type:
+              type: string
+              enum: [HOTEL]
+            property:
+              $ref: '#/components/schemas/Company'
+            location:
+              $ref: '#/components/schemas/Location'
+            checkInDate:
+              type: string
+              format: date-time
+            checkOutDate:
+              type: string
+              format: date-time
+            checkInTime:
+              type: string
+              pattern: '^\d{2}:\d{2}$'
+              default: '15:00'
+            checkOutTime:
+              type: string
+              pattern: '^\d{2}:\d{2}$'
+              default: '11:00'
+            roomType:
+              type: string
+            roomCount:
+              type: integer
+              minimum: 1
+              default: 1
+            boardBasis:
+              $ref: '#/components/schemas/BoardBasis'
+            cancellationPolicy:
+              type: string
+            amenities:
+              type: array
+              items:
+                type: string
+
+    MeetingSegment:
+      allOf:
+        - $ref: '#/components/schemas/BaseSegment'
+        - type: object
+          required:
+            - title
+            - location
+          properties:
+            type:
+              type: string
+              enum: [MEETING]
+            title:
+              type: string
+              minLength: 1
+            location:
+              $ref: '#/components/schemas/Location'
+            organizer:
+              type: string
+            attendees:
+              type: array
+              items:
+                type: string
+            agenda:
+              type: string
+            meetingUrl:
+              type: string
+              format: uri
+            dialIn:
+              type: string
+
+    ActivitySegment:
+      allOf:
+        - $ref: '#/components/schemas/BaseSegment'
+        - type: object
+          required:
+            - name
+            - location
+          properties:
+            type:
+              type: string
+              enum: [ACTIVITY]
+            name:
+              type: string
+              minLength: 1
+            description:
+              type: string
+            location:
+              $ref: '#/components/schemas/Location'
+            category:
+              type: string
+            voucherNumber:
+              type: string
+
+    TransferSegment:
+      allOf:
+        - $ref: '#/components/schemas/BaseSegment'
+        - type: object
+          required:
+            - transferType
+            - pickupLocation
+            - dropoffLocation
+          properties:
+            type:
+              type: string
+              enum: [TRANSFER]
+            transferType:
+              $ref: '#/components/schemas/TransferType'
+            pickupLocation:
+              $ref: '#/components/schemas/Location'
+            dropoffLocation:
+              $ref: '#/components/schemas/Location'
+            vehicleDetails:
+              type: string
+            driverName:
+              type: string
+            driverPhone:
+              type: string
+
+    CustomSegment:
+      allOf:
+        - $ref: '#/components/schemas/BaseSegment'
+        - type: object
+          required:
+            - title
+          properties:
+            type:
+              type: string
+              enum: [CUSTOM]
+            title:
+              type: string
+              minLength: 1
+            description:
+              type: string
+            location:
+              $ref: '#/components/schemas/Location'
+            customData:
+              type: object
+              additionalProperties: true
+
+    SegmentStatus:
+      type: string
+      enum:
+        - TENTATIVE
+        - CONFIRMED
+        - WAITLISTED
+        - CANCELLED
+        - COMPLETED
+
+    SegmentSourceDetails:
+      type: object
+      properties:
+        model:
+          type: string
+          description: LLM model used if agent-generated
+        searchQuery:
+          type: string
+          description: SerpAPI search query if used
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Confidence score for agent-generated segments
+        mode:
+          type: string
+          enum: [dream, plan, book, chat]
+          description: Agent mode when generating segment
+        timestamp:
+          type: string
+          format: date-time
+
+    CabinClass:
+      type: string
+      enum:
+        - ECONOMY
+        - PREMIUM_ECONOMY
+        - BUSINESS
+        - FIRST
+
+    BoardBasis:
+      type: string
+      enum:
+        - ROOM_ONLY
+        - BED_BREAKFAST
+        - HALF_BOARD
+        - FULL_BOARD
+        - ALL_INCLUSIVE
+
+    TransferType:
+      type: string
+      enum:
+        - TAXI
+        - SHUTTLE
+        - PRIVATE
+        - PUBLIC
+        - RIDE_SHARE
+        - RENTAL_CAR
+        - RAIL
+        - FERRY
+        - WALKING
+        - OTHER
+
+    # ==========================================
+    # Location Schemas
+    # ==========================================
+
+    Location:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          minLength: 1
+        code:
+          type: string
+          maxLength: 3
+          description: IATA airport or city code
+        address:
+          $ref: '#/components/schemas/Address'
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        timezone:
+          type: string
+          description: IANA timezone identifier
+
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+          pattern: '^[A-Z]{2}$'
+          description: ISO 3166-1 alpha-2 code
+
+    Coordinates:
+      type: object
+      required:
+        - latitude
+        - longitude
+      properties:
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+
+    Company:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          minLength: 1
+        code:
+          type: string
+          description: Company code (e.g., airline IATA)
+        website:
+          type: string
+          format: uri
+
+    # ==========================================
+    # Traveler Schemas
+    # ==========================================
+
+    Traveler:
+      type: object
+      required:
+        - id
+        - type
+        - firstName
+        - lastName
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/TravelerType'
+        firstName:
+          type: string
+          minLength: 1
+          maxLength: 100
+        lastName:
+          type: string
+          minLength: 1
+          maxLength: 100
+        middleName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date-time
+        passportNumber:
+          type: string
+        passportExpiry:
+          type: string
+          format: date-time
+        passportCountry:
+          type: string
+          pattern: '^[A-Z]{2}$'
+        loyaltyPrograms:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoyaltyProgram'
+        specialRequests:
+          type: array
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties: true
+
+    TravelerType:
+      type: string
+      enum:
+        - ADULT
+        - CHILD
+        - INFANT
+        - SENIOR
+
+    LoyaltyProgram:
+      type: object
+      required:
+        - carrier
+        - number
+      properties:
+        carrier:
+          type: string
+          minLength: 1
+        number:
+          type: string
+          minLength: 1
+        tier:
+          type: string
+
+    TravelPreferences:
+      type: object
+      properties:
+        seatPreference:
+          type: string
+          enum: [AISLE, WINDOW, MIDDLE]
+        mealPreference:
+          type: string
+        hotelChainPreference:
+          type: array
+          items:
+            type: string
+        accessibility:
+          type: array
+          items:
+            type: string
+
+    # ==========================================
+    # Money Schema
+    # ==========================================
+
+    Money:
+      type: object
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: integer
+          minimum: 0
+          description: Amount in smallest currency unit (e.g., cents)
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          description: ISO 4217 currency code
+
+    # ==========================================
+    # Trip Designer Schemas
+    # ==========================================
+
+    TripDesignerSession:
+      type: object
+      required:
+        - sessionId
+        - mode
+        - createdAt
+        - messages
+      properties:
+        sessionId:
+          type: string
+          format: uuid
+        itineraryId:
+          type: string
+          format: uuid
+        mode:
+          type: string
+          enum: [trip-designer, help]
+        createdAt:
+          type: string
+          format: date-time
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        totalTokens:
+          type: integer
+        totalCost:
+          type: number
+
+    ChatMessage:
+      type: object
+      required:
+        - role
+        - content
+      properties:
+        role:
+          type: string
+          enum: [user, assistant, system]
+        content:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        tokens:
+          type: integer
+        cost:
+          type: number
+
+    AgentResponse:
+      type: object
+      required:
+        - response
+      properties:
+        response:
+          type: string
+          description: AI response text
+        structuredQuestions:
+          type: array
+          items:
+            $ref: '#/components/schemas/StructuredQuestion'
+          description: Questions asking for specific information
+        itineraryUpdated:
+          type: boolean
+          description: Whether the itinerary was modified
+        segmentsModified:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: IDs of segments that were added/modified
+        tokens:
+          type: integer
+          description: Tokens used in this response
+        cost:
+          type: number
+          description: Cost of this response in USD
+
+    StructuredQuestion:
+      type: object
+      required:
+        - id
+        - question
+        - type
+      properties:
+        id:
+          type: string
+          description: Unique question ID
+        question:
+          type: string
+          description: Question text
+        type:
+          type: string
+          enum: [text, date, number, choice, multi-choice]
+        options:
+          type: array
+          items:
+            type: string
+          description: Available options for choice/multi-choice questions
+        required:
+          type: boolean
+          default: true
+
+    # ==========================================
+    # Error Schemas
+    # ==========================================
+
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: Error message
+        code:
+          type: string
+          description: Error code
+        details:
+          type: object
+          additionalProperties: true
+          description: Additional error details
+
+  responses:
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    Forbidden:
+      description: Forbidden - access denied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    ServiceUnavailable:
+      description: Service unavailable (e.g., Trip Designer disabled - no API key)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
