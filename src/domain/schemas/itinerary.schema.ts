@@ -36,9 +36,9 @@ export const itinerarySchema = z
     /** Itinerary status */
     status: itineraryStatusSchema.default('DRAFT'),
     /** Trip start date - optional, collected by trip designer */
-    startDate: dateSchema.optional(),
+    startDate: dateSchema.nullable().optional(),
     /** Trip end date - optional, collected by trip designer */
-    endDate: dateSchema.optional(),
+    endDate: dateSchema.nullable().optional(),
     /** Origin location */
     origin: locationSchema.optional(),
     /** Destination locations */
@@ -99,9 +99,9 @@ export const itineraryCreateSchema = z
     /** Trip description */
     description: z.string().optional(),
     /** Trip start date - optional, collected by trip designer */
-    startDate: dateSchema.optional(),
+    startDate: dateSchema.nullable().optional(),
     /** Trip end date - optional, collected by trip designer */
-    endDate: dateSchema.optional(),
+    endDate: dateSchema.nullable().optional(),
     /** Type of trip */
     tripType: tripTypeSchema.optional(),
     /** Origin location */
@@ -134,9 +134,9 @@ export const itineraryUpdateSchema = z.object({
   /** Itinerary status */
   status: itineraryStatusSchema.optional(),
   /** Trip start date */
-  startDate: dateSchema.optional(),
+  startDate: dateSchema.nullable().optional(),
   /** Trip end date */
-  endDate: dateSchema.optional(),
+  endDate: dateSchema.nullable().optional(),
   /** Origin location */
   origin: locationSchema.optional(),
   /** Destination locations */
