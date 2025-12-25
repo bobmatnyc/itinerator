@@ -35,10 +35,10 @@ export const itinerarySchema = z
     description: z.string().optional(),
     /** Itinerary status */
     status: itineraryStatusSchema.default('DRAFT'),
-    /** Trip start date */
-    startDate: dateSchema,
-    /** Trip end date */
-    endDate: dateSchema,
+    /** Trip start date - optional, collected by trip designer */
+    startDate: dateSchema.optional(),
+    /** Trip end date - optional, collected by trip designer */
+    endDate: dateSchema.optional(),
     /** Origin location */
     origin: locationSchema.optional(),
     /** Destination locations */
@@ -68,7 +68,13 @@ export const itinerarySchema = z
     /** Additional metadata */
     metadata: z.record(z.unknown()).default({}),
   })
-  .refine((data) => data.endDate >= data.startDate, {
+  .refine((data) => {
+    // Only validate date order if both dates are provided
+    if (data.startDate && data.endDate) {
+      return data.endDate >= data.startDate;
+    }
+    return true;
+  }, {
     message: 'End date must be on or after start date',
     path: ['endDate'],
   })
@@ -84,6 +90,7 @@ export const itinerarySchema = z
 /**
  * Itinerary creation schema - for creating new itineraries
  * Fewer required fields than full schema
+ * Note: Dates are optional - trip designer will collect them during discovery
  */
 export const itineraryCreateSchema = z
   .object({
@@ -91,10 +98,10 @@ export const itineraryCreateSchema = z
     title: z.string().min(1, 'Title is required').max(255, 'Title too long'),
     /** Trip description */
     description: z.string().optional(),
-    /** Trip start date */
-    startDate: dateSchema,
-    /** Trip end date */
-    endDate: dateSchema,
+    /** Trip start date - optional, collected by trip designer */
+    startDate: dateSchema.optional(),
+    /** Trip end date - optional, collected by trip designer */
+    endDate: dateSchema.optional(),
     /** Type of trip */
     tripType: tripTypeSchema.optional(),
     /** Origin location */
@@ -104,7 +111,13 @@ export const itineraryCreateSchema = z
     /** Tags for organization */
     tags: z.array(z.string()).default([]),
   })
-  .refine((data) => data.endDate >= data.startDate, {
+  .refine((data) => {
+    // Only validate date order if both dates are provided
+    if (data.startDate && data.endDate) {
+      return data.endDate >= data.startDate;
+    }
+    return true;
+  }, {
     message: 'End date must be on or after start date',
     path: ['endDate'],
   });
