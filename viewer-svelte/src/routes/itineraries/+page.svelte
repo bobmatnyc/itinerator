@@ -37,6 +37,7 @@
   import NewTripHelperView from '$lib/components/NewTripHelperView.svelte';
   import VisualizationPane from '$lib/components/VisualizationPane.svelte';
   import VisualizationTimeline from '$lib/components/VisualizationTimeline.svelte';
+  import EditModeToggle from '$lib/components/EditModeToggle.svelte';
   import type { Itinerary, ItineraryListItem as ItineraryListItemType } from '$lib/types';
 
   interface AgentConfig {
@@ -66,6 +67,13 @@
       : 'Type a message... (Shift+Enter for new line)',
     showTokenStats: navigationStore.agentMode === 'trip-designer'
   });
+
+  // Determine if chat sidebar should be visible
+  // Hide in manual edit mode when viewing itinerary detail
+  let showChatSidebar = $derived(
+    navigationStore.mainView !== 'itinerary-detail' ||
+    navigationStore.editMode === 'ai'
+  );
 
   // Sync navigation from URL parameters
   $effect(() => {
@@ -300,6 +308,10 @@
     resizeStartWidth = leftPaneWidth;
     e.preventDefault();
   }
+
+  function handleEditModeChange(mode: 'ai' | 'manual') {
+    navigationStore.setEditMode(mode);
+  }
 </script>
 
 <div class="app-container">
@@ -317,7 +329,8 @@
 
   <!-- Main Content Area -->
   <div class="main-content">
-    <!-- Left Pane: Tabbed Navigation -->
+    <!-- Left Pane: Tabbed Navigation (hidden in manual edit mode) -->
+    {#if showChatSidebar}
     <div class="left-pane" style="width: {leftPaneWidth}px;">
       <!-- Tab Navigation -->
       <div class="left-pane-tabs">
@@ -424,7 +437,7 @@
       {/if}
     </div>
 
-    <!-- Resize Handle -->
+    <!-- Resize Handle (hidden in manual edit mode) -->
     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
     <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
     <div
@@ -436,6 +449,7 @@
       aria-label="Resize sidebar"
       tabindex="0"
     ></div>
+    {/if}
 
     <!-- Right Pane: Main View Area + Visualization -->
     <div class="right-pane-wrapper">
@@ -480,20 +494,10 @@
             onTabChange={(tab) => navigationStore.setDetailTab(tab)}
           >
             {#snippet actions()}
-              <button
-                class="minimal-button"
-                onclick={() => handleEditManually($selectedItinerary)}
-                type="button"
-              >
-                Edit Manually
-              </button>
-              <button
-                class="minimal-button"
-                onclick={() => handleEditWithPrompt($selectedItinerary)}
-                type="button"
-              >
-                Edit With AI Trip Designer
-              </button>
+              <EditModeToggle
+                bind:mode={navigationStore.editMode}
+                onChange={handleEditModeChange}
+              />
               <button
                 class="minimal-button delete-button"
                 onclick={() => handleDelete($selectedItinerary)}
@@ -506,6 +510,7 @@
             {#if navigationStore.detailTab === 'itinerary'}
               <ItineraryDetail
                 itinerary={$selectedItinerary}
+                editMode={navigationStore.editMode}
                 onEditManually={handleEditManually}
                 onEditWithPrompt={handleEditWithPrompt}
                 onDelete={handleDelete}

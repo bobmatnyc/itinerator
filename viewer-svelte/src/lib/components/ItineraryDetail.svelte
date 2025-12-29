@@ -3,32 +3,40 @@
   import SegmentCard from './SegmentCard.svelte';
   import SegmentEditor from './SegmentEditor.svelte';
   import AddSegmentModal from './AddSegmentModal.svelte';
-  import { updateSegment, deleteSegment, addSegment } from '$lib/stores/itineraries.svelte';
+  import { updateSegment, deleteSegment, addSegment, updateItinerary } from '$lib/stores/itineraries.svelte';
   import { toast } from '$lib/stores/toast.svelte';
 
   let {
     itinerary,
+    editMode = 'ai',
     onEditManually,
     onEditWithPrompt,
     onDelete
   }: {
     itinerary: Itinerary;
+    editMode?: 'ai' | 'manual';
     onEditManually?: (itinerary: Itinerary) => void;
     onEditWithPrompt?: (itinerary: Itinerary) => void;
     onDelete?: (itinerary: Itinerary) => void;
   } = $props();
 
   let showDeleteConfirm = $state(false);
-  let editMode = $state(false);
   let editingSegmentId = $state<string | null>(null);
   let showAddSegmentModal = $state(false);
+
+  // Manual edit mode state
+  let isEditingMetadata = $state(false);
+  let editedTitle = $state(itinerary.title);
+  let editedDescription = $state(itinerary.description || '');
+  let editedStartDate = $state(itinerary.startDate || '');
+  let editedEndDate = $state(itinerary.endDate || '');
+
+  // Auto-enable editing when in manual mode
+  let inManualEditMode = $derived(editMode === 'manual');
 
   function handleEditManually() {
     if (onEditManually) {
       onEditManually(itinerary);
-    } else {
-      // Default behavior: enter edit mode
-      editMode = true;
     }
   }
 
@@ -36,9 +44,32 @@
     onEditWithPrompt?.(itinerary);
   }
 
-  function handleExitEditMode() {
-    editMode = false;
-    editingSegmentId = null;
+  function startEditingMetadata() {
+    isEditingMetadata = true;
+    editedTitle = itinerary.title;
+    editedDescription = itinerary.description || '';
+    editedStartDate = itinerary.startDate || '';
+    editedEndDate = itinerary.endDate || '';
+  }
+
+  async function saveMetadata() {
+    try {
+      await updateItinerary(itinerary.id, {
+        title: editedTitle,
+        description: editedDescription || undefined,
+        startDate: editedStartDate || undefined,
+        endDate: editedEndDate || undefined,
+      });
+      isEditingMetadata = false;
+      toast.success('Itinerary updated');
+    } catch (error) {
+      console.error('Failed to update itinerary:', error);
+      toast.error('Failed to update itinerary. Please try again.');
+    }
+  }
+
+  function cancelEditingMetadata() {
+    isEditingMetadata = false;
   }
 
   function handleEditSegment(segmentId: string) {
@@ -217,42 +248,117 @@
   <div class="detail-content h-full overflow-y-auto">
     <!-- Itinerary Metadata -->
     <div class="bg-minimal-card p-6">
-    {#if formatDateRange()}
-      <p class="text-minimal-text-muted text-sm mb-4">
-        {formatDateRange()}
-      </p>
-    {/if}
-
-    {#if hasPastDates}
-      <div class="past-dates-warning">
-        <span class="warning-icon">⚠️</span>
-        <div class="warning-content">
-          <p class="warning-title">Trip dates are in the past</p>
-          <p class="warning-message">
-            This itinerary is scheduled for {formatDateRange()}, which has already passed.
-            Would you like to update the dates?
-          </p>
-        </div>
+    {#if inManualEditMode && !isEditingMetadata}
+      <!-- Manual mode: Show edit button -->
+      <div class="metadata-header">
+        <button
+          class="minimal-button"
+          onclick={startEditingMetadata}
+          type="button"
+        >
+          ✏️ Edit Details
+        </button>
       </div>
     {/if}
 
-    {#if itinerary.description}
-      <p class="text-minimal-text-muted text-sm mb-4">
-        {itinerary.description}
-      </p>
+    {#if isEditingMetadata}
+      <!-- Editing mode: Show input fields -->
+      <div class="metadata-editor">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            id="title"
+            type="text"
+            bind:value={editedTitle}
+            placeholder="Itinerary title"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            bind:value={editedDescription}
+            placeholder="Optional description..."
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="startDate">Start Date</label>
+            <input
+              id="startDate"
+              type="date"
+              bind:value={editedStartDate}
+            />
+          </div>
+          <div class="form-group">
+            <label for="endDate">End Date</label>
+            <input
+              id="endDate"
+              type="date"
+              bind:value={editedEndDate}
+            />
+          </div>
+        </div>
+
+        <div class="metadata-actions">
+          <button
+            class="minimal-button"
+            onclick={cancelEditingMetadata}
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            class="minimal-button primary"
+            onclick={saveMetadata}
+            type="button"
+          >
+            Save Changes
+          </button>
+        </div>
+      </div>
+    {:else}
+      <!-- Display mode -->
+      {#if formatDateRange()}
+        <p class="text-minimal-text-muted text-sm mb-4">
+          {formatDateRange()}
+        </p>
+      {/if}
+
+      {#if hasPastDates}
+        <div class="past-dates-warning">
+          <span class="warning-icon">⚠️</span>
+          <div class="warning-content">
+            <p class="warning-title">Trip dates are in the past</p>
+            <p class="warning-message">
+              This itinerary is scheduled for {formatDateRange()}, which has already passed.
+              Would you like to update the dates?
+            </p>
+          </div>
+        </div>
+      {/if}
+
+      {#if itinerary.description}
+        <p class="text-minimal-text-muted text-sm mb-4">
+          {itinerary.description}
+        </p>
+      {/if}
+
+      <div class="flex items-center gap-3 text-sm text-minimal-text-muted">
+        {#if getDestinationsString()}
+          <span>{getDestinationsString()}</span>
+        {/if}
+
+        {#if itinerary.tripType}
+          <span class="minimal-badge">
+            {itinerary.tripType.toLowerCase()}
+          </span>
+        {/if}
+      </div>
     {/if}
-
-    <div class="flex items-center gap-3 text-sm text-minimal-text-muted">
-      {#if getDestinationsString()}
-        <span>{getDestinationsString()}</span>
-      {/if}
-
-      {#if itinerary.tripType}
-        <span class="minimal-badge">
-          {itinerary.tripType.toLowerCase()}
-        </span>
-      {/if}
-    </div>
   </div>
 
   <!-- Segments grouped by day -->
@@ -261,23 +367,14 @@
       <h3 class="text-sm font-semibold text-minimal-text-muted">
         {itinerary.segments?.length ?? 0} SEGMENT{(itinerary.segments?.length ?? 0) !== 1 ? 'S' : ''}
       </h3>
-      {#if editMode}
-        <div class="flex gap-2">
-          <button
-            class="minimal-button"
-            onclick={() => showAddSegmentModal = true}
-            type="button"
-          >
-            Add Segment
-          </button>
-          <button
-            class="minimal-button primary"
-            onclick={handleExitEditMode}
-            type="button"
-          >
-            Done Editing
-          </button>
-        </div>
+      {#if inManualEditMode}
+        <button
+          class="minimal-button"
+          onclick={() => showAddSegmentModal = true}
+          type="button"
+        >
+          ➕ Add Segment
+        </button>
       {/if}
     </div>
 
@@ -295,7 +392,7 @@
           <!-- Segments for this day -->
           <div class="space-y-3 pl-7">
             {#each day.segments as segment (segment.id)}
-              {#if editMode && editingSegmentId === segment.id}
+              {#if inManualEditMode && editingSegmentId === segment.id}
                 <!-- Editing mode -->
                 <SegmentEditor
                   {segment}
@@ -307,9 +404,9 @@
                 <!-- Display mode -->
                 <SegmentCard
                   {segment}
-                  {editMode}
-                  onEdit={editMode ? () => handleEditSegment(segment.id) : undefined}
-                  onDelete={editMode ? () => handleDeleteSegment(segment.id) : undefined}
+                  editMode={inManualEditMode}
+                  onEdit={inManualEditMode ? () => handleEditSegment(segment.id) : undefined}
+                  onDelete={inManualEditMode ? () => handleDeleteSegment(segment.id) : undefined}
                 />
               {/if}
             {/each}
@@ -521,6 +618,68 @@
   .minimal-button.primary:hover:not(:disabled) {
     background-color: #2563eb;
     border-color: #2563eb;
+  }
+
+  /* Metadata editor styles */
+  .metadata-header {
+    margin-bottom: 1rem;
+  }
+
+  .metadata-editor {
+    background: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    color: #1f2937;
+    transition: all 0.2s;
+    background: white;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    font-family: inherit;
+  }
+
+  .metadata-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1rem;
   }
 </style>
 
