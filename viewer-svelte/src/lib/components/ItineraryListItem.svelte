@@ -4,11 +4,13 @@
   let {
     itinerary,
     selected = false,
-    onclick
+    onclick,
+    ondelete
   }: {
     itinerary: ItineraryListItem;
     selected?: boolean;
     onclick?: () => void;
+    ondelete?: (itinerary: ItineraryListItem) => void;
   } = $props();
 
   // Format date for display
@@ -57,6 +59,14 @@
       return `Updated ${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
     }
   }
+
+  // Handle delete button click
+  function handleDelete(e: MouseEvent) {
+    e.stopPropagation(); // Prevent item selection when clicking delete
+    if (ondelete) {
+      ondelete(itinerary);
+    }
+  }
 </script>
 
 <button
@@ -84,6 +94,18 @@
         </div>
       </div>
     </div>
+
+    {#if ondelete}
+      <button
+        class="delete-btn"
+        onclick={handleDelete}
+        title="Delete itinerary"
+        type="button"
+        aria-label="Delete {getTitle()}"
+      >
+        🗑️
+      </button>
+    {/if}
   </div>
 </button>
 
@@ -122,5 +144,31 @@
   .item-info {
     flex: 1;
     min-width: 0;
+  }
+
+  .delete-btn {
+    opacity: 0;
+    padding: 0.375rem 0.5rem;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .itinerary-list-item:hover .delete-btn {
+    opacity: 1;
+  }
+
+  .delete-btn:hover {
+    background-color: #fef2f2;
+    border-color: #fca5a5;
+    transform: scale(1.1);
+  }
+
+  .delete-btn:active {
+    transform: scale(0.95);
   }
 </style>

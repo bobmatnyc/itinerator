@@ -400,6 +400,7 @@
                   {itinerary}
                   selected={$selectedItinerary?.id === itinerary.id}
                   onclick={() => handleSelect(itinerary.id)}
+                  ondelete={handleDelete}
                 />
               {/each}
             </div>
