@@ -22,6 +22,7 @@
   import { modal } from '$lib/stores/modal.svelte';
   import Header from '$lib/components/Header.svelte';
   import ImportModal from '$lib/components/ImportModal.svelte';
+  import ImportDialog from '$lib/components/ImportDialog.svelte';
   import TextImportModal from '$lib/components/TextImportModal.svelte';
   import EditItineraryModal from '$lib/components/EditItineraryModal.svelte';
   import ChatPanel from '$lib/components/ChatPanel.svelte';
@@ -51,6 +52,9 @@
   let isResizing = $state(false);
   let resizeStartX = $state(0);
   let resizeStartWidth = $state(0);
+
+  // Import dialog state
+  let importDialogOpen = $state(false);
 
   // Visualization state from store
   let isPaneVisible = $derived(visualizationStore.isPaneVisible);
@@ -176,6 +180,22 @@
   function handleTextImportClick() {
     if (!aiAccessAvailable) return;
     navigationStore.openTextImportModal();
+  }
+
+  function handleImportDialogClick() {
+    if (!aiAccessAvailable) return;
+    importDialogOpen = true;
+  }
+
+  function handleImportDialogComplete(itineraryId: string, itineraryName: string) {
+    // Reload itineraries to get the updated/new itinerary
+    loadItineraries();
+    // Select the imported itinerary
+    selectItinerary(itineraryId);
+    // Navigate to itinerary detail view
+    navigationStore.goToItineraryDetail();
+    // Show success message
+    toast.success(`Successfully imported to "${itineraryName}"`);
   }
 
   async function handleBuildClick() {
@@ -321,6 +341,9 @@
   <!-- Import Modal (PDF) -->
   <ImportModal bind:open={navigationStore.importModalOpen} onImport={handleImport} />
 
+  <!-- Import Dialog (Unified Import with Auto-Match) -->
+  <ImportDialog bind:open={importDialogOpen} onComplete={handleImportDialogComplete} />
+
   <!-- Text Import Modal -->
   <TextImportModal bind:open={navigationStore.textImportModalOpen} onSuccess={handleTextImportSuccess} />
 
@@ -457,7 +480,7 @@
       <div class="right-pane-content" class:with-viz={isPaneVisible}>
         {#if navigationStore.mainView === 'home'}
           <!-- Home View: Welcome and Quick Prompts -->
-          <HomeView onQuickPromptClick={handleQuickPrompt} />
+          <HomeView onQuickPromptClick={handleQuickPrompt} onImportClick={handleImportDialogClick} />
         {:else if navigationStore.mainView === 'new-trip-helper'}
           <!-- New Trip Helper View: Guidance for creating a trip -->
           <NewTripHelperView

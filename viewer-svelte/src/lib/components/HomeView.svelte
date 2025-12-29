@@ -4,9 +4,11 @@
   import { hasAIAccess } from '$lib/stores/settings.svelte';
 
   let {
-    onQuickPromptClick
+    onQuickPromptClick,
+    onImportClick
   }: {
     onQuickPromptClick: (prompt: string) => void;
+    onImportClick: () => void;
   } = $props();
 
   // Derive user's first name or email for welcome message
@@ -19,40 +21,56 @@
     return 'there';
   });
 
-  // Quick prompt buttons
-  const quickPrompts = [
+  // Action cards
+  const actionCards = [
+    {
+      id: 'import-itinerary',
+      text: 'Import Itinerary',
+      icon: '📥',
+      description: 'Upload PDF, ICS, or image files',
+      isImport: true
+    },
     {
       id: 'weekend-getaway',
       text: 'Plan a weekend getaway',
       icon: '🏖️',
-      description: 'Create a quick 2-3 day trip'
+      description: 'Create a quick 2-3 day trip',
+      isImport: false
     },
     {
       id: 'upcoming-trip',
       text: 'Help me with my upcoming trip',
       icon: '✈️',
-      description: 'Get assistance with trip planning'
+      description: 'Get assistance with trip planning',
+      isImport: false
     },
     {
       id: 'find-activities',
       text: 'Find activities for my destination',
       icon: '🎯',
-      description: 'Discover things to do'
+      description: 'Discover things to do',
+      isImport: false
     },
     {
       id: 'optimize-itinerary',
       text: 'Optimize my travel schedule',
       icon: '📅',
-      description: 'Improve your itinerary flow'
+      description: 'Improve your itinerary flow',
+      isImport: false
     }
   ];
 
   // Check if user has AI access
   let aiAccessAvailable = $derived(hasAIAccess());
 
-  function handlePromptClick(prompt: string) {
+  function handleActionClick(action: typeof actionCards[number]) {
     if (!aiAccessAvailable) return;
-    onQuickPromptClick(prompt);
+
+    if (action.isImport) {
+      onImportClick();
+    } else {
+      onQuickPromptClick(action.text);
+    }
   }
 </script>
 
@@ -82,19 +100,20 @@
       <p class="section-subtitle">Choose a quick action below or start chatting with the Trip Designer</p>
 
       <div class="quick-prompts-grid">
-        {#each quickPrompts as prompt}
+        {#each actionCards as action}
           <button
             class="prompt-button"
             class:disabled={!aiAccessAvailable}
-            onclick={() => handlePromptClick(prompt.text)}
+            class:import-action={action.isImport}
+            onclick={() => handleActionClick(action)}
             disabled={!aiAccessAvailable}
             title={!aiAccessAvailable ? 'API key required - visit Profile to add one' : ''}
             type="button"
           >
-            <div class="prompt-icon">{prompt.icon}</div>
+            <div class="prompt-icon">{action.icon}</div>
             <div class="prompt-content">
-              <div class="prompt-text">{prompt.text}</div>
-              <div class="prompt-description">{prompt.description}</div>
+              <div class="prompt-text">{action.text}</div>
+              <div class="prompt-description">{action.description}</div>
             </div>
             {#if !aiAccessAvailable}
               <div class="prompt-lock-icon">🔒</div>
@@ -264,6 +283,16 @@
     opacity: 0.5;
     cursor: not-allowed;
     background: #f9fafb;
+  }
+
+  .prompt-button.import-action {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-color: #93c5fd;
+  }
+
+  .prompt-button.import-action:not(.disabled):hover {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    border-color: #60a5fa;
   }
 
   .prompt-lock-icon {
