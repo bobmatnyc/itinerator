@@ -20,8 +20,10 @@ import type { ItineraryStorage, ItinerarySummary } from '../storage/storage.inte
  */
 export interface CreateItineraryInput {
   title: string;
-  startDate: Date;
-  endDate: Date;
+  /** Optional - trip designer will collect dates during discovery */
+  startDate?: Date;
+  /** Optional - trip designer will collect dates during discovery */
+  endDate?: Date;
   description?: string;
   tripType?: 'LEISURE' | 'BUSINESS' | 'MIXED';
   travelers?: Traveler[];
@@ -137,18 +139,13 @@ export class ItineraryCollectionService {
         value: {
           id: draft.id,
           title: draft.title,
-          description: draft.description,
           status: draft.status,
           startDate: draft.startDate,
           endDate: draft.endDate,
-          destinations: draft.destinations,
-          travelers: draft.travelers,
-          tags: draft.tags,
-          tripType: draft.tripType,
-          createdAt: draft.createdAt,
-          updatedAt: draft.updatedAt,
-          version: draft.version,
+          travelerCount: draft.travelers.length,
           segmentCount: draft.segments.length,
+          updatedAt: draft.updatedAt,
+          createdBy: draft.createdBy,
         },
       };
     }
@@ -165,18 +162,13 @@ export class ItineraryCollectionService {
       value: {
         id: itinerary.id,
         title: itinerary.title,
-        description: itinerary.description,
         status: itinerary.status,
         startDate: itinerary.startDate,
         endDate: itinerary.endDate,
-        destinations: itinerary.destinations,
-        travelers: itinerary.travelers,
-        tags: itinerary.tags,
-        tripType: itinerary.tripType,
-        createdAt: itinerary.createdAt,
-        updatedAt: itinerary.updatedAt,
-        version: itinerary.version,
+        travelerCount: itinerary.travelers.length,
         segmentCount: itinerary.segments.length,
+        updatedAt: itinerary.updatedAt,
+        createdBy: itinerary.createdBy,
       },
     };
   }
