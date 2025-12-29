@@ -503,6 +503,8 @@ export class ToolExecutor {
       success: true,
       message: 'Travel preferences updated successfully',
       preferences: tripPreferences,
+      // Signal that itinerary changed (triggers UI refresh)
+      itineraryChanged: true,
     };
   }
 
@@ -593,6 +595,8 @@ export class ToolExecutor {
       travelerId: newTraveler.id,
       travelerName,
       message: `Added ${travelerName}${relationshipText}${isPrimaryText} to the trip`,
+      // Signal that itinerary changed (triggers UI refresh)
+      itineraryChanged: true,
     };
   }
 
