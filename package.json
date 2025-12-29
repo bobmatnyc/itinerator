@@ -1,6 +1,6 @@
 {
   "name": "itinerizer",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A modern CLI tool for managing travel itineraries",
   "type": "module",
   "bin": {
