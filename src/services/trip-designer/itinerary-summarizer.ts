@@ -154,7 +154,7 @@ function summarizeSegmentDetails(segments: Segment[], maxCount: number = 8): str
         details.push(`- Flight: ${date}${seg.metadata?.route ? ` (${seg.metadata.route})` : ''}`);
         break;
       case 'HOTEL': {
-        const nights = seg.metadata?.nights || 1;
+        const nights = (seg.metadata?.nights as number | undefined) || 1;
         details.push(`- Hotel: ${date} (${nights} night${nights > 1 ? 's' : ''}${seg.metadata?.name ? `, ${seg.metadata.name}` : ''})`);
         break;
       }
@@ -174,6 +174,67 @@ function summarizeSegmentDetails(segments: Segment[], maxCount: number = 8): str
 }
 
 /**
+ * Infer hotel tier from hotel name
+ * Used to help AI recognize luxury properties
+ */
+function inferHotelTier(hotelName: string): string {
+  const luxury = [
+    'l\'esplanade', 'four seasons', 'ritz', 'st. regis', 'aman', 'belmond',
+    'peninsula', 'mandarin oriental', 'rosewood', 'park hyatt', 'bulgari',
+    'eden roc', 'cheval blanc', 'raffles', 'six senses', 'one&only',
+    'the berkeley', 'claridge\'s', 'dorchester', 'savoy'
+  ];
+  const moderate = [
+    'marriott', 'hilton', 'hyatt', 'sheraton', 'westin', 'holiday inn',
+    'courtyard', 'hampton', 'doubletree', 'intercontinental'
+  ];
+
+  const nameLower = hotelName.toLowerCase();
+  if (luxury.some(l => nameLower.includes(l))) return 'LUXURY';
+  if (moderate.some(m => nameLower.includes(m))) return 'MODERATE';
+  return 'STANDARD';
+}
+
+/**
+ * Infer travel style from flight cabin class
+ */
+function inferFlightTier(cabinClass: string): string {
+  const cabinLower = cabinClass.toLowerCase();
+  if (cabinLower.includes('first') || cabinLower.includes('suite')) return 'LUXURY';
+  if (cabinLower.includes('business') || cabinLower.includes('premium')) return 'PREMIUM';
+  return 'ECONOMY';
+}
+
+/**
+ * Extract existing bookings from segments to help AI infer preferences
+ * Returns prominent booking callouts with inferred travel style
+ */
+function formatExistingBookings(segments: Segment[]): string[] {
+  const bookings: string[] = [];
+
+  for (const seg of segments) {
+    if (seg.type === 'HOTEL') {
+      const hotelSeg = seg as import('./../../domain/types/segment.js').HotelSegment;
+      const hotelName = hotelSeg.property?.name || 'Unknown hotel';
+      const location = hotelSeg.location?.address?.city || hotelSeg.location?.name || '';
+      const tier = inferHotelTier(hotelName);
+      const nights = Math.ceil((hotelSeg.checkOutDate.getTime() - hotelSeg.checkInDate.getTime()) / (1000 * 60 * 60 * 24));
+      bookings.push(`- 🏨 HOTEL: ${hotelName}${location ? ` in ${location}` : ''} (${nights} night${nights > 1 ? 's' : ''}) → ${tier} style`);
+    }
+    if (seg.type === 'FLIGHT') {
+      const flightSeg = seg as import('./../../domain/types/segment.js').FlightSegment;
+      if (flightSeg.cabinClass) {
+        const tier = inferFlightTier(flightSeg.cabinClass);
+        const route = `${flightSeg.origin?.code || flightSeg.origin?.name || ''} → ${flightSeg.destination?.code || flightSeg.destination?.name || ''}`;
+        bookings.push(`- ✈️ FLIGHT: ${route} (${flightSeg.cabinClass}) → ${tier} style`);
+      }
+    }
+  }
+
+  return bookings;
+}
+
+/**
  * Generate a concise summary of the itinerary for context injection
  *
  * This summary is used in the Trip Designer system prompt when editing
@@ -187,9 +248,15 @@ export function summarizeItinerary(itinerary: Itinerary): string {
   const lines: string[] = [];
 
   // Header with title and dates
-  const duration = calculateDuration(itinerary.startDate, itinerary.endDate);
   lines.push(`**Trip**: ${itinerary.title}`);
-  lines.push(`**Dates**: ${formatDateRange(itinerary.startDate, itinerary.endDate)} (${duration} days)`);
+
+  // Handle null/undefined dates gracefully
+  if (itinerary.startDate && itinerary.endDate) {
+    const duration = calculateDuration(itinerary.startDate, itinerary.endDate);
+    lines.push(`**Dates**: ${formatDateRange(itinerary.startDate, itinerary.endDate)} (${duration} days)`);
+  } else {
+    lines.push(`**Dates**: Not specified`);
+  }
 
   // Travelers
   const travelerCount = itinerary.travelers.length;
@@ -203,7 +270,7 @@ export function summarizeItinerary(itinerary: Itinerary): string {
   // Destinations
   if (itinerary.destinations.length > 0) {
     const destNames = itinerary.destinations
-      .map(d => d.city || d.name)
+      .map(d => d.address?.city || d.name)
       .filter(Boolean)
       .join(', ');
     lines.push(`**Destinations**: ${destNames}`);
@@ -236,6 +303,16 @@ export function summarizeItinerary(itinerary: Itinerary): string {
     // Show first few segments with details
     const segmentDetails = summarizeSegmentDetails(itinerary.segments);
     lines.push(...segmentDetails);
+
+    // PROMINENT: Show existing bookings to help AI infer preferences
+    const bookings = formatExistingBookings(itinerary.segments);
+    if (bookings.length > 0) {
+      lines.push('');
+      lines.push('**⚠️ EXISTING BOOKINGS** (use to infer travel preferences):');
+      for (const booking of bookings) {
+        lines.push(booking);
+      }
+    }
   }
 
   return lines.join('\n');
@@ -248,13 +325,17 @@ export function summarizeItinerary(itinerary: Itinerary): string {
 export function summarizeItineraryMinimal(itinerary: Itinerary): string {
   const parts: string[] = [];
 
-  // Basic info
-  parts.push(`${itinerary.title} (${formatDateRange(itinerary.startDate, itinerary.endDate)})`);
+  // Basic info - handle null/undefined dates gracefully
+  if (itinerary.startDate && itinerary.endDate) {
+    parts.push(`${itinerary.title} (${formatDateRange(itinerary.startDate, itinerary.endDate)})`);
+  } else {
+    parts.push(`${itinerary.title} (dates not specified)`);
+  }
 
   // Destinations
   if (itinerary.destinations.length > 0) {
     const destNames = itinerary.destinations
-      .map(d => d.city || d.name)
+      .map(d => d.address?.city || d.name)
       .filter(Boolean)
       .join(', ');
     parts.push(`Destinations: ${destNames}`);
@@ -282,15 +363,35 @@ export function summarizeItineraryForTool(itinerary: Itinerary): unknown {
       start: itinerary.startDate,
       end: itinerary.endDate,
     },
-    destinations: itinerary.destinations?.map(d => d.city || d.name) || [],
+    destinations: itinerary.destinations?.map(d => d.address?.city || d.name) || [],
     segmentCount: itinerary.segments?.length || 0,
     // Only include segment IDs and types for reference
-    segments: itinerary.segments?.map(s => ({
-      id: s.id,
-      type: s.type,
-      startDatetime: s.startDatetime,
-      name: s.metadata?.name || s.metadata?.route || s.flightNumber || s.property || s.name || s.title || `${s.type} segment`,
-    })) || [],
+    segments: itinerary.segments?.map(s => {
+      const base = {
+        id: s.id,
+        type: s.type,
+        startDatetime: s.startDatetime,
+        name: s.metadata?.name || s.metadata?.route || (s as any).flightNumber || (s as any).property?.name || (s as any).name || (s as any).title || `${s.type} segment`,
+      };
+
+      // Add tier inference for hotels and flights to help AI understand travel style
+      if (s.type === 'HOTEL') {
+        const hotelSeg = s as import('./../../domain/types/segment.js').HotelSegment;
+        return {
+          ...base,
+          inferred_tier: inferHotelTier(hotelSeg.property?.name || ''),
+        };
+      }
+      if (s.type === 'FLIGHT') {
+        const flightSeg = s as import('./../../domain/types/segment.js').FlightSegment;
+        return {
+          ...base,
+          inferred_tier: flightSeg.cabinClass ? inferFlightTier(flightSeg.cabinClass) : undefined,
+        };
+      }
+
+      return base;
+    }) || [],
     tripPreferences: itinerary.tripPreferences || {},
     travelers: itinerary.travelers?.map(t => `${t.firstName} ${t.lastName}`) || [],
   };

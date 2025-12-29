@@ -170,9 +170,12 @@ export class TravelAgentFacade {
     // Generate summary using the summarizer service
     const summary = summarizeItinerary(itinerary);
 
-    // Calculate duration
-    const durationMs = itinerary.endDate.getTime() - itinerary.startDate.getTime();
-    const durationDays = Math.ceil(durationMs / (1000 * 60 * 60 * 24));
+    // Calculate duration - handle null/undefined dates gracefully
+    let durationDays = 0;
+    if (itinerary.startDate && itinerary.endDate) {
+      const durationMs = itinerary.endDate.getTime() - itinerary.startDate.getTime();
+      durationDays = Math.ceil(durationMs / (1000 * 60 * 60 * 24));
+    }
 
     // Count segment types
     const segmentCounts = itinerary.segments.reduce(
