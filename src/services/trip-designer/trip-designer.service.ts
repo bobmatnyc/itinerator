@@ -221,7 +221,9 @@ export class TripDesignerService {
 
 ${summary}
 
-Important: Since the itinerary already has content, skip any questions about information that's already provided in the summary above. Instead, acknowledge what's already planned and offer to help refine, modify, or extend the itinerary.`;
+Important: Since the itinerary already has content, skip any questions about information that's already provided in the summary above. Instead, acknowledge what's already planned and offer to help refine, modify, or extend the itinerary.
+
+CRITICAL: If the summary shows "⚠️ EXISTING BOOKINGS" with luxury/premium properties or cabin classes, DO NOT ask about travel style or budget - infer the luxury/premium preference from the bookings and proceed accordingly. The existing bookings define the expected quality level.`;
 
           await this.sessionManager.addMessage(session.id, {
             role: 'system',
@@ -752,6 +754,7 @@ Important: Since the itinerary already has content, skip any questions about inf
 
       // Handle tool calls if any
       let segmentsModified: SegmentId[] = [];
+      let itineraryMetadataChanged = false; // Track non-segment changes (destinations, dates, etc.)
 
       if (toolCalls.length > 0) {
         console.log(`[chatStream] ====== TOOL EXECUTION PHASE ======`);
@@ -805,6 +808,17 @@ Important: Since the itinerary already has content, skip any questions about inf
           if (result.success && result.metadata?.segmentId) {
             segmentsModified.push(result.metadata.segmentId);
           }
+
+          // Track itinerary metadata changes (destinations, dates, etc.)
+          // These don't modify segments but should trigger UI refresh
+          if (result.success && typeof result.result === 'object' && result.result !== null) {
+            const resultObj = result.result as Record<string, unknown>;
+            if (resultObj.itineraryChanged === true) {
+              // Set flag to signal itinerary metadata changed
+              itineraryMetadataChanged = true;
+            }
+          }
+
           // Check if switch_to_trip_designer was called
           if (result.success && typeof result.result === 'object' && result.result !== null) {
             const resultObj = result.result as Record<string, unknown>;
@@ -962,7 +976,7 @@ Important: Since the itinerary already has content, skip any questions about inf
         console.log(`[chatStream] ====== EMITTING DONE EVENT ======`);
         yield {
           type: 'done',
-          itineraryUpdated: segmentsModified.length > 0,
+          itineraryUpdated: segmentsModified.length > 0 || itineraryMetadataChanged,
           segmentsModified,
           tokens: {
             input: totalInputTokens,
@@ -1344,8 +1358,25 @@ Recent conversation continues below...`,
     session: TripDesignerSession,
     options?: { useMinimalPrompt?: boolean }
   ): Promise<ChatCompletionMessageParam[]> {
+    // Inject current date context for date awareness
+    const today = new Date();
+    const dateContext = `## Current Date Context
+
+Today is ${today.toLocaleDateString('en-US', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+})} (${today.toISOString().split('T')[0]}).
+
+IMPORTANT: All suggested dates MUST be in the future. Do not suggest dates that have already passed.
+
+---
+
+`;
+
     // Select base system prompt based on agent mode
-    let systemPrompt = this.getSystemPromptForMode(session.agentMode);
+    let systemPrompt = dateContext + this.getSystemPromptForMode(session.agentMode);
     let hasItineraryContent = false;
 
     // For help mode, we don't need itinerary context in the system prompt
@@ -1390,7 +1421,22 @@ You are editing an existing itinerary. Here's the current state:
 
 ${summary}
 
-The user wants to modify or extend this itinerary. Help them make changes while preserving the existing structure and respecting their stated preferences.`;
+## ⚠️ CRITICAL: BOOKING-BASED INFERENCE (READ THIS FIRST!)
+
+**Before asking ANY questions, check the "EXISTING BOOKINGS" section above.**
+
+If you see luxury properties booked (L'Esplanade, Four Seasons, Ritz, Aman, Belmond, Peninsula, Mandarin Oriental, Rosewood, Park Hyatt, or similar 5-star/boutique hotels):
+- **DO NOT ask about travel style** - the booking defines it as LUXURY
+- **DO NOT ask about budget** - they've already made premium choices
+- **INSTEAD**: Acknowledge their excellent taste and offer to plan upscale experiences to match
+
+Example of CORRECT behavior when Hotel L'Esplanade is booked:
+✅ "I see you've booked Hotel L'Esplanade in Grand Case - excellent choice! It's one of St. Martin's finest boutique properties. Based on your accommodation, I'll focus on upscale dining and premium experiences. What would you like to explore?"
+
+Example of WRONG behavior:
+❌ "What's your preferred travel style?" (NEVER ask this when luxury hotel is already booked!)
+
+The user wants to modify or extend this itinerary. Help them make changes while preserving the existing structure and respecting their booking-inferred preferences.`;
         }
       }
     }
@@ -1582,5 +1628,20 @@ Use this relevant knowledge to inform your responses, but prioritize the current
     return {
       activeSessions: this.sessionManager.getActiveSessionCount(),
     };
+  }
+
+  /**
+   * Delete a session by ID
+   */
+  async deleteSession(sessionId: SessionId): Promise<Result<void, StorageError>> {
+    return this.sessionManager.deleteSession(sessionId);
+  }
+
+  /**
+   * Delete all sessions for an itinerary
+   * Used when an itinerary is deleted to prevent orphaned sessions
+   */
+  deleteSessionsByItineraryId(itineraryId: ItineraryId): void {
+    this.sessionManager.deleteByItineraryId(itineraryId);
   }
 }
