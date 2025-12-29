@@ -27,8 +27,12 @@ const segmentSourceSchema = z.enum(['import', 'user', 'agent']);
 
 /**
  * Agent mode schema
+ * - dream: High-level planning without specific bookings
+ * - plan: Detailed planning with specific dates/times
+ * - book: Ready for booking with confirmed details
+ * - chat: Interactive trip designer chat mode
  */
-const agentModeSchema = z.enum(['dream', 'plan', 'book']);
+const agentModeSchema = z.enum(['dream', 'plan', 'book', 'chat']);
 
 /**
  * Segment source details schema
@@ -108,8 +112,8 @@ const flightSegmentBaseSchema = z.object({
   type: z.literal('FLIGHT'),
   /** Operating airline */
   airline: companySchema,
-  /** Flight number (e.g., AA123, BA4567) */
-  flightNumber: z.string().regex(/^[A-Z0-9]{2,3}\d{1,4}$/, 'Invalid flight number format'),
+  /** Flight number (e.g., AA123, BA4567, or combined B6887/B6788) */
+  flightNumber: z.string().regex(/^[A-Z0-9]{2,3}\d{1,4}([\/\-][A-Z0-9]{2,3}\d{1,4})?$/, 'Invalid flight number format'),
   /** Origin airport */
   origin: locationSchema,
   /** Destination airport */
