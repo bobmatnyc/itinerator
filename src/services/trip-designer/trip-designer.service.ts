@@ -1421,22 +1421,16 @@ You are editing an existing itinerary. Here's the current state:
 
 ${summary}
 
-## ⚠️ CRITICAL: BOOKING-BASED INFERENCE (READ THIS FIRST!)
+## ⚠️ CRITICAL: INFER PREFERENCES FROM EXISTING BOOKINGS
 
-**Before asking ANY questions, check the "EXISTING BOOKINGS" section above.**
+Check the "EXISTING BOOKINGS" section above. The bookings tell you everything about travel style:
+- **Luxury/boutique hotel?** → They travel luxury. Don't ask about style or budget.
+- **Business class flight?** → Premium traveler. Skip budget questions.
+- **Budget hotel/hostel?** → Budget-conscious. Suggest value options.
 
-If you see luxury properties booked (L'Esplanade, Four Seasons, Ritz, Aman, Belmond, Peninsula, Mandarin Oriental, Rosewood, Park Hyatt, or similar 5-star/boutique hotels):
-- **DO NOT ask about travel style** - the booking defines it as LUXURY
-- **DO NOT ask about budget** - they've already made premium choices
-- **INSTEAD**: Acknowledge their excellent taste and offer to plan upscale experiences to match
+**NEVER ask questions the bookings already answer.** Acknowledge their choices and match your suggestions accordingly.
 
-Example of CORRECT behavior when Hotel L'Esplanade is booked:
-✅ "I see you've booked Hotel L'Esplanade in Grand Case - excellent choice! It's one of St. Martin's finest boutique properties. Based on your accommodation, I'll focus on upscale dining and premium experiences. What would you like to explore?"
-
-Example of WRONG behavior:
-❌ "What's your preferred travel style?" (NEVER ask this when luxury hotel is already booked!)
-
-The user wants to modify or extend this itinerary. Help them make changes while preserving the existing structure and respecting their booking-inferred preferences.`;
+The user wants to modify or extend this itinerary. Help them while respecting their booking-inferred preferences.`;
         }
       }
     }
