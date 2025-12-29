@@ -80,6 +80,8 @@ export const POST: RequestHandler = async ({ request }) => {
     // If creating new trip
     if (createNew) {
       const newTripName = name || tripName; // Support both 'name' and 'tripName'
+      console.log('[Import Confirm] Creating new trip:', { newTripName, userId, segmentCount: segments?.length });
+
       if (!newTripName) {
         return error(400, 'name or tripName is required when creating new trip');
       }
@@ -90,14 +92,19 @@ export const POST: RequestHandler = async ({ request }) => {
         createdBy: userId,
       });
 
+      console.log('[Import Confirm] Create result:', createResult);
+
       if (!createResult.success) {
+        console.error('[Import Confirm] Failed to create:', createResult);
         return error(500, 'Failed to create new itinerary');
       }
 
       const newItinerary = createResult.value;
+      console.log('[Import Confirm] Created itinerary:', newItinerary.id);
 
       // Add segments to new itinerary
       const result = await importService.confirmImport(segments, newItinerary.id);
+      console.log('[Import Confirm] Segments added:', result);
 
       return json({
         ...result,

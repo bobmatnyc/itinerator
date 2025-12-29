@@ -196,10 +196,10 @@
 
       // Call completion callback
       if (onComplete) {
-        onComplete(
-          result.itineraryId || selectedTripId!,
-          result.itineraryName || selectedMatch?.itineraryName || newTripName
-        );
+        // Use selectedItinerary for new trips, itineraryId for existing
+        const itinId = result.selectedItinerary?.id || result.itineraryId || selectedTripId!;
+        const itinName = result.selectedItinerary?.name || result.itineraryName || selectedMatch?.itineraryName || newTripName;
+        onComplete(itinId, itinName);
       }
 
       // Close after a short delay
