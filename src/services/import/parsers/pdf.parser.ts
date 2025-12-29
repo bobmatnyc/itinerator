@@ -3,7 +3,8 @@
  * @module services/import/parsers/pdf
  */
 
-import pdfParse from 'pdf-parse';
+// NOTE: pdf-parse is loaded dynamically to avoid initialization bug
+// The library tries to load a test file on import which fails in bundlers
 import type { IParser, ImportRequest, ImportResult, ImportFormat } from '../types.js';
 import type { LLMExtractor } from '../extractors/llm.extractor.js';
 
@@ -35,6 +36,10 @@ export class PDFParser implements IParser {
       const buffer = Buffer.isBuffer(request.content)
         ? request.content
         : Buffer.from(request.content);
+
+      // Dynamic import to avoid pdf-parse initialization bug
+      // (The library tries to load ./test/data/05-versions-space.pdf on import)
+      const pdfParse = (await import('pdf-parse')).default;
 
       // Extract text from PDF
       const data = await pdfParse(buffer);
