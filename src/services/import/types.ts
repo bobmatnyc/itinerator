@@ -95,3 +95,43 @@ export interface IExtractor {
   /** Extract booking data from text */
   extract(text: string, format: ImportFormat): Promise<ImportResult>;
 }
+
+/**
+ * Options for importing with trip matching
+ */
+export interface ImportOptions {
+  /** Import directly to this itinerary (skip matching) */
+  itineraryId?: string;
+  /** User ID for trip lookup */
+  userId: string;
+  /** Auto-match to existing trips (default: true) */
+  autoMatch?: boolean;
+  /** Create new trip if no good match (default: false) */
+  createNewIfNoMatch?: boolean;
+}
+
+/**
+ * Import result with trip matching information
+ */
+export interface ImportResultWithMatching extends ImportResult {
+  /** Potential trip matches */
+  tripMatches?: Array<{
+    itineraryId: string;
+    itineraryName: string;
+    destination: string;
+    dateRange: { start: string; end: string };
+    matchScore: number;
+    matchReasons: string[];
+  }>;
+  /** Selected itinerary (if added) */
+  selectedItinerary?: { id: string; name: string };
+  /** Action taken or pending */
+  action: 'added_to_existing' | 'created_new' | 'pending_selection';
+  /** Deduplication info */
+  deduplication?: {
+    added: number;
+    skipped: number;
+    updated: number;
+    duplicates: string[];
+  };
+}
