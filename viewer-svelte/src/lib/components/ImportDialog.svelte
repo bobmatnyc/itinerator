@@ -45,6 +45,53 @@
     selectedTripId ? tripMatches.find((m) => m.itineraryId === selectedTripId) : null
   );
 
+  // Infer trip name from segments (Destination MonDD-DD or MonDD-MonDD)
+  let suggestedTripName = $derived(() => {
+    if (segments.length === 0) return '';
+
+    // Find destination from segments
+    let destination = '';
+    let earliestDate: Date | null = null;
+    let latestDate: Date | null = null;
+
+    for (const seg of segments) {
+      // Get dates
+      const start = new Date(seg.startDatetime);
+      const end = new Date(seg.endDatetime);
+      if (!earliestDate || start < earliestDate) earliestDate = start;
+      if (!latestDate || end > latestDate) latestDate = end;
+
+      // Get destination from flights or hotels
+      if (seg.type === 'FLIGHT' && (seg as any).destination) {
+        const dest = (seg as any).destination;
+        destination = dest.address?.city || dest.name || dest.code || '';
+      } else if (seg.type === 'HOTEL' && (seg as any).location) {
+        const loc = (seg as any).location;
+        if (!destination) {
+          destination = loc.address?.city || loc.name || '';
+        }
+      }
+    }
+
+    if (!destination || !earliestDate || !latestDate) {
+      return destination || 'New Trip';
+    }
+
+    // Format dates
+    const startMonth = earliestDate.toLocaleDateString('en-US', { month: 'short' });
+    const startDay = earliestDate.getDate();
+    const endMonth = latestDate.toLocaleDateString('en-US', { month: 'short' });
+    const endDay = latestDate.getDate();
+
+    // Same month: "Boston Jan 15-20"
+    // Different months: "Boston Jan 15 - Feb 2"
+    if (startMonth === endMonth) {
+      return `${destination} ${startMonth} ${startDay}-${endDay}`;
+    } else {
+      return `${destination} ${startMonth} ${startDay} - ${endMonth} ${endDay}`;
+    }
+  });
+
   function resetState() {
     step = 'upload';
     file = null;
@@ -222,6 +269,8 @@
   function handleCreateNew() {
     createNew = true;
     selectedTripId = null;
+    // Pre-fill with suggested name based on segments
+    newTripName = suggestedTripName();
   }
 </script>
 
