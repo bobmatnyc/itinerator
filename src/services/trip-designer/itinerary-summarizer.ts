@@ -206,6 +206,35 @@ function inferFlightTier(cabinClass: string): string {
 }
 
 /**
+ * Extract destinations from flight and hotel segments
+ * Used as fallback when itinerary.destinations is empty
+ */
+function extractDestinationsFromSegments(segments: Segment[]): string[] {
+  const destinations = new Set<string>();
+
+  for (const segment of segments) {
+    // Get destination from flights
+    if (segment.type === 'FLIGHT') {
+      const flightSeg = segment as import('./../../domain/types/segment.js').FlightSegment;
+      if (flightSeg.destination) {
+        const name = flightSeg.destination.address?.city || flightSeg.destination.name || flightSeg.destination.code;
+        if (name) destinations.add(name);
+      }
+    }
+    // Get location from hotels
+    if (segment.type === 'HOTEL') {
+      const hotelSeg = segment as import('./../../domain/types/segment.js').HotelSegment;
+      if (hotelSeg.location) {
+        const name = hotelSeg.location.address?.city || hotelSeg.location.name;
+        if (name) destinations.add(name);
+      }
+    }
+  }
+
+  return Array.from(destinations);
+}
+
+/**
  * Extract existing bookings from segments to help AI infer preferences
  * Returns prominent booking callouts with inferred travel style
  */
@@ -267,13 +296,18 @@ export function summarizeItinerary(itinerary: Itinerary): string {
     lines.push(`**Travelers**: Not specified`);
   }
 
-  // Destinations
-  if (itinerary.destinations.length > 0) {
-    const destNames = itinerary.destinations
+  // Destinations - try array first, then extract from segments
+  let destinationNames: string[] = [];
+  if (itinerary.destinations && itinerary.destinations.length > 0) {
+    destinationNames = itinerary.destinations
       .map(d => d.address?.city || d.name)
-      .filter(Boolean)
-      .join(', ');
-    lines.push(`**Destinations**: ${destNames}`);
+      .filter(Boolean);
+  } else if (itinerary.segments && itinerary.segments.length > 0) {
+    destinationNames = extractDestinationsFromSegments(itinerary.segments);
+  }
+
+  if (destinationNames.length > 0) {
+    lines.push(`**Destinations**: ${destinationNames.join(', ')}`);
   }
 
   // Preferences
@@ -332,13 +366,18 @@ export function summarizeItineraryMinimal(itinerary: Itinerary): string {
     parts.push(`${itinerary.title} (dates not specified)`);
   }
 
-  // Destinations
-  if (itinerary.destinations.length > 0) {
-    const destNames = itinerary.destinations
+  // Destinations - try array first, then extract from segments
+  let destinationNames: string[] = [];
+  if (itinerary.destinations && itinerary.destinations.length > 0) {
+    destinationNames = itinerary.destinations
       .map(d => d.address?.city || d.name)
-      .filter(Boolean)
-      .join(', ');
-    parts.push(`Destinations: ${destNames}`);
+      .filter(Boolean);
+  } else if (itinerary.segments && itinerary.segments.length > 0) {
+    destinationNames = extractDestinationsFromSegments(itinerary.segments);
+  }
+
+  if (destinationNames.length > 0) {
+    parts.push(`Destinations: ${destinationNames.join(', ')}`);
   }
 
   // Segments
@@ -355,6 +394,16 @@ export function summarizeItineraryMinimal(itinerary: Itinerary): string {
  * Returns minimal data to save tokens while still being useful
  */
 export function summarizeItineraryForTool(itinerary: Itinerary): unknown {
+  // Destinations - try array first, then extract from segments
+  let destinationNames: string[] = [];
+  if (itinerary.destinations && itinerary.destinations.length > 0) {
+    destinationNames = itinerary.destinations
+      .map(d => d.address?.city || d.name)
+      .filter(Boolean);
+  } else if (itinerary.segments && itinerary.segments.length > 0) {
+    destinationNames = extractDestinationsFromSegments(itinerary.segments);
+  }
+
   return {
     id: itinerary.id,
     title: itinerary.title,
@@ -363,7 +412,7 @@ export function summarizeItineraryForTool(itinerary: Itinerary): unknown {
       start: itinerary.startDate,
       end: itinerary.endDate,
     },
-    destinations: itinerary.destinations?.map(d => d.address?.city || d.name) || [],
+    destinations: destinationNames,
     segmentCount: itinerary.segments?.length || 0,
     // Only include segment IDs and types for reference
     segments: itinerary.segments?.map(s => {
