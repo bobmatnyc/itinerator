@@ -1,24 +1,41 @@
 <script lang="ts">
   import type { Segment, SegmentSource } from '$lib/types';
 
+  // Extended segment type for hotel night tracking
+  type ExpandedSegment = Segment & {
+    _hotelNightInfo?: {
+      nightNumber: number;
+      totalNights: number;
+      isCheckout: boolean;
+    };
+  };
+
   let {
     segment,
     editMode = false,
     onEdit,
     onDelete
   }: {
-    segment: Segment;
+    segment: ExpandedSegment;
     editMode?: boolean;
     onEdit?: () => void;
     onDelete?: () => void;
   } = $props();
 
   // Get segment title based on type
-  function getSegmentTitle(segment: Segment): string {
+  function getSegmentTitle(segment: ExpandedSegment): string {
     switch (segment.type) {
       case 'FLIGHT':
         return `${segment.origin.code || segment.origin.name} → ${segment.destination.code || segment.destination.name}`;
       case 'HOTEL':
+        // Show night number or checkout status
+        if (segment._hotelNightInfo) {
+          if (segment._hotelNightInfo.isCheckout) {
+            return `${segment.property.name} - Check-out`;
+          } else {
+            return `${segment.property.name} - Night ${segment._hotelNightInfo.nightNumber} of ${segment._hotelNightInfo.totalNights}`;
+          }
+        }
         return segment.property.name;
       case 'ACTIVITY':
         return segment.name;
@@ -48,8 +65,16 @@
   }
 
   // Format time only (for day-grouped view)
-  function formatTime(dateTime: string): string {
+  function formatTime(dateTime: string, isCheckout: boolean = false): string {
     const date = new Date(dateTime);
+    // For checkout entries, show the time (11:00 AM)
+    // For night entries, don't show a time (or show "All day")
+    if (isCheckout) {
+      return date.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+      });
+    }
     return date.toLocaleString('en-US', {
       hour: 'numeric',
       minute: '2-digit',
@@ -145,7 +170,12 @@
 
   <!-- Time and Source -->
   <div class="flex items-center gap-2 text-sm text-minimal-text-muted ml-11">
-    <span>{formatTime(segment.startDatetime)}</span>
+    {#if segment.type === 'HOTEL' && segment._hotelNightInfo && !segment._hotelNightInfo.isCheckout}
+      <!-- For hotel night entries, show "All day" instead of time -->
+      <span>All day</span>
+    {:else}
+      <span>{formatTime(segment.startDatetime, segment._hotelNightInfo?.isCheckout ?? false)}</span>
+    {/if}
     <span class="text-gray-300">·</span>
     <span class="inline-flex items-center gap-1 text-xs">
       <span>{getSourceLabel(segment.source).icon}</span>

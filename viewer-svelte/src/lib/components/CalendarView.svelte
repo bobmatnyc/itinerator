@@ -6,11 +6,79 @@
   type ViewMode = 'day' | 'week' | 'month';
   let viewMode = $state<ViewMode>('week');
 
+  // Extended segment type for hotel night tracking
+  type ExpandedSegment = Segment & {
+    _hotelNightInfo?: {
+      nightNumber: number;
+      totalNights: number;
+      isCheckout: boolean;
+    };
+  };
+
+  // Helper function to expand hotel segments across all nights
+  function expandHotelSegments(segments: Segment[]): ExpandedSegment[] {
+    const expanded: ExpandedSegment[] = [];
+
+    segments.forEach((segment) => {
+      if (segment.type === 'HOTEL' && segment.checkInDate && segment.checkOutDate) {
+        const checkIn = new Date(segment.checkInDate);
+        const checkOut = new Date(segment.checkOutDate);
+
+        // Calculate number of nights (not including checkout day)
+        const nights = Math.round((checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24));
+
+        if (nights > 0) {
+          // Create an entry for each night of the stay
+          for (let i = 0; i < nights; i++) {
+            const nightDate = new Date(checkIn);
+            nightDate.setDate(nightDate.getDate() + i);
+
+            // Use the night's date at midnight for grouping
+            const nightDatetime = nightDate.toISOString().split('T')[0] + 'T00:00:00.000Z';
+
+            expanded.push({
+              ...segment,
+              startDatetime: nightDatetime,
+              _hotelNightInfo: {
+                nightNumber: i + 1,
+                totalNights: nights,
+                isCheckout: false,
+              },
+            });
+          }
+
+          // Add checkout entry on the checkout date
+          const checkoutDatetime = checkOut.toISOString().split('T')[0] + 'T11:00:00.000Z'; // Assume 11 AM checkout
+          expanded.push({
+            ...segment,
+            startDatetime: checkoutDatetime,
+            _hotelNightInfo: {
+              nightNumber: 0,
+              totalNights: nights,
+              isCheckout: true,
+            },
+          });
+        } else {
+          // Same-day check-in/check-out or invalid dates
+          expanded.push(segment);
+        }
+      } else {
+        // Non-hotel segment or hotel without date range
+        expanded.push(segment);
+      }
+    });
+
+    return expanded;
+  }
+
   // Get all dates with segments
   let segmentsByDate = $derived.by(() => {
-    const grouped = new Map<string, Segment[]>();
+    const grouped = new Map<string, ExpandedSegment[]>();
 
-    itinerary.segments.forEach((segment) => {
+    // Expand hotel segments across all nights
+    const expandedSegments = expandHotelSegments(itinerary.segments);
+
+    expandedSegments.forEach((segment) => {
       const date = new Date(segment.startDatetime);
       const dateKey = date.toISOString().split('T')[0];
 
@@ -88,11 +156,19 @@
   }
 
   // Helper function to get segment title
-  function getSegmentTitle(segment: Segment): string {
+  function getSegmentTitle(segment: ExpandedSegment): string {
     switch (segment.type) {
       case 'FLIGHT':
         return `${segment.airline.name} ${segment.flightNumber}`;
       case 'HOTEL':
+        // Show night number or checkout status
+        if (segment._hotelNightInfo) {
+          if (segment._hotelNightInfo.isCheckout) {
+            return `${segment.property.name} - Check-out`;
+          } else {
+            return `${segment.property.name} - Night ${segment._hotelNightInfo.nightNumber}/${segment._hotelNightInfo.totalNights}`;
+          }
+        }
         return segment.property.name;
       case 'ACTIVITY':
         return segment.name;
