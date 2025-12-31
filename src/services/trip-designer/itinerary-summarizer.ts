@@ -301,12 +301,18 @@ export interface TitleDestinationMismatch {
  * @returns Mismatch detection result, or null if no check could be performed
  */
 export function detectTitleDestinationMismatch(itinerary: Itinerary): TitleDestinationMismatch | null {
+  console.log('[Mismatch Detection] Starting mismatch detection for itinerary:', itinerary.id);
+  console.log('[Mismatch Detection] Itinerary title:', itinerary.title);
+
   // Need at least one flight to detect destination
   const flightSegments = itinerary.segments.filter(
     (s) => s.type === 'FLIGHT'
   ) as import('./../../domain/types/segment.js').FlightSegment[];
 
+  console.log('[Mismatch Detection] Flight segments found:', flightSegments.length);
+
   if (flightSegments.length === 0) {
+    console.log('[Mismatch Detection] No flights - cannot detect mismatch');
     return null; // Can't determine without flights
   }
 
@@ -327,7 +333,13 @@ export function detectTitleDestinationMismatch(itinerary: Itinerary): TitleDesti
   const destinationCityRaw = firstFlight.destination?.address?.city || firstFlight.destination?.city || firstFlight.destination?.name;
   const destinationCode = firstFlight.destination?.code;
 
+  console.log('[Mismatch Detection] Origin city raw:', originCityRaw);
+  console.log('[Mismatch Detection] Origin code:', originCode);
+  console.log('[Mismatch Detection] Destination city raw:', destinationCityRaw);
+  console.log('[Mismatch Detection] Destination code:', destinationCode);
+
   if (!originCityRaw || !destinationCityRaw) {
+    console.log('[Mismatch Detection] Missing city names - cannot detect mismatch');
     return null; // Can't detect without city names
   }
 
@@ -345,6 +357,9 @@ export function detectTitleDestinationMismatch(itinerary: Itinerary): TitleDesti
   const originCity = normalizeCityName(originCityRaw);
   const destinationCity = normalizeCityName(destinationCityRaw);
 
+  console.log('[Mismatch Detection] Origin city normalized:', originCity);
+  console.log('[Mismatch Detection] Destination city normalized:', destinationCity);
+
   // Check if this is a round trip (last flight returns to origin)
   const isRoundTrip =
     lastFlight.destination?.code === originCode ||
@@ -360,6 +375,11 @@ export function detectTitleDestinationMismatch(itinerary: Itinerary): TitleDesti
   const originCityLower = originCity.toLowerCase();
   const destinationCityLower = actualDestination.toLowerCase();
 
+  console.log('[Mismatch Detection] Title (lowercase):', titleLower);
+  console.log('[Mismatch Detection] Description (lowercase):', descLower);
+  console.log('[Mismatch Detection] Origin city (lowercase):', originCityLower);
+  console.log('[Mismatch Detection] Destination city (lowercase):', destinationCityLower);
+
   // Check if title/description mentions origin but NOT destination
   const mentionsOrigin =
     titleLower.includes(originCityLower) ||
@@ -373,8 +393,13 @@ export function detectTitleDestinationMismatch(itinerary: Itinerary): TitleDesti
     descLower.includes(destinationCityLower) ||
     (actualDestinationCode && descLower.includes(actualDestinationCode.toLowerCase()));
 
+  console.log('[Mismatch Detection] Mentions origin?', mentionsOrigin);
+  console.log('[Mismatch Detection] Mentions destination?', mentionsDestination);
+
   // Mismatch detected if mentions origin but not destination
   if (mentionsOrigin && !mentionsDestination) {
+    console.log('[Mismatch Detection] ⚠️ MISMATCH DETECTED - Title mentions origin but not destination');
+
     // Remove origin city from title to generate suggestion
     // Handle multi-word city names by doing case-insensitive replacement
     let suggestedTitle = itinerary.title;
@@ -400,6 +425,8 @@ export function detectTitleDestinationMismatch(itinerary: Itinerary): TitleDesti
     // Prepend destination
     suggestedTitle = `${actualDestination} ${suggestedTitle}`;
 
+    console.log('[Mismatch Detection] Suggested title:', suggestedTitle);
+
     return {
       hasMismatch: true,
       titleMentions: originCity,
@@ -408,6 +435,8 @@ export function detectTitleDestinationMismatch(itinerary: Itinerary): TitleDesti
       explanation: `Title mentions "${originCity}" (your departure city) but you're actually traveling to "${actualDestination}". This often happens when importing confirmation emails sent from the departure city.`,
     };
   }
+
+  console.log('[Mismatch Detection] ✓ No mismatch detected');
 
   // No mismatch detected
   return {

@@ -13,7 +13,7 @@
 import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { ImportService } from '$services/import/index.js';
-import { OPENROUTER_API_KEY } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 /**
  * POST /api/v1/import/upload
@@ -22,7 +22,7 @@ import { OPENROUTER_API_KEY } from '$env/static/private';
 export const POST: RequestHandler = async ({ request, url, locals }) => {
   try {
     // Check API key
-    if (!OPENROUTER_API_KEY) {
+    if (!env.OPENROUTER_API_KEY) {
       return error(500, 'OPENROUTER_API_KEY not configured');
     }
 
@@ -48,7 +48,7 @@ export const POST: RequestHandler = async ({ request, url, locals }) => {
 
     // Initialize import service with trip matching support
     const importService = new ImportService({
-      apiKey: OPENROUTER_API_KEY,
+      apiKey: env.OPENROUTER_API_KEY!,
       itineraryCollection,
       segmentService,
     });

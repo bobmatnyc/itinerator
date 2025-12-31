@@ -53,72 +53,82 @@
   }
 </script>
 
-<div class="app-container">
-  <!-- Fixed Header -->
-  <Header />
+{#if selectedId}
+  <!-- Detail page handles its own layout (chat + content) -->
+  {@render children?.()}
+{:else}
+  <!-- List-only view -->
+  <div class="app-container">
+    <!-- Fixed Header -->
+    <Header />
 
-  <!-- Main Content Area: Split Pane Layout -->
-  <div class="main-content">
-    <!-- LEFT PANE: Itinerary List (always visible) -->
-    <div class="itinerary-list-pane">
-      <div class="list-header">
-        <h1 class="list-title">My Itineraries</h1>
-        <button
-          class="minimal-button primary"
-          onclick={() => goto('/')}
-          type="button"
-        >
-          New
-        </button>
+    <!-- Main Content Area: Split Pane Layout -->
+    <div class="main-content">
+      <!-- LEFT PANE: Itinerary List (always visible) -->
+      <div class="itinerary-list-pane">
+        <div class="list-header">
+          <h1 class="list-title">My Itineraries</h1>
+          <button
+            class="minimal-button primary"
+            onclick={() => goto('/')}
+            type="button"
+          >
+            New
+          </button>
+        </div>
+
+        <div class="list-content">
+          {#if $itinerariesLoading}
+            <div class="loading-state">
+              <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-minimal-accent border-r-transparent mb-4"></div>
+              <p class="text-sm text-minimal-text-muted">Loading itineraries...</p>
+            </div>
+          {:else if $itinerariesError}
+            <div class="error-state">
+              <p class="text-minimal-text mb-4 text-sm">Error: {$itinerariesError}</p>
+              <button class="minimal-button" onclick={loadItineraries} type="button">
+                Retry
+              </button>
+            </div>
+          {:else if $itineraries.length === 0}
+            <div class="empty-state">
+              <div class="empty-state-icon">📋</div>
+              <p class="text-minimal-text mb-2 font-semibold">No itineraries yet</p>
+              <p class="text-minimal-text-muted mb-4 text-sm">Start planning your next adventure!</p>
+              <button
+                class="minimal-button primary"
+                onclick={() => goto('/')}
+                type="button"
+              >
+                Create Your First Itinerary
+              </button>
+            </div>
+          {:else}
+            <div class="itinerary-list">
+              {#each $itineraries as itinerary (itinerary.id)}
+                <ItineraryListItem
+                  {itinerary}
+                  selected={itinerary.id === selectedId}
+                  onclick={() => handleSelect(itinerary.id)}
+                  ondelete={handleDelete}
+                />
+              {/each}
+            </div>
+          {/if}
+        </div>
       </div>
 
-      <div class="list-content">
-        {#if $itinerariesLoading}
-          <div class="loading-state">
-            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-minimal-accent border-r-transparent mb-4"></div>
-            <p class="text-sm text-minimal-text-muted">Loading itineraries...</p>
-          </div>
-        {:else if $itinerariesError}
-          <div class="error-state">
-            <p class="text-minimal-text mb-4 text-sm">Error: {$itinerariesError}</p>
-            <button class="minimal-button" onclick={loadItineraries} type="button">
-              Retry
-            </button>
-          </div>
-        {:else if $itineraries.length === 0}
-          <div class="empty-state">
-            <div class="empty-state-icon">📋</div>
-            <p class="text-minimal-text mb-2 font-semibold">No itineraries yet</p>
-            <p class="text-minimal-text-muted mb-4 text-sm">Start planning your next adventure!</p>
-            <button
-              class="minimal-button primary"
-              onclick={() => goto('/')}
-              type="button"
-            >
-              Create Your First Itinerary
-            </button>
-          </div>
-        {:else}
-          <div class="itinerary-list">
-            {#each $itineraries as itinerary (itinerary.id)}
-              <ItineraryListItem
-                {itinerary}
-                selected={itinerary.id === selectedId}
-                onclick={() => handleSelect(itinerary.id)}
-                ondelete={handleDelete}
-              />
-            {/each}
-          </div>
-        {/if}
+      <!-- RIGHT PANE: Detail View (slot content) -->
+      <div class="detail-pane">
+        <div class="empty-detail-state">
+          <div class="empty-detail-icon">🗺️</div>
+          <p class="text-minimal-text mb-2 font-semibold">Select an itinerary</p>
+          <p class="text-minimal-text-muted text-sm">Choose from the list to view details</p>
+        </div>
       </div>
-    </div>
-
-    <!-- RIGHT PANE: Detail View (slot content) -->
-    <div class="detail-pane">
-      {@render children?.()}
     </div>
   </div>
-</div>
+{/if}
 
 <style>
   .app-container {
@@ -186,6 +196,21 @@
   }
 
   .empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .empty-detail-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .empty-detail-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
   }

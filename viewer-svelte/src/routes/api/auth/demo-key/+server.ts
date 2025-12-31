@@ -8,7 +8,7 @@
  */
 
 import type { RequestHandler } from './$types';
-import * as privateEnv from '$env/static/private';
+import { env as privateEnv } from '$env/dynamic/private';
 
 const SESSION_COOKIE_NAME = 'itinerizer_session';
 const SESSION_SECRET = 'authenticated';

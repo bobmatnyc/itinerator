@@ -11,8 +11,8 @@
  */
 
 import type { RequestHandler } from './$types';
-import * as privateEnv from '$env/static/private';
-import * as env from '$env/static/public';
+import { env as privateEnv } from '$env/dynamic/private';
+import * as publicEnv from '$env/static/public';
 
 const SESSION_COOKIE_NAME = 'itinerizer_session';
 const SESSION_SECRET = 'authenticated';
@@ -22,7 +22,7 @@ const SESSION_SECRET = 'authenticated';
  */
 function getAuthMode(): 'password' | 'open' {
 	// Explicit override via PUBLIC_AUTH_MODE env var
-	const authMode = env.PUBLIC_AUTH_MODE;
+	const authMode = publicEnv.PUBLIC_AUTH_MODE;
 	if (authMode === 'password' || authMode === 'open') {
 		return authMode;
 	}

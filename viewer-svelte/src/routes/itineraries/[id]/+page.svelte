@@ -3,6 +3,10 @@
   import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
   import {
+    itineraries,
+    itinerariesLoading,
+    itinerariesError,
+    loadItineraries,
     selectedItinerary,
     selectedItineraryLoading,
     selectItinerary,
@@ -12,6 +16,8 @@
   import { navigationStore } from '$lib/stores/navigation.svelte';
   import { toast } from '$lib/stores/toast.svelte';
   import { modal } from '$lib/stores/modal.svelte';
+  import Header from '$lib/components/Header.svelte';
+  import ItineraryListItem from '$lib/components/ItineraryListItem.svelte';
   import ChatPanel from '$lib/components/ChatPanel.svelte';
   import MainPane from '$lib/components/MainPane.svelte';
   import CalendarView from '$lib/components/CalendarView.svelte';
@@ -55,8 +61,10 @@
   // Hide in manual edit mode
   let showChatSidebar = $derived(navigationStore.editMode === 'ai');
 
-  // Load itinerary on mount and when ID changes
+  // Load itineraries and selected itinerary
   onMount(() => {
+    loadItineraries();
+
     // Add mouse event listeners for resizing
     const handleMouseMove = (e: MouseEvent) => {
       if (isResizing) {
@@ -130,126 +138,214 @@
   function handleEditModeChange(mode: 'ai' | 'manual') {
     navigationStore.setEditMode(mode);
   }
+
+  function handleSelectItinerary(id: string) {
+    goto(`/itineraries/${id}`);
+  }
+
+  async function handleDeleteFromList(itinerary: any) {
+    const confirmed = await modal.confirm({
+      title: 'Delete Itinerary',
+      message: `Delete "${itinerary.title}"? This cannot be undone.`,
+      confirmText: 'Delete',
+      destructive: true
+    });
+
+    if (!confirmed) return;
+
+    try {
+      await deleteItinerary(itinerary.id);
+      toast.success('Itinerary deleted');
+      // If we deleted the currently selected itinerary, go back to list
+      if (itineraryId === itinerary.id) {
+        goto('/itineraries');
+      }
+    } catch (error) {
+      console.error('Failed to delete itinerary:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to delete itinerary. Please try again.';
+      toast.error(errorMessage);
+    }
+  }
 </script>
 
-<div class="detail-container">
-  <!-- Main Content Area -->
+<div class="app-container">
+  <!-- Fixed Header -->
+  <Header />
+
+  <!-- Main Content Area: 2-Pane Layout -->
   <div class="main-content">
-    <!-- Left Pane: Chat Panel (hidden in manual edit mode) -->
-    {#if showChatSidebar}
-    <div class="left-pane" style="width: {leftPaneWidth}px;">
-      <div class="chat-pane-content">
-        {#if $selectedItinerary}
-          <ChatPanel agent={agentConfig} itineraryId={$selectedItinerary.id} />
+    <!-- Left Pane: Itinerary List -->
+    <div class="itinerary-list-pane">
+      <div class="list-header">
+        <h1 class="list-title">My Itineraries</h1>
+        <button
+          class="minimal-button primary"
+          onclick={() => goto('/')}
+          type="button"
+        >
+          New
+        </button>
+      </div>
+
+      <div class="list-content">
+        {#if $itinerariesLoading}
+          <div class="loading-state">
+            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-minimal-accent border-r-transparent mb-4"></div>
+            <p class="text-sm text-minimal-text-muted">Loading itineraries...</p>
+          </div>
+        {:else if $itinerariesError}
+          <div class="error-state">
+            <p class="text-minimal-text mb-4 text-sm">Error: {$itinerariesError}</p>
+            <button class="minimal-button" onclick={loadItineraries} type="button">
+              Retry
+            </button>
+          </div>
+        {:else if $itineraries.length === 0}
+          <div class="empty-state">
+            <div class="empty-state-icon">📋</div>
+            <p class="text-minimal-text mb-2 font-semibold">No itineraries yet</p>
+            <p class="text-minimal-text-muted mb-4 text-sm">Start planning your next adventure!</p>
+            <button
+              class="minimal-button primary"
+              onclick={() => goto('/')}
+              type="button"
+            >
+              Create Your First Itinerary
+            </button>
+          </div>
         {:else}
-          <div class="chat-no-itinerary">
-            <div class="chat-no-itinerary-icon">💬</div>
-            <p class="chat-no-itinerary-text">Loading itinerary...</p>
+          <div class="itinerary-list">
+            {#each $itineraries as itinerary (itinerary.id)}
+              <ItineraryListItem
+                {itinerary}
+                selected={itinerary.id === itineraryId}
+                onclick={() => handleSelectItinerary(itinerary.id)}
+                ondelete={handleDeleteFromList}
+              />
+            {/each}
           </div>
         {/if}
       </div>
     </div>
 
-    <!-- Resize Handle (hidden in manual edit mode) -->
-    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-    <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-    <div
-      class="resize-handle"
-      class:resizing={isResizing}
-      onmousedown={startResize}
-      role="separator"
-      aria-orientation="vertical"
-      aria-label="Resize sidebar"
-      tabindex="0"
-    ></div>
-    {/if}
-
-    <!-- Right Pane: Itinerary Detail + Visualization -->
-    <div class="right-pane-wrapper">
-      <!-- Main Content Area -->
-      <div class="right-pane-content" class:with-viz={isPaneVisible}>
-        {#if $selectedItineraryLoading}
-          <div class="flex items-center justify-center h-full">
-            <div class="text-center">
-              <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-minimal-accent border-r-transparent mb-4"></div>
-              <p class="text-sm text-minimal-text-muted">Loading itinerary...</p>
+    <!-- Right Pane: Workspace (contains chat sidebar + detail content) -->
+    <div class="workspace-pane">
+      <!-- Chat Sidebar (inside workspace, hidden in manual edit mode) -->
+      {#if showChatSidebar}
+      <div class="chat-sidebar" style="width: {leftPaneWidth}px;">
+        <div class="chat-pane-content">
+          {#if $selectedItinerary}
+            <ChatPanel agent={agentConfig} itineraryId={$selectedItinerary.id} />
+          {:else}
+            <div class="chat-no-itinerary">
+              <div class="chat-no-itinerary-icon">💬</div>
+              <p class="chat-no-itinerary-text">Loading itinerary...</p>
             </div>
-          </div>
-        {:else if !$selectedItinerary}
-          <div class="flex items-center justify-center h-full">
-            <div class="text-center">
-              <p class="text-minimal-text mb-4">Itinerary not found</p>
-              <button class="minimal-button" onclick={() => goto('/itineraries')} type="button">
-                Back to List
-              </button>
-            </div>
-          </div>
-        {:else}
-          <!-- Itinerary Detail View with Tabs -->
-          <MainPane
-            title={$selectedItinerary.title}
-            tabs={[
-              { id: 'itinerary', label: 'Detail' },
-              { id: 'calendar', label: 'Calendar' },
-              { id: 'map', label: 'Map' },
-              { id: 'travelers', label: 'Travelers' }
-            ]}
-            activeTab={navigationStore.detailTab}
-            onTabChange={(tab) => navigationStore.setDetailTab(tab as any)}
-          >
-            {#snippet actions()}
-              <EditModeToggle
-                bind:mode={navigationStore.editMode}
-                onChange={handleEditModeChange}
-              />
-              <button
-                class="minimal-button delete-button"
-                onclick={() => handleDelete($selectedItinerary)}
-                type="button"
-              >
-                Delete
-              </button>
-            {/snippet}
-
-            {#if navigationStore.detailTab === 'itinerary'}
-              <ItineraryDetail
-                itinerary={$selectedItinerary}
-                editMode={navigationStore.editMode}
-                onEditManually={handleEditManually}
-                onEditWithPrompt={handleEditWithPrompt}
-                onDelete={handleDelete}
-              />
-            {:else if navigationStore.detailTab === 'calendar'}
-              <CalendarView itinerary={$selectedItinerary} />
-            {:else if navigationStore.detailTab === 'map'}
-              <MapView itinerary={$selectedItinerary} />
-            {:else if navigationStore.detailTab === 'travelers'}
-              <TravelersView itinerary={$selectedItinerary} />
-            {/if}
-          </MainPane>
-        {/if}
-      </div>
-
-      <!-- Visualization Pane (conditional) -->
-      {#if isPaneVisible}
-        <div class="visualization-pane-container">
-          <VisualizationPane />
-
-          <!-- Visualization Timeline (at bottom, conditional) -->
-          {#if historyLength > 0}
-            <VisualizationTimeline />
           {/if}
         </div>
+      </div>
+
+      <!-- Resize Handle (hidden in manual edit mode) -->
+      <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+      <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+      <div
+        class="resize-handle"
+        class:resizing={isResizing}
+        onmousedown={startResize}
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="Resize sidebar"
+        tabindex="0"
+      ></div>
       {/if}
+
+      <!-- Detail Content + Visualization -->
+      <div class="detail-wrapper">
+        <!-- Main Content Area -->
+        <div class="detail-content" class:with-viz={isPaneVisible}>
+          {#if $selectedItineraryLoading}
+            <div class="flex items-center justify-center h-full">
+              <div class="text-center">
+                <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-minimal-accent border-r-transparent mb-4"></div>
+                <p class="text-sm text-minimal-text-muted">Loading itinerary...</p>
+              </div>
+            </div>
+          {:else if !$selectedItinerary}
+            <div class="flex items-center justify-center h-full">
+              <div class="text-center">
+                <p class="text-minimal-text mb-4">Itinerary not found</p>
+                <button class="minimal-button" onclick={() => goto('/itineraries')} type="button">
+                  Back to List
+                </button>
+              </div>
+            </div>
+          {:else}
+            <!-- Itinerary Detail View with Tabs -->
+            <MainPane
+              title={$selectedItinerary.title}
+              tabs={[
+                { id: 'itinerary', label: 'Detail' },
+                { id: 'calendar', label: 'Calendar' },
+                { id: 'map', label: 'Map' },
+                { id: 'travelers', label: 'Travelers' }
+              ]}
+              activeTab={navigationStore.detailTab}
+              onTabChange={(tab) => navigationStore.setDetailTab(tab as any)}
+            >
+              {#snippet actions()}
+                <EditModeToggle
+                  bind:mode={navigationStore.editMode}
+                  onChange={handleEditModeChange}
+                />
+                <button
+                  class="minimal-button delete-button"
+                  onclick={() => handleDelete($selectedItinerary)}
+                  type="button"
+                >
+                  Delete
+                </button>
+              {/snippet}
+
+              {#if navigationStore.detailTab === 'itinerary'}
+                <ItineraryDetail
+                  itinerary={$selectedItinerary}
+                  editMode={navigationStore.editMode}
+                  onEditManually={handleEditManually}
+                  onEditWithPrompt={handleEditWithPrompt}
+                  onDelete={handleDelete}
+                />
+              {:else if navigationStore.detailTab === 'calendar'}
+                <CalendarView itinerary={$selectedItinerary} />
+              {:else if navigationStore.detailTab === 'map'}
+                <MapView itinerary={$selectedItinerary} />
+              {:else if navigationStore.detailTab === 'travelers'}
+                <TravelersView itinerary={$selectedItinerary} />
+              {/if}
+            </MainPane>
+          {/if}
+        </div>
+
+        <!-- Visualization Pane (conditional) -->
+        {#if isPaneVisible}
+          <div class="visualization-pane-container">
+            <VisualizationPane />
+
+            <!-- Visualization Timeline (at bottom, conditional) -->
+            {#if historyLength > 0}
+              <VisualizationTimeline />
+            {/if}
+          </div>
+        {/if}
+      </div>
     </div>
   </div>
 </div>
 
 <style>
-  .detail-container {
+  .app-container {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
     background-color: #fafafa;
   }
 
@@ -260,7 +356,72 @@
     position: relative;
   }
 
-  .left-pane {
+  /* Left Pane: Itinerary List */
+  .itinerary-list-pane {
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    overflow: hidden;
+  }
+
+  .list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #ffffff;
+  }
+
+  .list-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+  }
+
+  .list-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+  }
+
+  .itinerary-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .loading-state,
+  .error-state,
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    text-align: center;
+    height: 100%;
+  }
+
+  .empty-state-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Right Pane: Workspace Container */
+  .workspace-pane {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    background-color: #fafafa;
+  }
+
+  /* Chat Sidebar (inside workspace) */
+  .chat-sidebar {
     flex-shrink: 0;
     background-color: #ffffff;
     border-right: 1px solid #e5e7eb;
@@ -321,14 +482,15 @@
     right: -3px;
   }
 
-  .right-pane-wrapper {
+  /* Detail Wrapper (contains detail content + visualization) */
+  .detail-wrapper {
     flex: 1;
     overflow: hidden;
     display: flex;
     flex-direction: row;
   }
 
-  .right-pane-content {
+  .detail-content {
     flex: 1;
     overflow: hidden;
     background-color: #fafafa;
@@ -337,7 +499,7 @@
     transition: flex 0.3s ease;
   }
 
-  .right-pane-content.with-viz {
+  .detail-content.with-viz {
     /* Main content shrinks when viz pane is visible */
     flex: 0.6;
   }
@@ -401,23 +563,34 @@
       flex-direction: column;
     }
 
-    .left-pane {
+    .itinerary-list-pane {
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid #e5e7eb;
+      max-height: 30%;
+    }
+
+    .workspace-pane {
+      flex-direction: column;
+    }
+
+    .chat-sidebar {
       width: 100% !important;
       border-right: none;
       border-bottom: 1px solid #e5e7eb;
-      max-height: 50%;
+      max-height: 40%;
     }
 
     .resize-handle {
       display: none;
     }
 
-    .right-pane-wrapper {
+    .detail-wrapper {
       flex: 1;
       flex-direction: column;
     }
 
-    .right-pane-content {
+    .detail-content {
       flex: 1 !important;
     }
 
