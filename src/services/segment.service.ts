@@ -43,6 +43,18 @@ export class SegmentService {
       id: segment.id ?? generateSegmentId(),
     } as Segment;
 
+    // Check for duplicate segments before adding
+    const duplicateCheck = this.findDuplicateSegment(existing.segments, segmentWithId);
+    if (duplicateCheck) {
+      return err(
+        createValidationError(
+          'CONSTRAINT_VIOLATION',
+          duplicateCheck.message,
+          'duplicate'
+        )
+      );
+    }
+
     // Validate segment dates are within itinerary date range (if itinerary has dates)
     if (existing.startDate && existing.endDate) {
       if (
@@ -315,5 +327,228 @@ export class SegmentService {
 
     // Save updated itinerary
     return this.storage.save(updated);
+  }
+
+  /**
+   * Find duplicate segment in existing segments
+   * @param existingSegments - Array of existing segments
+   * @param newSegment - New segment to check
+   * @returns Duplicate info with message if found, null otherwise
+   */
+  private findDuplicateSegment(
+    existingSegments: Segment[],
+    newSegment: Segment
+  ): { message: string } | null {
+    for (const existing of existingSegments) {
+      if (this.isDuplicateSegment(existing, newSegment)) {
+        return {
+          message: this.buildDuplicateMessage(existing, newSegment),
+        };
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Check if two segments are duplicates
+   * @param existing - Existing segment
+   * @param newSeg - New segment to check
+   * @returns True if segments are duplicates
+   */
+  private isDuplicateSegment(existing: Segment, newSeg: Segment): boolean {
+    // Must be same type
+    if (existing.type !== newSeg.type) {
+      return false;
+    }
+
+    switch (newSeg.type) {
+      case 'ACTIVITY': {
+        if (existing.type !== 'ACTIVITY') return false;
+        // For activities/dining: same name and same date
+        const sameName =
+          this.normalizeString(existing.name) === this.normalizeString(newSeg.name);
+        const sameDate = this.isSameDate(existing.startDatetime, newSeg.startDatetime);
+        return sameName && sameDate;
+      }
+
+      case 'HOTEL': {
+        if (existing.type !== 'HOTEL') return false;
+        // For hotels: same property name and overlapping dates
+        const sameName =
+          this.normalizeString(existing.property?.name) ===
+          this.normalizeString(newSeg.property?.name);
+        const overlapping = this.datesOverlap(
+          existing.checkInDate,
+          existing.checkOutDate,
+          newSeg.checkInDate,
+          newSeg.checkOutDate
+        );
+        return sameName && overlapping;
+      }
+
+      case 'FLIGHT': {
+        if (existing.type !== 'FLIGHT') return false;
+        // For flights: same flight number and same departure date
+        const sameNumber = existing.flightNumber === newSeg.flightNumber;
+        const sameDate = this.isSameDate(existing.startDatetime, newSeg.startDatetime);
+        return sameNumber && sameDate;
+      }
+
+      case 'MEETING': {
+        if (existing.type !== 'MEETING') return false;
+        // For meetings: same title and same start time
+        const sameTitle =
+          this.normalizeString(existing.title) === this.normalizeString(newSeg.title);
+        const sameTime = this.isSameDateTime(existing.startDatetime, newSeg.startDatetime);
+        return sameTitle && sameTime;
+      }
+
+      case 'TRANSFER': {
+        if (existing.type !== 'TRANSFER') return false;
+        // For transfers: same type, same pickup/dropoff locations, and same date
+        const sameType = existing.transferType === newSeg.transferType;
+        const samePickup =
+          this.normalizeString(existing.pickupLocation?.name) ===
+          this.normalizeString(newSeg.pickupLocation?.name);
+        const sameDropoff =
+          this.normalizeString(existing.dropoffLocation?.name) ===
+          this.normalizeString(newSeg.dropoffLocation?.name);
+        const sameDate = this.isSameDate(existing.startDatetime, newSeg.startDatetime);
+        return sameType && samePickup && sameDropoff && sameDate;
+      }
+
+      case 'CUSTOM': {
+        if (existing.type !== 'CUSTOM') return false;
+        // For custom segments: same title and same start time
+        const sameTitle =
+          this.normalizeString(existing.title) === this.normalizeString(newSeg.title);
+        const sameTime = this.isSameDateTime(existing.startDatetime, newSeg.startDatetime);
+        return sameTitle && sameTime;
+      }
+
+      default:
+        return false;
+    }
+  }
+
+  /**
+   * Build a user-friendly duplicate message
+   * @param existing - Existing segment
+   * @param newSeg - New segment attempting to be added
+   * @returns User-friendly error message
+   */
+  private buildDuplicateMessage(existing: Segment, newSeg: Segment): string {
+    const dateStr = this.formatDate(newSeg.startDatetime);
+
+    switch (newSeg.type) {
+      case 'ACTIVITY': {
+        return `Duplicate detected: "${newSeg.name}" is already on your itinerary for ${dateStr}. Would you like to update it instead?`;
+      }
+
+      case 'HOTEL': {
+        return `Duplicate detected: "${newSeg.property?.name}" is already booked with overlapping dates. Would you like to update it instead?`;
+      }
+
+      case 'FLIGHT': {
+        return `Duplicate detected: Flight ${newSeg.flightNumber} is already on your itinerary for ${dateStr}. Would you like to update it instead?`;
+      }
+
+      case 'MEETING': {
+        return `Duplicate detected: Meeting "${newSeg.title}" is already scheduled for ${dateStr}. Would you like to update it instead?`;
+      }
+
+      case 'TRANSFER': {
+        return `Duplicate detected: A ${newSeg.transferType.toLowerCase()} transfer is already scheduled for ${dateStr}. Would you like to update it instead?`;
+      }
+
+      case 'CUSTOM': {
+        return `Duplicate detected: "${newSeg.title}" is already on your itinerary for ${dateStr}. Would you like to update it instead?`;
+      }
+
+      default:
+        return 'Duplicate segment detected. A similar item already exists in the itinerary.';
+    }
+  }
+
+  /**
+   * Normalize string for comparison (lowercase, trim, remove special chars)
+   * @param s - String to normalize
+   * @returns Normalized string
+   */
+  private normalizeString(s?: string): string {
+    if (!s) return '';
+    return s.toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+  }
+
+  /**
+   * Check if two dates are on the same day
+   * @param d1 - First date
+   * @param d2 - Second date
+   * @returns True if dates are on the same day
+   */
+  private isSameDate(d1?: string | Date, d2?: string | Date): boolean {
+    if (!d1 || !d2) return false;
+    const date1 = new Date(d1).toDateString();
+    const date2 = new Date(d2).toDateString();
+    return date1 === date2;
+  }
+
+  /**
+   * Check if two datetimes are the same (within a minute)
+   * @param d1 - First datetime
+   * @param d2 - Second datetime
+   * @returns True if datetimes are the same
+   */
+  private isSameDateTime(d1?: string | Date, d2?: string | Date): boolean {
+    if (!d1 || !d2) return false;
+    const time1 = new Date(d1).getTime();
+    const time2 = new Date(d2).getTime();
+    // Within 1 minute (60000 ms)
+    return Math.abs(time1 - time2) < 60000;
+  }
+
+  /**
+   * Check if date ranges overlap
+   * For hotel stays, we need to be careful about same-day boundaries
+   * Checkout on day N and checkin on day N should NOT be considered overlapping
+   * @param start1 - Start date of first range
+   * @param end1 - End date of first range
+   * @param start2 - Start date of second range
+   * @param end2 - End date of second range
+   * @returns True if ranges overlap
+   */
+  private datesOverlap(
+    start1?: string | Date,
+    end1?: string | Date,
+    start2?: string | Date,
+    end2?: string | Date
+  ): boolean {
+    if (!start1 || !end1 || !start2 || !end2) return false;
+
+    // Normalize to date-only (no time component) for proper day-based comparison
+    const s1 = new Date(start1).setHours(0, 0, 0, 0);
+    const e1 = new Date(end1).setHours(0, 0, 0, 0);
+    const s2 = new Date(start2).setHours(0, 0, 0, 0);
+    const e2 = new Date(end2).setHours(0, 0, 0, 0);
+
+    // Ranges overlap if: start1 < end2 AND start2 < end1
+    // This correctly handles same-day boundaries:
+    // - Checkout Jan 12, Checkin Jan 13: 12 < 13 AND 13 < 12 = FALSE (no overlap) ✓
+    // - Checkout Jan 13, Checkin Jan 12: 12 < 13 AND 12 < 13 = TRUE (overlap) ✓
+    return s1 < e2 && s2 < e1;
+  }
+
+  /**
+   * Format date for user-friendly display
+   * @param d - Date to format
+   * @returns Formatted date string
+   */
+  private formatDate(d: string | Date): string {
+    const date = new Date(d);
+    return date.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
   }
 }
