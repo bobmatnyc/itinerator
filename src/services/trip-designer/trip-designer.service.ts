@@ -818,6 +818,14 @@ CRITICAL: If the summary shows "⚠️ EXISTING BOOKINGS" with luxury/premium pr
           const result = executionResults[i];
           const toolCall = toolCalls[i];
 
+          console.log(`[chatStream] Processing tool result ${i}:`, {
+            toolName: toolCall.function.name,
+            success: result.success,
+            hasMetadata: !!result.metadata,
+            segmentId: result.metadata?.segmentId,
+            resultHasSegmentId: result.result && typeof result.result === 'object' && 'segmentId' in result.result
+          });
+
           yield {
             type: 'tool_result',
             name: toolCall.function.name,
@@ -825,9 +833,21 @@ CRITICAL: If the summary shows "⚠️ EXISTING BOOKINGS" with luxury/premium pr
             success: result.success,
           };
 
-          // Track modified segments
-          if (result.success && result.metadata?.segmentId) {
-            segmentsModified.push(result.metadata.segmentId);
+          // Track modified segments - check BOTH metadata and result
+          if (result.success) {
+            // First check metadata.segmentId (preferred)
+            if (result.metadata?.segmentId) {
+              console.log(`[chatStream] Segment modified via metadata:`, result.metadata.segmentId);
+              segmentsModified.push(result.metadata.segmentId);
+            }
+            // Fallback: check result.segmentId (for backward compatibility)
+            else if (typeof result.result === 'object' && result.result !== null) {
+              const resultObj = result.result as Record<string, unknown>;
+              if (resultObj.segmentId && typeof resultObj.segmentId === 'string') {
+                console.log(`[chatStream] Segment modified via result.segmentId:`, resultObj.segmentId);
+                segmentsModified.push(resultObj.segmentId as any);
+              }
+            }
           }
 
           // Track itinerary metadata changes (destinations, dates, etc.)
@@ -835,6 +855,7 @@ CRITICAL: If the summary shows "⚠️ EXISTING BOOKINGS" with luxury/premium pr
           if (result.success && typeof result.result === 'object' && result.result !== null) {
             const resultObj = result.result as Record<string, unknown>;
             if (resultObj.itineraryChanged === true) {
+              console.log(`[chatStream] Itinerary metadata changed`);
               // Set flag to signal itinerary metadata changed
               itineraryMetadataChanged = true;
             }
@@ -995,6 +1016,10 @@ CRITICAL: If the summary shows "⚠️ EXISTING BOOKINGS" with luxury/premium pr
 
         // Emit done event
         console.log(`[chatStream] ====== EMITTING DONE EVENT ======`);
+        console.log(`[chatStream] segmentsModified:`, segmentsModified);
+        console.log(`[chatStream] itineraryMetadataChanged:`, itineraryMetadataChanged);
+        console.log(`[chatStream] itineraryUpdated will be:`, segmentsModified.length > 0 || itineraryMetadataChanged);
+
         yield {
           type: 'done',
           itineraryUpdated: segmentsModified.length > 0 || itineraryMetadataChanged,

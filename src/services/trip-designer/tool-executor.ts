@@ -235,6 +235,14 @@ export class ToolExecutor {
 
       if (result && typeof result === 'object' && 'segmentId' in result) {
         metadata.segmentId = result.segmentId;
+        console.log(`[ToolExecutor] Extracted segmentId to metadata for ${name}:`, result.segmentId);
+      } else {
+        console.log(`[ToolExecutor] No segmentId in result for ${name}`, {
+          hasResult: !!result,
+          isObject: typeof result === 'object',
+          hasSegmentIdKey: result && typeof result === 'object' && 'segmentId' in result,
+          resultKeys: result && typeof result === 'object' ? Object.keys(result) : []
+        });
       }
 
       return {
@@ -666,7 +674,9 @@ export class ToolExecutor {
       throw new Error(`Failed to add flight: ${result.error.message}`);
     }
 
-    return { success: true, segmentId: segment.id };
+    // CRITICAL: Return the segment ID from the service result, not the input segment
+    // The input segment doesn't have an ID yet - it's added by the service
+    return { success: true, segmentId: result.value.id };
   }
 
   /**
@@ -731,7 +741,9 @@ export class ToolExecutor {
       throw new Error(`Failed to add hotel: ${result.error.message}`);
     }
 
-    return { success: true, segmentId: segment.id };
+    // CRITICAL: Return the segment ID from the service result, not the input segment
+    // The input segment doesn't have an ID yet - it's added by the service
+    return { success: true, segmentId: result.value.id };
   }
 
   /**
@@ -792,7 +804,9 @@ export class ToolExecutor {
       throw new Error(`Failed to add activity: ${result.error.message}`);
     }
 
-    return { success: true, segmentId: segment.id };
+    // CRITICAL: Return the segment ID from the service result, not the input segment
+    // The input segment doesn't have an ID yet - it's added by the service
+    return { success: true, segmentId: result.value.id };
   }
 
   /**
@@ -844,7 +858,9 @@ export class ToolExecutor {
       throw new Error(`Failed to add transfer: ${result.error.message}`);
     }
 
-    return { success: true, segmentId: segment.id };
+    // CRITICAL: Return the segment ID from the service result, not the input segment
+    // The input segment doesn't have an ID yet - it's added by the service
+    return { success: true, segmentId: result.value.id };
   }
 
   /**
@@ -892,7 +908,9 @@ export class ToolExecutor {
       throw new Error(`Failed to add meeting: ${result.error.message}`);
     }
 
-    return { success: true, segmentId: segment.id };
+    // CRITICAL: Return the segment ID from the service result, not the input segment
+    // The input segment doesn't have an ID yet - it's added by the service
+    return { success: true, segmentId: result.value.id };
   }
 
   /**
