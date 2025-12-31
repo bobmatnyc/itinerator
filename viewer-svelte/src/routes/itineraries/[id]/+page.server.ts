@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
   const { id } = params;
 
   // Verify user is authenticated
-  if (!locals.user) {
+  if (!locals.isAuthenticated) {
     throw error(401, 'Authentication required');
   }
 
@@ -17,6 +17,6 @@ export const load: PageServerLoad = async ({ params, locals }) => {
   // via the itineraries store to maintain consistency with the rest of the app
   return {
     itineraryId: id,
-    userId: locals.user.id
+    userEmail: locals.userEmail
   };
 };
