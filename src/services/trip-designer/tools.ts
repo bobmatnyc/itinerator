@@ -137,7 +137,7 @@ export const ADD_HOTEL_TOOL: ToolDefinition = {
   type: 'function',
   function: {
     name: 'add_hotel',
-    description: 'Add a hotel or accommodation segment to the itinerary',
+    description: 'REQUIRED CALL when user mentions ANY accommodation (hotel, resort, Airbnb, "staying at", etc.). Add a hotel or accommodation segment to the itinerary. You MUST call this tool immediately when user mentions where they are staying - verbal acknowledgment alone will NOT save the data. Example: User says "We\'re staying at Hotel L\'Esplanade" → You MUST call this tool with property details BEFORE responding.',
     parameters: {
       type: 'object',
       properties: {
