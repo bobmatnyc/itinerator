@@ -319,14 +319,28 @@ export function detectTitleDestinationMismatch(itinerary: Itinerary): TitleDesti
   const lastFlight = sortedFlights[sortedFlights.length - 1];
 
   // Extract origin and destination info
-  const originCity = firstFlight.origin?.address?.city || firstFlight.origin?.city || firstFlight.origin?.name;
+  const originCityRaw = firstFlight.origin?.address?.city || firstFlight.origin?.city || firstFlight.origin?.name;
   const originCode = firstFlight.origin?.code;
-  const destinationCity = firstFlight.destination?.address?.city || firstFlight.destination?.city || firstFlight.destination?.name;
+  const destinationCityRaw = firstFlight.destination?.address?.city || firstFlight.destination?.city || firstFlight.destination?.name;
   const destinationCode = firstFlight.destination?.code;
 
-  if (!originCity || !destinationCity) {
+  if (!originCityRaw || !destinationCityRaw) {
     return null; // Can't detect without city names
   }
+
+  // Normalize city names: remove airport codes and state/country suffixes
+  // Example: "New York, NY (JFK)" → "New York"
+  //          "St. Maarten (SXM)" → "St. Maarten"
+  const normalizeCityName = (name: string): string => {
+    // Remove airport code in parentheses (e.g., "(JFK)")
+    let normalized = name.replace(/\s*\([A-Z]{3}\)\s*/g, '');
+    // Remove state/country codes after comma (e.g., ", NY")
+    normalized = normalized.replace(/,\s*[A-Z]{2}(?:\s|$)/g, '');
+    return normalized.trim();
+  };
+
+  const originCity = normalizeCityName(originCityRaw);
+  const destinationCity = normalizeCityName(destinationCityRaw);
 
   // Check if this is a round trip (last flight returns to origin)
   const isRoundTrip =
@@ -417,6 +431,7 @@ export function summarizeItinerary(itinerary: Itinerary): string {
 
   // Check for title/destination mismatch FIRST
   const mismatch = detectTitleDestinationMismatch(itinerary);
+
   if (mismatch?.hasMismatch) {
     lines.push('⚠️ **TITLE/DESTINATION MISMATCH DETECTED**');
     lines.push(`- Current title: "${itinerary.title}"`);
