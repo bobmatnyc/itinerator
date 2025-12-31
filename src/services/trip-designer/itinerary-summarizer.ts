@@ -247,7 +247,13 @@ function formatExistingBookings(segments: Segment[]): string[] {
       const hotelName = hotelSeg.property?.name || 'Unknown hotel';
       const location = hotelSeg.location?.address?.city || hotelSeg.location?.name || '';
       const tier = inferHotelTier(hotelName);
-      const nights = Math.ceil((hotelSeg.checkOutDate.getTime() - hotelSeg.checkInDate.getTime()) / (1000 * 60 * 60 * 24));
+
+      // Calculate nights if dates are available
+      let nights = 1;
+      if (hotelSeg.checkOutDate && hotelSeg.checkInDate) {
+        nights = Math.ceil((hotelSeg.checkOutDate.getTime() - hotelSeg.checkInDate.getTime()) / (1000 * 60 * 60 * 24));
+      }
+
       bookings.push(`- 🏨 HOTEL: ${hotelName}${location ? ` in ${location}` : ''} (${nights} night${nights > 1 ? 's' : ''}) → ${tier} style`);
     }
     if (seg.type === 'FLIGHT') {
@@ -264,6 +270,139 @@ function formatExistingBookings(segments: Segment[]): string[] {
 }
 
 /**
+ * Mismatch detection result
+ */
+export interface TitleDestinationMismatch {
+  /** True if a mismatch was detected */
+  hasMismatch: boolean;
+  /** Location name mentioned in title (if any) */
+  titleMentions: string | null;
+  /** Actual primary destination from segments */
+  actualDestination: string | null;
+  /** Suggested corrected title */
+  suggestedTitle: string | null;
+  /** Explanation of the mismatch */
+  explanation: string | null;
+}
+
+/**
+ * Detect if the itinerary title/description mentions a different location than
+ * the actual destination based on flight segments.
+ *
+ * Common issue: User imports confirmation from departure city email,
+ * and title gets set to departure city instead of destination.
+ *
+ * Example:
+ * - Title: "New York Winter Getaway"
+ * - Flights: JFK → SXM (St. Maarten), SXM → JFK
+ * - Mismatch: Title mentions New York (origin) but destination is St. Maarten
+ *
+ * @param itinerary - The itinerary to check
+ * @returns Mismatch detection result, or null if no check could be performed
+ */
+export function detectTitleDestinationMismatch(itinerary: Itinerary): TitleDestinationMismatch | null {
+  // Need at least one flight to detect destination
+  const flightSegments = itinerary.segments.filter(
+    (s) => s.type === 'FLIGHT'
+  ) as import('./../../domain/types/segment.js').FlightSegment[];
+
+  if (flightSegments.length === 0) {
+    return null; // Can't determine without flights
+  }
+
+  // Sort flights by date to find first/last
+  const sortedFlights = [...flightSegments].sort(
+    (a, b) => a.startDatetime.getTime() - b.startDatetime.getTime()
+  );
+
+  const firstFlight = sortedFlights[0];
+  const lastFlight = sortedFlights[sortedFlights.length - 1];
+
+  // Extract origin and destination info
+  const originCity = firstFlight.origin?.address?.city || firstFlight.origin?.city || firstFlight.origin?.name;
+  const originCode = firstFlight.origin?.code;
+  const destinationCity = firstFlight.destination?.address?.city || firstFlight.destination?.city || firstFlight.destination?.name;
+  const destinationCode = firstFlight.destination?.code;
+
+  if (!originCity || !destinationCity) {
+    return null; // Can't detect without city names
+  }
+
+  // Check if this is a round trip (last flight returns to origin)
+  const isRoundTrip =
+    lastFlight.destination?.code === originCode ||
+    (lastFlight.destination?.address?.city || lastFlight.destination?.city) === originCity;
+
+  // For round trips, the destination is the middle point (first flight's destination)
+  const actualDestination = isRoundTrip ? destinationCity : destinationCity;
+  const actualDestinationCode = isRoundTrip ? destinationCode : destinationCode;
+
+  // Check if title or description mentions the origin city instead of destination
+  const titleLower = itinerary.title.toLowerCase();
+  const descLower = (itinerary.description || '').toLowerCase();
+  const originCityLower = originCity.toLowerCase();
+  const destinationCityLower = actualDestination.toLowerCase();
+
+  // Check if title/description mentions origin but NOT destination
+  const mentionsOrigin =
+    titleLower.includes(originCityLower) ||
+    (originCode && titleLower.includes(originCode.toLowerCase())) ||
+    descLower.includes(originCityLower) ||
+    (originCode && descLower.includes(originCode.toLowerCase()));
+
+  const mentionsDestination =
+    titleLower.includes(destinationCityLower) ||
+    (actualDestinationCode && titleLower.includes(actualDestinationCode.toLowerCase())) ||
+    descLower.includes(destinationCityLower) ||
+    (actualDestinationCode && descLower.includes(actualDestinationCode.toLowerCase()));
+
+  // Mismatch detected if mentions origin but not destination
+  if (mentionsOrigin && !mentionsDestination) {
+    // Remove origin city from title to generate suggestion
+    // Handle multi-word city names by doing case-insensitive replacement
+    let suggestedTitle = itinerary.title;
+
+    // Try to remove origin city name (case-insensitive)
+    const originRegex = new RegExp(originCity.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+    suggestedTitle = suggestedTitle.replace(originRegex, '').trim();
+
+    // Try to remove origin code if exists
+    if (originCode) {
+      const codeRegex = new RegExp(`\\b${originCode}\\b`, 'gi');
+      suggestedTitle = suggestedTitle.replace(codeRegex, '').trim();
+    }
+
+    // Clean up extra spaces
+    suggestedTitle = suggestedTitle.replace(/\s+/g, ' ').trim();
+
+    // If we removed everything, use a generic suffix
+    if (!suggestedTitle) {
+      suggestedTitle = 'Trip';
+    }
+
+    // Prepend destination
+    suggestedTitle = `${actualDestination} ${suggestedTitle}`;
+
+    return {
+      hasMismatch: true,
+      titleMentions: originCity,
+      actualDestination,
+      suggestedTitle,
+      explanation: `Title mentions "${originCity}" (your departure city) but you're actually traveling to "${actualDestination}". This often happens when importing confirmation emails sent from the departure city.`,
+    };
+  }
+
+  // No mismatch detected
+  return {
+    hasMismatch: false,
+    titleMentions: null,
+    actualDestination,
+    suggestedTitle: null,
+    explanation: null,
+  };
+}
+
+/**
  * Generate a concise summary of the itinerary for context injection
  *
  * This summary is used in the Trip Designer system prompt when editing
@@ -275,6 +414,21 @@ function formatExistingBookings(segments: Segment[]): string[] {
  */
 export function summarizeItinerary(itinerary: Itinerary): string {
   const lines: string[] = [];
+
+  // Check for title/destination mismatch FIRST
+  const mismatch = detectTitleDestinationMismatch(itinerary);
+  if (mismatch?.hasMismatch) {
+    lines.push('⚠️ **TITLE/DESTINATION MISMATCH DETECTED**');
+    lines.push(`- Current title: "${itinerary.title}"`);
+    lines.push(`- Title mentions: "${mismatch.titleMentions}" (departure city)`);
+    lines.push(`- Actual destination: "${mismatch.actualDestination}"`);
+    lines.push(`- Suggested title: "${mismatch.suggestedTitle}"`);
+    lines.push('');
+    lines.push(`**Explanation**: ${mismatch.explanation}`);
+    lines.push('');
+    lines.push('**ACTION REQUIRED**: You should acknowledge this mismatch and offer to update the title to correctly reflect the destination.');
+    lines.push('');
+  }
 
   // Header with title and dates
   lines.push(`**Trip**: ${itinerary.title}`);

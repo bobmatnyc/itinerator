@@ -5,7 +5,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { summarizeItinerary, summarizeItineraryMinimal } from '../../../src/services/trip-designer/itinerary-summarizer.js';
+import { summarizeItinerary, summarizeItineraryMinimal, detectTitleDestinationMismatch } from '../../../src/services/trip-designer/itinerary-summarizer.js';
 import type { Itinerary } from '../../../src/domain/types/itinerary.js';
 import type { Segment } from '../../../src/domain/types/segment.js';
 import { SegmentType, SegmentStatus } from '../../../src/domain/types/common.js';
@@ -491,6 +491,267 @@ describe('ItinerarySummarizer', () => {
       // Should show full dates when different months
       expect(summary).toContain('Mar 28');
       expect(summary).toContain('Apr 5');
+    });
+  });
+
+  describe('detectTitleDestinationMismatch', () => {
+    it('should detect when title mentions origin instead of destination (round trip)', () => {
+      // Create itinerary with title mentioning origin (New York)
+      // but flights going to St. Maarten
+      const itinerary = createTestItinerary({
+        title: 'New York Winter Getaway',
+        description: 'Winter trip to New York City',
+        segments: [
+          {
+            id: 'seg-flight-1' as any,
+            type: SegmentType.FLIGHT,
+            status: SegmentStatus.CONFIRMED,
+            startDatetime: new Date('2025-01-10T08:00:00Z'),
+            endDatetime: new Date('2025-01-10T14:00:00Z'),
+            travelerIds: [],
+            source: 'import',
+            airline: { name: 'JetBlue', code: 'B6' },
+            flightNumber: 'B6123',
+            origin: {
+              name: 'John F. Kennedy International Airport',
+              code: 'JFK',
+              city: 'New York',
+              country: 'USA',
+              type: 'AIRPORT',
+            },
+            destination: {
+              name: 'Princess Juliana International Airport',
+              code: 'SXM',
+              city: 'St. Maarten',
+              country: 'Sint Maarten',
+              type: 'AIRPORT',
+            },
+            metadata: {},
+          } as Segment,
+          {
+            id: 'seg-flight-2' as any,
+            type: SegmentType.FLIGHT,
+            status: SegmentStatus.CONFIRMED,
+            startDatetime: new Date('2025-01-17T15:00:00Z'),
+            endDatetime: new Date('2025-01-17T19:00:00Z'),
+            travelerIds: [],
+            source: 'import',
+            airline: { name: 'JetBlue', code: 'B6' },
+            flightNumber: 'B6124',
+            origin: {
+              name: 'Princess Juliana International Airport',
+              code: 'SXM',
+              city: 'St. Maarten',
+              country: 'Sint Maarten',
+              type: 'AIRPORT',
+            },
+            destination: {
+              name: 'John F. Kennedy International Airport',
+              code: 'JFK',
+              city: 'New York',
+              country: 'USA',
+              type: 'AIRPORT',
+            },
+            metadata: {},
+          } as Segment,
+        ],
+      });
+
+      const mismatch = detectTitleDestinationMismatch(itinerary);
+
+      expect(mismatch).not.toBeNull();
+      expect(mismatch!.hasMismatch).toBe(true);
+      expect(mismatch!.titleMentions).toBe('New York');
+      expect(mismatch!.actualDestination).toBe('St. Maarten');
+      expect(mismatch!.suggestedTitle).toContain('St. Maarten');
+      expect(mismatch!.suggestedTitle).toContain('Winter Getaway');
+      expect(mismatch!.explanation).toContain('departure city');
+    });
+
+    it('should NOT detect mismatch when title correctly mentions destination', () => {
+      const itinerary = createTestItinerary({
+        title: 'St. Maarten Beach Vacation',
+        segments: [
+          {
+            id: 'seg-flight-1' as any,
+            type: SegmentType.FLIGHT,
+            status: SegmentStatus.CONFIRMED,
+            startDatetime: new Date('2025-01-10T08:00:00Z'),
+            endDatetime: new Date('2025-01-10T14:00:00Z'),
+            travelerIds: [],
+            source: 'import',
+            airline: { name: 'JetBlue', code: 'B6' },
+            flightNumber: 'B6123',
+            origin: {
+              name: 'John F. Kennedy International Airport',
+              code: 'JFK',
+              city: 'New York',
+              country: 'USA',
+              type: 'AIRPORT',
+            },
+            destination: {
+              name: 'Princess Juliana International Airport',
+              code: 'SXM',
+              city: 'St. Maarten',
+              country: 'Sint Maarten',
+              type: 'AIRPORT',
+            },
+            metadata: {},
+          } as Segment,
+        ],
+      });
+
+      const mismatch = detectTitleDestinationMismatch(itinerary);
+
+      expect(mismatch).not.toBeNull();
+      expect(mismatch!.hasMismatch).toBe(false);
+    });
+
+    it('should handle case when no flights exist', () => {
+      const itinerary = createTestItinerary({
+        title: 'City Tour',
+        segments: [createHotelSegment(), createActivitySegment()],
+      });
+
+      const mismatch = detectTitleDestinationMismatch(itinerary);
+
+      expect(mismatch).toBeNull(); // Can't detect without flights
+    });
+
+    it('should detect mismatch using airport codes', () => {
+      const itinerary = createTestItinerary({
+        title: 'JFK Weekend Trip', // Mentions origin code
+        segments: [
+          {
+            id: 'seg-flight-1' as any,
+            type: SegmentType.FLIGHT,
+            status: SegmentStatus.CONFIRMED,
+            startDatetime: new Date('2025-01-10T08:00:00Z'),
+            endDatetime: new Date('2025-01-10T14:00:00Z'),
+            travelerIds: [],
+            source: 'import',
+            airline: { name: 'JetBlue', code: 'B6' },
+            flightNumber: 'B6123',
+            origin: {
+              name: 'John F. Kennedy International Airport',
+              code: 'JFK',
+              city: 'New York',
+              country: 'USA',
+              type: 'AIRPORT',
+            },
+            destination: {
+              name: 'Miami International Airport',
+              code: 'MIA',
+              city: 'Miami',
+              country: 'USA',
+              type: 'AIRPORT',
+            },
+            metadata: {},
+          } as Segment,
+        ],
+      });
+
+      const mismatch = detectTitleDestinationMismatch(itinerary);
+
+      expect(mismatch).not.toBeNull();
+      expect(mismatch!.hasMismatch).toBe(true);
+      expect(mismatch!.actualDestination).toBe('Miami');
+    });
+
+    it('should generate appropriate suggested titles', () => {
+      const itinerary = createTestItinerary({
+        title: 'New York Summer Adventure',
+        segments: [
+          {
+            id: 'seg-flight-1' as any,
+            type: SegmentType.FLIGHT,
+            status: SegmentStatus.CONFIRMED,
+            startDatetime: new Date('2025-01-10T08:00:00Z'),
+            endDatetime: new Date('2025-01-10T14:00:00Z'),
+            travelerIds: [],
+            source: 'import',
+            airline: { name: 'Delta', code: 'DL' },
+            flightNumber: 'DL100',
+            origin: {
+              code: 'JFK',
+              city: 'New York',
+              type: 'AIRPORT',
+            },
+            destination: {
+              code: 'CDG',
+              city: 'Paris',
+              type: 'AIRPORT',
+            },
+            metadata: {},
+          } as Segment,
+        ],
+      });
+
+      const mismatch = detectTitleDestinationMismatch(itinerary);
+
+      expect(mismatch).not.toBeNull();
+      expect(mismatch!.hasMismatch).toBe(true);
+      expect(mismatch!.suggestedTitle).toBe('Paris Summer Adventure');
+    });
+  });
+
+  describe('summarizeItinerary with mismatch detection', () => {
+    it('should include mismatch warning in summary when detected', () => {
+      const itinerary = createTestItinerary({
+        title: 'New York Winter Getaway',
+        segments: [
+          {
+            id: 'seg-flight-1' as any,
+            type: SegmentType.FLIGHT,
+            status: SegmentStatus.CONFIRMED,
+            startDatetime: new Date('2025-01-10T08:00:00Z'),
+            endDatetime: new Date('2025-01-10T14:00:00Z'),
+            travelerIds: [],
+            source: 'import',
+            airline: { name: 'JetBlue', code: 'B6' },
+            flightNumber: 'B6123',
+            origin: {
+              code: 'JFK',
+              city: 'New York',
+              type: 'AIRPORT',
+            },
+            destination: {
+              code: 'SXM',
+              city: 'St. Maarten',
+              type: 'AIRPORT',
+            },
+            metadata: {},
+          } as Segment,
+        ],
+      });
+
+      const summary = summarizeItinerary(itinerary);
+
+      // Check that mismatch warning appears FIRST
+      expect(summary).toContain('⚠️ **TITLE/DESTINATION MISMATCH DETECTED**');
+      expect(summary).toContain('Current title: "New York Winter Getaway"');
+      expect(summary).toContain('Title mentions: "New York" (departure city)');
+      expect(summary).toContain('Actual destination: "St. Maarten"');
+      expect(summary).toContain('Suggested title: "St. Maarten Winter Getaway"');
+      expect(summary).toContain('**ACTION REQUIRED**');
+      expect(summary).toContain('acknowledge this mismatch');
+
+      // Warning should appear before trip details
+      const warningIndex = summary.indexOf('⚠️');
+      const tripIndex = summary.indexOf('**Trip**:');
+      expect(warningIndex).toBeLessThan(tripIndex);
+    });
+
+    it('should NOT include mismatch warning when no mismatch exists', () => {
+      const itinerary = createTestItinerary({
+        title: 'Portugal Adventure',
+        segments: [createFlightSegment()],
+      });
+
+      const summary = summarizeItinerary(itinerary);
+
+      expect(summary).not.toContain('⚠️ **TITLE/DESTINATION MISMATCH DETECTED**');
+      expect(summary).not.toContain('ACTION REQUIRED');
     });
   });
 });

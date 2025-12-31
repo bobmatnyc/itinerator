@@ -26,6 +26,7 @@ export default defineConfig({
     include: [
       'tests/unit/**/*.test.ts',
       'tests/integration/**/*.test.ts',
+      'tests/services/**/*.test.ts',
     ],
     exclude: [
       'tests/e2e/**/*.e2e.test.ts', // E2E tests use separate config
