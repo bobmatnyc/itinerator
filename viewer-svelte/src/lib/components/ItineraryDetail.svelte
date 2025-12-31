@@ -31,8 +31,8 @@
   let isEditingMetadata = $state(false);
   let editedTitle = $state(itinerary.title);
   let editedDescription = $state(itinerary.description || '');
-  let editedStartDate = $state(itinerary.startDate || '');
-  let editedEndDate = $state(itinerary.endDate || '');
+  let editedStartDate = $state(itinerary.startDate ? itinerary.startDate.split('T')[0] : '');
+  let editedEndDate = $state(itinerary.endDate ? itinerary.endDate.split('T')[0] : '');
 
   // Auto-enable editing when in manual mode
   let inManualEditMode = $derived(editMode === 'manual');
@@ -51,8 +51,8 @@
     isEditingMetadata = true;
     editedTitle = itinerary.title;
     editedDescription = itinerary.description || '';
-    editedStartDate = itinerary.startDate || '';
-    editedEndDate = itinerary.endDate || '';
+    editedStartDate = itinerary.startDate ? itinerary.startDate.split('T')[0] : '';
+    editedEndDate = itinerary.endDate ? itinerary.endDate.split('T')[0] : '';
   }
 
   async function saveMetadata() {
