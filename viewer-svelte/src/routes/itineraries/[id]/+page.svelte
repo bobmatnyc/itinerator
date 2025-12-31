@@ -57,10 +57,6 @@
     showTokenStats: navigationStore.agentMode === 'trip-designer'
   });
 
-  // Determine if chat sidebar should be visible
-  // Hide in manual edit mode
-  let showChatSidebar = $derived(navigationStore.editMode === 'ai');
-
   // Load itineraries and selected itinerary
   onMount(() => {
     loadItineraries();
@@ -172,81 +168,80 @@
   <!-- Fixed Header -->
   <Header />
 
-  <!-- Main Content Area: 2-Pane or 3-Pane Layout (depending on edit mode) -->
+  <!-- Main Content Area: 2-Pane Layout with Conditional Left Content -->
   <div class="main-content">
-    <!-- Left Pane: Itinerary List -->
-    <div class="itinerary-list-pane">
-      <div class="list-header">
-        <h1 class="list-title">My Itineraries</h1>
-        <button
-          class="minimal-button primary"
-          onclick={() => goto('/')}
-          type="button"
-        >
-          New
-        </button>
-      </div>
-
-      <div class="list-content">
-        {#if $itinerariesLoading}
-          <div class="loading-state">
-            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-minimal-accent border-r-transparent mb-4"></div>
-            <p class="text-sm text-minimal-text-muted">Loading itineraries...</p>
-          </div>
-        {:else if $itinerariesError}
-          <div class="error-state">
-            <p class="text-minimal-text mb-4 text-sm">Error: {$itinerariesError}</p>
-            <button class="minimal-button" onclick={loadItineraries} type="button">
-              Retry
-            </button>
-          </div>
-        {:else if $itineraries.length === 0}
-          <div class="empty-state">
-            <div class="empty-state-icon">📋</div>
-            <p class="text-minimal-text mb-2 font-semibold">No itineraries yet</p>
-            <p class="text-minimal-text-muted mb-4 text-sm">Start planning your next adventure!</p>
-            <button
-              class="minimal-button primary"
-              onclick={() => goto('/')}
-              type="button"
-            >
-              Create Your First Itinerary
-            </button>
-          </div>
-        {:else}
-          <div class="itinerary-list">
-            {#each $itineraries as itinerary (itinerary.id)}
-              <ItineraryListItem
-                {itinerary}
-                selected={itinerary.id === itineraryId}
-                onclick={() => handleSelectItinerary(itinerary.id)}
-                ondelete={handleDeleteFromList}
-              />
-            {/each}
-          </div>
-        {/if}
-      </div>
-    </div>
-
-    <!-- Middle Pane: Chat (conditional, only in AI edit mode) -->
-    {#if showChatSidebar}
-      <div class="chat-sidebar" style="width: {leftPaneWidth}px">
+    <!-- Left Pane: Toggles between Chat (AI mode) and List (Manual mode) -->
+    <div class="left-pane" style="width: {leftPaneWidth}px">
+      {#if navigationStore.editMode === 'ai'}
+        <!-- AI Mode: Show Chat Panel -->
         <ChatPanel
           mode={agentConfig.mode}
           placeholderText={agentConfig.placeholderText}
           showTokenStats={agentConfig.showTokenStats}
         />
-      </div>
+      {:else}
+        <!-- Manual Mode: Show Itinerary List -->
+        <div class="list-header">
+          <h1 class="list-title">My Itineraries</h1>
+          <button
+            class="minimal-button primary"
+            onclick={() => goto('/')}
+            type="button"
+          >
+            New
+          </button>
+        </div>
 
-      <!-- Resize handle between chat and detail -->
-      <!-- svelte-ignore a11y_no_static_element_interactions -->
-      <div
-        class="resize-handle"
-        onmousedown={startResize}
-        role="separator"
-        aria-orientation="vertical"
-      ></div>
-    {/if}
+        <div class="list-content">
+          {#if $itinerariesLoading}
+            <div class="loading-state">
+              <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-minimal-accent border-r-transparent mb-4"></div>
+              <p class="text-sm text-minimal-text-muted">Loading itineraries...</p>
+            </div>
+          {:else if $itinerariesError}
+            <div class="error-state">
+              <p class="text-minimal-text mb-4 text-sm">Error: {$itinerariesError}</p>
+              <button class="minimal-button" onclick={loadItineraries} type="button">
+                Retry
+              </button>
+            </div>
+          {:else if $itineraries.length === 0}
+            <div class="empty-state">
+              <div class="empty-state-icon">📋</div>
+              <p class="text-minimal-text mb-2 font-semibold">No itineraries yet</p>
+              <p class="text-minimal-text-muted mb-4 text-sm">Start planning your next adventure!</p>
+              <button
+                class="minimal-button primary"
+                onclick={() => goto('/')}
+                type="button"
+              >
+                Create Your First Itinerary
+              </button>
+            </div>
+          {:else}
+            <div class="itinerary-list">
+              {#each $itineraries as itinerary (itinerary.id)}
+                <ItineraryListItem
+                  {itinerary}
+                  selected={itinerary.id === itineraryId}
+                  onclick={() => handleSelectItinerary(itinerary.id)}
+                  ondelete={handleDeleteFromList}
+                />
+              {/each}
+            </div>
+          {/if}
+        </div>
+      {/if}
+    </div>
+
+    <!-- Resize handle between left and right panes -->
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
+    <div
+      class="resize-handle"
+      onmousedown={startResize}
+      role="separator"
+      aria-orientation="vertical"
+    ></div>
 
     <!-- Right Pane: Detail View -->
     <div class="detail-pane">
@@ -347,19 +342,8 @@
     position: relative;
   }
 
-  /* Left Pane: Itinerary List */
-  .itinerary-list-pane {
-    width: 280px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    background-color: #ffffff;
-    border-right: 1px solid #e5e7eb;
-    overflow: hidden;
-  }
-
-  /* Middle Pane: Chat Sidebar (conditional) */
-  .chat-sidebar {
+  /* Left Pane: Toggles between Chat (AI) and List (Manual) */
+  .left-pane {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
@@ -521,14 +505,7 @@
       flex-direction: column;
     }
 
-    .itinerary-list-pane {
-      width: 100%;
-      border-right: none;
-      border-bottom: 1px solid #e5e7eb;
-      max-height: 30%;
-    }
-
-    .chat-sidebar {
+    .left-pane {
       width: 100% !important;
       border-right: none;
       border-bottom: 1px solid #e5e7eb;
