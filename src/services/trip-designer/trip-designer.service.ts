@@ -381,16 +381,17 @@ CRITICAL: If the summary shows "⚠️ EXISTING BOOKINGS" with luxury/premium pr
           },
         }));
 
-        // Execute all tool calls
-        const executionResults = await Promise.all(
-          ourToolCalls.map((tc) =>
-            this.toolExecutor.execute({
-              sessionId,
-              itineraryId: session.itineraryId,
-              toolCall: tc,
-            })
-          )
-        );
+        // Execute tool calls sequentially to prevent race conditions
+        // (e.g., duplicate detection needs to see previously added segments)
+        const executionResults: ToolExecutionResult[] = [];
+        for (const tc of ourToolCalls) {
+          const result = await this.toolExecutor.execute({
+            sessionId,
+            itineraryId: session.itineraryId,
+            toolCall: tc,
+          });
+          executionResults.push(result);
+        }
 
         toolResults = executionResults;
 
@@ -787,16 +788,17 @@ CRITICAL: If the summary shows "⚠️ EXISTING BOOKINGS" with luxury/premium pr
           toolCalls,
         });
 
-        // Execute tool calls and emit results
-        const executionResults = await Promise.all(
-          toolCalls.map((tc) =>
-            this.toolExecutor.execute({
-              sessionId,
-              itineraryId: session.itineraryId,
-              toolCall: tc,
-            })
-          )
-        );
+        // Execute tool calls sequentially to prevent race conditions
+        // (e.g., duplicate detection needs to see previously added segments)
+        const executionResults: ToolExecutionResult[] = [];
+        for (const tc of toolCalls) {
+          const result = await this.toolExecutor.execute({
+            sessionId,
+            itineraryId: session.itineraryId,
+            toolCall: tc,
+          });
+          executionResults.push(result);
+        }
 
         // Count successes/failures and log errors
         const successCount = executionResults.filter(r => r.success).length;
