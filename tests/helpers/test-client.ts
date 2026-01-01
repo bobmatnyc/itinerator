@@ -55,10 +55,10 @@ export class TestClient {
     // Extract session cookie from Set-Cookie header
     const setCookie = response.headers.get('set-cookie');
     if (setCookie) {
-      // Parse the itinerizer_session cookie value
-      const match = setCookie.match(/itinerizer_session=([^;]+)/);
+      // Parse the itinerator_session cookie value
+      const match = setCookie.match(/itinerator_session=([^;]+)/);
       if (match) {
-        this.sessionCookie = `itinerizer_session=${match[1]}; itinerizer_user_email=${this.userEmail}`;
+        this.sessionCookie = `itinerator_session=${match[1]}; itinerator_user_email=${this.userEmail}`;
       }
     }
   }

@@ -1,11 +1,11 @@
-# Itinerizer - Project Overview
+# Itinerator - Project Overview
 
 A modern travel itinerary management system with CLI and web interfaces.
 
 ## Architecture Overview
 
 ```
-itinerizer-ts/
+itinerator/
 ├── src/                    # Core TypeScript library
 │   ├── domain/             # Types, schemas, branded types
 │   ├── services/           # Business logic services
@@ -45,7 +45,7 @@ cd viewer-svelte && npm run dev  # Frontend + API on :5176
 npm run build           # Creates dist/index.js
 
 # Run CLI
-npx itinerizer [command]
+npx itinerator [command]
 ```
 
 ## Key Technologies

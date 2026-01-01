@@ -7,7 +7,7 @@
 
 ## Executive Summary
 
-The gap-filling logic in itinerizer-ts has **fundamental design flaws** that cause:
+The gap-filling logic in Itinerator has **fundamental design flaws** that cause:
 1. **Duplicate transfers** - Two transfers inserted in a row (private transfer followed by TAXI)
 2. **Hotel address confusion** - Transfers from hotels to their own street addresses
 3. **Failure to recognize existing connections** - Not detecting that transfer already bridges locations

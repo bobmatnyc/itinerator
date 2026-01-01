@@ -10,7 +10,7 @@
 import type { RequestHandler } from './$types';
 import { env as privateEnv } from '$env/dynamic/private';
 
-const SESSION_COOKIE_NAME = 'itinerizer_session';
+const SESSION_COOKIE_NAME = 'itinerator_session';
 const SESSION_SECRET = 'authenticated';
 
 /**

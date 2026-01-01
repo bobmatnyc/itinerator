@@ -106,7 +106,7 @@ Response: {
 **Example Create Itinerary:**
 ```typescript
 POST /api/v1/itineraries
-Headers: Cookie: itinerizer_session=...
+Headers: Cookie: itinerator_session=...
 Body: {
   "title": "Tokyo Adventure",
   "description": "Spring trip to Japan",
@@ -557,14 +557,14 @@ POST /api/v1/import/text/stream
 ```typescript
 Headers: {
   "X-OpenRouter-API-Key": "sk-or-v1-...",
-  "Cookie": "itinerizer_session=...; itinerizer_user_email=qa@test.com"
+  "Cookie": "itinerator_session=...; itinerator_user_email=qa@test.com"
 }
 ```
 
 **For regular endpoints:**
 ```typescript
 Headers: {
-  "Cookie": "itinerizer_session=...; itinerizer_user_email=qa@test.com"
+  "Cookie": "itinerator_session=...; itinerator_user_email=qa@test.com"
 }
 ```
 

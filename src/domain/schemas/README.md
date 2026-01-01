@@ -1,6 +1,6 @@
 # Domain Schemas
 
-Runtime validation schemas using Zod for the itinerizer-ts CLI.
+Runtime validation schemas using Zod for the itinerator CLI.
 
 ## Overview
 

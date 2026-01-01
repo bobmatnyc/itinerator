@@ -333,7 +333,7 @@ const result = await collectionService.createItinerary({...});
 
 3. **Verification Commands**
    ```bash
-   cd /Users/masa/Projects/itinerizer-ts
+   cd /Users/masa/Projects/itinerator
    npm run build        # TypeScript compilation
    npm test            # Run tests
    npm run lint        # Check code quality

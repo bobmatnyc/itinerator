@@ -1,0 +1,62 @@
+{
+  "id": "e33f95f7-e31e-42fc-bb1b-18fa43edac28",
+  "version": 3,
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "updatedAt": "2025-12-31T23:25:46.218Z",
+  "title": "Test Trip",
+  "status": "DRAFT",
+  "startDate": "2025-01-10T00:00:00.000Z",
+  "endDate": "2025-01-16T00:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "segments": [
+    {
+      "id": "f68dd9b9-e47f-42e0-8638-6fcc4d3f16c9",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-01-10T15:00:00.000Z",
+      "endDatetime": "2025-01-12T11:00:00.000Z",
+      "travelerIds": [
+        "11cd0e5c-9e39-4946-8abd-cd099233cb6a"
+      ],
+      "source": "agent",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Grand Hotel"
+      },
+      "location": {
+        "name": "Grand Hotel"
+      },
+      "checkInDate": "2025-01-10T00:00:00.000Z",
+      "checkOutDate": "2025-01-12T00:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "property": {
+        "name": "Grand Hotel"
+      },
+      "location": {
+        "name": "Grand Hotel"
+      },
+      "checkInDate": "2025-01-13T00:00:00.000Z",
+      "checkOutDate": "2025-01-15T00:00:00.000Z",
+      "startDatetime": "2025-01-13T15:00:00.000Z",
+      "endDatetime": "2025-01-15T11:00:00.000Z",
+      "roomCount": 1,
+      "amenities": [],
+      "travelerIds": [
+        "11cd0e5c-9e39-4946-8abd-cd099233cb6a"
+      ],
+      "source": "agent",
+      "metadata": {},
+      "id": "b05f7ff9-12d2-4907-8f76-7e5cc640e908"
+    }
+  ],
+  "tags": [],
+  "metadata": {}
+}

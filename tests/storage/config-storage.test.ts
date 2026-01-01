@@ -8,7 +8,7 @@ import { generateItineraryId } from '../../src/domain/types/branded.js';
 import { type AppConfig, ConfigStorage } from '../../src/storage/config-storage.js';
 
 describe('ConfigStorage', () => {
-  const testConfigPath = './test-data-config/.itinerizer/config.json';
+  const testConfigPath = './test-data-config/.itinerator/config.json';
   let storage: ConfigStorage;
 
   beforeEach(async () => {

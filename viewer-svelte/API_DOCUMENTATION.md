@@ -593,8 +593,8 @@ if (!response.ok) {
 
 - **OpenAPI Spec:** `/openapi.yaml`
 - **Swagger UI:** `/api/docs`
-- **GitHub:** https://github.com/yourusername/itinerizer-ts
-- **Issues:** https://github.com/yourusername/itinerizer-ts/issues
+- **GitHub:** https://github.com/yourusername/Itinerator
+- **Issues:** https://github.com/yourusername/Itinerator/issues
 
 ## Version History
 

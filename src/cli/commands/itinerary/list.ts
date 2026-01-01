@@ -32,7 +32,7 @@ export function listCommand(): Command {
       }
 
       if (summaries.length === 0) {
-        p.note('No itineraries found. Create one with "itinerizer itinerary create"');
+        p.note('No itineraries found. Create one with "itinerator itinerary create"');
         return;
       }
 

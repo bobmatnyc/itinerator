@@ -167,7 +167,7 @@ if (result.success) {
 
 ## Files Modified
 
-- `/Users/masa/Projects/itinerizer-ts/src/services/document-import.service.ts`
+- `/Users/masa/Projects/itinerator/src/services/document-import.service.ts`
 
 ## LOC Delta
 

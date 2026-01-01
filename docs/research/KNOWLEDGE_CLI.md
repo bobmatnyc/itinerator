@@ -1,6 +1,6 @@
 # Knowledge Base CLI Commands
 
-CLI commands for managing the Weaviate-based knowledge base in Itinerizer.
+CLI commands for managing the Weaviate-based knowledge base in Itinerator.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ export WEAVIATE_API_KEY="your-api-key"
 export OPENAI_API_KEY="your-openai-key"  # For embeddings
 ```
 
-Or run `npx itinerizer setup` to configure interactively.
+Or run `npx itinerator setup` to configure interactively.
 
 ## Commands
 
@@ -22,16 +22,16 @@ Bulk ingest itineraries into the knowledge base:
 
 ```bash
 # Ingest all itineraries
-npx itinerizer knowledge ingest --all
+npx itinerator knowledge ingest --all
 
 # Ingest specific itinerary
-npx itinerizer knowledge ingest --id <itinerary-id>
+npx itinerator knowledge ingest --id <itinerary-id>
 
 # Preview without storing (dry-run)
-npx itinerizer knowledge ingest --all --dry-run
+npx itinerator knowledge ingest --all --dry-run
 
 # Show detailed progress
-npx itinerizer knowledge ingest --all --verbose
+npx itinerator knowledge ingest --all --verbose
 ```
 
 **What gets extracted:**
@@ -56,29 +56,29 @@ Search for relevant knowledge:
 
 ```bash
 # Basic search
-npx itinerizer knowledge search "best restaurants in Tokyo"
+npx itinerator knowledge search "best restaurants in Tokyo"
 
 # Search with filters
-npx itinerizer knowledge search "cherry blossoms" \
+npx itinerator knowledge search "cherry blossoms" \
   --region Asia \
   --season spring
 
 # Search for luxury travel tips
-npx itinerizer knowledge search "luxury hotels" \
+npx itinerator knowledge search "luxury hotels" \
   --luxury-level luxury \
   --trip-type leisure
 
 # Family-friendly activities
-npx itinerizer knowledge search "family activities" \
+npx itinerator knowledge search "family activities" \
   --traveler-type family \
   --category activity
 
 # Limit results
-npx itinerizer knowledge search "budget travel" \
+npx itinerator knowledge search "budget travel" \
   --limit 5
 
 # Output as JSON
-npx itinerizer knowledge search "travel tips" --json
+npx itinerator knowledge search "travel tips" --json
 ```
 
 **Available Filters:**
@@ -97,13 +97,13 @@ View knowledge base statistics:
 
 ```bash
 # Basic stats
-npx itinerizer knowledge stats
+npx itinerator knowledge stats
 
 # Detailed stats (includes source and temporal breakdowns)
-npx itinerizer knowledge stats --detailed
+npx itinerator knowledge stats --detailed
 
 # JSON output
-npx itinerizer knowledge stats --json
+npx itinerator knowledge stats --json
 ```
 
 **Stats Include:**
@@ -119,9 +119,9 @@ npx itinerizer knowledge stats --json
 The `knowledge` command can be abbreviated as `kb`:
 
 ```bash
-npx itinerizer kb ingest --all
-npx itinerizer kb search "Tokyo hotels"
-npx itinerizer kb stats
+npx itinerator kb ingest --all
+npx itinerator kb search "Tokyo hotels"
+npx itinerator kb stats
 ```
 
 ## Knowledge Extraction Process
@@ -147,19 +147,19 @@ For each itinerary ingested:
 
 ```bash
 # Dry-run first to see what will be ingested
-npx itinerizer kb ingest --all --dry-run
+npx itinerator kb ingest --all --dry-run
 
 # Ingest everything
-npx itinerizer kb ingest --all --verbose
+npx itinerator kb ingest --all --verbose
 
 # Check stats
-npx itinerizer kb stats --detailed
+npx itinerator kb stats --detailed
 ```
 
 ### Find family-friendly spring activities in Japan
 
 ```bash
-npx itinerizer kb search "outdoor activities" \
+npx itinerator kb search "outdoor activities" \
   --country Japan \
   --season spring \
   --traveler-type family \
@@ -170,7 +170,7 @@ npx itinerizer kb search "outdoor activities" \
 ### Search for luxury hotel recommendations
 
 ```bash
-npx itinerizer kb search "boutique hotels" \
+npx itinerator kb search "boutique hotels" \
   --luxury-level luxury \
   --trip-type leisure
 ```

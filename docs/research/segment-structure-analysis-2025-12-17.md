@@ -1,4 +1,4 @@
-# Segment Structure Analysis - itinerizer-ts
+# Segment Structure Analysis - Itinerator
 
 **Research Date:** 2025-12-17
 **Objective:** Investigate current segment types and structure to understand temporal/geographic data fields and identify gaps for implementing semantic segments with auto-generated transfers.
@@ -7,7 +7,7 @@
 
 ## Executive Summary
 
-The itinerizer-ts project has a well-structured segment type system using TypeScript discriminated unions with Zod schema validation. The current implementation provides:
+The Itinerator project has a well-structured segment type system using TypeScript discriminated unions with Zod schema validation. The current implementation provides:
 
 - ✅ **Strong typing** with 6 distinct segment types (FLIGHT, HOTEL, MEETING, ACTIVITY, TRANSFER, CUSTOM)
 - ✅ **Temporal data** via `startDatetime` and `endDatetime` on all segments
@@ -250,7 +250,7 @@ interface Coordinates {
 
 ### 4.1 LLM Service Overview
 
-Located in: `/Users/masa/Projects/itinerizer-ts/src/services/llm.service.ts`
+Located in: `/Users/masa/Projects/itinerator/src/services/llm.service.ts`
 
 **LLM Pipeline:**
 1. **Input:** Structured markdown (pre-categorized by segment type)
@@ -748,20 +748,20 @@ Example:
 ## Appendix A: File Locations
 
 ### Type Definitions
-- `/Users/masa/Projects/itinerizer-ts/src/domain/types/segment.ts` - Segment type definitions
-- `/Users/masa/Projects/itinerizer-ts/src/domain/types/location.ts` - Location type definitions
-- `/Users/masa/Projects/itinerizer-ts/src/domain/types/common.ts` - Enum definitions
-- `/Users/masa/Projects/itinerizer-ts/src/domain/types/itinerary.ts` - Itinerary type
+- `/Users/masa/Projects/itinerator/src/domain/types/segment.ts` - Segment type definitions
+- `/Users/masa/Projects/itinerator/src/domain/types/location.ts` - Location type definitions
+- `/Users/masa/Projects/itinerator/src/domain/types/common.ts` - Enum definitions
+- `/Users/masa/Projects/itinerator/src/domain/types/itinerary.ts` - Itinerary type
 
 ### Schemas
-- `/Users/masa/Projects/itinerizer-ts/src/domain/schemas/segment.schema.ts` - Zod validation schemas
-- `/Users/masa/Projects/itinerizer-ts/src/domain/schemas/location.schema.ts` - Location schemas
-- `/Users/masa/Projects/itinerizer-ts/src/domain/schemas/common.schema.ts` - Common schemas
+- `/Users/masa/Projects/itinerator/src/domain/schemas/segment.schema.ts` - Zod validation schemas
+- `/Users/masa/Projects/itinerator/src/domain/schemas/location.schema.ts` - Location schemas
+- `/Users/masa/Projects/itinerator/src/domain/schemas/common.schema.ts` - Common schemas
 
 ### Services
-- `/Users/masa/Projects/itinerizer-ts/src/services/segment.service.ts` - Segment CRUD operations
-- `/Users/masa/Projects/itinerizer-ts/src/services/dependency.service.ts` - Dependency tracking
-- `/Users/masa/Projects/itinerizer-ts/src/services/llm.service.ts` - LLM parsing integration
+- `/Users/masa/Projects/itinerator/src/services/segment.service.ts` - Segment CRUD operations
+- `/Users/masa/Projects/itinerator/src/services/dependency.service.ts` - Dependency tracking
+- `/Users/masa/Projects/itinerator/src/services/llm.service.ts` - LLM parsing integration
 
 ---
 

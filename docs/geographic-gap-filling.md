@@ -40,7 +40,7 @@ After LLM parsing, if geographic gaps still exist, the system automatically crea
 ### Basic Import with Gap Filling (Default)
 
 ```typescript
-import { DocumentImportService } from 'itinerizer';
+import { DocumentImportService } from 'itinerator';
 
 const importService = new DocumentImportService(config);
 await importService.initialize();
@@ -83,7 +83,7 @@ if (result.success && result.value.continuityValidation) {
 ### Manual Gap Validation
 
 ```typescript
-import { SegmentContinuityService } from 'itinerizer';
+import { SegmentContinuityService } from 'itinerator';
 
 const continuityService = new SegmentContinuityService();
 

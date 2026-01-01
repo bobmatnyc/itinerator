@@ -40,7 +40,7 @@ export function addCommand(): Command {
 
       const workingResult = await workingService.getWorkingItinerary();
       if (!workingResult.success || !workingResult.value) {
-        printError('No working itinerary set. Use "itinerizer itinerary use <id>" first.');
+        printError('No working itinerary set. Use "itinerator itinerary use <id>" first.');
         process.exit(1);
       }
 

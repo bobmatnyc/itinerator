@@ -1,6 +1,6 @@
-# Itinerizer Web Viewer
+# Itinerator Web Viewer
 
-This document describes the new features added to itinerizer-ts: Dynamic Model Selection and Web Viewer.
+This document describes the new features added to Itinerator: Dynamic Model Selection and Web Viewer.
 
 ## Feature 1: Dynamic Model Selection
 
@@ -39,10 +39,10 @@ The `DocumentImportService` now automatically uses `ModelSelectorService` when n
 
 ```bash
 # Auto-selects best model based on file size
-itinerizer import my-itinerary.pdf
+itinerator import my-itinerary.pdf
 
 # Or specify a model explicitly
-itinerizer import my-itinerary.pdf --model anthropic/claude-3.5-sonnet
+itinerator import my-itinerary.pdf --model anthropic/claude-3.5-sonnet
 ```
 
 ## Feature 2: Web Viewer
@@ -162,7 +162,7 @@ curl -X POST http://localhost:5176/api/v1/designer/sessions \
 ### Project Structure
 
 ```
-itinerizer-ts/
+itinerator/
 ├── src/
 │   ├── services/             # Business logic services
 │   └── domain/               # Types and schemas

@@ -16,7 +16,7 @@ The "Thinking..." indicator gets stuck when the LLM response starts with a JSON 
 
 ### 1. Server Logs Analysis ✅
 
-**File Checked:** `/tmp/claude/-Users-masa-Projects-itinerizer-ts/tasks/b87a82b.output`
+**File Checked:** `/tmp/claude/-Users-masa-Projects-Itinerator/tasks/b87a82b.output`
 
 **Findings:**
 - Stream is **completing successfully**
@@ -40,7 +40,7 @@ The "Thinking..." indicator gets stuck when the LLM response starts with a JSON 
 
 ### 2. Chat Store State Management Analysis ✅
 
-**File Checked:** `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/stores/chat.ts`
+**File Checked:** `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/stores/chat.ts`
 
 **State Variables:**
 - `chatLoading` - Set to `true` when message is being sent
@@ -65,7 +65,7 @@ chatLoading.set(false);
 
 ### 3. "Thinking..." Display Condition Analysis ⚠️ ISSUE FOUND
 
-**File:** `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/components/ChatPanel.svelte`
+**File:** `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/components/ChatPanel.svelte`
 **Line:** 620
 
 **Condition:**
@@ -93,7 +93,7 @@ The "Thinking..." indicator shows when:
 
 ### 4. JSON Buffering Logic Analysis 🔍 ROOT CAUSE
 
-**File:** `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/stores/chat.ts`
+**File:** `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/stores/chat.ts`
 **Lines:** 171-186
 
 **Function:** `getStreamingDisplayContent(accumulatedContent: string)`
@@ -341,12 +341,12 @@ After applying fix, verify:
 ## Related Files
 
 ### Modified in Recent Changes
-- `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/stores/chat.ts`
-- `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/components/ChatPanel.svelte`
+- `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/stores/chat.ts`
+- `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/components/ChatPanel.svelte`
 
 ### Relevant Server Code
-- `/Users/masa/Projects/itinerizer-ts/src/server/routers/trip-designer.router.ts` (streaming endpoint)
-- `/Users/masa/Projects/itinerizer-ts/src/services/trip-designer/trip-designer.service.ts` (stream generation)
+- `/Users/masa/Projects/itinerator/src/server/routers/trip-designer.router.ts` (streaming endpoint)
+- `/Users/masa/Projects/itinerator/src/services/trip-designer/trip-designer.service.ts` (stream generation)
 
 ---
 

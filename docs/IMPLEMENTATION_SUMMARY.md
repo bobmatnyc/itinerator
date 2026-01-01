@@ -53,7 +53,7 @@ Successfully implemented a Travel Agent Service that uses SerpAPI to intelligent
    - Added graceful fallback to placeholders on errors
    - Fixed TypeScript errors with Location type
 
-4. **`.itinerizer/config.yaml`**
+4. **`.itinerator/config.yaml`**
    - Added SerpAPI configuration section with API key
 
 ## Architecture

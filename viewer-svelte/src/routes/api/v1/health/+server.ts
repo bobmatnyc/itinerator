@@ -9,6 +9,6 @@ export const GET: RequestHandler = async () => {
   return json({
     status: 'ok',
     timestamp: new Date().toISOString(),
-    service: 'itinerizer-api',
+    service: 'itinerator-api',
   });
 };

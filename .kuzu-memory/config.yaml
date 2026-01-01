@@ -7,7 +7,7 @@ log_level: "INFO"
 
 # Database location (project-specific)
 database:
-  path: /Users/masa/Projects/itinerizer-ts/kuzu-memories
+  path: /Users/masa/Projects/itinerator/kuzu-memories
 
 # Storage configuration
 storage:

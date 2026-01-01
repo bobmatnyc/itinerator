@@ -1,4 +1,4 @@
-// PM2 Ecosystem Configuration for Itinerizer
+// PM2 Ecosystem Configuration for Itinerator
 // Usage: pm2 start ecosystem.config.cjs
 // Stop: pm2 stop all
 // Status: pm2 status
@@ -7,8 +7,8 @@
 module.exports = {
   apps: [
     {
-      name: 'itinerizer-dev',
-      cwd: '/Users/masa/Projects/itinerizer-ts',
+      name: 'itinerator-dev',
+      cwd: '/Users/masa/Projects/itinerator',
       script: './start-dev.sh',
       interpreter: '/bin/bash',
       watch: false,

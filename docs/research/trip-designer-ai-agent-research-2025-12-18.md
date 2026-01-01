@@ -1207,7 +1207,7 @@ Provides personalized recommendations without re-asking basics
 
 **Recommendation 1: Implement Three-Mode Architecture (Dream → Plan → Book)**
 
-Current system has agent modes in `/Users/masa/Projects/itinerizer-ts/src/domain/types/agent.ts`. Enhance this architecture:
+Current system has agent modes in `/Users/masa/Projects/itinerator/src/domain/types/agent.ts`. Enhance this architecture:
 
 **Dream Mode (Qualitative, Experiential Focus):**
 - Generate plausible itineraries without verification

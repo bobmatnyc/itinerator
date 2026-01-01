@@ -4,7 +4,7 @@ The Travel Agent Service uses SerpAPI to intelligently find real travel options 
 
 ## Configuration
 
-Add your SerpAPI key to `.itinerizer/config.yaml`:
+Add your SerpAPI key to `.itinerator/config.yaml`:
 
 ```yaml
 serpapi:

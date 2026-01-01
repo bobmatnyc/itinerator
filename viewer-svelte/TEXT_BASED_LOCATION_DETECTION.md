@@ -7,7 +7,7 @@ Added automatic map visualization triggered by detecting geographic content (air
 ## Implementation
 
 ### File Modified
-- `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/stores/chat.ts`
+- `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/stores/chat.ts`
 
 ### Changes Made
 

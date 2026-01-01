@@ -1,4 +1,4 @@
-# Vercel Deployment Guide - itinerizer-ts
+# Vercel Deployment Guide - Itinerator
 
 ## Overview
 
@@ -130,7 +130,7 @@ export default defineConfig({
 ## Project Structure
 
 ```
-/Users/masa/Projects/itinerizer-ts/
+/Users/masa/Projects/itinerator/
 ├── src/
 │   ├── services/          # Shared services (imported by SvelteKit)
 │   ├── domain/            # Domain types and schemas (imported by SvelteKit)
@@ -364,7 +364,7 @@ jobs:
 
 ## Project Information
 
-- **Project Name**: itinerizer-ts
+- **Project Name**: Itinerator
 - **Project ID**: prj_Sja5XyHLjbtozgEKU93OfI1KUrE4
 - **Organization**: team_ErcARK9OcmFb8zc77Khd4i2z
 - **User**: bobmatnyc

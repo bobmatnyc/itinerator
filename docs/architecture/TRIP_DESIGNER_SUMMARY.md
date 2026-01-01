@@ -298,7 +298,7 @@ Total: ~4,325 lines of code + documentation
 5. Rate limiting (20 msg/min)
 
 ### Medium Term (Quarter 1)
-1. CLI integration (`itinerizer chat`)
+1. CLI integration (`itinerator chat`)
 2. Web interface with structured questions
 3. Multi-session support (resume conversations)
 4. Collaborative planning (multiple users)

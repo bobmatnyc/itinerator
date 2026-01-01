@@ -293,7 +293,7 @@ Tested via web API `/api/v1/import/upload` endpoint:
 ```bash
 curl -X POST http://localhost:5176/api/v1/import/upload \
   -F "file=@~/Downloads/JetBlue - Print confirmation.pdf" \
-  -H "Cookie: itinerizer_session=authenticated"
+  -H "Cookie: itinerator_session=authenticated"
 ```
 
 **Result:** Error occurred before LLM was even called, proving the bug is in PDF parsing, not LLM extraction.

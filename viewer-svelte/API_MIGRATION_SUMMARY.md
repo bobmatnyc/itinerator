@@ -5,7 +5,7 @@ Successfully migrated the viewer-svelte frontend from legacy API routes to the n
 
 ## Changes Made
 
-### 1. Updated `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/api.ts`
+### 1. Updated `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/api.ts`
 
 #### Added API Route Constants
 ```typescript
@@ -42,7 +42,7 @@ const API_V1 = {
 | `/api/chat/sessions/:id/messages` | `/api/v1/designer/sessions/:id/messages` | POST | Send chat message |
 | `/api/chat/sessions/:id/messages/stream` | `/api/v1/designer/sessions/:id/messages/stream` | POST | Stream chat message |
 
-### 2. Updated `/Users/masa/Projects/itinerizer-ts/viewer-svelte/mock-server.js`
+### 2. Updated `/Users/masa/Projects/itinerator/viewer-svelte/mock-server.js`
 
 - Added support for new `/api/v1/` routes
 - Maintained backward compatibility with legacy `/api/` routes
@@ -100,8 +100,8 @@ The mock server supports both old and new routes during transition:
 
 ## Files Modified
 
-1. `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/api.ts` - Main API client
-2. `/Users/masa/Projects/itinerizer-ts/viewer-svelte/mock-server.js` - Mock server for development
+1. `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/api.ts` - Main API client
+2. `/Users/masa/Projects/itinerator/viewer-svelte/mock-server.js` - Mock server for development
 
 ## No Changes Required
 

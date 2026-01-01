@@ -96,9 +96,9 @@
       // If onboarding, redirect to help for first-time users
       if (isOnboarding) {
         setTimeout(() => {
-          const hasSeenHelp = localStorage.getItem('itinerizer_has_seen_help');
+          const hasSeenHelp = localStorage.getItem('itinerator_has_seen_help');
           if (!hasSeenHelp) {
-            localStorage.setItem('itinerizer_has_seen_help', 'true');
+            localStorage.setItem('itinerator_has_seen_help', 'true');
             goto('/help');
           } else {
             goto('/itineraries');
@@ -122,9 +122,9 @@
 
   function handleSkip() {
     // Allow users to skip API key setup during onboarding
-    const hasSeenHelp = localStorage.getItem('itinerizer_has_seen_help');
+    const hasSeenHelp = localStorage.getItem('itinerator_has_seen_help');
     if (!hasSeenHelp) {
-      localStorage.setItem('itinerizer_has_seen_help', 'true');
+      localStorage.setItem('itinerator_has_seen_help', 'true');
       goto('/help');
     } else {
       goto('/itineraries');

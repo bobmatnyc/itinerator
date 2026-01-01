@@ -50,7 +50,7 @@ export function showCommand(): Command {
           process.exit(1);
         }
         if (!workingResult.value) {
-          p.note('No working itinerary set. Provide an ID or use "itinerizer itinerary use <id>"');
+          p.note('No working itinerary set. Provide an ID or use "itinerator itinerary use <id>"');
           process.exit(1);
         }
         itineraryId = workingResult.value.id;

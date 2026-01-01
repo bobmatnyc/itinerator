@@ -58,10 +58,10 @@
           await goto('/profile?onboarding=true');
         } else {
           // Check if user has seen the help page
-          const hasSeenHelp = localStorage.getItem('itinerizer_has_seen_help');
+          const hasSeenHelp = localStorage.getItem('itinerator_has_seen_help');
           if (!hasSeenHelp) {
             // First time user - show help page
-            localStorage.setItem('itinerizer_has_seen_help', 'true');
+            localStorage.setItem('itinerator_has_seen_help', 'true');
             await goto('/help');
           } else {
             // Returning user - go to itineraries

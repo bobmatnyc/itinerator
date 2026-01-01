@@ -95,7 +95,7 @@ export function importConfigCommand(): Command {
         printWarning('No configuration found');
         console.log();
         console.log(colors.dim('  Set your API key with:'));
-        console.log(colors.cyan('  itinerizer import config --set-key <your-key>'));
+        console.log(colors.cyan('  itinerator import config --set-key <your-key>'));
         p.outro('Run setup to configure');
         return;
       }

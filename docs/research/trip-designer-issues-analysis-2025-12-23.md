@@ -91,23 +91,23 @@ This populates `segmentsModified[]`, which sets `itineraryUpdated: true`, trigge
 ### File References
 
 **Key Files:**
-1. `/Users/masa/Projects/itinerizer-ts/src/services/trip-designer/tool-executor.ts`
+1. `/Users/masa/Projects/itinerator/src/services/trip-designer/tool-executor.ts`
    - Lines 246-317: `handleUpdateItinerary()` - does not set metadata.segmentId
    - Lines 114-120: Segment tool handlers - correctly set metadata.segmentId
 
-2. `/Users/masa/Projects/itinerizer-ts/src/services/trip-designer/trip-designer.service.ts`
+2. `/Users/masa/Projects/itinerator/src/services/trip-designer/trip-designer.service.ts`
    - Line 451: `itineraryUpdated: segmentsModified.length > 0` (non-streaming)
    - Line 965: Same logic in streaming (chatStream)
    - Lines 804-807: Where segmentsModified is populated from metadata.segmentId
 
-3. `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/stores/chat.ts`
+3. `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/stores/chat.ts`
    - Lines 483-484: Where `itineraryUpdated` store is set from done event
    - Lines 422-506: Full done event handling
 
-4. `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/components/ChatPanel.svelte`
+4. `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/components/ChatPanel.svelte`
    - Lines 299-313: Effect that reloads itinerary when `$itineraryUpdated` is true
 
-5. `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/routes/itineraries/+page.svelte`
+5. `/Users/masa/Projects/itinerator/viewer-svelte/src/routes/itineraries/+page.svelte`
    - Lines 147-153: `hasItineraryContent()` - checks for destinations/dates
    - Lines 185-196: Effect that switches to detail view when content detected
 
@@ -180,7 +180,7 @@ The system prompt does **not include the current date**.
 
 #### Current System Prompt Generation
 
-**File:** `/Users/masa/Projects/itinerizer-ts/src/services/trip-designer/trip-designer.service.ts`
+**File:** `/Users/masa/Projects/itinerator/src/services/trip-designer/trip-designer.service.ts`
 **Lines:** 1343-1421
 
 ```typescript
@@ -205,7 +205,7 @@ private async buildMessages(
 
 #### System Prompt Content
 
-**File:** `/Users/masa/Projects/itinerizer-ts/src/prompts/trip-designer/system.md`
+**File:** `/Users/masa/Projects/itinerator/src/prompts/trip-designer/system.md`
 **Lines:** 1-659
 
 The entire 659-line system prompt contains:

@@ -46,7 +46,7 @@ Simple health check endpoint that returns server status:
 {
   "status": "ok",
   "timestamp": "2025-12-27T19:46:49.797Z",
-  "service": "itinerizer-api"
+  "service": "itinerator-api"
 }
 ```
 

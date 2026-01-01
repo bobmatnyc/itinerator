@@ -5,7 +5,7 @@ The Trip Designer API provides conversational trip planning capabilities for the
 ## Prerequisites
 
 The Trip Designer endpoints require an OpenRouter API key to be configured. The API key can be set in:
-- `.itinerizer/config.yaml` (recommended)
+- `.itinerator/config.yaml` (recommended)
 - Environment variable `OPENROUTER_API_KEY`
 
 If no API key is configured, all Trip Designer endpoints will return `503 Service Unavailable`.

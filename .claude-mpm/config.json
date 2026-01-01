@@ -4,7 +4,7 @@
     "provider": "kuzu-memory",
     "auto_enhance": true,
     "async_learning": true,
-    "project_root": "/Users/masa/Projects/itinerizer-ts"
+    "project_root": "/Users/masa/Projects/itinerator"
   },
   "hooks": {
     "pre_response": [

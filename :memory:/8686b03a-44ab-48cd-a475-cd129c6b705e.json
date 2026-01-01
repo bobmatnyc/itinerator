@@ -1,0 +1,48 @@
+{
+  "id": "8686b03a-44ab-48cd-a475-cd129c6b705e",
+  "version": 3,
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "updatedAt": "2025-12-31T23:15:46.374Z",
+  "title": "Test Trip",
+  "status": "DRAFT",
+  "startDate": "2025-01-10T00:00:00.000Z",
+  "endDate": "2025-01-15T00:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "segments": [
+    {
+      "id": "4b04c30b-a62f-465a-9844-62799cbc97f8",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-01-10T19:00:00.000Z",
+      "endDatetime": "2025-01-10T21:00:00.000Z",
+      "travelerIds": [
+        "867d072a-3a76-40d7-8063-cf388a0b7dbc"
+      ],
+      "source": "agent",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "La Villa Restaurant",
+      "location": {
+        "name": "La Villa"
+      }
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "name": "La Villa Restaurant",
+      "startDatetime": "2025-01-11T19:00:00.000Z",
+      "endDatetime": "2025-01-11T21:00:00.000Z",
+      "travelerIds": [
+        "867d072a-3a76-40d7-8063-cf388a0b7dbc"
+      ],
+      "source": "agent",
+      "location": {
+        "name": "La Villa"
+      },
+      "metadata": {},
+      "id": "2d278163-7fbc-4758-a7cc-48c7985263f6"
+    }
+  ],
+  "tags": [],
+  "metadata": {}
+}

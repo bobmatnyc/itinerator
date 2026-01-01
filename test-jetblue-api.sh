@@ -50,7 +50,7 @@ RESPONSE=$(curl -s -X POST \
   http://localhost:5176/api/v1/import/upload \
   -F "file=@$PDF_FILE" \
   -H "Accept: application/json" \
-  -H "Cookie: itinerizer_session=authenticated; itinerizer_user_email=test@example.com")
+  -H "Cookie: itinerator_session=authenticated; itinerator_user_email=test@example.com")
 
 # Save response to file for inspection
 echo "$RESPONSE" > test-jetblue-response.json

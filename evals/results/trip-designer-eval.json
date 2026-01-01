@@ -3470,7 +3470,7 @@
     "tags": {},
     "description": "Trip Designer AI Quality Evaluation",
     "prompts": [
-      "file:///Users/masa/Projects/itinerizer-ts/evals/evals/prompt.js"
+      "file:///Users/masa/Projects/itinerator/evals/evals/prompt.js"
     ],
     "providers": [
       {

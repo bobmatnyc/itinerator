@@ -106,7 +106,7 @@ export function createTripDesignerRouter(
         return res.status(503).json({
           error: 'Trip Designer disabled',
           message: 'No API key provided. Set your OpenRouter API key in Profile settings.',
-          hint: 'Add your key to .itinerizer/config.yaml or set OPENROUTER_API_KEY environment variable',
+          hint: 'Add your key to .itinerator/config.yaml or set OPENROUTER_API_KEY environment variable',
         });
       }
 

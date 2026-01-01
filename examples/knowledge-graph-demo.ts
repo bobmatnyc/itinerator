@@ -18,7 +18,7 @@ async function main() {
 
   if (!configResult.success) {
     console.error('Failed to load config:', configResult.error.message);
-    console.error('Please set your OpenRouter API key in .itinerizer/config.yaml');
+    console.error('Please set your OpenRouter API key in .itinerator/config.yaml');
     return;
   }
 

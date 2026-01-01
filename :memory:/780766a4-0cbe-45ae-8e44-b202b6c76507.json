@@ -1,0 +1,35 @@
+{
+  "id": "780766a4-0cbe-45ae-8e44-b202b6c76507",
+  "version": 2,
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "updatedAt": "2025-12-31T23:14:21.071Z",
+  "title": "Test Trip",
+  "status": "DRAFT",
+  "startDate": "2025-01-10T00:00:00.000Z",
+  "endDate": "2025-01-15T00:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "segments": [
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "name": "La Villa Restaurant",
+      "startDatetime": "2025-01-10T19:00:00.000Z",
+      "endDatetime": "2025-01-10T21:00:00.000Z",
+      "travelerIds": [
+        "74cf36bf-2763-4489-a929-536a2d3e3f92"
+      ],
+      "source": "agent",
+      "location": {
+        "name": "La Villa",
+        "address": "123 Main St",
+        "city": "New York",
+        "country": "US"
+      },
+      "metadata": {},
+      "id": "f2114e10-728a-441d-b31d-eab3b9b2da7a"
+    }
+  ],
+  "tags": [],
+  "metadata": {}
+}

@@ -14,7 +14,7 @@ Deployment procedures, environment setup, and operational guides for developers 
 High-level architectural documentation, system design documents, and architectural decision records (ADRs).
 
 ### `/user/` - User Guides
-End-user documentation, tutorials, and how-to guides for using the Itinerizer application.
+End-user documentation, tutorials, and how-to guides for using the Itinerator application.
 
 ## Quick Links
 

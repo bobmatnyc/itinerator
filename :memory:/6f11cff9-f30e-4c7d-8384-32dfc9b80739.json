@@ -1,0 +1,35 @@
+{
+  "id": "6f11cff9-f30e-4c7d-8384-32dfc9b80739",
+  "version": 2,
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "updatedAt": "2025-12-31T23:14:21.079Z",
+  "title": "Test Trip",
+  "status": "DRAFT",
+  "startDate": "2025-01-10T00:00:00.000Z",
+  "endDate": "2025-01-15T00:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "segments": [
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "name": "La Villa",
+      "startDatetime": "2025-01-10T19:00:00.000Z",
+      "endDatetime": "2025-01-10T21:00:00.000Z",
+      "travelerIds": [
+        "42be7467-1274-432d-8c8e-f76188c63e7a"
+      ],
+      "source": "agent",
+      "location": {
+        "name": "La Villa",
+        "address": "123 Main St",
+        "city": "New York",
+        "country": "US"
+      },
+      "metadata": {},
+      "id": "c07ed4fb-8e33-4580-a18e-a694b1baaf3d"
+    }
+  ],
+  "tags": [],
+  "metadata": {}
+}

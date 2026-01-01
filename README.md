@@ -1,4 +1,4 @@
-# Itinerizer
+# Itinerator
 
 A modern TypeScript CLI tool for managing travel itineraries.
 
@@ -50,31 +50,31 @@ npm run typecheck
 
 ```bash
 # Show version
-itinerizer --version
+itinerator --version
 
 # Initialize configuration
-itinerizer setup
+itinerator setup
 
 # Create a new itinerary
-itinerizer itinerary create
+itinerator itinerary create
 
 # List all itineraries
-itinerizer itinerary list
+itinerator itinerary list
 
 # Show itinerary details
-itinerizer itinerary show <id>
+itinerator itinerary show <id>
 
 # Run demo
-itinerizer demo
+itinerator demo
 
 # Check installation
-itinerizer doctor
+itinerator doctor
 ```
 
 ## Project Structure
 
 ```
-itinerizer-ts/
+itinerator/
 ├── src/
 │   ├── index.ts              # CLI entry point
 │   ├── core/                 # Core business logic

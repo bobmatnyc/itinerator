@@ -394,8 +394,8 @@ The Svelte Viewer Dashboard is correctly integrated with the Backend API. All cr
 
 ## Test Artifacts
 
-- Test Report: `/Users/masa/Projects/itinerizer-ts/INTEGRATION_TEST_REPORT.md`
-- Test Script: `/Users/masa/Projects/itinerizer-ts/test-integration.mjs`
+- Test Report: `/Users/masa/Projects/itinerator/INTEGRATION_TEST_REPORT.md`
+- Test Script: `/Users/masa/Projects/itinerator/test-integration.mjs`
 
 ---
 

@@ -44,7 +44,7 @@ Modified the `'done'` event handler in both `sendMessageStreaming()` and `sendCo
 
 ## Code Changes
 
-**File**: `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/stores/chat.ts`
+**File**: `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/stores/chat.ts`
 
 ### Before:
 ```typescript
@@ -121,9 +121,9 @@ To verify the fix:
 
 ## Related Files
 
-- `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/stores/chat.ts` - Main fix location
-- `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/components/ChatPanel.svelte` - UI rendering (unchanged)
-- `/Users/masa/Projects/itinerizer-ts/src/prompts/trip-designer/system.md` - Backend prompt defining JSON format
+- `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/stores/chat.ts` - Main fix location
+- `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/components/ChatPanel.svelte` - UI rendering (unchanged)
+- `/Users/masa/Projects/itinerator/src/prompts/trip-designer/system.md` - Backend prompt defining JSON format
 
 ## Notes
 

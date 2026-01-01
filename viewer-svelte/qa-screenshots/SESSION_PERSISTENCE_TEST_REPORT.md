@@ -57,8 +57,8 @@ The session was successfully created but was **not found 12 minutes later** when
 
 ### Screenshots
 
-- **After Send:** `/Users/masa/Projects/itinerizer-ts/viewer-svelte/qa-screenshots/chat-test-after-send.png`
-- **Final Error State:** `/Users/masa/Projects/itinerizer-ts/viewer-svelte/qa-screenshots/chat-test-final-error.png`
+- **After Send:** `/Users/masa/Projects/itinerator/viewer-svelte/qa-screenshots/chat-test-after-send.png`
+- **Final Error State:** `/Users/masa/Projects/itinerator/viewer-svelte/qa-screenshots/chat-test-final-error.png`
 
 ## Comparison with Expected Behavior
 

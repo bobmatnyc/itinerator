@@ -1,4 +1,4 @@
-# User Data Management Analysis - Itinerizer SvelteKit Application
+# User Data Management Analysis - Itinerator SvelteKit Application
 
 **Date:** 2025-12-24
 **Research Focus:** Authentication patterns, user data scoping, session management, and potential data isolation issues
@@ -7,7 +7,7 @@
 
 ## Executive Summary
 
-The Itinerizer application implements a **cookie-based authentication system** with **email-based user scoping** for itineraries. While the architecture includes proper user filtering at the storage layer, there are **critical security gaps** in session management and API access control that could allow data leakage between users.
+The Itinerator application implements a **cookie-based authentication system** with **email-based user scoping** for itineraries. While the architecture includes proper user filtering at the storage layer, there are **critical security gaps** in session management and API access control that could allow data leakage between users.
 
 ### Critical Findings
 
@@ -34,9 +34,9 @@ event.locals.userEmail = event.cookies.get(USER_EMAIL_COOKIE_NAME) || null;
 ```
 
 **Authentication Storage:**
-- **Server-side:** `itinerizer_session` cookie (HttpOnly, 7-day expiry)
-- **Client-side:** `itinerizer_user_email` cookie (readable by JS, 7-day expiry)
-- **Frontend store:** `authStore.userEmail` (localStorage: `itinerizer_user_email`)
+- **Server-side:** `itinerator_session` cookie (HttpOnly, 7-day expiry)
+- **Client-side:** `itinerator_user_email` cookie (readable by JS, 7-day expiry)
+- **Frontend store:** `authStore.userEmail` (localStorage: `itinerator_user_email`)
 
 ### Login Process
 
@@ -671,7 +671,7 @@ function getBaseHeaders(): HeadersInit {
 
 ## 8. Conclusion
 
-The Itinerizer application has **strong data isolation for itineraries** but **critical gaps in session access control**. The primary concerns are:
+The Itinerator application has **strong data isolation for itineraries** but **critical gaps in session access control**. The primary concerns are:
 
 1. **No ownership tracking for chat sessions** - Sessions can be accessed by any authenticated user who guesses the ID
 2. **Predictable session IDs** - Time-based generation makes enumeration feasible

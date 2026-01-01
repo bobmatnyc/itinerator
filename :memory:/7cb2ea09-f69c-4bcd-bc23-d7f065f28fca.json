@@ -1,0 +1,60 @@
+{
+  "id": "7cb2ea09-f69c-4bcd-bc23-d7f065f28fca",
+  "version": 3,
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "updatedAt": "2025-12-31T23:16:42.792Z",
+  "title": "Test Trip",
+  "status": "DRAFT",
+  "startDate": "2025-01-10T00:00:00.000Z",
+  "endDate": "2025-01-15T00:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "segments": [
+    {
+      "id": "b79d9cb7-668f-4bca-9ceb-5a456ed7d0e6",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-01-10T08:00:00.000Z",
+      "endDatetime": "2025-01-10T11:00:00.000Z",
+      "travelerIds": [
+        "612d4c49-e5df-486b-8b83-2055d59ee415"
+      ],
+      "source": "agent",
+      "metadata": {},
+      "type": "FLIGHT",
+      "airline": {
+        "name": "United Airlines"
+      },
+      "flightNumber": "UA123",
+      "origin": {
+        "name": "JFK"
+      },
+      "destination": {
+        "name": "LAX"
+      }
+    },
+    {
+      "type": "FLIGHT",
+      "status": "CONFIRMED",
+      "airline": {
+        "name": "United Airlines"
+      },
+      "flightNumber": "UA123",
+      "origin": {
+        "name": "JFK"
+      },
+      "destination": {
+        "name": "LAX"
+      },
+      "startDatetime": "2025-01-11T08:00:00.000Z",
+      "endDatetime": "2025-01-11T11:00:00.000Z",
+      "travelerIds": [
+        "612d4c49-e5df-486b-8b83-2055d59ee415"
+      ],
+      "source": "agent",
+      "metadata": {},
+      "id": "e31441bd-1fc5-4d9d-9255-fb47cc257e19"
+    }
+  ],
+  "tags": [],
+  "metadata": {}
+}

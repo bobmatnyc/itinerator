@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "project_name": "itinerizer-ts",
+  "project_name": "itinerator",
   "agents": {
     "enabled": true
   },

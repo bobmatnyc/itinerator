@@ -413,7 +413,7 @@ export function createApiServer(config: {
         return res.status(503).json({
           error: 'Trip Designer disabled',
           message: 'OPENROUTER_API_KEY not configured - chat functionality is disabled',
-          hint: 'Add your key to .itinerizer/config.yaml or set OPENROUTER_API_KEY environment variable',
+          hint: 'Add your key to .itinerator/config.yaml or set OPENROUTER_API_KEY environment variable',
         });
       }
 

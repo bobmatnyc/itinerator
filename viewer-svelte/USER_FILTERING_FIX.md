@@ -44,7 +44,7 @@ alice@example.com:  0 itineraries  ✅
 ```
 
 ### Flow Confirmed
-1. Login sets `itinerizer_user_email` cookie with normalized email
+1. Login sets `itinerator_user_email` cookie with normalized email
 2. `hooks.server.ts` reads cookie and sets `locals.userEmail`
 3. List endpoint calls `storage.listByUser(userEmail)`
 4. Storage filters by `createdBy` field (case-insensitive)

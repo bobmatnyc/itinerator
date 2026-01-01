@@ -10,7 +10,7 @@
 
 ### New Service: `DurationInferenceService`
 
-**Location**: `/Users/masa/Projects/itinerizer-ts/src/services/duration-inference.service.ts`
+**Location**: `/Users/masa/Projects/itinerator/src/services/duration-inference.service.ts`
 
 **Key Features**:
 - Infers standard durations for activities without explicit end times

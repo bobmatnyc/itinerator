@@ -28,7 +28,7 @@ export function importTestModelsCommand(): Command {
 
       const configResult = await configStorage.getImportConfig();
       if (!configResult.success) {
-        printError('Import not configured. Run: itinerizer import config --set-key <key>');
+        printError('Import not configured. Run: itinerator import config --set-key <key>');
         printError(configResult.error.message);
         process.exit(1);
       }

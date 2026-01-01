@@ -1,5 +1,5 @@
 /**
- * Doctor command - Health check for itinerizer installation
+ * Doctor command - Health check for itinerator installation
  * @module cli/commands/doctor
  */
 
@@ -24,9 +24,9 @@ interface Check {
  */
 export function doctorCommand(): Command {
   return new Command('doctor')
-    .description('Check itinerizer installation and configuration')
+    .description('Check itinerator installation and configuration')
     .action(async () => {
-      p.intro(colors.heading('Itinerizer Doctor'));
+      p.intro(colors.heading('Itinerator Doctor'));
 
       const checks: Check[] = [];
 

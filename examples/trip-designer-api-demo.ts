@@ -6,7 +6,7 @@
  *
  * Prerequisites:
  * 1. Start the API server: npm run server
- * 2. Configure OpenRouter API key in .itinerizer/config.yaml
+ * 2. Configure OpenRouter API key in .itinerator/config.yaml
  *
  * Run this example:
  * npx tsx examples/trip-designer-api-demo.ts
@@ -189,7 +189,7 @@ async function main() {
       console.error('');
       console.error('💡 Make sure to:');
       console.error('   1. Start the API server: npm run server');
-      console.error('   2. Configure your OpenRouter API key in .itinerizer/config.yaml');
+      console.error('   2. Configure your OpenRouter API key in .itinerator/config.yaml');
       console.error('   Or set the OPENROUTER_API_KEY environment variable');
     }
 

@@ -231,7 +231,7 @@ Z-Index 3: Indicators (interactive navigation dots)
 
 ## License
 
-Part of itinerizer-ts project. Same license applies.
+Part of Itinerator project. Same license applies.
 
 ---
 

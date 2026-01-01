@@ -1,13 +1,13 @@
 {
   "id": "f6f505b6-0408-4841-b305-050f40e490b3",
-  "version": 33,
+  "version": 99,
   "createdAt": "2025-12-31T13:59:39.353Z",
-  "updatedAt": "2025-12-31T15:18:26.319Z",
-  "title": "New York Winter Getaway",
-  "description": "Winter trip to New York City, exploring the city's winter attractions and experiences",
+  "updatedAt": "2026-01-01T06:56:34.106Z",
+  "title": "Winter Destination Trip to St. Maarten",
+  "description": "Romantic getaway for Joanie and Masa to decompress before a new job",
   "status": "DRAFT",
-  "startDate": "2026-01-08T17:00:00.000Z",
-  "endDate": "2026-01-15T17:00:00.000Z",
+  "startDate": "2026-01-07T17:00:00.000Z",
+  "endDate": "2026-01-14T17:00:00.000Z",
   "destinations": [],
   "travelers": [],
   "createdBy": "masa@matsuoka.com",
@@ -75,6 +75,123 @@
         "code": "JFK"
       },
       "cabinClass": "ECONOMY"
+    },
+    {
+      "id": "719be70d-73dd-4d26-b784-6e5d4cd49ffa",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-01-08T20:00:00.000Z",
+      "endDatetime": "2026-01-15T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2025-12-31T20:21:40.593Z"
+      },
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Hotel L'Esplanade"
+      },
+      "location": {
+        "name": "Grand Case"
+      },
+      "checkInDate": "2026-01-08T20:00:00.000Z",
+      "checkOutDate": "2026-01-15T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "67f034ae-1711-4c41-bf3f-7e483e39ebfd",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-01-11T00:30:00.000Z",
+      "endDatetime": "2026-01-11T03:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2025-12-31T22:50:57.282Z"
+      },
+      "price": {
+        "amount": 18000,
+        "currency": "USD"
+      },
+      "notes": "Dress code: Smart elegant. Advance reservation recommended. Tasting menu with wine pairing available.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Dinner at La Villa",
+      "description": "Exquisite French fine dining experience in the culinary capital of the Caribbean. Michelin-star level cuisine featuring local ingredients and French techniques.",
+      "location": {
+        "name": "La Villa Restaurant"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "7c43cc2f-80ee-46c9-b251-636893afc2ce",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-01-11T00:30:00.000Z",
+      "endDatetime": "2026-01-11T03:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2025-12-31T22:51:20.626Z"
+      },
+      "price": {
+        "amount": 36000,
+        "currency": "USD"
+      },
+      "notes": "Smart elegant dress code. Tasting menu recommended. Intimate, romantic atmosphere.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Dinner at La Villa",
+      "description": "Fine dining experience at one of Grand Case's most renowned French-Caribbean restaurants. Michelin-star level cuisine featuring local ingredients prepared with classic French techniques.",
+      "location": {
+        "name": "La Villa"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "6333cd1e-bea5-4e6a-bf66-e2f91bb50004",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-01-09T19:00:00.000Z",
+      "endDatetime": "2026-01-09T22:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2025-12-31T23:08:10.272Z"
+      },
+      "notes": "Includes multiple tasting stops, culinary insights, and local food experiences. Wear comfortable walking shoes and come hungry!",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Grand Case Gourmet Walking Tour",
+      "description": "A culinary walking tour exploring the best of Grand Case's renowned restaurant scene. Taste local Caribbean fusion cuisine, seafood specialties, and learn about the island's unique culinary traditions.",
+      "location": {
+        "name": "Grand Case"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "1a9283dd-6cf4-4b0d-b7e7-cf11afef5ca5",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-01-11T00:00:00.000Z",
+      "endDatetime": "2026-01-11T02:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T06:26:19.383Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Local 'Lolos' Restaurants in Grand Case",
+      "description": "Authentic Caribbean BBQ spots along the beach. Traditional open-air restaurants serving local grilled seafood, ribs, and Caribbean dishes. A must-try culinary experience in St. Maarten.",
+      "location": {
+        "name": "Grand Case"
+      },
+      "category": "dining"
     }
   ],
   "tags": [],

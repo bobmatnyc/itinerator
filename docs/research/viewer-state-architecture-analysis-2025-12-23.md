@@ -357,13 +357,13 @@ onMount(async () => {
 - `authStore.userEmail` (Svelte 5 rune)
 - `settingsStore.firstName/lastName/nickname` (Svelte 5 runes)
 - `settingsStore.openRouterKey` (Svelte 5 rune)
-- localStorage keys: `itinerizer_auth`, `itinerizer_user_email`, `itinerizer_settings`
+- localStorage keys: `itinerator_auth`, `itinerator_user_email`, `itinerator_settings`
 
 **API client reads directly from localStorage:**
 ```typescript
 // api.ts
 function getUserEmail(): string | null {
-  return localStorage.getItem('itinerizer_user_email');
+  return localStorage.getItem('itinerator_user_email');
 }
 ```
 

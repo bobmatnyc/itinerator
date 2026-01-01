@@ -127,7 +127,7 @@ export function ingestCommand(): Command {
       // Check for Weaviate configuration
       if (!process.env.WEAVIATE_URL || !process.env.WEAVIATE_API_KEY) {
         printError('Weaviate not configured. Set WEAVIATE_URL and WEAVIATE_API_KEY');
-        printInfo('Run "itinerizer setup" to configure Weaviate');
+        printInfo('Run "itinerator setup" to configure Weaviate');
         process.exit(1);
       }
 

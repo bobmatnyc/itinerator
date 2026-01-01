@@ -1,6 +1,6 @@
 # Dual Storage Implementation
 
-This document describes the dual storage backend implementation for itinerizer-ts, which automatically switches between Vercel Blob (production) and filesystem (local development) based on environment configuration.
+This document describes the dual storage backend implementation for Itinerator, which automatically switches between Vercel Blob (production) and filesystem (local development) based on environment configuration.
 
 ## Overview
 

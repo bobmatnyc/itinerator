@@ -33,7 +33,7 @@ async function testApiKeyValidation() {
       openRouterKey: 'sk-or-v1-test-key-12345',
       homeAirport: 'SFO'
     };
-    localStorage.setItem('itinerizer_settings', JSON.stringify(settings));
+    localStorage.setItem('itinerator_settings', JSON.stringify(settings));
     console.log('✅ API key set in localStorage:', settings.openRouterKey);
   });
 
@@ -55,7 +55,7 @@ async function testApiKeyValidation() {
 
   // Check localStorage directly
   const storedKey = await page.evaluate(() => {
-    const settings = localStorage.getItem('itinerizer_settings');
+    const settings = localStorage.getItem('itinerator_settings');
     if (settings) {
       const parsed = JSON.parse(settings);
       return parsed.openRouterKey;

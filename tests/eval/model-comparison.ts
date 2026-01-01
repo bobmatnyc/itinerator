@@ -114,7 +114,7 @@ async function callModel(
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${apiKey}`,
-      'HTTP-Referer': 'https://github.com/yourusername/itinerizer-ts',
+      'HTTP-Referer': 'https://github.com/yourusername/itinerator',
       'X-Title': 'Itinerizer Model Eval',
     },
     body: JSON.stringify({

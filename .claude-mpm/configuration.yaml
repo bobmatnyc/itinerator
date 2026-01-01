@@ -196,5 +196,28 @@ updates:
 use_ai_trackdown_tools: false
 verbose: false
 skills:
-  agent_referenced: []
+  agent_referenced:
+  - brainstorming
+  - digitalocean-agentic-cloud
+  - digitalocean-compute
+  - digitalocean-containers-images
+  - digitalocean-managed-databases
+  - digitalocean-management
+  - digitalocean-networking
+  - digitalocean-overview
+  - digitalocean-storage
+  - digitalocean-teams
+  - dispatching-parallel-agents
+  - docker
+  - env-manager
+  - git-workflow
+  - internal-comms
+  - json-data-handling
+  - requesting-code-review
+  - root-cause-tracing
+  - session-compression
+  - systematic-debugging
+  - test-driven-development
+  - verification-before-completion
+  - writing-plans
   user_defined: []

@@ -9,8 +9,8 @@ import { eventBus } from './events';
 
 // SSR-safe localStorage access
 const isBrowser = typeof window !== 'undefined';
-const STORAGE_KEY = 'itinerizer_auth';
-const USER_EMAIL_KEY = 'itinerizer_user_email';
+const STORAGE_KEY = 'itinerator_auth';
+const USER_EMAIL_KEY = 'itinerator_user_email';
 
 // Static hash for app password
 const VALID_PASSWORD_HASH = '1003766e45ffdcbacdbfdedaf03034eee6b6a9b7cb8f0e47c49ed92f952dbad5';

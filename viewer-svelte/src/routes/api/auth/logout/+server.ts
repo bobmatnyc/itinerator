@@ -6,8 +6,8 @@
 
 import type { RequestHandler } from './$types';
 
-const SESSION_COOKIE_NAME = 'itinerizer_session';
-const USER_EMAIL_COOKIE_NAME = 'itinerizer_user_email';
+const SESSION_COOKIE_NAME = 'itinerator_session';
+const USER_EMAIL_COOKIE_NAME = 'itinerator_user_email';
 
 /**
  * POST /api/auth/logout

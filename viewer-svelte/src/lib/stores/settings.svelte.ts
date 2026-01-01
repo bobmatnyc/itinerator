@@ -7,8 +7,8 @@
 
 // SSR-safe localStorage access
 const isBrowser = typeof window !== 'undefined';
-const SETTINGS_STORAGE_KEY = 'itinerizer_settings';
-const LEGACY_API_KEY_STORAGE_KEY = 'itinerizer_api_key';
+const SETTINGS_STORAGE_KEY = 'itinerator_settings';
+const LEGACY_API_KEY_STORAGE_KEY = 'itinerator_api_key';
 
 /**
  * Settings data structure

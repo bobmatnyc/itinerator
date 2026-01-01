@@ -1,6 +1,6 @@
-# 🧠 Project Memories - itinerizer-ts
+# 🧠 Project Memories - itinerator
 
-This directory contains the KuzuMemory database for the **itinerizer-ts** project.
+This directory contains the KuzuMemory database for the **itinerator** project.
 
 ## 📁 What's Here
 

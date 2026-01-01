@@ -62,13 +62,13 @@ function getApiKeyFromStorage(): string | null {
 
   try {
     // Same logic as api.ts - reads directly from localStorage
-    const settings = localStorage.getItem('itinerizer_settings');
+    const settings = localStorage.getItem('itinerator_settings');
     if (settings) {
       const parsed = JSON.parse(settings);
       if (parsed.openRouterKey) return parsed.openRouterKey;
     }
 
-    return localStorage.getItem('itinerizer_api_key');
+    return localStorage.getItem('itinerator_api_key');
   } catch {
     return null;
   }

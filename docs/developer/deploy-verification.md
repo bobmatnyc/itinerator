@@ -3,7 +3,7 @@
 ## Configuration Summary
 
 ### Project Structure
-- **Project Root:** `/Users/masa/Projects/itinerizer-ts`
+- **Project Root:** `/Users/masa/Projects/itinerator`
 - **SvelteKit App:** `viewer-svelte/`
 - **Shared Services:** `src/services/` and `src/domain/`
 
@@ -62,11 +62,11 @@
 
 ```bash
 # Preview deployment
-cd /Users/masa/Projects/itinerizer-ts
+cd /Users/masa/Projects/itinerator
 vercel
 
 # Production deployment
-cd /Users/masa/Projects/itinerizer-ts
+cd /Users/masa/Projects/itinerator
 vercel --prod
 ```
 
@@ -107,7 +107,7 @@ curl "$DEPLOY_URL/api/itineraries"
 
 ## Project Links
 
-- **Project:** itinerizer-ts
+- **Project:** Itinerator
 - **Project ID:** prj_Sja5XyHLjbtozgEKU93OfI1KUrE4
 - **Organization:** team_ErcARK9OcmFb8zc77Khd4i2z
 - **User:** bobmatnyc

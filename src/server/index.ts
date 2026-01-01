@@ -50,7 +50,7 @@ async function main() {
 
   if (configResult.success) {
     importConfig = configResult.value;
-    console.log('✅ Loaded configuration from .itinerizer/config.yaml');
+    console.log('✅ Loaded configuration from .itinerator/config.yaml');
   } else {
     // Fall back to environment variable
     const envApiKey = process.env.OPENROUTER_API_KEY;
@@ -65,8 +65,8 @@ async function main() {
     } else {
       // Neither YAML nor env var has API key
       console.warn('⚠️  No API key configured - import functionality disabled');
-      console.warn('   Add your key to .itinerizer/config.yaml or set OPENROUTER_API_KEY');
-      console.warn('   Run: npx itinerizer config set openrouter.apiKey YOUR_KEY');
+      console.warn('   Add your key to .itinerator/config.yaml or set OPENROUTER_API_KEY');
+      console.warn('   Run: npx itinerator config set openrouter.apiKey YOUR_KEY');
     }
   }
 
@@ -80,7 +80,7 @@ async function main() {
   });
 
   app.listen(port, () => {
-    console.log(`🚀 Itinerizer API server running on http://localhost:${port}`);
+    console.log(`🚀 Itinerator API server running on http://localhost:${port}`);
     console.log(`   - Health: http://localhost:${port}/api/health`);
     console.log(`   - Itineraries: http://localhost:${port}/api/itineraries`);
     console.log(`   - Models: http://localhost:${port}/api/models`);

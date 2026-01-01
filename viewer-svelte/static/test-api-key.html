@@ -94,7 +94,7 @@
         openRouterKey: 'sk-or-v1-test-key-12345-67890',
         homeAirport: 'SFO'
       };
-      localStorage.setItem('itinerizer_settings', JSON.stringify(settings));
+      localStorage.setItem('itinerator_settings', JSON.stringify(settings));
 
       const resultDiv = document.getElementById('setResult');
       resultDiv.className = 'result success';
@@ -102,8 +102,8 @@
     }
 
     function clearApiKey() {
-      localStorage.removeItem('itinerizer_settings');
-      localStorage.removeItem('itinerizer_api_key');
+      localStorage.removeItem('itinerator_settings');
+      localStorage.removeItem('itinerator_api_key');
 
       const resultDiv = document.getElementById('setResult');
       resultDiv.className = 'result success';
@@ -111,8 +111,8 @@
     }
 
     function checkLocalStorage() {
-      const settings = localStorage.getItem('itinerizer_settings');
-      const legacyKey = localStorage.getItem('itinerizer_api_key');
+      const settings = localStorage.getItem('itinerator_settings');
+      const legacyKey = localStorage.getItem('itinerator_api_key');
 
       const resultDiv = document.getElementById('checkResult');
 
@@ -141,13 +141,13 @@
       // Same logic as api.ts and ChatBox.svelte
       function getApiKeyFromStorage() {
         try {
-          const settings = localStorage.getItem('itinerizer_settings');
+          const settings = localStorage.getItem('itinerator_settings');
           if (settings) {
             const parsed = JSON.parse(settings);
             if (parsed.openRouterKey) return parsed.openRouterKey;
           }
 
-          return localStorage.getItem('itinerizer_api_key');
+          return localStorage.getItem('itinerator_api_key');
         } catch {
           return null;
         }

@@ -15,7 +15,7 @@ This project has **two interfaces** sharing the same core library:
 - **Direct imports**: Uses `src/` library without HTTP
 - **Storage**: JSON files in `./data/` directory
 - **Build**: `npm run build` → `dist/index.js`
-- **Usage**: `npx itinerizer [command]`
+- **Usage**: `npx itinerator [command]`
 
 | Mode | API Server | Frontend | Storage | Vector DB |
 |------|------------|----------|---------|-----------|
@@ -45,7 +45,7 @@ npm run viewer
 | `viewer-svelte/vite.config.ts` | SvelteKit port (5176) |
 | `viewer-svelte/.env` | OpenRouter API key, local config |
 | `viewer-svelte/src/lib/api.ts` | API client (uses relative paths) |
-| `.itinerizer/config.yaml` | CLI-only config (not used by web) |
+| `.itinerator/config.yaml` | CLI-only config (not used by web) |
 
 ### API Key Loading
 
@@ -55,7 +55,7 @@ npm run viewer
 - No server-side API key storage required
 
 **CLI**:
-1. `.itinerizer/config.yaml` → `openrouter.apiKey`
+1. `.itinerator/config.yaml` → `openrouter.apiKey`
 2. `OPENROUTER_API_KEY` environment variable
 3. If neither: CLI features disabled
 
@@ -203,7 +203,7 @@ npx tsx scripts/validate-itineraries.ts
 - Look for "Blob save failed" in Vercel logs
 
 ### Import Disabled
-- Check `.itinerizer/config.yaml` for `openrouter.apiKey`
+- Check `.itinerator/config.yaml` for `openrouter.apiKey`
 - Or set `OPENROUTER_API_KEY` environment variable
 
 ### SvelteKit 500 on API Routes

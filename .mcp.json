@@ -15,8 +15,8 @@
         "mcp"
       ],
       "env": {
-        "KUZU_MEMORY_PROJECT_ROOT": "/Users/masa/Projects/itinerizer-ts",
-        "KUZU_MEMORY_DB": "/Users/masa/Projects/itinerizer-ts/kuzu-memories"
+        "KUZU_MEMORY_PROJECT_ROOT": "/Users/masa/Projects/itinerator",
+        "KUZU_MEMORY_DB": "/Users/masa/Projects/itinerator/kuzu-memories"
       }
     },
     "mcp-vector-search": {
@@ -25,13 +25,13 @@
       "args": [
         "run",
         "--directory",
-        "/Users/masa/Projects/itinerizer-ts",
+        "/Users/masa/Projects/itinerator",
         "mcp-vector-search",
         "mcp"
       ],
       "env": {
-        "PROJECT_ROOT": "/Users/masa/Projects/itinerizer-ts",
-        "MCP_PROJECT_ROOT": "/Users/masa/Projects/itinerizer-ts"
+        "PROJECT_ROOT": "/Users/masa/Projects/itinerator",
+        "MCP_PROJECT_ROOT": "/Users/masa/Projects/itinerator"
       }
     }
   }

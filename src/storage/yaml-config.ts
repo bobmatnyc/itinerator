@@ -71,9 +71,9 @@ export class YamlConfigStorage {
 
   /**
    * Creates a new YAML config storage instance
-   * @param configPath - Path to config file (default: ./.itinerizer/config.yaml)
+   * @param configPath - Path to config file (default: ./.itinerator/config.yaml)
    */
-  constructor(private readonly configPath: string = './.itinerizer/config.yaml') {}
+  constructor(private readonly configPath: string = './.itinerator/config.yaml') {}
 
   /**
    * Initialize configuration storage

@@ -141,7 +141,7 @@ Event types: `connected`, `text`, `tool_call`, `tool_result`, `structured_questi
 ## Support
 
 For issues or questions:
-- GitHub Issues: https://github.com/yourusername/itinerizer-ts/issues
+- GitHub Issues: https://github.com/yourusername/Itinerator/issues
 - OpenAPI Spec: https://spec.openapis.org/oas/v3.0.3
 
 ---

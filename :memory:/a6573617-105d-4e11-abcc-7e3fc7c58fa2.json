@@ -1,0 +1,54 @@
+{
+  "id": "a6573617-105d-4e11-abcc-7e3fc7c58fa2",
+  "version": 3,
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "updatedAt": "2025-12-31T23:16:35.890Z",
+  "title": "Test Trip",
+  "status": "DRAFT",
+  "startDate": "2025-01-10T00:00:00.000Z",
+  "endDate": "2025-01-15T00:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "segments": [
+    {
+      "id": "7060cd5f-7b34-4072-853f-07e82a82bdcf",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-01-10T10:00:00.000Z",
+      "endDatetime": "2025-01-10T11:00:00.000Z",
+      "travelerIds": [
+        "9ce70e04-3a58-4109-b048-372b778f8554"
+      ],
+      "source": "agent",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "JFK Airport"
+      },
+      "dropoffLocation": {
+        "name": "Grand Hotel"
+      }
+    },
+    {
+      "type": "TRANSFER",
+      "status": "CONFIRMED",
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "JFK Airport"
+      },
+      "dropoffLocation": {
+        "name": "Grand Hotel"
+      },
+      "startDatetime": "2025-01-11T10:00:00.000Z",
+      "endDatetime": "2025-01-11T11:00:00.000Z",
+      "travelerIds": [
+        "9ce70e04-3a58-4109-b048-372b778f8554"
+      ],
+      "source": "agent",
+      "metadata": {},
+      "id": "f4a853b0-8fd8-4041-8922-93ba9ff69ce7"
+    }
+  ],
+  "tags": [],
+  "metadata": {}
+}

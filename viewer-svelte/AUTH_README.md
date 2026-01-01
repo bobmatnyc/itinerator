@@ -1,6 +1,6 @@
-# Authentication & Settings - Itinerizer Viewer
+# Authentication & Settings - Itinerator Viewer
 
-This document describes the authentication and settings implementation for the Itinerizer SvelteKit viewer application.
+This document describes the authentication and settings implementation for the Itinerator SvelteKit viewer application.
 
 ## Overview
 
@@ -44,7 +44,7 @@ src/
 3. Hash is compared to stored hash: `03f8b6334b99364cf4bad126e751ece55b8f34afd1ffbf8bd46f961afd9d5b54`
 4. On success:
    - `authStore.isAuthenticated` set to `true`
-   - State saved to `localStorage` under key `itinerizer_auth`
+   - State saved to `localStorage` under key `itinerator_auth`
    - User redirected to `/itineraries`
 5. On failure:
    - Error message displayed
@@ -88,7 +88,7 @@ The profile page allows users to configure their OpenRouter API key:
    - Enter key in password field (masked by default)
    - Toggle visibility with eye icon
    - Click "Save API Key"
-   - Key stored in `localStorage` under `itinerizer_api_key`
+   - Key stored in `localStorage` under `itinerator_api_key`
 
 2. **Display Current Key**
    - Masked display: `sk-or-...xxxx` (first 6 + last 4 chars)
@@ -238,8 +238,8 @@ For production deployment, implement:
 ### localStorage Keys
 
 The application uses these localStorage keys:
-- `itinerizer_auth` - Authentication state (`"true"` or absent)
-- `itinerizer_api_key` - OpenRouter API key (string)
+- `itinerator_auth` - Authentication state (`"true"` or absent)
+- `itinerator_api_key` - OpenRouter API key (string)
 
 ## Browser Compatibility
 

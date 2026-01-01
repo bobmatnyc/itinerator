@@ -420,17 +420,17 @@ The Trip Designer is functioning **correctly**. The LLM (Claude Sonnet 4) is res
 
 ## Files Analyzed
 
-1. `/Users/masa/Projects/itinerizer-ts/src/services/trip-designer/trip-designer.service.ts` (Lines 521-897)
+1. `/Users/masa/Projects/itinerator/src/services/trip-designer/trip-designer.service.ts` (Lines 521-897)
    - `chatStream()` method implementation
    - Two-stream pattern for tool execution
    - Chunk processing logic
 
-2. `/Users/masa/Projects/itinerizer-ts/src/services/trip-designer/tools.ts` (All 967 lines)
+2. `/Users/masa/Projects/itinerator/src/services/trip-designer/tools.ts` (All 967 lines)
    - Tool definitions (18 tools total)
    - Essential vs. All tools distinction
    - Help mode tools
 
-3. `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/routes/api/v1/designer/sessions/[sessionId]/messages/stream/+server.ts` (Lines 1-128)
+3. `/Users/masa/Projects/itinerator/viewer-svelte/src/routes/api/v1/designer/sessions/[sessionId]/messages/stream/+server.ts` (Lines 1-128)
    - SSE streaming route
    - Event mapping logic
    - Error handling

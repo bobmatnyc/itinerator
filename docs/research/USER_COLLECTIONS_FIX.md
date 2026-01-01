@@ -9,7 +9,7 @@ Existing itineraries had `createdBy: null/undefined`, so they didn't match any u
 ## Solution
 The user-scoped filtering was **already implemented correctly**:
 
-1. ✅ Login sets `itinerizer_user_email` cookie
+1. ✅ Login sets `itinerator_user_email` cookie
 2. ✅ `hooks.server.ts` reads cookie and populates `locals.userEmail`
 3. ✅ POST `/api/v1/itineraries` creates itineraries with `createdBy: userEmail`
 4. ✅ GET `/api/v1/itineraries` filters by `createdBy` field
@@ -36,7 +36,7 @@ Existing itineraries (created before this fix) have `createdBy: null` and are hi
 Assign all legacy itineraries to a default user email:
 
 ```bash
-cd /Users/masa/Projects/itinerizer-ts
+cd /Users/masa/Projects/itinerator
 tsx scripts/migrate-legacy-itineraries.ts your-email@example.com
 ```
 

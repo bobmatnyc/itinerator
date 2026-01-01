@@ -80,7 +80,7 @@ adapter: adapter({
 ### Project Structure
 
 ```
-itinerizer-ts/              # Project root
+Itinerator/              # Project root
 ├── vercel.json            # Vercel configuration
 ├── viewer-svelte/         # SvelteKit app
 │   ├── src/

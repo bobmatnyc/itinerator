@@ -1,0 +1,41 @@
+{
+  "id": "c8e82855-dfac-4de4-8a0d-2768e332417c",
+  "version": 2,
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "updatedAt": "2025-12-31T23:14:21.081Z",
+  "title": "Test Trip",
+  "status": "DRAFT",
+  "startDate": "2025-01-10T00:00:00.000Z",
+  "endDate": "2025-01-15T00:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "property": {
+        "name": "Grand Hotel"
+      },
+      "location": {
+        "name": "Grand Hotel",
+        "address": "456 Park Ave",
+        "city": "New York",
+        "country": "US"
+      },
+      "checkInDate": "2025-01-10T00:00:00.000Z",
+      "checkOutDate": "2025-01-12T00:00:00.000Z",
+      "startDatetime": "2025-01-10T15:00:00.000Z",
+      "endDatetime": "2025-01-12T11:00:00.000Z",
+      "roomCount": 1,
+      "amenities": [],
+      "travelerIds": [
+        "8391b636-5b82-4e03-a537-edadaa5767d9"
+      ],
+      "source": "agent",
+      "metadata": {},
+      "id": "b300a8a9-ab3f-4839-a100-41c1d1595ce2"
+    }
+  ],
+  "tags": [],
+  "metadata": {}
+}

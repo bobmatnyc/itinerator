@@ -32,9 +32,9 @@ export class ConfigStorage {
 
   /**
    * Creates a new configuration storage instance
-   * @param configPath - Path to config file (default: ./.itinerizer/config.json)
+   * @param configPath - Path to config file (default: ./.itinerator/config.json)
    */
-  constructor(private readonly configPath: string = './.itinerizer/config.json') {}
+  constructor(private readonly configPath: string = './.itinerator/config.json') {}
 
   /** Regex to detect ISO 8601 date strings */
   private static readonly ISO_DATE_REGEX = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/;

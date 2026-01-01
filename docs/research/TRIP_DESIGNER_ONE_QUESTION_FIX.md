@@ -31,14 +31,14 @@ The system prompts had a rule about "one question at a time" but it wasn't enfor
 
 ### Files Modified
 
-1. **`/Users/masa/Projects/itinerizer-ts/src/prompts/trip-designer/system.md`**
+1. **`/Users/masa/Projects/itinerator/src/prompts/trip-designer/system.md`**
    - Strengthened RULE 2 with explicit forbidden patterns
    - Added visual examples showing wrong vs. right patterns
    - Added requirement for "Other" option in single_choice questions
    - Added example of perfect response structure in RULE 4
    - Expanded "CRITICAL: ONE QUESTION AT A TIME" section with forbidden/correct patterns
 
-2. **`/Users/masa/Projects/itinerizer-ts/src/prompts/trip-designer/system-minimal.md`**
+2. **`/Users/masa/Projects/itinerator/src/prompts/trip-designer/system-minimal.md`**
    - Strengthened section 5 (One Question at a Time)
    - Added explicit wrong/right examples
    - Made it clear: EXACTLY ONE question, NO EXCEPTIONS

@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-This analysis examines the validation patterns across the itinerizer-ts travel itinerary application, covering domain schemas, service layer validation, API route validation, and Trip Designer tool validation. The application demonstrates **strong schema-first design** with Zod schemas at the core, but reveals **critical inconsistencies** in how validation is applied across different layers.
+This analysis examines the validation patterns across the Itinerator travel itinerary application, covering domain schemas, service layer validation, API route validation, and Trip Designer tool validation. The application demonstrates **strong schema-first design** with Zod schemas at the core, but reveals **critical inconsistencies** in how validation is applied across different layers.
 
 ### Key Findings
 
@@ -1151,7 +1151,7 @@ private async handleAddFlight(
 
 ## Conclusion
 
-The itinerizer-ts application has a **solid foundation** with well-designed Zod schemas, but suffers from **inconsistent application** of validation across layers. The most critical issues are:
+The Itinerator application has a **solid foundation** with well-designed Zod schemas, but suffers from **inconsistent application** of validation across layers. The most critical issues are:
 
 1. **API routes bypass schemas** - Creates security and data integrity risks
 2. **Date parsing inconsistencies** - Causes timezone rollover bugs

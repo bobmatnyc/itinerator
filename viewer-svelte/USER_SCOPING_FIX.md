@@ -98,7 +98,7 @@ Added comment explaining that itinerary data is cleared after login and will be 
 ### How It Works
 
 1. **On Login**:
-   - User email is stored in `localStorage` under key `itinerizer_user_email`
+   - User email is stored in `localStorage` under key `itinerator_user_email`
    - Auth store updates `userEmail` property
    - User is redirected to home/profile
 

@@ -32,7 +32,7 @@ After successful login, the application checks if the user has configured their 
     ▼
 ┌─────────────────────────┐
 │ Onboarding Banner       │
-│ "Welcome to Itinerizer" │
+│ "Welcome to Itinerator" │
 │ Configure API Key       │
 └────────┬────────────────┘
          │
@@ -117,7 +117,7 @@ function handleSkip() {
 ### First-Time Login (No API Key)
 1. User logs in successfully
 2. Automatically redirected to `/profile?onboarding=true`
-3. See welcome banner: "Welcome to Itinerizer!"
+3. See welcome banner: "Welcome to Itinerator!"
 4. Options:
    - **Enter API key** → Click "Save and Continue" → Auto-redirect to itineraries
    - **Skip** → Click "Skip for now" → Go to itineraries (can add key later)
@@ -137,7 +137,7 @@ function handleSkip() {
 ## Storage
 
 - **Location**: `localStorage` (client-side)
-- **Key**: `itinerizer_api_key`
+- **Key**: `itinerator_api_key`
 - **Access**: Via `settingsStore.getApiKey()` / `updateApiKey()`
 
 ## Environment Variables

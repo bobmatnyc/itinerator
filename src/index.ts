@@ -9,12 +9,12 @@ import { viewCommand, viewersCommand, viewAllCommand } from './cli/commands/view
 import { VERSION } from './utils/version.js';
 
 /**
- * Itinerizer - A modern CLI tool for managing travel itineraries
+ * Itinerator - A modern CLI tool for managing travel itineraries
  */
 const program = new Command();
 
 program
-  .name('itinerizer')
+  .name('itinerator')
   .description('A modern CLI tool for managing travel itineraries')
   .version(VERSION, '-v, --version', 'Display version information');
 

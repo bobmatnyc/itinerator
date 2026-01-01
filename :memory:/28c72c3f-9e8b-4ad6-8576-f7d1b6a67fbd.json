@@ -1,0 +1,32 @@
+{
+  "id": "28c72c3f-9e8b-4ad6-8576-f7d1b6a67fbd",
+  "version": 2,
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "updatedAt": "2025-12-31T23:15:52.082Z",
+  "title": "Test Trip",
+  "status": "DRAFT",
+  "startDate": "2025-01-10T00:00:00.000Z",
+  "endDate": "2025-01-15T00:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "segments": [
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "name": "La Villa",
+      "startDatetime": "2025-01-10T19:00:00.000Z",
+      "endDatetime": "2025-01-10T21:00:00.000Z",
+      "travelerIds": [
+        "1b4d6593-08a5-41f8-bb15-b692d3cc1bf2"
+      ],
+      "source": "agent",
+      "location": {
+        "name": "La Villa"
+      },
+      "metadata": {},
+      "id": "c666e54e-56bb-47e4-b644-5f2ca09839c3"
+    }
+  ],
+  "tags": [],
+  "metadata": {}
+}

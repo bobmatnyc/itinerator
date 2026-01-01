@@ -25,14 +25,14 @@ export function listCommand(): Command {
       // Get working itinerary
       const workingResult = await workingService.getWorkingItinerary();
       if (!workingResult.success || !workingResult.value) {
-        printError('No working itinerary set. Use "itinerizer itinerary use <id>" first.');
+        printError('No working itinerary set. Use "itinerator itinerary use <id>" first.');
         process.exit(1);
       }
 
       const itinerary = workingResult.value;
 
       if (itinerary.segments.length === 0) {
-        p.note('No segments yet. Add one with "itinerizer segment add"');
+        p.note('No segments yet. Add one with "itinerator segment add"');
         return;
       }
 

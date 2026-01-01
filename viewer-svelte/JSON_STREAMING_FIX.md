@@ -28,7 +28,7 @@ Implemented a **buffering strategy** that detects JSON blocks and delays display
 
 ### Changes Made
 
-**File**: `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/stores/chat.ts`
+**File**: `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/stores/chat.ts`
 
 1. Added three new helper functions before `cleanMessageContent()`
 2. Updated `sendMessageStreaming()` line 396:

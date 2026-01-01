@@ -1,0 +1,38 @@
+{
+  "id": "995ffd5b-1b6a-4d97-bac5-120d65565c4c",
+  "version": 2,
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "updatedAt": "2025-12-31T23:16:42.790Z",
+  "title": "Test Trip",
+  "status": "DRAFT",
+  "startDate": "2025-01-10T00:00:00.000Z",
+  "endDate": "2025-01-15T00:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "segments": [
+    {
+      "type": "FLIGHT",
+      "status": "CONFIRMED",
+      "airline": {
+        "name": "United Airlines"
+      },
+      "flightNumber": "UA123",
+      "origin": {
+        "name": "JFK"
+      },
+      "destination": {
+        "name": "LAX"
+      },
+      "startDatetime": "2025-01-10T08:00:00.000Z",
+      "endDatetime": "2025-01-10T11:00:00.000Z",
+      "travelerIds": [
+        "a91c4cce-6f54-438c-a1e9-94a204c108fa"
+      ],
+      "source": "agent",
+      "metadata": {},
+      "id": "fe0bdbce-b886-4129-a305-f9975b5a270c"
+    }
+  ],
+  "tags": [],
+  "metadata": {}
+}

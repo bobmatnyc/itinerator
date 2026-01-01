@@ -4,11 +4,11 @@
 
 ```bash
 # Preview deployment
-cd /Users/masa/Projects/itinerizer-ts
+cd /Users/masa/Projects/itinerator
 vercel
 
 # Production deployment
-cd /Users/masa/Projects/itinerizer-ts
+cd /Users/masa/Projects/itinerator
 vercel --prod
 ```
 
@@ -33,7 +33,7 @@ vercel --prod
 |---------|-------|-----|
 | `buildCommand` | `cd viewer-svelte && npm ci && npm run build` | Build from root, access parent files |
 | `outputDirectory` | `viewer-svelte/.vercel/output` | Where adapter-vercel puts output |
-| Deploy from | `/Users/masa/Projects/itinerizer-ts` | Project root |
+| Deploy from | `/Users/masa/Projects/itinerator` | Project root |
 | Adapter | `@sveltejs/adapter-vercel` | Generates Vercel-compatible output |
 
 ## How It Works

@@ -888,7 +888,7 @@ class NavigationStore {
 
 - **Svelte 5 Runes:** https://svelte-5-preview.vercel.app/docs/runes
 - **SvelteKit Routing:** https://kit.svelte.dev/docs/routing
-- **Project Overview:** `/Users/masa/Projects/itinerizer-ts/CLAUDE.md`
+- **Project Overview:** `/Users/masa/Projects/itinerator/CLAUDE.md`
 
 ---
 

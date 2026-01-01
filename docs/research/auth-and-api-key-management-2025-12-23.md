@@ -65,8 +65,8 @@ if (authMode === 'password') {
 ### 1.3 Session Management
 
 **Session Storage:**
-- Cookie: `itinerizer_session` (value: `"authenticated"`)
-- Cookie: `itinerizer_user_email` (user's email address)
+- Cookie: `itinerator_session` (value: `"authenticated"`)
+- Cookie: `itinerator_user_email` (user's email address)
 - HttpOnly: Yes (session cookie), No (email cookie for client-side access)
 - Secure: Only in production (`import.meta.env.PROD`)
 - Max Age: 7 days
@@ -182,8 +182,8 @@ function handleSave() {
 
 **Storage Mechanism:**
 - **Client-side only:** localStorage (browser)
-- **Storage key:** `itinerizer_settings`
-- **Legacy key:** `itinerizer_api_key` (migrated to unified storage)
+- **Storage key:** `itinerator_settings`
+- **Legacy key:** `itinerator_api_key` (migrated to unified storage)
 
 **Data Structure:**
 ```typescript
@@ -252,14 +252,14 @@ function getOpenRouterApiKey(): string | null {
 
   try {
     // Try new unified storage first
-    const settings = localStorage.getItem('itinerizer_settings');
+    const settings = localStorage.getItem('itinerator_settings');
     if (settings) {
       const parsed = JSON.parse(settings);
       if (parsed.openRouterKey) return parsed.openRouterKey;
     }
 
     // Fall back to legacy storage
-    return localStorage.getItem('itinerizer_api_key');
+    return localStorage.getItem('itinerator_api_key');
   } catch {
     return null;
   }
@@ -612,15 +612,15 @@ function getAuthMode(): 'password' | 'open' {
 | Component | Implementation | Storage |
 |-----------|----------------|---------|
 | **Login** | Email + password (password mode) or email only (open mode) | Session cookie |
-| **Session** | Cookie-based (`itinerizer_session`) | Server + Client |
-| **User Identity** | Email address | Cookie (`itinerizer_user_email`) |
+| **Session** | Cookie-based (`itinerator_session`) | Server + Client |
+| **User Identity** | Email address | Cookie (`itinerator_user_email`) |
 | **Password** | Server-side validation via `AUTH_PASSWORD` env var | Server env |
 
 ### 7.2 API Key Architecture
 
 | Aspect | Implementation | Notes |
 |--------|----------------|-------|
-| **Storage** | localStorage (`itinerizer_settings`) | Client-side only |
+| **Storage** | localStorage (`itinerator_settings`) | Client-side only |
 | **Transmission** | HTTP header (`X-OpenRouter-API-Key`) | Trip Designer routes |
 | **Transmission** | Request body (`apiKey` field) | Import text route |
 | **Fallback** | Server env var (`OPENROUTER_API_KEY`) | Trip Designer, PDF import |

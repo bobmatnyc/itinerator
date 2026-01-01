@@ -1,6 +1,6 @@
 # Geographic Continuity Validation
 
-This document explains the semantic segment validation and geographic continuity features in itinerizer-ts.
+This document explains the semantic segment validation and geographic continuity features in Itinerator.
 
 ## Overview
 
@@ -477,4 +477,4 @@ To extend the geographic continuity features:
 
 ## License
 
-Same as itinerizer-ts project license.
+Same as Itinerator project license.

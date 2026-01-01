@@ -21,7 +21,7 @@ export function demoCommand(): Command {
   return new Command('demo')
     .description('Create a sample itinerary to explore features')
     .action(async () => {
-      p.intro(colors.heading('Itinerizer Demo'));
+      p.intro(colors.heading('Itinerator Demo'));
 
       const spinner = p.spinner();
       spinner.start('Creating sample itinerary...');
@@ -119,11 +119,11 @@ export function demoCommand(): Command {
         }
 
         p.note(
-          `ID: ${itinerary.id}\n\nUse "itinerizer itinerary use ${itinerary.id.slice(0, 8)}" to set as working itinerary`,
+          `ID: ${itinerary.id}\n\nUse "itinerator itinerary use ${itinerary.id.slice(0, 8)}" to set as working itinerary`,
           'Demo Itinerary Created'
         );
 
-        p.outro('Try "itinerizer itinerary show" to see full details');
+        p.outro('Try "itinerator itinerary show" to see full details');
       } catch (error) {
         spinner.stop('Demo creation failed');
         printError(error instanceof Error ? error.message : 'Unknown error occurred');

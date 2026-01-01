@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Itinerizer API
+  title: Itinerator API
   description: |
     A modern travel itinerary management system with AI-powered trip planning.
 
@@ -20,8 +20,8 @@ info:
 
   version: 1.0.0
   contact:
-    name: Itinerizer Support
-    url: https://github.com/yourusername/itinerizer-ts
+    name: Itinerator Support
+    url: https://github.com/bobmatnyc/itinerator
 
 servers:
   - url: http://localhost:5176/api/v1

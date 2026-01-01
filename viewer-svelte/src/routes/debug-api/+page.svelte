@@ -29,7 +29,7 @@
 
     // Check raw localStorage value
     try {
-      const settings = localStorage.getItem('itinerizer_settings');
+      const settings = localStorage.getItem('itinerator_settings');
       if (settings) {
         const parsed = JSON.parse(settings);
         storageValue = JSON.stringify(parsed, null, 2);

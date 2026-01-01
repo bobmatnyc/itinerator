@@ -7,7 +7,7 @@
 
 ## Executive Summary
 
-The itinerizer-ts project has migrated from a dual-server architecture (Express on 5177 + SvelteKit on 5176) to a **SvelteKit-only architecture** (single server on port 5176). However, extensive documentation still references the old Express server and dual deployment model.
+The Itinerator project has migrated from a dual-server architecture (Express on 5177 + SvelteKit on 5176) to a **SvelteKit-only architecture** (single server on port 5176). However, extensive documentation still references the old Express server and dual deployment model.
 
 **Key Findings:**
 - ✅ API routes successfully migrated to SvelteKit (`SVELTEKIT_API_MIGRATION.md` confirms)
@@ -36,7 +36,7 @@ The itinerizer-ts project has migrated from a dual-server architecture (Express 
 ```diff
 ## Architecture Overview
 
-itinerizer-ts/
+Itinerator/
 ├── src/                    # Core TypeScript library
 │   ├── domain/             # Types, schemas, branded types
 │   ├── services/           # Business logic services
@@ -159,7 +159,7 @@ cd viewer-svelte && npm run dev
 -| `viewer-svelte/.env` | `VITE_API_URL=http://localhost:5177` |
 -| `viewer-svelte/src/lib/api.ts` | API URL default |
 +| `viewer-svelte/src/lib/api.ts` | API client (uses relative URLs) |
-| `.itinerizer/config.yaml` | API keys (OpenRouter, SerpAPI) |
+| `.itinerator/config.yaml` | API keys (OpenRouter, SerpAPI) |
 -| `src/server/index.ts` | Express API entry point |
 +| `viewer-svelte/src/hooks.server.ts` | Service initialization |
 
@@ -196,7 +196,7 @@ cd viewer-svelte && npm run dev
 **Prerequisites:**
 -1. Start the API server: `npm run server`
 +1. Start the SvelteKit dev server: `cd viewer-svelte && npm run dev`
-2. Configure your OpenRouter API key in `.itinerizer/config.yaml`:
+2. Configure your OpenRouter API key in `.itinerator/config.yaml`:
 
 ### "Connection refused"
 
@@ -241,7 +241,7 @@ To use the Trip Designer API:
 2. **Configure API key:**
    ```bash
    # Option 1: YAML config
-   npx itinerizer config set openrouter.apiKey YOUR_KEY
+   npx itinerator config set openrouter.apiKey YOUR_KEY
 
    # Option 2: Environment variable
    export OPENROUTER_API_KEY=YOUR_KEY
@@ -590,7 +590,7 @@ When communicating the change to users/developers:
 
 **Effective:** 2025-12-22
 
-The itinerizer-ts project has migrated from a dual-server architecture to SvelteKit-only:
+The Itinerator project has migrated from a dual-server architecture to SvelteKit-only:
 
 **Before (Old):**
 - Frontend: SvelteKit on port 5176

@@ -26,7 +26,7 @@ Actual: Empty response, chat appears stuck
 **Missing `tools` parameter in second LLM call** (both streaming and non-streaming)
 
 ### Code Location 1: Streaming Version (chatStream)
-**File:** `/Users/masa/Projects/itinerizer-ts/src/services/trip-designer/trip-designer.service.ts`
+**File:** `/Users/masa/Projects/itinerator/src/services/trip-designer/trip-designer.service.ts`
 **Line:** 763
 
 ```typescript
@@ -57,7 +57,7 @@ const finalStream = await this.client.chat.completions.create({
 ```
 
 ### Code Location 2: Non-Streaming Version (chat)
-**File:** `/Users/masa/Projects/itinerizer-ts/src/services/trip-designer/trip-designer.service.ts`
+**File:** `/Users/masa/Projects/itinerator/src/services/trip-designer/trip-designer.service.ts`
 **Line:** 404
 
 ```typescript

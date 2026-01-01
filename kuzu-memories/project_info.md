@@ -1,10 +1,10 @@
-# 📋 Project Information - itinerizer-ts
+# 📋 Project Information - itinerator
 
 This file contains structured information about the project that helps KuzuMemory provide better context.
 
 ## 🏗️ Project Overview
 
-**Project Name**: itinerizer-ts
+**Project Name**: itinerator
 **Type**: [Web App / API / Library / CLI Tool / etc.]
 **Language**: [Python / JavaScript / Rust / etc.]
 **Framework**: [FastAPI / React / Django / etc.]

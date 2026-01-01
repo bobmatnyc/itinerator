@@ -9,7 +9,7 @@
  */
 
 const API_BASE = 'http://localhost:5176/api/v1';
-const SESSION_COOKIE = 'itinerizer_session=authenticated';
+const SESSION_COOKIE = 'itinerator_session=authenticated';
 const TEST_EMAIL = 'test@example.com';
 
 async function testHeaderFallback() {
@@ -50,7 +50,7 @@ async function testHeaderFallback() {
   try {
     const response = await fetch(`${API_BASE}/itineraries`, {
       headers: {
-        'Cookie': `${SESSION_COOKIE}; itinerizer_user_email=${TEST_EMAIL}`,
+        'Cookie': `${SESSION_COOKIE}; itinerator_user_email=${TEST_EMAIL}`,
         'X-User-Email': 'different@example.com',
       },
     });

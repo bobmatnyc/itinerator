@@ -48,7 +48,7 @@ Client Side (Browser)                 Server Side (SvelteKit)
          │<──────────────────────────────────────┤
          │                                       │
          │ ❌ authStore.isAuthenticated         │ ✅ Cookie set
-         │    still FALSE                        │    (itinerizer_session)
+         │    still FALSE                        │    (itinerator_session)
          │                                       │
          │ Check settingsStore.apiKey            │
          │ → goto('/profile?onboarding=true')    │
@@ -172,7 +172,7 @@ Looking at the code history and structure:
 
 ### Settings Store (`/viewer-svelte/src/lib/stores/settings.svelte.ts`)
 
-**Storage Mechanism**: `localStorage` with key `itinerizer_api_key`
+**Storage Mechanism**: `localStorage` with key `itinerator_api_key`
 
 **Current Fields**:
 ```typescript
@@ -242,7 +242,7 @@ if (isOnboarding) {
 
 ### Auth Store (`/viewer-svelte/src/lib/stores/auth.svelte.ts`)
 
-**Storage Mechanism**: `localStorage` with key `itinerizer_auth`
+**Storage Mechanism**: `localStorage` with key `itinerator_auth`
 
 **Current Fields**:
 ```typescript
@@ -407,7 +407,7 @@ class SettingsStore {
   homeAirport = $state('');
 
   // Single localStorage key for all settings
-  private readonly STORAGE_KEY = 'itinerizer_settings';
+  private readonly STORAGE_KEY = 'itinerator_settings';
 
   loadSettings(): void {
     if (!isBrowser) return;

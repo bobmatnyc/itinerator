@@ -259,9 +259,9 @@ async function initializeServices(): Promise<Services> {
 /**
  * Session authentication constants
  */
-const SESSION_COOKIE_NAME = 'itinerizer_session';
+const SESSION_COOKIE_NAME = 'itinerator_session';
 const SESSION_SECRET = 'authenticated';
-const USER_EMAIL_COOKIE_NAME = 'itinerizer_user_email';
+const USER_EMAIL_COOKIE_NAME = 'itinerator_user_email';
 
 // Public routes that don't require authentication
 const PUBLIC_ROUTES = ['/login', '/api/auth', '/api/health', '/api/v1/health'];

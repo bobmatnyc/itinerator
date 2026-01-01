@@ -1,6 +1,6 @@
 # Authentication System
 
-Environment-based session authentication for the Itinerizer SvelteKit application.
+Environment-based session authentication for the Itinerator SvelteKit application.
 
 ## Overview
 
@@ -31,7 +31,7 @@ The authentication system provides flexible security based on deployment environ
 │  3. Redirect to app     │
 └─────────────────────────┘
        │
-       │ Set-Cookie: itinerizer_session=authenticated
+       │ Set-Cookie: itinerator_session=authenticated
        ▼
 ┌─────────────┐
 │   Client    │
@@ -40,7 +40,7 @@ The authentication system provides flexible security based on deployment environ
 └──────┬──────┘
        │
        │ Subsequent requests
-       │ Cookie: itinerizer_session=authenticated
+       │ Cookie: itinerator_session=authenticated
        ▼
 ┌─────────────────────────┐
 │  hooks.server.ts        │
@@ -157,7 +157,7 @@ User visits app
 ### Cookie Configuration
 
 ```typescript
-cookies.set('itinerizer_session', 'authenticated', {
+cookies.set('itinerator_session', 'authenticated', {
   path: '/',
   httpOnly: true,              // Prevent XSS
   secure: import.meta.env.PROD, // HTTPS only in production
@@ -203,7 +203,7 @@ Protected routes automatically redirect to `/login` if not authenticated.
 **Behavior:**
 - **Password Mode**: Validates password against `AUTH_PASSWORD`
 - **Open Mode**: Skips password validation
-- Sets `itinerizer_session` cookie on success
+- Sets `itinerator_session` cookie on success
 
 ### POST /api/auth/logout
 
@@ -215,7 +215,7 @@ Protected routes automatically redirect to `/login` if not authenticated.
 ```
 
 **Behavior:**
-- Deletes `itinerizer_session` cookie
+- Deletes `itinerator_session` cookie
 - User must login again
 
 ### GET /api/auth/status
@@ -330,7 +330,7 @@ AUTH_PASSWORD=your-password
 **Cause:** Session cookie missing or invalid
 
 **Solution:**
-1. Check browser cookies (should have `itinerizer_session`)
+1. Check browser cookies (should have `itinerator_session`)
 2. Try logging out and logging in again
 3. Clear browser cookies and retry
 

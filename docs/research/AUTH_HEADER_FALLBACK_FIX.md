@@ -14,7 +14,7 @@ Users experienced 403 errors when selecting itineraries because:
    - Cookie can expire while `localStorage` persists
 
 2. **Server behavior (before fix):**
-   - Only read email from `itinerizer_user_email` cookie
+   - Only read email from `itinerator_user_email` cookie
    - Completely ignored `X-User-Email` header
    - When cookie expired → `userEmail = null` → 403 Forbidden
 
@@ -57,7 +57,7 @@ console.log('[hooks] userEmail:', event.locals.userEmail);
 ✅ **Yes, this is secure because:**
 
 1. **Session authentication is verified first** (lines 282-284)
-   - `itinerizer_session` cookie must be valid
+   - `itinerator_session` cookie must be valid
    - Without valid session, request fails with 401
 
 2. **Email header only checked AFTER session validation**

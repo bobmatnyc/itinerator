@@ -80,7 +80,7 @@ The API supports two methods for API key configuration:
 
 1. **YAML Config** (recommended):
    ```yaml
-   # .itinerizer/config.yaml
+   # .itinerator/config.yaml
    openrouter:
      apiKey: "your-api-key"
    ```
@@ -234,7 +234,7 @@ To use the Trip Designer API:
 2. **Configure API key:**
    ```bash
    # Option 1: YAML config
-   npx itinerizer config set openrouter.apiKey YOUR_KEY
+   npx itinerator config set openrouter.apiKey YOUR_KEY
 
    # Option 2: Environment variable
    export OPENROUTER_API_KEY=YOUR_KEY

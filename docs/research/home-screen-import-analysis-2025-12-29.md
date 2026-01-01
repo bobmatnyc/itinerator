@@ -7,9 +7,9 @@
 
 ### 1. Main Home Screen File
 
-**Primary File**: `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/routes/itineraries/+page.svelte`
+**Primary File**: `/Users/masa/Projects/itinerator/viewer-svelte/src/routes/itineraries/+page.svelte`
 
-**Important Note**: The root `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/routes/+page.svelte` is just a redirect that auto-navigates to `/itineraries` on mount. The actual home screen is the itineraries page.
+**Important Note**: The root `/Users/masa/Projects/itinerator/viewer-svelte/src/routes/+page.svelte` is just a redirect that auto-navigates to `/itineraries` on mount. The actual home screen is the itineraries page.
 
 ### 2. Home Screen Architecture
 
@@ -48,7 +48,7 @@ The itineraries page uses a **tabbed left pane** with two tabs:
 
 ### 3. ImportDialog Component
 
-**File**: `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/components/ImportDialog.svelte`
+**File**: `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/components/ImportDialog.svelte`
 
 **Current Usage**: ImportDialog is used in `ItineraryDetail.svelte` (line 673-677):
 ```svelte
@@ -141,7 +141,7 @@ async function handleImport(file: File, model: string | undefined) {
 
 ### 6. HomeView Component
 
-**File**: `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/components/HomeView.svelte`
+**File**: `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/components/HomeView.svelte`
 
 **Purpose**: Welcome screen with quick prompts (shown when `navigationStore.mainView === 'home'`)
 
@@ -282,7 +282,7 @@ let {
 
 ## Conclusion
 
-**Main Home Screen**: `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/routes/itineraries/+page.svelte`
+**Main Home Screen**: `/Users/masa/Projects/itinerator/viewer-svelte/src/routes/itineraries/+page.svelte`
 
 **ImportDialog Trigger**: Currently only in ItineraryDetail component (📥 Import button)
 

@@ -13,7 +13,7 @@ import { JsonItineraryStorage } from '../../src/storage/json-storage.js';
 
 describe('WorkingContextService', () => {
   const testDataDir = './test-data-working-context-service';
-  const testConfigPath = `${testDataDir}/.itinerizer/config.json`;
+  const testConfigPath = `${testDataDir}/.itinerator/config.json`;
   let itineraryStorage: JsonItineraryStorage;
   let configStorage: ConfigStorage;
   let itineraryService: ItineraryService;

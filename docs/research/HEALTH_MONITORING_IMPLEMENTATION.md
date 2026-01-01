@@ -166,7 +166,7 @@ curl http://localhost:5176/api/v1/health
 # {
 #   "status": "ok",
 #   "timestamp": "2025-12-27T19:46:49.797Z",
-#   "service": "itinerizer-api"
+#   "service": "itinerator-api"
 # }
 ```
 
@@ -288,7 +288,7 @@ const lastCheck = healthStore.lastCheck;
    {
      "status": "ok",
      "timestamp": "2025-12-27T19:46:49.797Z",
-     "service": "itinerizer-api"
+     "service": "itinerator-api"
    }
    ```
 

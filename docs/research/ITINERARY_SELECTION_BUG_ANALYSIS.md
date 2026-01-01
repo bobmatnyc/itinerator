@@ -15,12 +15,12 @@
 ```typescript
 function getUserEmail(): string | null {
   // Reads from localStorage
-  const settings = localStorage.getItem('itinerizer_settings');
+  const settings = localStorage.getItem('itinerator_settings');
   if (settings) {
     return parsed.email;
   }
   // Fallback to legacy storage
-  return localStorage.getItem('itinerizer_user_email');
+  return localStorage.getItem('itinerator_user_email');
 }
 
 function getBaseHeaders(): HeadersInit {
@@ -68,8 +68,8 @@ export const GET: RequestHandler = async ({ params, locals }) => {
 ## The Mismatch
 
 1. **Login sets BOTH:**
-   - Cookie: `itinerizer_user_email` (server-readable)
-   - LocalStorage: `itinerizer_user_email` (client-readable)
+   - Cookie: `itinerator_user_email` (server-readable)
+   - LocalStorage: `itinerator_user_email` (client-readable)
 
 2. **Client sends header:**
    - Reads from localStorage
@@ -178,7 +178,7 @@ function getUserEmail(): string | null {
 
   // Read from cookie (same as server)
   const cookies = document.cookie.split(';');
-  const userCookie = cookies.find(c => c.trim().startsWith('itinerizer_user_email='));
+  const userCookie = cookies.find(c => c.trim().startsWith('itinerator_user_email='));
   if (userCookie) {
     return userCookie.split('=')[1];
   }
@@ -244,7 +244,7 @@ console.log('[hooks] userEmail:', event.locals.userEmail, 'from:', userEmail ? (
 **This approach is acceptable because:**
 
 1. **Session Authentication Still Required**
-   - User must have valid session cookie (`itinerizer_session`)
+   - User must have valid session cookie (`itinerator_session`)
    - X-User-Email header only used AFTER session is verified
    - Without session, request fails at line 294 (redirect to login)
 

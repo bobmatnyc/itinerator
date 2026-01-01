@@ -245,7 +245,7 @@ Comprehensive error types:
 4. **Rate limiting** - Prevent abuse (20 msg/min)
 
 ### Medium Term
-1. **CLI integration** - `itinerizer chat` command
+1. **CLI integration** - `itinerator chat` command
 2. **Web interface** - Chat UI with structured questions
 3. **Multi-session support** - Resume previous conversations
 4. **Collaborative planning** - Multiple users on same trip

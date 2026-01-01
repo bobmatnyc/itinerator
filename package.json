@@ -1,10 +1,10 @@
 {
-  "name": "itinerizer",
+  "name": "itinerator",
   "version": "0.2.4",
   "description": "A modern CLI tool for managing travel itineraries",
   "type": "module",
   "bin": {
-    "itinerizer": "./dist/index.js"
+    "itinerator": "./dist/index.js"
   },
   "scripts": {
     "build": "tsup",

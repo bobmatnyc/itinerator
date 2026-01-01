@@ -1,6 +1,6 @@
-# Itinerizer Examples
+# Itinerator Examples
 
-This directory contains example scripts demonstrating various features of Itinerizer.
+This directory contains example scripts demonstrating various features of Itinerator.
 
 ## Trip Designer API Demo
 
@@ -14,7 +14,7 @@ Demonstrates the complete flow of using the Trip Designer API:
 
 **Prerequisites:**
 1. Start the SvelteKit server: `cd viewer-svelte && npm run dev`
-2. Configure your OpenRouter API key in `.itinerizer/config.yaml`:
+2. Configure your OpenRouter API key in `.itinerator/config.yaml`:
    ```yaml
    openrouter:
      apiKey: "your-api-key-here"
@@ -113,7 +113,7 @@ main();
 Configure your OpenRouter API key:
 ```bash
 # Option 1: YAML config (recommended)
-npx itinerizer config set openrouter.apiKey YOUR_KEY
+npx itinerator config set openrouter.apiKey YOUR_KEY
 
 # Option 2: Environment variable
 export OPENROUTER_API_KEY=YOUR_KEY

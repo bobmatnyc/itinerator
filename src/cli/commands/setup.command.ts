@@ -1,5 +1,5 @@
 /**
- * Setup command - Initialize itinerizer configuration
+ * Setup command - Initialize itinerator configuration
  * @module cli/commands/setup
  */
 
@@ -15,11 +15,11 @@ import { colors, printError, printSuccess } from '../output/index.js';
  */
 export function setupCommand(): Command {
   return new Command('setup')
-    .description('Initialize itinerizer configuration')
+    .description('Initialize itinerator configuration')
     .option('--data-dir <path>', 'Data directory path', './data/itineraries')
     .option('--force', 'Force re-initialization', false)
     .action(async (options: { dataDir: string; force: boolean }) => {
-      p.intro(colors.heading('Itinerizer Setup'));
+      p.intro(colors.heading('Itinerator Setup'));
 
       const spinner = p.spinner();
       spinner.start('Initializing storage...');
@@ -46,14 +46,14 @@ export function setupCommand(): Command {
         }
 
         spinner.stop('Storage initialized');
-        printSuccess('Itinerizer is ready to use!');
+        printSuccess('Itinerator is ready to use!');
 
         p.note(
-          `Data directory: ${options.dataDir}\nConfig: .itinerizer/config.json`,
+          `Data directory: ${options.dataDir}\nConfig: .itinerator/config.json`,
           'Configuration'
         );
 
-        p.outro('Run "itinerizer itinerary create" to create your first itinerary');
+        p.outro('Run "itinerator itinerary create" to create your first itinerary');
       } catch (error) {
         spinner.stop('Setup failed');
         printError(error instanceof Error ? error.message : 'Unknown error occurred');

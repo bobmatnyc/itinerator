@@ -102,7 +102,7 @@ Enhanced date picker styling:
 
 ## Files Modified
 
-- `/Users/masa/Projects/itinerizer-ts/viewer-svelte/src/lib/components/ChatPanel.svelte`
+- `/Users/masa/Projects/itinerator/viewer-svelte/src/lib/components/ChatPanel.svelte`
 
 ## Testing Checklist
 

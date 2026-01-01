@@ -14,7 +14,7 @@ import type { RequestHandler } from './$types';
 import { env as privateEnv } from '$env/dynamic/private';
 import * as publicEnv from '$env/static/public';
 
-const SESSION_COOKIE_NAME = 'itinerizer_session';
+const SESSION_COOKIE_NAME = 'itinerator_session';
 const SESSION_SECRET = 'authenticated';
 
 /**
@@ -31,7 +31,7 @@ function getAuthMode(): 'password' | 'open' {
 	return import.meta.env.PROD ? 'password' : 'open';
 }
 
-const USER_EMAIL_COOKIE_NAME = 'itinerizer_user_email';
+const USER_EMAIL_COOKIE_NAME = 'itinerator_user_email';
 
 /**
  * POST /api/auth/login

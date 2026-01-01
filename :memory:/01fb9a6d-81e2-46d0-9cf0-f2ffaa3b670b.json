@@ -1,0 +1,56 @@
+{
+  "id": "01fb9a6d-81e2-46d0-9cf0-f2ffaa3b670b",
+  "version": 3,
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "updatedAt": "2025-12-31T23:14:21.097Z",
+  "title": "Test Trip",
+  "status": "DRAFT",
+  "startDate": "2025-01-10T00:00:00.000Z",
+  "endDate": "2025-01-15T00:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "segments": [
+    {
+      "id": "e43556b4-2f48-4f90-b32f-041fc991d291",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-01-10T19:00:00.000Z",
+      "endDatetime": "2025-01-10T21:00:00.000Z",
+      "travelerIds": [
+        "d84a2f49-1624-4b1d-87f8-9c014cd978f1"
+      ],
+      "source": "agent",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Grand Hotel",
+      "location": {
+        "name": "Grand Hotel"
+      }
+    },
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "property": {
+        "name": "Grand Hotel"
+      },
+      "location": {
+        "name": "Grand Hotel",
+        "city": "New York",
+        "country": "US"
+      },
+      "checkInDate": "2025-01-10T00:00:00.000Z",
+      "checkOutDate": "2025-01-12T00:00:00.000Z",
+      "startDatetime": "2025-01-10T15:00:00.000Z",
+      "endDatetime": "2025-01-12T11:00:00.000Z",
+      "roomCount": 1,
+      "amenities": [],
+      "travelerIds": [
+        "33c38ebb-5b3f-4f0a-9f65-1ca2274c2271"
+      ],
+      "source": "agent",
+      "metadata": {},
+      "id": "d1bc81dd-03c5-420e-a9b6-c21d1cf5c655"
+    }
+  ],
+  "tags": [],
+  "metadata": {}
+}
