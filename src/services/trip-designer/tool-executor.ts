@@ -559,11 +559,16 @@ export class ToolExecutor {
     };
 
     // Create new Traveler object
+    // lastName is required by schema (.min(1)), so provide default if empty/missing
+    const lastName = params.lastName && params.lastName.trim().length > 0
+      ? params.lastName
+      : 'Traveler'; // Default for single-name travelers
+
     const newTraveler: any = {
       id: generateTravelerId(),
       type: typeMap[params.type] || TravelerType.ADULT,
       firstName: params.firstName,
-      lastName: params.lastName || '',
+      lastName,
       middleName: params.middleName,
       email: params.email,
       phone: params.phone,

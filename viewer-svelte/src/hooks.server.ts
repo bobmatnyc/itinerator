@@ -286,14 +286,16 @@ export const handle: Handle = async ({ event, resolve }) => {
 		// Try cookie first, fallback to X-User-Email header for compatibility
 		// This handles cases where the cookie expires but localStorage still has the email
 		let userEmail = event.cookies.get(USER_EMAIL_COOKIE_NAME);
+		console.log('[hooks] Cookie value:', { userEmail, cookieName: USER_EMAIL_COOKIE_NAME });
 		if (!userEmail) {
 			userEmail = event.request.headers.get('X-User-Email');
 			if (userEmail) {
 				console.log('[hooks] Using X-User-Email header:', userEmail);
 			}
 		}
-		event.locals.userEmail = userEmail || null;
-		console.log('[hooks] userEmail:', event.locals.userEmail);
+		// Normalize email to match login endpoint normalization
+		event.locals.userEmail = userEmail ? userEmail.trim().toLowerCase() : null;
+		console.log('[hooks] Final userEmail:', event.locals.userEmail);
 
 		// Check if route requires authentication
 		const isPublicRoute = PUBLIC_ROUTES.some(route => event.url.pathname.startsWith(route));
