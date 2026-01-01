@@ -674,9 +674,10 @@ export class ToolExecutor {
       throw new Error(`Failed to add flight: ${result.error.message}`);
     }
 
-    // CRITICAL: Return the segment ID from the service result, not the input segment
-    // The input segment doesn't have an ID yet - it's added by the service
-    return { success: true, segmentId: result.value.id };
+    // CRITICAL: Extract the newly added segment ID from the returned itinerary
+    // SegmentService.add() returns the full itinerary, so get the last segment
+    const addedSegment = result.value.segments[result.value.segments.length - 1];
+    return { success: true, segmentId: addedSegment.id };
   }
 
   /**
@@ -741,9 +742,10 @@ export class ToolExecutor {
       throw new Error(`Failed to add hotel: ${result.error.message}`);
     }
 
-    // CRITICAL: Return the segment ID from the service result, not the input segment
-    // The input segment doesn't have an ID yet - it's added by the service
-    return { success: true, segmentId: result.value.id };
+    // CRITICAL: Extract the newly added segment ID from the returned itinerary
+    // SegmentService.add() returns the full itinerary, so get the last segment
+    const addedSegment = result.value.segments[result.value.segments.length - 1];
+    return { success: true, segmentId: addedSegment.id };
   }
 
   /**
@@ -804,9 +806,10 @@ export class ToolExecutor {
       throw new Error(`Failed to add activity: ${result.error.message}`);
     }
 
-    // CRITICAL: Return the segment ID from the service result, not the input segment
-    // The input segment doesn't have an ID yet - it's added by the service
-    return { success: true, segmentId: result.value.id };
+    // CRITICAL: Extract the newly added segment ID from the returned itinerary
+    // SegmentService.add() returns the full itinerary, so get the last segment
+    const addedSegment = result.value.segments[result.value.segments.length - 1];
+    return { success: true, segmentId: addedSegment.id };
   }
 
   /**
@@ -858,9 +861,10 @@ export class ToolExecutor {
       throw new Error(`Failed to add transfer: ${result.error.message}`);
     }
 
-    // CRITICAL: Return the segment ID from the service result, not the input segment
-    // The input segment doesn't have an ID yet - it's added by the service
-    return { success: true, segmentId: result.value.id };
+    // CRITICAL: Extract the newly added segment ID from the returned itinerary
+    // SegmentService.add() returns the full itinerary, so get the last segment
+    const addedSegment = result.value.segments[result.value.segments.length - 1];
+    return { success: true, segmentId: addedSegment.id };
   }
 
   /**
@@ -908,9 +912,10 @@ export class ToolExecutor {
       throw new Error(`Failed to add meeting: ${result.error.message}`);
     }
 
-    // CRITICAL: Return the segment ID from the service result, not the input segment
-    // The input segment doesn't have an ID yet - it's added by the service
-    return { success: true, segmentId: result.value.id };
+    // CRITICAL: Extract the newly added segment ID from the returned itinerary
+    // SegmentService.add() returns the full itinerary, so get the last segment
+    const addedSegment = result.value.segments[result.value.segments.length - 1];
+    return { success: true, segmentId: addedSegment.id };
   }
 
   /**
