@@ -12,12 +12,21 @@ import { generateSegmentId } from '../domain/types/branded.js';
 import type { Itinerary } from '../domain/types/itinerary.js';
 import type { Segment } from '../domain/types/segment.js';
 import type { ItineraryStorage } from '../storage/storage.interface.js';
+import { createRuleEngine } from '../domain/rules/index.js';
+import type { ItineraryRuleEngine, ValidationResult } from '../domain/rules/index.js';
 
 /**
- * Service for segment CRUD operations
+ * Service for segment CRUD operations with rule-based validation
  */
 export class SegmentService {
-  constructor(private readonly storage: ItineraryStorage) {}
+  private ruleEngine: ItineraryRuleEngine;
+
+  constructor(private readonly storage: ItineraryStorage) {
+    this.ruleEngine = createRuleEngine({
+      enableWarnings: true,
+      enableInfo: false,
+    });
+  }
 
   /**
    * Add a segment to an itinerary
@@ -43,7 +52,40 @@ export class SegmentService {
       id: segment.id ?? generateSegmentId(),
     } as Segment;
 
-    // Check for duplicate segments before adding
+    // Check if segment ID already exists (before rule validation)
+    const segmentExists = existing.segments.some((s) => s.id === segmentWithId.id);
+    if (segmentExists) {
+      return err(
+        createStorageError('VALIDATION_ERROR', `Segment ${segmentWithId.id} already exists`, {
+          segmentId: segmentWithId.id,
+        })
+      );
+    }
+
+    // Run rule-based validation
+    const validationResult = this.ruleEngine.validateAdd(existing, segmentWithId);
+
+    // Check for validation errors (hard constraints)
+    if (!validationResult.valid) {
+      const firstError = validationResult.errors[0];
+      return err(
+        createValidationError(
+          'CONSTRAINT_VIOLATION',
+          firstError.message || 'Validation failed',
+          firstError.ruleId,
+          {
+            ruleId: firstError.ruleId,
+            ruleName: firstError.ruleName,
+            suggestion: firstError.suggestion,
+            relatedSegmentIds: firstError.relatedSegmentIds,
+            allErrors: validationResult.errors,
+            warnings: validationResult.warnings,
+          }
+        )
+      );
+    }
+
+    // Check for duplicate segments (legacy validation - could be moved to rule)
     const duplicateCheck = this.findDuplicateSegment(existing.segments, segmentWithId);
     if (duplicateCheck) {
       return err(
@@ -52,43 +94,6 @@ export class SegmentService {
           duplicateCheck.message,
           'duplicate'
         )
-      );
-    }
-
-    // Validate segment dates are within itinerary date range (if itinerary has dates)
-    if (existing.startDate && existing.endDate) {
-      if (
-        segmentWithId.startDatetime < existing.startDate ||
-        segmentWithId.endDatetime > existing.endDate
-      ) {
-        return err(
-          createValidationError(
-            'CONSTRAINT_VIOLATION',
-            'Segment dates must be within itinerary date range',
-            'startDatetime'
-          )
-        );
-      }
-    }
-
-    // Validate start is before end
-    if (segmentWithId.startDatetime >= segmentWithId.endDatetime) {
-      return err(
-        createValidationError(
-          'CONSTRAINT_VIOLATION',
-          'Segment start datetime must be before end datetime',
-          'endDatetime'
-        )
-      );
-    }
-
-    // Check if segment ID already exists
-    const segmentExists = existing.segments.some((s) => s.id === segmentWithId.id);
-    if (segmentExists) {
-      return err(
-        createStorageError('VALIDATION_ERROR', `Segment ${segmentWithId.id} already exists`, {
-          segmentId: segmentWithId.id,
-        })
       );
     }
 
@@ -101,7 +106,20 @@ export class SegmentService {
     };
 
     // Save updated itinerary
-    return this.storage.save(updated);
+    const saveResult = await this.storage.save(updated);
+
+    // Attach warnings to successful result if any
+    if (saveResult.success && validationResult.warnings.length > 0) {
+      return ok({
+        ...saveResult.value,
+        metadata: {
+          ...saveResult.value.metadata,
+          validationWarnings: validationResult.warnings,
+        },
+      });
+    }
+
+    return saveResult;
   }
 
   /**
@@ -143,32 +161,27 @@ export class SegmentService {
       id: segmentId, // Prevent ID change
     } as Segment;
 
-    // Validate segment dates if changed (and itinerary has dates)
-    if (updates.startDatetime || updates.endDatetime) {
-      if (existing.startDate && existing.endDate) {
-        if (
-          updatedSegment.startDatetime < existing.startDate ||
-          updatedSegment.endDatetime > existing.endDate
-        ) {
-          return err(
-            createValidationError(
-              'CONSTRAINT_VIOLATION',
-              'Segment dates must be within itinerary date range',
-              'startDatetime'
-            )
-          );
-        }
-      }
+    // Run rule-based validation
+    const validationResult = this.ruleEngine.validateUpdate(existing, updatedSegment);
 
-      if (updatedSegment.startDatetime >= updatedSegment.endDatetime) {
-        return err(
-          createValidationError(
-            'CONSTRAINT_VIOLATION',
-            'Segment start datetime must be before end datetime',
-            'endDatetime'
-          )
-        );
-      }
+    // Check for validation errors (hard constraints)
+    if (!validationResult.valid) {
+      const firstError = validationResult.errors[0];
+      return err(
+        createValidationError(
+          'CONSTRAINT_VIOLATION',
+          firstError.message || 'Validation failed',
+          firstError.ruleId,
+          {
+            ruleId: firstError.ruleId,
+            ruleName: firstError.ruleName,
+            suggestion: firstError.suggestion,
+            relatedSegmentIds: firstError.relatedSegmentIds,
+            allErrors: validationResult.errors,
+            warnings: validationResult.warnings,
+          }
+        )
+      );
     }
 
     // Update segment in array
@@ -184,7 +197,20 @@ export class SegmentService {
     };
 
     // Save updated itinerary
-    return this.storage.save(updated);
+    const saveResult = await this.storage.save(updated);
+
+    // Attach warnings to successful result if any
+    if (saveResult.success && validationResult.warnings.length > 0) {
+      return ok({
+        ...saveResult.value,
+        metadata: {
+          ...saveResult.value.metadata,
+          validationWarnings: validationResult.warnings,
+        },
+      });
+    }
+
+    return saveResult;
   }
 
   /**

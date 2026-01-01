@@ -1,279 +1,255 @@
-# Model Evaluation Framework
+# Model Evaluation Suite
 
-Automated framework for comparing different LLM models across different agent types.
+Comprehensive evaluation framework for Trip Designer LLM performance.
 
-## Overview
+## Available Evaluations
 
-This framework evaluates models on multiple dimensions:
+### 1. Trip Designer Comprehensive Eval
+**File**: `trip-designer-eval.ts`
+**Command**: `npm run eval:trip-designer`
 
-- **Format Compliance** (20%): JSON structure, markdown quality
-- **One Question Rule** (30%): Adherence to ONE question constraint
-- **Response Quality** (30%): LLM-as-judge evaluation
-- **Cost Efficiency** (10%): Cost per 1k interactions
-- **Latency** (10%): Response time
+Tests instruction adherence and tool usage accuracy across 18 scenarios:
+- **10 Tool Usage Tests** - Correct tool calls with valid parameters
+- **8 Instruction Tests** - Critical system prompt rule compliance
+
+**Metrics**:
+- Tool Accuracy (%)
+- Instruction Adherence (%)
+- Avg Latency (ms)
+- Cost per 1k interactions ($)
+
+**Output**:
+- JSON: `results/trip-designer-comprehensive-eval-{timestamp}.json`
+- Markdown: `results/trip-designer-comprehensive-eval-{timestamp}.md`
+
+**Guide**: See [TRIP_DESIGNER_EVAL_GUIDE.md](./TRIP_DESIGNER_EVAL_GUIDE.md)
+
+### 2. Model Comparison
+**File**: `model-comparison.ts`
+**Command**: `npm run eval`
+
+Compare multiple models across:
+- Format compliance (JSON structure)
+- ONE question rule adherence
+- Tool usage patterns
+- Response quality (LLM-as-judge)
+
+### 3. Example Evaluation
+**File**: `example.ts`
+**Command**: `npm run eval:example`
+
+Basic example of evaluation framework usage.
+
+### 4. Promptfoo Integration
+**Files**: `../evals/promptfoo.yaml`
+**Commands**:
+- `npm run eval:promptfoo` - Run evaluation
+- `npm run eval:promptfoo:view` - View results
+- `npm run eval:compare` - Run and view
+
+External evaluation framework with UI.
 
 ## Quick Start
 
-### Prerequisites
-
 ```bash
-# Set OpenRouter API key
-export OPENROUTER_API_KEY="your-key-here"
-```
+# Run Trip Designer evaluation
+npm run eval:trip-designer
 
-### Run Full Evaluation
+# Test specific models
+npx tsx tests/eval/trip-designer-eval.ts --models=haiku,sonnet
 
-```bash
-# Evaluate all agents with all models
-npx tsx tests/eval/model-comparison.ts
+# Test only tool usage scenarios
+npx tsx tests/eval/trip-designer-eval.ts --scenarios=tool-usage
 
-# Evaluate specific agent
-npx tsx tests/eval/model-comparison.ts --agent trip-designer
-
-# Evaluate specific models only
-npx tsx tests/eval/model-comparison.ts --models claude-sonnet-4,gpt-4o
-
-# Skip quality judge (faster, cheaper)
-npx tsx tests/eval/model-comparison.ts --no-judge
+# Test only instruction adherence
+npx tsx tests/eval/trip-designer-eval.ts --scenarios=instruction-adherence
 ```
 
 ## Directory Structure
 
 ```
 tests/eval/
-├── model-comparison.ts       # Main evaluation script
-├── test-prompts.ts            # Test prompts for each agent
-├── types.ts                   # Type definitions
-├── report-generator.ts        # Report generation
+├── README.md                           # This file
+├── TRIP_DESIGNER_EVAL_GUIDE.md        # Detailed guide
+├── trip-designer-eval.ts              # Comprehensive evaluation
+├── model-comparison.ts                # Model comparison
+├── model-tool-calling.ts              # Tool calling test
+├── example.ts                         # Basic example
+├── test-prompts.ts                    # Test scenarios
+├── types.ts                           # Type definitions
 ├── metrics/
-│   ├── format-compliance.ts   # Format evaluation
-│   ├── quality-judge.ts       # LLM-as-judge
-│   └── cost-calculator.ts     # Cost estimation
+│   ├── cost-calculator.ts            # Cost estimation
+│   ├── evaluator.ts                  # Evaluation logic
+│   ├── quality-judge.ts              # LLM-as-judge
+│   └── format-compliance.ts          # Format validation
+├── scenarios/
+│   └── index.ts                      # Test scenarios
 └── results/
-    ├── eval-TIMESTAMP.json    # Raw results
-    ├── eval-TIMESTAMP.md      # Markdown report
-    └── recommendations.md     # Model recommendations
+    ├── trip-designer-comprehensive-eval-*.json
+    └── trip-designer-comprehensive-eval-*.md
 ```
 
-## Metrics Explained
+## Environment Variables
 
-### Format Compliance (0-1)
+```bash
+# Required
+export OPENROUTER_API_KEY="your-key-here"
 
-Evaluates:
-- Valid JSON structure when expected
-- Proper markdown formatting
-- Code blocks with language tags
-- Heading hierarchy
+# Optional (for specific features)
+export SERPAPI_KEY="your-serpapi-key"  # For travel search
+```
 
-**Weight**: 20% of overall score
+## Cost Management
 
-### One Question Compliance (0-1)
+Evaluation runs can be expensive. Tips:
 
-Evaluates adherence to the ONE question rule:
-- `1.0` = Exactly one question OR no questions
-- `0.0` = Multiple questions (violation)
+1. **Test cheap models first**:
+   ```bash
+   npx tsx tests/eval/trip-designer-eval.ts --models=gemini-2.0-flash
+   ```
 
-**Weight**: 30% of overall score
+2. **Test single scenario type**:
+   ```bash
+   npx tsx tests/eval/trip-designer-eval.ts --scenarios=tool-usage
+   ```
 
-### Response Quality (0-1)
+3. **Use local cache** (not implemented yet):
+   - Results are saved to JSON
+   - Future: Add cache to avoid re-running identical scenarios
 
-LLM-as-judge evaluation using Claude Haiku:
-- **Relevance**: Addresses user's prompt
-- **Helpfulness**: Provides actionable information
-- **Clarity**: Well-structured and understandable
-- **Correctness**: Factually accurate
+## Expected Costs
 
-**Weight**: 30% of overall score
+Per full evaluation (7 models × 18 scenarios = 126 requests):
 
-### Cost Efficiency (normalized)
+| Model | Est. Cost/Run | Notes |
+|-------|---------------|-------|
+| gemini-2.0-flash | $0.05 | Cheapest |
+| gpt-4o-mini | $0.10 | Good value |
+| claude-3.5-haiku | $0.50 | Current default |
+| gpt-4o | $1.50 | Premium |
+| claude-3.5-sonnet | $1.80 | High quality |
+| claude-sonnet-4 | $2.00 | Latest |
+| gemini-pro-1.5 | $0.75 | Mid-tier |
 
-- Based on estimated cost per 1k interactions
-- Lower cost = higher score
-- Normalized: $2/1k = 0.0, $0/1k = 1.0
+**Total for all models**: ~$7.00
 
-**Weight**: 10% of overall score
+## Interpreting Results
 
-### Latency (normalized)
+### Tool Accuracy
+- **90%+**: Production-ready
+- **80-90%**: Good, minor issues
+- **70-80%**: Acceptable with monitoring
+- **<70%**: Not recommended
 
-- Average response time in milliseconds
-- Lower latency = higher score
-- Normalized: 5000ms = 0.0, 0ms = 1.0
+### Instruction Adherence
+- **90%+**: Reliably follows rules
+- **80-90%**: Good, occasional violations
+- **70-80%**: Concerning
+- **<70%**: Unsuitable
 
-**Weight**: 10% of overall score
+### Recommendations
+Look for models that:
+1. Score 85%+ on both metrics
+2. Have acceptable latency (<3s)
+3. Fit your cost budget
 
-## Test Prompts
+## Adding New Tests
 
-Each agent has test prompts covering:
-
-### Trip Designer
-- **Discovery**: Initial planning questions
-- **Refinement**: Follow-up questions
-- **Tool Use**: Adding/removing segments
-- **General**: Viewing itineraries
-
-### Help Agent
-- **Feature Questions**: How to use app
-- **Handoff Detection**: When to transfer to other agents
-- **Troubleshooting**: Common issues
-
-### Travel Agent
-- **Search Queries**: Hotels, flights, restaurants
-- **Refinement**: Clarifying search parameters
-- **Synthesis**: Comparing and recommending options
-
-## Output Files
-
-### Raw Results (`eval-TIMESTAMP.json`)
-
-Complete evaluation data including:
-- All samples with prompts and responses
-- Token counts and latencies
-- Individual scores per metric
-- Quality judge reasoning
-
-### Markdown Report (`eval-TIMESTAMP.md`)
-
-Human-readable report with:
-- Performance comparison tables
-- Model recommendations per agent
-- Detailed analysis of top models
-- Cost comparison table
-
-### Recommendations (`recommendations.md`)
-
-Concise recommendations for each agent:
-- Best model based on evaluation
-- Rationale for recommendation
-- Key metrics summary
-- Alternative options
-
-## Extending the Framework
-
-### Add New Test Prompts
-
-Edit `test-prompts.ts`:
-
+### 1. Tool Usage Test
 ```typescript
 {
-  agent: 'trip-designer',
-  prompts: [
-    {
-      prompt: 'Your test prompt here',
-      expectedBehavior: 'What the agent should do',
-      category: 'discovery', // or 'refinement', 'tool-use', 'general'
-    },
-  ],
+  type: 'tool-usage',
+  prompt: 'Add a hotel in Tokyo',
+  expectedTool: 'add_hotel',
+  requiredParams: ['property', 'location', 'checkInDate', 'checkOutDate'],
+  description: 'Hotel booking',
 }
 ```
 
-### Add New Metrics
-
-1. Create file in `metrics/` directory
-2. Export evaluation function
-3. Import in `model-comparison.ts`
-4. Add to `calculateMetrics()` function
-
-### Add New Models
-
-Edit `tests/config/models.ts`:
-
+### 2. Instruction Test
 ```typescript
-export const EVAL_MODELS = [
-  'anthropic/claude-sonnet-4',
-  'your/new-model',
-  // ...
-] as const;
+{
+  type: 'instruction-adherence',
+  prompt: 'I want to go to Japan',
+  criticalRule: 'ONE_QUESTION_RULE',
+  validationFn: (response) => {
+    const questionCount = (response.message?.content || '').match(/\?/g)?.length || 0;
+    return questionCount <= 1;
+  },
+  description: 'Should ask one question',
+}
 ```
 
-Add pricing in `metrics/cost-calculator.ts`:
+## CI/CD Integration
 
-```typescript
-export const MODEL_PRICING = {
-  'your/new-model': { input: X, output: Y },
-  // ...
-};
+### GitHub Actions
+```yaml
+name: Model Evaluation
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly
+  workflow_dispatch:
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: Run Trip Designer Eval
+        run: npm run eval:trip-designer -- --models=haiku
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: tests/eval/results/
 ```
 
 ## Best Practices
 
-### Running Evaluations
-
-1. **Start Small**: Test with one agent/model first
-2. **Use --no-judge**: For faster iteration during development
-3. **Rate Limiting**: Built-in 1s delay between requests
-4. **Cost Awareness**: Quality judge uses Haiku (cheap but adds cost)
-
-### Interpreting Results
-
-- **Overall Score ≥ 0.8**: Excellent performance
-- **Overall Score 0.6-0.8**: Good performance
-- **Overall Score < 0.6**: Poor performance
-
-Focus on:
-- **One Question Compliance**: Critical for UX
-- **Response Quality**: Most important for user satisfaction
-- **Cost**: Matters for production scaling
-
-### Continuous Evaluation
-
-Run evaluations:
-- Before changing agent prompts
-- When considering new models
-- After OpenRouter adds new models
-- Monthly for production model validation
+1. **Baseline First**: Establish baseline with current model
+2. **Incremental Testing**: Test new models one at a time
+3. **Version Control**: Commit results to track degradation
+4. **Cost Awareness**: Monitor spending, use cheap models for development
+5. **Real-world Validation**: Supplement with manual testing
+6. **Regular Cadence**: Re-run after system prompt changes
 
 ## Troubleshooting
 
-### API Errors
-
-```bash
-# Check API key
-echo $OPENROUTER_API_KEY
-
-# Test connectivity
-curl https://openrouter.ai/api/v1/models \
-  -H "Authorization: Bearer $OPENROUTER_API_KEY"
-```
-
 ### Rate Limiting
+Evaluation includes 1s delay between requests. If you hit limits:
+- Increase delay in code
+- Use fewer models
+- Split into batches
 
-Increase delay between requests:
+### High Token Usage
+If prompts are too long:
+- Use `systemMinimal` instead of full system prompt
+- Reduce context in instruction scenarios
+- Test with smaller tool subsets
 
-```typescript
-delayBetweenRequests: 2000, // 2 seconds
-```
+### Model Errors
+If specific model fails:
+- Check OpenRouter model availability
+- Verify pricing data in `cost-calculator.ts`
+- Check model supports tool calling
 
-### Out of Memory
+## Related Documentation
 
-Reduce samples per agent:
+- [Trip Designer Eval Guide](./TRIP_DESIGNER_EVAL_GUIDE.md)
+- [Tool Definitions](../../src/services/trip-designer/tools.ts)
+- [System Prompt](../../src/prompts/trip-designer/system.md)
+- [Cost Calculator](./metrics/cost-calculator.ts)
 
-```typescript
-samplesPerAgent: 5, // Default is 10
-```
+## Support
 
-## Cost Estimation
-
-Typical costs for full evaluation:
-
-| Configuration | Estimated Cost |
-|---------------|----------------|
-| All agents, all models, with judge | ~$2-5 |
-| Single agent, single model, no judge | ~$0.10 |
-| All agents, all models, no judge | ~$1-2 |
-
-Costs depend on:
-- Number of test prompts
-- Response length
-- Model pricing
-- Quality judge enabled/disabled
-
-## Future Enhancements
-
-- [ ] Tool use accuracy evaluation
-- [ ] Multi-turn conversation evaluation
-- [ ] A/B testing framework
-- [ ] Automated model selection
-- [ ] Integration with CI/CD
-- [ ] Slack/Discord notifications
-- [ ] Historical trend tracking
-- [ ] Performance regression detection
+For issues or questions:
+1. Check the guides in this directory
+2. Review existing results in `results/`
+3. Examine test implementation in source files
+4. Create an issue with evaluation output

@@ -26,6 +26,7 @@
     "test:eval": "vitest run --config vitest.config.eval.ts",
     "eval": "tsx tests/eval/model-comparison.ts",
     "eval:example": "tsx tests/eval/example.ts",
+    "eval:trip-designer": "tsx tests/eval/trip-designer-eval.ts",
     "eval:promptfoo": "npx promptfoo eval --config evals/promptfoo.yaml",
     "eval:promptfoo:view": "npx promptfoo view",
     "eval:compare": "npx promptfoo eval --config evals/promptfoo.yaml && npx promptfoo view",
