@@ -657,7 +657,6 @@ Do NOT just say "that sounds good" or "I like that" - you must EXPLICITLY REQUES
    */
   private async createItinerary(): Promise<string> {
     const url = `${this.apiBaseUrl}/itineraries`;
-    const headers = this.getHeaders();
     const body = {
       title: `${this.persona.name}'s Trip`,
       description: `Test itinerary for ${this.persona.type} persona`,
@@ -667,17 +666,29 @@ Do NOT just say "that sounds good" or "I like that" - you must EXPLICITLY REQUES
 
     console.log('\n🔍 DEBUG: Creating itinerary');
     console.log('URL:', url);
-    console.log('Headers:', JSON.stringify(headers, null, 2));
+    console.log('Headers:', JSON.stringify(this.getHeaders(), null, 2));
     console.log('Body:', JSON.stringify(body, null, 2));
 
-    const response = await fetch(url, {
+    let response = await fetch(url, {
       method: 'POST',
-      headers,
+      headers: this.getHeaders(),
       body: JSON.stringify(body)
     });
 
     console.log('Response Status:', response.status);
     console.log('Response Headers:', Object.fromEntries(response.headers.entries()));
+
+    // Retry once on 403 with fresh authentication
+    if (response.status === 403) {
+      console.log('🔄 Session expired, re-authenticating...');
+      await this.authenticate();
+      response = await fetch(url, {
+        method: 'POST',
+        headers: this.getHeaders(),
+        body: JSON.stringify(body)
+      });
+      console.log('Response Status after re-auth:', response.status);
+    }
 
     if (!response.ok) {
       const error = await response.text();
@@ -702,7 +713,6 @@ Do NOT just say "that sounds good" or "I like that" - you must EXPLICITLY REQUES
    */
   private async createSession(itineraryId: string): Promise<string> {
     const url = `${this.apiBaseUrl}/designer/sessions`;
-    const headers = this.getHeaders(true);
     const body = {
       itineraryId,
       mode: 'trip-designer'
@@ -711,16 +721,28 @@ Do NOT just say "that sounds good" or "I like that" - you must EXPLICITLY REQUES
     console.log('\n🔍 DEBUG: Creating session');
     console.log('URL:', url);
     console.log('Itinerary ID:', itineraryId);
-    console.log('Headers:', JSON.stringify(headers, null, 2));
+    console.log('Headers:', JSON.stringify(this.getHeaders(true), null, 2));
     console.log('Body:', JSON.stringify(body, null, 2));
 
-    const response = await fetch(url, {
+    let response = await fetch(url, {
       method: 'POST',
-      headers,
+      headers: this.getHeaders(true),
       body: JSON.stringify(body)
     });
 
     console.log('Response Status:', response.status);
+
+    // Retry once on 403 with fresh authentication
+    if (response.status === 403) {
+      console.log('🔄 Session expired, re-authenticating...');
+      await this.authenticate();
+      response = await fetch(url, {
+        method: 'POST',
+        headers: this.getHeaders(true),
+        body: JSON.stringify(body)
+      });
+      console.log('Response Status after re-auth:', response.status);
+    }
 
     if (!response.ok) {
       const error = await response.text();
@@ -752,7 +774,7 @@ Do NOT just say "that sounds good" or "I like that" - you must EXPLICITLY REQUES
       throw new Error('No session ID - must create session first');
     }
 
-    const response = await fetch(
+    let response = await fetch(
       `${this.apiBaseUrl}/designer/sessions/${this.sessionId}/messages/stream`,
       {
         method: 'POST',
@@ -760,6 +782,20 @@ Do NOT just say "that sounds good" or "I like that" - you must EXPLICITLY REQUES
         body: JSON.stringify({ message })
       }
     );
+
+    // Retry once on 403 with fresh authentication
+    if (response.status === 403) {
+      console.log('🔄 Session expired, re-authenticating...');
+      await this.authenticate();
+      response = await fetch(
+        `${this.apiBaseUrl}/designer/sessions/${this.sessionId}/messages/stream`,
+        {
+          method: 'POST',
+          headers: this.getHeaders(true),
+          body: JSON.stringify({ message })
+        }
+      );
+    }
 
     if (!response.ok) {
       const error = await response.text();
@@ -839,9 +875,18 @@ Do NOT just say "that sounds good" or "I like that" - you must EXPLICITLY REQUES
       throw new Error('No itinerary ID');
     }
 
-    const response = await fetch(`${this.apiBaseUrl}/itineraries/${this.itineraryId}`, {
+    let response = await fetch(`${this.apiBaseUrl}/itineraries/${this.itineraryId}`, {
       headers: this.getHeaders()
     });
+
+    // Retry once on 403 with fresh authentication
+    if (response.status === 403) {
+      console.log('🔄 Session expired, re-authenticating...');
+      await this.authenticate();
+      response = await fetch(`${this.apiBaseUrl}/itineraries/${this.itineraryId}`, {
+        headers: this.getHeaders()
+      });
+    }
 
     if (!response.ok) {
       const error = await response.text();

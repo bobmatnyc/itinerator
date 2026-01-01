@@ -546,6 +546,17 @@ export class ToolExecutor {
 
     const itinerary = itinResult.value;
 
+    // Initialize travelers array if needed
+    if (!itinerary.travelers) {
+      itinerary.travelers = [];
+    }
+
+    // Safety check: prevent runaway duplication (max 20 travelers)
+    const MAX_TRAVELERS = 20;
+    if (itinerary.travelers.length >= MAX_TRAVELERS) {
+      throw new Error(`Maximum number of travelers (${MAX_TRAVELERS}) reached. Cannot add more travelers to prevent duplication issues.`);
+    }
+
     // Import generateTravelerId from branded types
     const { generateTravelerId } = await import('../../domain/types/branded.js');
     const { TravelerType } = await import('../../domain/types/common.js');
@@ -558,12 +569,67 @@ export class ToolExecutor {
       senior: TravelerType.SENIOR,
     };
 
-    // Create new Traveler object
     // lastName is required by schema (.min(1)), so provide default if empty/missing
     const lastName = params.lastName && params.lastName.trim().length > 0
       ? params.lastName
       : 'Traveler'; // Default for single-name travelers
 
+    // Check for existing traveler with same firstName + lastName (case-insensitive)
+    const normalizedFirstName = params.firstName.toLowerCase().trim();
+    const normalizedLastName = lastName.toLowerCase().trim();
+
+    const existingTraveler = itinerary.travelers.find(t =>
+      t.firstName.toLowerCase().trim() === normalizedFirstName &&
+      t.lastName.toLowerCase().trim() === normalizedLastName
+    );
+
+    if (existingTraveler) {
+      // Update existing traveler instead of creating duplicate
+      existingTraveler.type = typeMap[params.type] || TravelerType.ADULT;
+      existingTraveler.middleName = params.middleName;
+      existingTraveler.email = params.email;
+      existingTraveler.phone = params.phone;
+      existingTraveler.metadata = {
+        relationship: params.relationship,
+        isPrimary: params.isPrimary || false,
+        age: params.age,
+      };
+
+      // Parse dateOfBirth if provided
+      if (params.dateOfBirth) {
+        existingTraveler.dateOfBirth = parseLocalDate(params.dateOfBirth);
+      }
+
+      itinerary.updatedAt = new Date();
+
+      // Save updated itinerary
+      const saveResult = await this.deps.itineraryService.update(itineraryId, {
+        travelers: itinerary.travelers,
+      });
+
+      if (!saveResult.success) {
+        throw new Error(`Failed to update traveler: ${saveResult.error.message}`);
+      }
+
+      // Build response message
+      const travelerName = params.lastName
+        ? `${params.firstName} ${params.lastName}`
+        : params.firstName;
+      const relationshipText = params.relationship ? ` (${params.relationship})` : '';
+      const isPrimaryText = params.isPrimary ? ' - Primary traveler' : '';
+
+      return {
+        success: true,
+        travelerId: existingTraveler.id,
+        travelerName,
+        message: `Updated existing traveler ${travelerName}${relationshipText}${isPrimaryText}`,
+        action: 'updated',
+        // Signal that itinerary changed (triggers UI refresh)
+        itineraryChanged: true,
+      };
+    }
+
+    // No duplicate found - create new traveler
     const newTraveler: any = {
       id: generateTravelerId(),
       type: typeMap[params.type] || TravelerType.ADULT,
@@ -584,11 +650,6 @@ export class ToolExecutor {
     // Parse dateOfBirth if provided
     if (params.dateOfBirth) {
       newTraveler.dateOfBirth = parseLocalDate(params.dateOfBirth);
-    }
-
-    // Add to itinerary travelers array
-    if (!itinerary.travelers) {
-      itinerary.travelers = [];
     }
 
     itinerary.travelers.push(newTraveler);
@@ -615,6 +676,7 @@ export class ToolExecutor {
       travelerId: newTraveler.id,
       travelerName,
       message: `Added ${travelerName}${relationshipText}${isPrimaryText} to the trip`,
+      action: 'created',
       // Signal that itinerary changed (triggers UI refresh)
       itineraryChanged: true,
     };
