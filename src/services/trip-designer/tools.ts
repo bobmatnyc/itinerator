@@ -1069,12 +1069,18 @@ export const HELP_AGENT_TOOLS: ToolDefinition[] = [
 /**
  * Essential tools for initial context (new itineraries)
  * Minimal set to reduce token count on first message
+ *
+ * IMPORTANT: Includes segment-creating tools (add_flight, add_hotel, add_activity)
+ * so the Trip Designer can capture bookings mentioned in the first message.
  */
 export const ESSENTIAL_TOOLS: ToolDefinition[] = [
   GET_ITINERARY_TOOL,
   UPDATE_ITINERARY_TOOL,
   UPDATE_PREFERENCES_TOOL,
   ADD_TRAVELER_TOOL,
+  ADD_FLIGHT_TOOL,
+  ADD_HOTEL_TOOL,
+  ADD_ACTIVITY_TOOL,
   SEARCH_WEB_TOOL,
 ];
 
