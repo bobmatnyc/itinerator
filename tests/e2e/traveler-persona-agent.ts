@@ -63,6 +63,7 @@ interface TravelerPersona {
   tripRequest: TripRequest;
   expectations: PersonaExpectations;
   communicationStyle?: string;
+  sampleBookingPhrases?: string[];
 }
 
 interface ConversationMessage {
@@ -162,7 +163,14 @@ const PERSONAS: TravelerPersona[] = [
       shouldInclude: ['hostel', 'street food', 'temple'],
       shouldNotInclude: ['luxury', 'resort', 'fine dining'],
     },
-    communicationStyle: 'casual, enthusiastic, uses slang, values authenticity'
+    communicationStyle: 'casual, enthusiastic, uses slang, values authenticity',
+    sampleBookingPhrases: [
+      'Book that flight for me',
+      'Add that hostel to my trip',
+      'I want to reserve that',
+      'Put that activity on my itinerary',
+      'Go ahead and add that'
+    ]
   },
 
   {
@@ -191,7 +199,14 @@ const PERSONAS: TravelerPersona[] = [
       shouldInclude: ['romantic', 'wine', 'sunset'],
       shouldNotInclude: ['budget', 'hostel', 'family-friendly'],
     },
-    communicationStyle: 'polite, detail-oriented, appreciates recommendations, romantic'
+    communicationStyle: 'polite, detail-oriented, appreciates recommendations, romantic',
+    sampleBookingPhrases: [
+      'Please book that hotel for us',
+      'We would like to reserve that restaurant',
+      'Add that wine tour to our itinerary',
+      'Please add that to our trip',
+      'Book that for our anniversary trip'
+    ]
   },
 
   {
@@ -223,7 +238,14 @@ const PERSONAS: TravelerPersona[] = [
       shouldInclude: ['Disney', 'Universal', 'family', 'pool'],
       shouldNotInclude: ['nightclub', 'bar crawl', 'adults-only'],
     },
-    communicationStyle: 'practical, safety-conscious, kid-focused, organized'
+    communicationStyle: 'practical, safety-conscious, kid-focused, organized',
+    sampleBookingPhrases: [
+      'Book those Disney tickets for our family',
+      'Please add that resort to our itinerary',
+      'Reserve that family-friendly restaurant',
+      'Add those theme park tickets',
+      'Book that for all four of us'
+    ]
   },
 
   {
@@ -249,7 +271,14 @@ const PERSONAS: TravelerPersona[] = [
       shouldInclude: ['business', 'wifi', 'central'],
       shouldNotInclude: ['beach', 'resort', 'leisure'],
     },
-    communicationStyle: 'direct, time-conscious, efficiency-focused, professional'
+    communicationStyle: 'direct, time-conscious, efficiency-focused, professional',
+    sampleBookingPhrases: [
+      'Book that business class flight',
+      'Reserve that hotel near Shibuya',
+      'Add that airport transfer',
+      'Book that meeting room',
+      'I need that booked ASAP'
+    ]
   },
 
   {
@@ -278,7 +307,14 @@ const PERSONAS: TravelerPersona[] = [
       shouldInclude: ['accessible', 'luxury', 'guided tour'],
       shouldNotInclude: ['hiking', 'adventure', 'budget'],
     },
-    communicationStyle: 'thoughtful, experienced, values comfort, appreciates culture'
+    communicationStyle: 'thoughtful, experienced, values comfort, appreciates culture',
+    sampleBookingPhrases: [
+      'Please book that luxury suite for us',
+      'Reserve that guided museum tour',
+      'Add that fine dining restaurant',
+      'Book that first-class cabin',
+      'We would like to reserve that'
+    ]
   },
 
   {
@@ -309,7 +345,14 @@ const PERSONAS: TravelerPersona[] = [
       shouldInclude: ['adventure', 'zip', 'hike', 'wildlife'],
       shouldNotInclude: ['spa', 'relaxation', 'shopping'],
     },
-    communicationStyle: 'energetic, adventurous, group-oriented, seeks thrills'
+    communicationStyle: 'energetic, adventurous, group-oriented, seeks thrills',
+    sampleBookingPhrases: [
+      'Book that zip-lining tour for all of us',
+      'Add that rafting adventure',
+      'Reserve those spots on the hike',
+      'Sign us up for that',
+      'Book that extreme sports package'
+    ]
   },
 
   {
@@ -335,7 +378,14 @@ const PERSONAS: TravelerPersona[] = [
       shouldInclude: ['hostel', 'free', 'walking', 'budget'],
       shouldNotInclude: ['luxury', 'michelin', 'five-star'],
     },
-    communicationStyle: 'budget-conscious, flexible, curious, student mindset'
+    communicationStyle: 'budget-conscious, flexible, curious, student mindset',
+    sampleBookingPhrases: [
+      'Book that cheap hostel',
+      'Add that free walking tour',
+      'Reserve that budget flight',
+      'Add that to my trip',
+      'Book that for me'
+    ]
   },
 
   {
@@ -359,7 +409,14 @@ const PERSONAS: TravelerPersona[] = [
       expectedSegmentTypes: ['FLIGHT', 'HOTEL', 'ACTIVITY'],
       shouldInclude: ['unique', 'local'],
     },
-    communicationStyle: 'open-minded, exploratory, trusts recommendations, adventurous'
+    communicationStyle: 'open-minded, exploratory, trusts recommendations, adventurous',
+    sampleBookingPhrases: [
+      'Add that to my itinerary',
+      'Book that for me',
+      'Reserve that experience',
+      'Sign me up for that',
+      'I want to book that'
+    ]
   }
 ];
 
@@ -384,7 +441,7 @@ class TravelerPersonaAgent {
     this.persona = persona;
     this.model = options.model || 'anthropic/claude-sonnet-4';
     this.apiBaseUrl = options.apiBaseUrl || 'http://localhost:5176/api/v1';
-    this.maxTurns = options.maxTurns || 20;
+    this.maxTurns = options.maxTurns || 15;
     this.verbose = options.verbose ?? true;
     this.userEmail = options.userEmail || 'test@test.com';
     this.conversationHistory = [];
@@ -514,6 +571,15 @@ class TravelerPersonaAgent {
     lastAssistantMessage?: string;
     itinerary?: Itinerary;
   }): Promise<string> {
+    const bookingPhrasesSection = this.persona.sampleBookingPhrases
+      ? `\n\nBOOKING LANGUAGE - Use explicit booking requests like:
+${this.persona.sampleBookingPhrases.map(p => `- "${p}"`).join('\n')}
+
+IMPORTANT: When the Trip Designer suggests specific flights, hotels, activities, or restaurants, respond with EXPLICIT booking language.
+Use phrases like "book that", "add that to my itinerary", "reserve that", "I want to book", etc.
+Do NOT just say "that sounds good" or "I like that" - actively REQUEST the booking.`
+      : '';
+
     const systemPrompt = `You are roleplaying as ${this.persona.name}, a ${this.persona.type} traveler.
 
 PERSONA DETAILS:
@@ -532,7 +598,7 @@ ${this.persona.tripRequest.destination ? `- Destination: ${this.persona.tripRequ
 ${this.persona.tripRequest.dates ? `- Dates: ${this.persona.tripRequest.dates.start} to ${this.persona.tripRequest.dates.end}` : ''}
 ${this.persona.tripRequest.specialRequests ? `- Special requests: ${this.persona.tripRequest.specialRequests.join(', ')}` : ''}
 
-COMMUNICATION STYLE: ${this.persona.communicationStyle}
+COMMUNICATION STYLE: ${this.persona.communicationStyle}${bookingPhrasesSection}
 
 Generate ONLY your response as this traveler would naturally speak. Be conversational and authentic to the persona.
 Do NOT include any explanations, meta-commentary, or role labels - just the message content.`;
@@ -562,7 +628,16 @@ Do NOT include any explanations, meta-commentary, or role labels - just the mess
     const userPrompt = `The Trip Designer just said:
 "${context.lastAssistantMessage}"
 
-Generate your natural response as ${this.persona.name}. Answer their questions based on your persona details above. Be helpful but stay in character.`;
+Generate your natural response as ${this.persona.name}. Answer their questions based on your persona details above. Be helpful but stay in character.
+
+CRITICAL: If the Trip Designer is suggesting or recommending a specific flight, hotel, restaurant, activity, or any bookable item, you MUST respond with an EXPLICIT booking request using phrases like:
+- "Book that [thing] for me"
+- "Add that to my itinerary"
+- "Reserve that [thing]"
+- "I want to book that"
+- "Please add that to my trip"
+
+Do NOT just say "that sounds good" or "I like that" - you must EXPLICITLY REQUEST the booking.`;
 
     const response = await this.openai.chat.completions.create({
       model: 'anthropic/claude-3.5-sonnet',
@@ -1062,7 +1137,7 @@ async function runPersonaTests(options: TestOptions = {}): Promise<void> {
   console.log('🧪 Starting Traveler Persona E2E Tests\n');
   console.log(`Model: ${options.model || 'anthropic/claude-sonnet-4'}`);
   console.log(`API: ${options.apiBaseUrl || 'http://localhost:5176/api/v1'}`);
-  console.log(`Max turns: ${options.maxTurns || 20}\n`);
+  console.log(`Max turns: ${options.maxTurns || 15}\n`);
 
   for (const persona of PERSONAS) {
     console.log(`\n${'='.repeat(80)}`);
@@ -1295,7 +1370,7 @@ Options:
   --type <type>        Test all personas of a specific type
   --model <model>      OpenRouter model to use (default: anthropic/claude-sonnet-4)
   --api <url>          API base URL (default: http://localhost:5176/api/v1)
-  --max-turns <n>      Maximum conversation turns (default: 20)
+  --max-turns <n>      Maximum conversation turns (default: 15)
   --verbose            Enable verbose debug output (default: true)
   --quiet              Disable verbose output
   --help               Show this help message
