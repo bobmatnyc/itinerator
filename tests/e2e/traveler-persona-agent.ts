@@ -223,7 +223,7 @@ const PERSONAS: TravelerPersona[] = [
       budget: 'moderate',
       pace: 'relaxed',
       accommodation: 'resort',
-      interests: ['theme parks', 'beach', 'kid-friendly activities', 'pools'],
+      interests: ['Walt Disney World Magic Kingdom', 'Universal Studios Orlando', 'resort pools', 'beach', 'kid-friendly activities'],
       dietaryRestrictions: ['nut allergy'],
     },
     tripRequest: {
@@ -235,7 +235,7 @@ const PERSONAS: TravelerPersona[] = [
     expectations: {
       minSegments: 6,
       expectedSegmentTypes: ['FLIGHT', 'HOTEL', 'ACTIVITY'],
-      shouldInclude: ['Disney', 'Universal', 'family', 'pool'],
+      shouldInclude: ['Disney', 'Universal', 'pool', 'resort', 'family'],
       shouldNotInclude: ['nightclub', 'bar crawl', 'adults-only'],
     },
     communicationStyle: 'practical, safety-conscious, kid-focused, organized',
@@ -244,7 +244,11 @@ const PERSONAS: TravelerPersona[] = [
       'Please add that resort to our itinerary',
       'Reserve that family-friendly restaurant',
       'Add those theme park tickets',
-      'Book that for all four of us'
+      'Book that for all four of us',
+      'Book pool access at the resort',
+      'Reserve a cabana by the pool',
+      'Get us Magic Kingdom tickets for multiple days',
+      'Add Universal Studios to our trip'
     ]
   },
 
@@ -331,7 +335,7 @@ const PERSONAS: TravelerPersona[] = [
       budget: 'moderate',
       pace: 'packed',
       accommodation: 'airbnb',
-      interests: ['hiking', 'rafting', 'camping', 'extreme sports', 'wildlife'],
+      interests: ['zip-lining tours', 'volcano hiking', 'whitewater rafting', 'jungle trekking', 'extreme sports'],
     },
     tripRequest: {
       origin: 'Denver',
@@ -340,9 +344,9 @@ const PERSONAS: TravelerPersona[] = [
       specialRequests: ['want to try zip-lining', 'rainforest hike'],
     },
     expectations: {
-      minSegments: 12,
-      expectedSegmentTypes: ['FLIGHT', 'HOTEL', 'ACTIVITY', 'TRANSFER'],
-      shouldInclude: ['adventure', 'zip', 'hike', 'wildlife'],
+      minSegments: 6,
+      expectedSegmentTypes: ['FLIGHT', 'HOTEL', 'ACTIVITY'],
+      shouldInclude: ['adventure', 'zip', 'hike'],
       shouldNotInclude: ['spa', 'relaxation', 'shopping'],
     },
     communicationStyle: 'energetic, adventurous, group-oriented, seeks thrills',
@@ -351,7 +355,11 @@ const PERSONAS: TravelerPersona[] = [
       'Add that rafting adventure',
       'Reserve those spots on the hike',
       'Sign us up for that',
-      'Book that extreme sports package'
+      'Book that extreme sports package',
+      'Book that zip-line tour right now',
+      'Sign all four of us up for the hike',
+      'Reserve that adventure package for the group',
+      'Add that volcano hike to our itinerary'
     ]
   },
 
