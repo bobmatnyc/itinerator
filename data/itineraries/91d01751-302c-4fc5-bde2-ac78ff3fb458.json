@@ -1,0 +1,28 @@
+{
+  "id": "91d01751-302c-4fc5-bde2-ac78ff3fb458",
+  "version": 8,
+  "createdAt": "2026-01-02T17:50:31.739Z",
+  "updatedAt": "2026-01-02T17:51:36.622Z",
+  "title": "Southeast Asia Backpacking Adventure",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "0f9898c9-993b-4afd-9527-ab5b96080bb6",
+      "type": "ADULT",
+      "firstName": "Alex",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

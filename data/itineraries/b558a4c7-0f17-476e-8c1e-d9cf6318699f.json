@@ -1,0 +1,189 @@
+{
+  "id": "b558a4c7-0f17-476e-8c1e-d9cf6318699f",
+  "version": 15,
+  "createdAt": "2026-01-02T00:47:41.697Z",
+  "updatedAt": "2026-01-02T00:50:00.448Z",
+  "title": "The Hendersons's Trip",
+  "description": "Test itinerary for senior persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "52cdd431-7092-4539-a95a-7ee610b8ba80",
+      "type": "SENIOR",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "aeb15f19-cd9b-48a4-8a6f-c485ad276dee",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "8181c66c-7d71-4f9f-8500-37709c1bda0a",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-09T14:00:00.000Z",
+      "endDatetime": "2024-09-10T00:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:49:30.471Z"
+      },
+      "metadata": {},
+      "type": "FLIGHT",
+      "airline": {
+        "name": "American Airlines",
+        "code": "AA"
+      },
+      "flightNumber": "AA98",
+      "origin": {
+        "name": "Miami International Airport",
+        "code": "MIA"
+      },
+      "destination": {
+        "name": "Leonardo da Vinci International Airport",
+        "code": "FCO"
+      },
+      "cabinClass": "FIRST"
+    },
+    {
+      "id": "1de91116-7567-4dd7-af83-849d9303a200",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-09T19:00:00.000Z",
+      "endDatetime": "2024-09-10T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:49:30.472Z"
+      },
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Rome Marriott Grand Hotel Flora"
+      },
+      "location": {
+        "name": "Via Vittorio Veneto"
+      },
+      "checkInDate": "2024-09-09T19:00:00.000Z",
+      "checkOutDate": "2024-09-10T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Deluxe Room",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "17bcf758-409c-433a-a255-b46182ac1180",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-13T14:00:00.000Z",
+      "endDatetime": "2024-09-13T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:49:30.473Z"
+      },
+      "notes": "Wheelchair assistance available. Limited walking required.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Uffizi Gallery Gentle Walking Tour",
+      "description": "Gentle-paced guided tour of the world-renowned Uffizi Gallery, featuring Renaissance masterpieces",
+      "location": {
+        "name": "Uffizi Gallery"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "b325eedc-0f7d-46db-a00d-b69524b8fae7",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-15T14:00:00.000Z",
+      "endDatetime": "2024-09-15T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:49:30.474Z"
+      },
+      "notes": "Wheelchair assistance available. Elevator access throughout.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Vatican Museums Gentle Walking Tour",
+      "description": "Comprehensive tour of the Vatican Museums with minimal walking and comfortable pacing",
+      "location": {
+        "name": "Vatican Museums"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "4452e170-e31a-4060-8d06-4adab5fbb281",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-12T22:00:00.000Z",
+      "endDatetime": "2024-09-13T00:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:49:30.475Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Mediterranean Wine Tasting Experience",
+      "description": "Complimentary wine tasting featuring select Mediterranean regional wines",
+      "location": {
+        "name": "Marina Ship Wine Bar"
+      },
+      "category": "dining"
+    },
+    {
+      "type": "FLIGHT",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-09T14:00:00.000Z",
+      "endDatetime": "2025-09-10T00:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:50:00.447Z"
+      },
+      "airline": {
+        "name": "American Airlines",
+        "code": "AA"
+      },
+      "flightNumber": "AA98",
+      "origin": {
+        "name": "Miami International Airport",
+        "code": "MIA",
+        "type": "AIRPORT"
+      },
+      "destination": {
+        "name": "Leonardo da Vinci International Airport",
+        "code": "FCO",
+        "type": "AIRPORT"
+      },
+      "cabinClass": "FIRST",
+      "metadata": {},
+      "id": "c2df9937-3e9f-4c2f-8c46-6c430a68dea5"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

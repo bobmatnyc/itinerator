@@ -1,0 +1,29 @@
+{
+  "id": "58964322-a9cb-4304-ac53-fbaf151f4791",
+  "version": 2,
+  "createdAt": "2026-01-01T20:03:52.410Z",
+  "updatedAt": "2026-01-01T20:04:09.194Z",
+  "title": "Sarah & Michael's Trip",
+  "description": "Test itinerary for couple persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "132c7ea0-8317-4032-8eb7-2aad6655bcec",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

@@ -1,0 +1,86 @@
+{
+  "id": "600ad42b-a2b8-4439-a9f0-95589fa7030e",
+  "version": 16,
+  "createdAt": "2026-01-02T04:37:43.059Z",
+  "updatedAt": "2026-01-02T04:39:06.038Z",
+  "title": "Adventure Squad: Costa Rica Thrill Ride",
+  "description": "10-day extreme adventure packed with zip-lining, volcano treks, white water rafting, and jungle expeditions!",
+  "status": "DRAFT",
+  "startDate": "2026-03-10T16:00:00.000Z",
+  "endDate": "2026-03-20T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "e0af2c31-f77d-4d3c-a37a-f3529edf3303",
+      "type": "ADULT",
+      "firstName": "Mike",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "31c1d073-556a-4b8a-a834-8e102d1540cf",
+      "type": "ADULT",
+      "firstName": "Sara",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "a4777ff5-41a5-4576-b05a-840a7675dcdc",
+      "type": "ADULT",
+      "firstName": "Tom",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "63caf938-7ed2-4190-9326-6d569ba2d062",
+      "type": "ADULT",
+      "firstName": "Anna",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-03-15T13:00:00.000Z",
+      "endDatetime": "2026-03-15T19:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:39:06.038Z"
+      },
+      "name": "Extreme White Water Rafting - Pacuare River",
+      "description": "Full-day extreme white water rafting expedition through the stunning Pacuare River. Navigate Class III and IV rapids through pristine rainforest landscapes. Professional guides, top-tier safety equipment, and heart-pounding adventure guaranteed!",
+      "location": {
+        "name": "Pacuare River",
+        "type": "ATTRACTION"
+      },
+      "category": "adventure",
+      "notes": "Bring: Quick-dry clothes, water shoes, sunscreen, waterproof camera. Intense physical activity - moderate to high fitness level recommended.",
+      "metadata": {},
+      "id": "7005aff3-d60d-4fad-8cf2-137bc432b552"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

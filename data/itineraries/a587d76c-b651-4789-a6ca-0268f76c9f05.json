@@ -1,0 +1,49 @@
+{
+  "id": "a587d76c-b651-4789-a6ca-0268f76c9f05",
+  "version": 7,
+  "createdAt": "2026-01-01T20:35:51.196Z",
+  "updatedAt": "2026-01-01T20:37:43.800Z",
+  "title": "Solo Trip to Colombia",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "34dfd9eb-ba0c-42f4-bd95-f411f697ebdc",
+      "type": "ADULT",
+      "firstName": "Pat",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "83821a6c-e2af-43d9-b893-240a2faa6d86",
+      "type": "ADULT",
+      "firstName": "Pat",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "solo",
+    "pace": "balanced",
+    "interests": [
+      "coffee",
+      "local experiences",
+      "cultural immersion"
+    ],
+    "origin": "Seattle"
+  }
+}

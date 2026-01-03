@@ -1,0 +1,159 @@
+{
+  "id": "9764f692-4431-43e5-9693-070f22e57701",
+  "version": 9,
+  "createdAt": "2026-01-02T00:44:44.346Z",
+  "updatedAt": "2026-01-02T00:47:09.178Z",
+  "title": "Jennifer Chen's Trip",
+  "description": "Test itinerary for business persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "f9174a12-d050-4c60-95da-4060837ef6d2",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-03-13T22:00:00.000Z",
+      "endDatetime": "2025-03-15T01:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:46:03.399Z"
+      },
+      "metadata": {},
+      "type": "FLIGHT",
+      "airline": {
+        "name": "United Airlines",
+        "code": "UA"
+      },
+      "flightNumber": "UA79",
+      "origin": {
+        "name": "San Francisco International Airport",
+        "code": "SFO"
+      },
+      "destination": {
+        "name": "Narita International Airport",
+        "code": "NRT"
+      },
+      "cabinClass": "BUSINESS"
+    },
+    {
+      "id": "128ac67f-ea76-4455-a51f-f481e5b37730",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-03-13T19:00:00.000Z",
+      "endDatetime": "2025-03-17T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:46:21.555Z"
+      },
+      "notes": "Early check-in requested. Business traveler with meeting room requirements.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Cerulean Tower Tokyu Hotel"
+      },
+      "location": {
+        "name": "Shibuya"
+      },
+      "checkInDate": "2025-03-13T19:00:00.000Z",
+      "checkOutDate": "2025-03-17T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Business Room",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "160e7833-5a2f-4dfe-abd9-b50d3b90449b",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-03-14T13:00:00.000Z",
+      "endDatetime": "2025-03-14T21:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:46:46.202Z"
+      },
+      "notes": "Video conferencing setup required. Ensure strong, stable internet connection for international calls.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Business Meeting Rooms at Cerulean Tower",
+      "description": "Private meeting rooms with video conferencing capabilities and high-speed wifi. Booked for full-day client meetings.",
+      "location": {
+        "name": "Cerulean Tower Tokyu Hotel"
+      }
+    },
+    {
+      "id": "b12ac1c2-a73c-4480-96c9-3ff79224d37f",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-03-15T13:00:00.000Z",
+      "endDatetime": "2025-03-15T21:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:46:46.203Z"
+      },
+      "notes": "Video conferencing setup required. Ensure strong, stable internet connection for international calls.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Business Meeting Rooms at Cerulean Tower",
+      "description": "Private meeting rooms with video conferencing capabilities and high-speed wifi. Booked for full-day client meetings.",
+      "location": {
+        "name": "Cerulean Tower Tokyu Hotel"
+      }
+    },
+    {
+      "id": "995ddac3-99be-4925-ab45-d4feac1253be",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-03-13T12:00:00.000Z",
+      "endDatetime": "2025-03-13T12:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:46:46.205Z"
+      },
+      "provider": {
+        "name": "Tokyo Executive Transfers"
+      },
+      "notes": "Private business-class transfer. Ensure punctual, professional service for arriving business traveler.",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "Narita International Airport"
+      },
+      "dropoffLocation": {
+        "name": "Cerulean Tower Tokyu Hotel"
+      }
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-03-14T23:30:00.000Z",
+      "endDatetime": "2025-03-15T01:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:47:09.178Z"
+      },
+      "name": "Business Dinner at Ukai-tei Omotesando",
+      "description": "High-end teppanyaki restaurant perfect for business dinners. Private dining areas available for client meetings. Offers premium Japanese beef and seafood prepared at your table.",
+      "location": {
+        "name": "Ukai-tei Omotesando",
+        "type": "ATTRACTION"
+      },
+      "category": "dining",
+      "metadata": {},
+      "id": "55a0ce0d-0750-40b8-85f0-a5bad38f3c10"
+    }
+  ],
+  "tripType": "BUSINESS",
+  "tags": [],
+  "metadata": {}
+}

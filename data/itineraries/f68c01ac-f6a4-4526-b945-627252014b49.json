@@ -1,0 +1,91 @@
+{
+  "id": "f68c01ac-f6a4-4526-b945-627252014b49",
+  "version": 8,
+  "createdAt": "2026-01-01T20:21:45.660Z",
+  "updatedAt": "2026-01-01T20:24:11.892Z",
+  "title": "Sarah & Michael's Amalfi Coast Anniversary Trip",
+  "description": "Test itinerary for couple persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "e0051922-cb30-4da6-bd04-c440c298578c",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "0f1297dc-100b-4f59-8550-c82d36d28a6e",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "3d3bfda1-9313-41d0-8514-bca6d28c330c",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-20T19:00:00.000Z",
+      "endDatetime": "2024-09-25T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T20:23:39.766Z"
+      },
+      "notes": "Anniversary trip - request terrace with Mediterranean view",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Le Sirenuse"
+      },
+      "location": {
+        "name": "Positano"
+      },
+      "checkInDate": "2024-09-20T19:00:00.000Z",
+      "checkOutDate": "2024-09-25T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Sea View Suite",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-22T22:30:00.000Z",
+      "endDatetime": "2024-09-23T01:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T20:24:11.891Z"
+      },
+      "name": "Private Luxury Sunset Yacht Tour",
+      "description": "Romantic sunset cruise along the Amalfi Coast with champagne and gourmet appetizers",
+      "location": {
+        "name": "Positano Coast",
+        "type": "ATTRACTION"
+      },
+      "category": "tour",
+      "metadata": {},
+      "id": "dd9f98b9-4bdf-4342-af7d-616a7d46fe6b"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

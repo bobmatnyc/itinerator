@@ -1,0 +1,135 @@
+{
+  "id": "5741094d-d7b6-4c79-83c1-3ea7f788f1ce",
+  "version": 8,
+  "createdAt": "2026-01-01T23:30:29.724Z",
+  "updatedAt": "2026-01-01T23:32:00.649Z",
+  "title": "The Johnson Family's Trip",
+  "description": "Test itinerary for family persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "989558ef-1bbe-4d9c-b752-9e0ea772e67b",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "131f2523-d156-4f64-984d-206082ddcc66",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "45a99e38-9711-43f3-8be8-d13c753842f8",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "3217c019-0640-4017-8a67-68a0afa768d7",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false,
+        "age": 8
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "c768c5e3-1263-414e-bb16-0a9e31d8f581",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-15T19:00:00.000Z",
+      "endDatetime": "2025-06-22T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:31:11.851Z"
+      },
+      "notes": "Family of 4 (2 adults, 2 children). Request room with nut-free environment and allergy-safe amenities.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Wyndham Bonnet Creek Resort"
+      },
+      "location": {
+        "name": "Orlando"
+      },
+      "checkInDate": "2025-06-15T19:00:00.000Z",
+      "checkOutDate": "2025-06-22T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Family Suite with Multiple Beds",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "35c8363c-3210-4ab6-b9a9-2d773cbf72b7",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-16T13:00:00.000Z",
+      "endDatetime": "2025-06-19T00:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:31:39.980Z"
+      },
+      "notes": "4 tickets for David, Lisa, Emma (12), and Jake (8). Includes allergy considerations.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "3-Day Disney Park Tickets",
+      "description": "3-day park tickets for the Johnson family, with focus on Magic Kingdom",
+      "location": {
+        "name": "Walt Disney World"
+      },
+      "category": "theme_park"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-18T13:00:00.000Z",
+      "endDatetime": "2025-06-19T21:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:32:00.649Z"
+      },
+      "name": "2-Day Universal Studios Tickets",
+      "description": "2-day tickets for all four Johnson family members - access to Universal Studios and Islands of Adventure",
+      "location": {
+        "name": "Universal Studios Orlando",
+        "type": "ATTRACTION"
+      },
+      "category": "theme_park",
+      "metadata": {},
+      "id": "6670e05c-cb9b-4653-a396-8c0443d0909f"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

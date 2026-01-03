@@ -1,0 +1,15 @@
+{
+  "id": "76ae056d-6577-429a-8019-07b5d9bf5509",
+  "version": 1,
+  "createdAt": "2026-01-01T19:37:28.888Z",
+  "updatedAt": "2026-01-01T19:37:28.888Z",
+  "title": "Test Storage Issue",
+  "description": "Testing persistence",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "segments": [],
+  "tags": [],
+  "metadata": {},
+  "createdBy": "test@example.com"
+}

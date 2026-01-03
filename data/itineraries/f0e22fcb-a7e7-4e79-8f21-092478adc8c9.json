@@ -1,0 +1,46 @@
+{
+  "id": "f0e22fcb-a7e7-4e79-8f21-092478adc8c9",
+  "version": 5,
+  "createdAt": "2026-01-01T23:46:29.250Z",
+  "updatedAt": "2026-01-01T23:48:35.194Z",
+  "title": "Alex's Southeast Asia Backpacking Adventure",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-08T19:00:00.000Z",
+      "endDatetime": "2025-09-11T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:48:35.194Z"
+      },
+      "property": {
+        "name": "Hanoi Backpackers Hostel"
+      },
+      "location": {
+        "name": "Old Quarter, Hanoi",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2025-09-08T19:00:00.000Z",
+      "checkOutDate": "2025-09-11T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Dormitory Bed",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Social hostel with free walking tours and group activities. Perfect for meeting other backpackers!\"",
+      "metadata": {},
+      "id": "5f1962c4-a369-45fb-8782-40ec5ea8a3ad"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

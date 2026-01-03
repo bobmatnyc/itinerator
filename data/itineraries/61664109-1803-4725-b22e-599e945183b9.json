@@ -1,0 +1,174 @@
+{
+  "id": "61664109-1803-4725-b22e-599e945183b9",
+  "version": 11,
+  "createdAt": "2026-01-02T04:44:33.736Z",
+  "updatedAt": "2026-01-02T04:47:02.482Z",
+  "title": "European Backpacking Adventure",
+  "description": "Test itinerary for budget persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "1c8b6733-bb31-44e0-98cb-c69de81806b2",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-06-15T19:00:00.000Z",
+      "endDatetime": "2024-06-19T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:46:28.832Z"
+      },
+      "price": {
+        "amount": 6000,
+        "currency": "EUR"
+      },
+      "notes": "Budget-friendly hostel with free walking tour. Dorm-style accommodation.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Czech Inn Hostel"
+      },
+      "location": {
+        "name": "Prague"
+      },
+      "checkInDate": "2024-06-15T19:00:00.000Z",
+      "checkOutDate": "2024-06-19T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Hostel Dorm",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "41af6cc3-e832-4b98-b8a1-b584602eb39a",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-06-19T19:00:00.000Z",
+      "endDatetime": "2024-06-23T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:46:35.633Z"
+      },
+      "price": {
+        "amount": 5400,
+        "currency": "EUR"
+      },
+      "notes": "Budget-friendly hostel with great social atmosphere. Dorm-style accommodation.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Big Fish Budapest Hostel"
+      },
+      "location": {
+        "name": "Budapest"
+      },
+      "checkInDate": "2024-06-19T19:00:00.000Z",
+      "checkOutDate": "2024-06-23T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Hostel Dorm",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "3b87c09b-fe95-49f0-be7b-d702be47e69d",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-06-23T19:00:00.000Z",
+      "endDatetime": "2024-06-27T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:46:42.555Z"
+      },
+      "price": {
+        "amount": 10000,
+        "currency": "EUR"
+      },
+      "notes": "Slightly pricier hostel in amazing Montmartre location. Dorm-style accommodation.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Le Village Hostel Montmartre"
+      },
+      "location": {
+        "name": "Paris"
+      },
+      "checkInDate": "2024-06-23T19:00:00.000Z",
+      "checkOutDate": "2024-06-27T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Hostel Dorm",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "d0fd3f6c-d593-40d7-96d2-331db238baa6",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-06-16T14:00:00.000Z",
+      "endDatetime": "2024-06-16T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:46:49.348Z"
+      },
+      "notes": "Tip-based walking tour covering Old Town, Charles Bridge, and historic sites. Meet at Old Town Square.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Prague Free Walking Tour",
+      "location": {
+        "name": "Prague Old Town"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "ed9b9c8c-0850-47ea-ae21-bfd5424bce25",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-06-20T14:00:00.000Z",
+      "endDatetime": "2024-06-20T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:46:56.266Z"
+      },
+      "notes": "Tip-based walking tour covering key Budapest landmarks. Meet at St. Stephen's Basilica.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Budapest Free Walking Tour",
+      "location": {
+        "name": "Budapest City Center"
+      },
+      "category": "tour"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-06-24T14:00:00.000Z",
+      "endDatetime": "2024-06-24T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:47:02.481Z"
+      },
+      "name": "Paris Free Walking Tour",
+      "location": {
+        "name": "Paris City Center",
+        "type": "ATTRACTION"
+      },
+      "category": "tour",
+      "notes": "Tip-based walking tour covering major Paris landmarks. Meet near Notre-Dame Cathedral.",
+      "metadata": {},
+      "id": "16101de9-39d7-4278-969b-762b690777ad"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

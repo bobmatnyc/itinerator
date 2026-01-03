@@ -1,0 +1,119 @@
+{
+  "id": "fafa93e1-5381-42a9-b738-38b2a7d476e7",
+  "version": 14,
+  "createdAt": "2026-01-02T05:21:01.103Z",
+  "updatedAt": "2026-01-02T05:22:09.440Z",
+  "title": "Johnson Family Orlando Vacation",
+  "description": "Family trip to Disney World and Universal Studios with pool time",
+  "status": "DRAFT",
+  "startDate": "2026-06-15T16:00:00.000Z",
+  "endDate": "2026-06-22T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "600e14e3-a332-4c93-ad4f-967b5086f8a3",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "parent",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "ab920511-7977-495b-acf8-4091b0f1f229",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "2e77aa30-b0c3-478f-9c94-e57495c3aa39",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "0cf3fd03-ab55-44a9-9920-d82c9be3d385",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 8
+      }
+    },
+    {
+      "id": "238517e9-ad31-4782-9b84-4ab657978a5d",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "91dd5b41-f3b4-48fa-87aa-873a70b42825",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "7bc43198-76d1-49a0-b2bc-c0bedd9931b7",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "ccc99823-a83c-4834-afba-a9c0fb9c6535",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 8
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

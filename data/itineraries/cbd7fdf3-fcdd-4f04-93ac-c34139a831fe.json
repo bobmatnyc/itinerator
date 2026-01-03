@@ -1,0 +1,40 @@
+{
+  "id": "cbd7fdf3-fcdd-4f04-93ac-c34139a831fe",
+  "version": 13,
+  "createdAt": "2026-01-01T23:34:26.405Z",
+  "updatedAt": "2026-01-01T23:35:35.203Z",
+  "title": "Mediterranean Luxury Cruise - Oceania Riviera",
+  "description": "Test itinerary for senior persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "7a5ba327-8457-4a66-9913-562cc85677bd",
+      "type": "ADULT",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "cf83acd0-1f7f-4b9a-9512-3dd2a2b9a6ba",
+      "type": "ADULT",
+      "firstName": "Margaret",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

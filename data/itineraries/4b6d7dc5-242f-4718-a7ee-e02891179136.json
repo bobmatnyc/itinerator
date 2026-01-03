@@ -1,0 +1,115 @@
+{
+  "id": "4b6d7dc5-242f-4718-a7ee-e02891179136",
+  "version": 11,
+  "createdAt": "2026-01-01T21:11:10.947Z",
+  "updatedAt": "2026-01-01T21:13:19.900Z",
+  "title": "The Hendersons's Trip",
+  "description": "Test itinerary for senior persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "1a808245-ddd7-42a0-95cb-74e64b6c527b",
+      "type": "SENIOR",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "ef2e8c44-9fc5-472a-b8c2-92832652ba28",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "d9ce6cc7-8539-4d02-bb3d-069c8bb5e5a7",
+      "type": "SENIOR",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "e973d325-2889-48ad-82cc-a7f7387f66e7",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "1c927373-b9b5-4850-a207-83ba5c4ccc61",
+      "type": "SENIOR",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "9d4aad68-120b-4df2-92a9-07db0ba54bad",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "FLIGHT",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-15T16:00:00.000Z",
+      "endDatetime": "2025-09-15T18:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:13:19.899Z"
+      },
+      "airline": {
+        "name": "Seabourn",
+        "code": "SK"
+      },
+      "flightNumber": "Cruise Voyage",
+      "origin": {
+        "name": "Venice International Airport",
+        "code": "VCE",
+        "type": "AIRPORT"
+      },
+      "destination": {
+        "name": "Mediterranean Cruise Route",
+        "code": "MED",
+        "type": "AIRPORT"
+      },
+      "metadata": {},
+      "id": "7f77f748-3c89-46ad-a9ea-645a7722f2e9"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

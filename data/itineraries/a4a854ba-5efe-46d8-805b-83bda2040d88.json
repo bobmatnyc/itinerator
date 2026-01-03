@@ -1,0 +1,82 @@
+{
+  "id": "a4a854ba-5efe-46d8-805b-83bda2040d88",
+  "version": 24,
+  "createdAt": "2026-01-02T05:35:46.113Z",
+  "updatedAt": "2026-01-02T05:39:44.787Z",
+  "title": "Mediterranean Cultural Cruise",
+  "description": "14-day luxury Mediterranean cruise for retired professors, focusing on cultural experiences with mobility-friendly options",
+  "status": "DRAFT",
+  "startDate": "2026-09-03T16:00:00.000Z",
+  "endDate": "2026-09-19T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "3a6ec6e7-237a-4bbb-8cb9-38dda569725f",
+      "type": "SENIOR",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "b102196c-c921-4651-9c50-a0a764218112",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "42fc4805-19b1-442e-b1d7-de6830276557",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-03T19:00:00.000Z",
+      "endDatetime": "2026-09-05T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:39:31.753Z"
+      },
+      "notes": "Room near elevator bank. Club Lounge access for light meals and afternoon tea. Mobility considerations for Margaret.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "The Ritz-Carlton Miami"
+      },
+      "location": {
+        "name": "Miami"
+      },
+      "checkInDate": "2026-09-03T19:00:00.000Z",
+      "checkOutDate": "2026-09-05T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Club Level Suite",
+      "roomCount": 1,
+      "amenities": []
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelStyle": "luxury",
+    "interests": [
+      "fine dining",
+      "cultural experiences",
+      "art museums",
+      "historical sites"
+    ],
+    "mobilityRestrictions": "limited walking, need elevator access",
+    "accommodationPreference": "hotel"
+  }
+}

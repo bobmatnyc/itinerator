@@ -1,0 +1,145 @@
+{
+  "id": "1040ae72-70d0-4055-891f-1a1a198baaa6",
+  "version": 25,
+  "createdAt": "2026-01-02T17:50:23.222Z",
+  "updatedAt": "2026-01-02T17:55:37.947Z",
+  "title": "Regent Seven Seas Mediterranean Cruise",
+  "description": "Luxury Mediterranean cruise with accessible cultural experiences for senior travelers",
+  "status": "DRAFT",
+  "startDate": "2026-10-15T16:00:00.000Z",
+  "endDate": "2026-10-29T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "ee029f7c-a33a-49fa-a9ef-7f442dcbbbe7",
+      "type": "SENIOR",
+      "firstName": "You",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "ccf275a8-4402-4a76-ade7-56a66723072a",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "c845a250-27eb-443b-b4b4-8ca5b1a03387",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-15T14:00:00.000Z",
+      "endDatetime": "2024-09-15T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T17:52:34.014Z"
+      },
+      "notes": "Accessible route with minimal walking, wheelchair-friendly paths, frequent rest areas",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Accessible Vatican Museums Tour",
+      "description": "Specially designed tour with seated rest stops, focusing on Renaissance art and Vatican highlights",
+      "location": {
+        "name": "Vatican Museums, Rome",
+        "city": "Rome",
+        "country": "Italy"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "5962e149-235e-4861-9653-12284fddacb2",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-10-17T14:00:00.000Z",
+      "endDatetime": "2026-10-17T17:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T17:54:15.211Z"
+      },
+      "notes": "Wheelchair accessible route, seated rest stops, minimal walking",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Accessible Vatican Museums Panoramic Tour",
+      "description": "Accessible panoramic tour of Vatican Museums with mobility accommodations for seniors",
+      "location": {
+        "name": "Vatican Museums, Rome",
+        "city": "Rome",
+        "country": "Italy"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "0b6a3b21-77da-4a43-97b8-640885173c9e",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-10-20T15:00:00.000Z",
+      "endDatetime": "2026-10-20T17:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T17:54:15.213Z"
+      },
+      "notes": "Multiple seated rest stops, wheelchair accessible route",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Accessible Uffizi Gallery Tour",
+      "description": "Guided tour of Uffizi Gallery with accommodations for limited mobility",
+      "location": {
+        "name": "Uffizi Gallery, Florence",
+        "city": "Florence",
+        "country": "Italy"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "8addbe3c-c635-4bf5-9604-125590229f81",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-10-18T14:30:00.000Z",
+      "endDatetime": "2026-10-18T16:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T17:54:15.213Z"
+      },
+      "notes": "Specially designed route for seniors with limited mobility, panoramic viewing areas",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Accessible Roman Forum Historical Tour",
+      "description": "Wheelchair-friendly historical tour of the Roman Forum with minimal walking",
+      "location": {
+        "name": "Roman Forum, Rome",
+        "city": "Rome",
+        "country": "Italy"
+      },
+      "category": "tour"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "pace": "leisurely",
+    "interests": [
+      "luxury cruising",
+      "fine dining",
+      "art museums",
+      "historical tours"
+    ],
+    "mobilityRestrictions": "[\"limited walking\", \"need accessibility\"]"
+  }
+}

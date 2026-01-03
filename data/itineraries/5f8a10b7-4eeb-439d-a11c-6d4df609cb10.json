@@ -1,0 +1,153 @@
+{
+  "id": "5f8a10b7-4eeb-439d-a11c-6d4df609cb10",
+  "version": 11,
+  "createdAt": "2026-01-02T18:07:09.319Z",
+  "updatedAt": "2026-01-02T18:09:08.653Z",
+  "title": "Adventure Squad Costa Rica Extreme Trip",
+  "description": "Test itinerary for adventure persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "67b520b4-bbd2-4f0b-8925-982c47f31dc0",
+      "type": "ADULT",
+      "firstName": "Mike",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "7cd09676-5968-46bf-b27b-a73c1cb8d1cb",
+      "type": "ADULT",
+      "firstName": "Sara",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "159e8f64-30df-4f7c-881f-8fde24d274f4",
+      "type": "ADULT",
+      "firstName": "Tom",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "974e6d32-8810-46e4-a7d3-d6b2ccbd2eb1",
+      "type": "ADULT",
+      "firstName": "Anna",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "dbf05cf7-04e9-4940-8ca8-3bdde98d8aca",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-02-18T14:00:00.000Z",
+      "endDatetime": "2025-02-18T17:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:08:51.930Z"
+      },
+      "provider": {
+        "name": "Monteverde Extreme Adventures"
+      },
+      "price": {
+        "amount": 120000,
+        "currency": "USD"
+      },
+      "notes": "Extreme adventure package for 4 people. Requires prior adventure sports experience. Maximum adrenaline experience!",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Extreme Canopy Zip-Line Tour - Monteverde",
+      "description": "Ultra-intense zip-line adventure through Monteverde Cloud Forest. Featuring heights up to 400 feet, speeds reaching 45 mph, with multiple extreme-level lines crossing the rainforest canopy.",
+      "location": {
+        "name": "Monteverde Cloud Forest",
+        "city": "Monteverde",
+        "country": "Costa Rica"
+      },
+      "category": "adventure"
+    },
+    {
+      "id": "f60df93a-7548-4e52-bd1f-9733255e577e",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-02-20T12:00:00.000Z",
+      "endDatetime": "2025-02-20T18:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:09:00.206Z"
+      },
+      "provider": {
+        "name": "Arenal Volcano Expeditions"
+      },
+      "price": {
+        "amount": 80000,
+        "currency": "USD"
+      },
+      "notes": "Extreme difficulty level. Technical hiking gear recommended. Challenging route with minimal rest periods.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Arenal Volcano Extreme Hiking Expedition",
+      "description": "Advanced-level volcanic terrain hiking tour. Challenging trail with steep inclines, volcanic rock terrain, and breathtaking views of the active Arenal Volcano. For experienced hikers only!",
+      "location": {
+        "name": "Arenal Volcano National Park",
+        "city": "La Fortuna",
+        "country": "Costa Rica"
+      },
+      "category": "hiking"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-02-22T13:00:00.000Z",
+      "endDatetime": "2025-02-22T17:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:09:08.652Z"
+      },
+      "name": "Pacuare River Extreme Whitewater Rafting Expedition",
+      "description": "Ultimate Class IV-V whitewater rafting adventure on one of the world's top-rated rivers. Intense rapids, technical challenges, and heart-pounding drops for experienced rafters.",
+      "location": {
+        "name": "Pacuare River",
+        "city": "Turrialba",
+        "country": "Costa Rica",
+        "type": "ATTRACTION"
+      },
+      "category": "adventure",
+      "provider": {
+        "name": "Pacuare Extreme Rafting"
+      },
+      "price": {
+        "amount": 100000,
+        "currency": "USD"
+      },
+      "notes": "Highest difficulty level. For expert rafters only. Full safety gear and experienced guides provided.",
+      "metadata": {},
+      "id": "bdccaf12-be11-4504-98ad-daf4d44d1709"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

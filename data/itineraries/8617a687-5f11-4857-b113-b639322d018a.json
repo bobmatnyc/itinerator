@@ -1,0 +1,124 @@
+{
+  "id": "8617a687-5f11-4857-b113-b639322d018a",
+  "version": 11,
+  "createdAt": "2026-01-01T23:16:01.920Z",
+  "updatedAt": "2026-01-01T23:17:18.679Z",
+  "title": "The Johnson Family's Trip",
+  "description": "Test itinerary for family persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "d772543f-831c-48fc-a6a4-f19dbef39ea7",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "88ac7a81-5a22-4cb3-9440-957885ac19fd",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "5dc1a6be-3f5e-420b-9f40-fed14bda847f",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "da6048ea-7ce4-424d-bb2d-af391d3aab6d",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 8
+      }
+    },
+    {
+      "id": "47656dad-308c-4139-b689-618972ffd1d2",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "parent",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "5326a14c-2993-4222-be45-baa5db79816e",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "727f1499-710d-431e-9a5b-f6c162081053",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "63c786a4-a1a4-420d-9c78-a45d1d88d760",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 8
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "family",
+    "interests": [
+      "theme_parks",
+      "water_activities"
+    ],
+    "dietaryRestrictions": "nut_allergy"
+  }
+}

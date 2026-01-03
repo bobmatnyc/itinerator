@@ -1,0 +1,67 @@
+{
+  "id": "e8da2fdf-b9f3-43cb-a4ba-3c1472bd2a95",
+  "version": 9,
+  "createdAt": "2026-01-01T23:22:36.132Z",
+  "updatedAt": "2026-01-01T23:24:07.266Z",
+  "title": "Adventure Squad: Costa Rica Extreme Expedition",
+  "description": "10-day extreme adventure expedition featuring volcano hiking, white water rafting, and rainforest canopy experiences in Costa Rica's most thrilling locations.",
+  "status": "DRAFT",
+  "startDate": "2026-02-15T17:00:00.000Z",
+  "endDate": "2026-02-25T17:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "ad315113-0601-4605-ba97-6c0183eac04d",
+      "type": "ADULT",
+      "firstName": "Mike",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "group",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "7058af18-2128-4968-b509-cc39e4c57345",
+      "type": "ADULT",
+      "firstName": "Sara",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "group",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "f28b6e04-7ef9-46a8-8677-6a475d8d8632",
+      "type": "ADULT",
+      "firstName": "Tom",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "group",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "e8c5c335-73ac-4dde-8d72-7c70ddd6eb6e",
+      "type": "ADULT",
+      "firstName": "Anna",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "group",
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

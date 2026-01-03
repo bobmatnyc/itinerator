@@ -1,0 +1,63 @@
+{
+  "id": "561f51d4-2a51-4fde-9fa7-b34ea69f04fa",
+  "version": 15,
+  "createdAt": "2026-01-02T17:56:14.417Z",
+  "updatedAt": "2026-01-02T17:57:29.555Z",
+  "title": "Adventure Squad: Costa Rica Extreme Expedition",
+  "description": "10-day adrenaline-packed adventure through Costa Rica's most extreme landscapes and activities!",
+  "status": "DRAFT",
+  "startDate": "2026-02-15T17:00:00.000Z",
+  "endDate": "2026-02-25T17:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "20413368-08e3-41f2-8a88-f11e909edecb",
+      "type": "ADULT",
+      "firstName": "Mike",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "2289bf43-4b5d-4933-a37d-8df6b3ab98f5",
+      "type": "ADULT",
+      "firstName": "Sara",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "27c6a5bf-8bcc-4088-a09d-5db73063c0d6",
+      "type": "ADULT",
+      "firstName": "Tom",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "1518d86c-a695-4852-9bbd-e11b39599c96",
+      "type": "ADULT",
+      "firstName": "Anna",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

@@ -1,0 +1,32 @@
+{
+  "id": "d2eb29c5-82c6-45bf-93dd-f261dec47c78",
+  "version": 3,
+  "createdAt": "2026-01-01T19:46:53.497Z",
+  "updatedAt": "2026-01-01T19:47:08.658Z",
+  "title": "Alex's Southeast Asia Backpacking Trip",
+  "description": "3-week adventure focused on hiking, street food, and cultural experiences",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "solo",
+    "travelStyle": "backpacker",
+    "pace": "packed",
+    "interests": [
+      "hiking",
+      "food",
+      "street food",
+      "culture",
+      "photography",
+      "nightlife"
+    ],
+    "budgetFlexibility": 2,
+    "origin": "New York City",
+    "accommodationPreference": "hostel"
+  }
+}

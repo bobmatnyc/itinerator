@@ -1,0 +1,131 @@
+{
+  "id": "5bc21503-689c-496e-84fa-90bd74083d76",
+  "version": 9,
+  "createdAt": "2026-01-02T04:24:26.636Z",
+  "updatedAt": "2026-01-02T04:27:21.033Z",
+  "title": "Tokyo Business Trip",
+  "description": "Test itinerary for business persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "3e3ca5f9-c0de-4e94-a654-34f945ed61a1",
+      "type": "ADULT",
+      "firstName": "Jennifer",
+      "lastName": "Chen",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "842c7930-4fb2-4818-ab47-7f7c7ac09625",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-12T20:00:00.000Z",
+      "endDatetime": "2024-02-17T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:25:03.367Z"
+      },
+      "notes": "Business-friendly hotel with meeting facilities, walking distance to Shibuya Station. High-speed WiFi, work desk, and multiple meeting rooms available.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Shibuya Stream Excel Hotel Tokyu"
+      },
+      "location": {
+        "name": "Shibuya"
+      },
+      "checkInDate": "2024-02-12T20:00:00.000Z",
+      "checkOutDate": "2024-02-17T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Business King Room",
+      "roomCount": 1,
+      "boardBasis": "ROOM_ONLY",
+      "amenities": []
+    },
+    {
+      "id": "7268a1fc-135a-4ff4-8b04-4c3e9f84e47b",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-13T14:00:00.000Z",
+      "endDatetime": "2024-02-13T22:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:25:49.970Z"
+      },
+      "notes": "Full-day meeting room reservation with business facilities",
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Business Meeting Room Reservation",
+      "location": {
+        "name": "Shibuya Stream Excel Hotel Tokyu"
+      },
+      "attendees": []
+    },
+    {
+      "id": "d900b8f5-a7b2-4b20-a4ea-04efd6e011c2",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-12T19:30:00.000Z",
+      "endDatetime": "2024-02-12T20:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:26:46.832Z"
+      },
+      "provider": {
+        "name": "Blacklane"
+      },
+      "notes": "Premium vehicle service for business traveler. Meet and greet service required.",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "Narita International Airport"
+      },
+      "dropoffLocation": {
+        "name": "Shibuya Stream Excel Hotel Tokyu"
+      }
+    },
+    {
+      "type": "TRANSFER",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-12T19:30:00.000Z",
+      "endDatetime": "2024-02-12T20:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:27:21.033Z"
+      },
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "Narita Airport",
+        "type": "OTHER"
+      },
+      "dropoffLocation": {
+        "name": "Shibuya Stream Excel Hotel Tokyu",
+        "type": "OTHER"
+      },
+      "vehicleDetails": "Premium Car Service",
+      "provider": {
+        "name": "Blacklane"
+      },
+      "notes": "Business traveler transfer - premium vehicle",
+      "metadata": {},
+      "id": "8943ad23-2780-4e75-ac5a-8924f2d00d6f"
+    }
+  ],
+  "tripType": "BUSINESS",
+  "tags": [],
+  "metadata": {}
+}

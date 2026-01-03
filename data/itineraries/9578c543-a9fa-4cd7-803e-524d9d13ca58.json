@@ -1,0 +1,293 @@
+{
+  "id": "9578c543-a9fa-4cd7-803e-524d9d13ca58",
+  "version": 40,
+  "createdAt": "2026-01-01T22:42:24.343Z",
+  "updatedAt": "2026-01-01T22:48:08.742Z",
+  "title": "Mediterranean Luxury Cruise for Robert and Margaret Henderson",
+  "description": "Fall Mediterranean cruise focusing on art, history, and cultural enrichment with mobility-friendly options",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "670df2b5-53c8-48fd-bda9-833925084144",
+      "type": "SENIOR",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "email": "rhenderson427@email.com",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "a1bbf76b-c2fa-46bf-a9db-a1ef565d6737",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "e1a49b78-49b1-4c52-a7aa-77d7a27dc495",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-20T15:00:00.000Z",
+      "endDatetime": "2024-02-20T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:43:39.283Z"
+      },
+      "notes": "Specific interests:\n- Mobility-friendly tours with rest stops\n- Art history lectures\n- Butler service in Concierge-level suite\n- October 2025 Mediterranean itinerary\n- Flights from Miami in business class",
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Regent Seven Seas Cruise Consultation",
+      "location": {
+        "name": "Virtual Meeting"
+      },
+      "attendees": [
+        "Robert Henderson",
+        "Margaret Henderson",
+        "Regent Cruise Specialist"
+      ],
+      "agenda": "Discuss Mediterranean cruise options, Concierge-level suite, mobility-friendly shore excursions, Vatican Museums tour, and onboard enrichment programs"
+    },
+    {
+      "id": "e04381ae-db5f-43cb-be6b-cbb429e215c8",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-26T15:00:00.000Z",
+      "endDatetime": "2024-02-26T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:44:49.856Z"
+      },
+      "notes": "45th Wedding Anniversary Cruise\nPreferred Suite: Voyager Master Suite\nSpecial Accommodation Needs: Bathtub, elevator proximity, mobility assistance",
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Regent Seven Seas Cruise Consultation - Henderson Anniversary Trip",
+      "location": {
+        "name": "Virtual Meeting"
+      },
+      "attendees": [
+        "Robert Henderson",
+        "Margaret Henderson",
+        "Regent Cruise Specialist"
+      ],
+      "agenda": "Consultation Details:\n1. Master Suite Selection (Voyager ship)\n   - Midship elevator proximity\n   - Bathtub requirement\n   - Butler service options\n\n2. Cruise Itinerary\n   - October 2025 Mediterranean routes\n   - Italy and Greece stops\n   - Mobility-friendly shore excursions\n   - Vatican Museums tour with rest stops\n\n3. Onboard Experiences\n   - Early dinner seating (6:00 PM)\n   - Art history lecture series\n   - Wine cellar and anniversary dinner wine pairing\n   - 45th Wedding Anniversary special arrangements\n\n4. Accessibility Considerations\n   - Elevator access\n   - Suite comfort for limited mobility\n   - Tour modifications\n\nSpecial Requests:\n- Confirm Master Suite with bathtub\n- Detailed wine pairing for anniversary dinner\n- Proximity to midship elevators"
+    },
+    {
+      "id": "8af7cd08-7ee6-48d9-b85a-c6b1ad2c3b90",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-27T15:00:00.000Z",
+      "endDatetime": "2024-02-27T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:44:49.857Z"
+      },
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Business Class Flight Consultation - Henderson Anniversary Trip",
+      "location": {
+        "name": "Virtual Meeting"
+      },
+      "attendees": [
+        "Robert Henderson",
+        "Margaret Henderson",
+        "Travel Specialist"
+      ],
+      "agenda": "Flight Consultation Details:\n1. Business Class Flight Arrangements\n   - Miami to Cruise Departure Port\n   - Return Flight After Cruise\n\n2. Seating Considerations\n   - Maximum seat recline\n   - Comfort for back issues\n   - Aisle access\n   - Carrier recommendations\n\n3. Flight Timing\n   - Optimal departure times\n   - Minimal layovers\n   - Arrival coordination with cruise schedule\n\nSpecial Requests:\n- Prioritize seat comfort\n- Minimal travel stress\n- Accommodation for limited mobility"
+    },
+    {
+      "id": "8c73a9db-d23a-45ff-afa1-fdd907aac8c9",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-26T15:00:00.000Z",
+      "endDatetime": "2024-02-26T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:45:21.862Z"
+      },
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Regent Seven Seas Cruise Consultation",
+      "location": {
+        "name": "Virtual Meeting"
+      },
+      "attendees": [
+        "Robert Henderson",
+        "Margaret Henderson",
+        "Regent Cruise Specialist"
+      ],
+      "agenda": "Detailed Mediterranean cruise planning:\n- Master Suite selection on Voyager ship\n- Bathtub-equipped suite near midship elevators\n- Early 6:00 PM dinner seating\n- Mobility-friendly shore excursions\n- Art history lectures\n- 45th Wedding Anniversary wine pairing dinner\n- Vatican Museums specialized tour"
+    },
+    {
+      "id": "4e3c816e-a086-4c3c-aa4b-af1173362941",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-27T15:00:00.000Z",
+      "endDatetime": "2024-02-27T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:45:21.864Z"
+      },
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Business Class Flight and Pre-Cruise Hotel Consultation",
+      "location": {
+        "name": "Virtual Meeting"
+      },
+      "attendees": [
+        "Robert Henderson",
+        "Margaret Henderson",
+        "Travel Specialist"
+      ],
+      "agenda": "Flight and Pre-Cruise Arrangements:\n- Business class flight booking\n- Comfortable seat selection considering mobility needs\n- Airport to cruise port car service transfer\n- Pre-cruise hotel stay (1 day early)\n- Time zone adjustment accommodations"
+    },
+    {
+      "id": "b2b330ed-0d56-480c-bbdf-1fb24f5b113e",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-28T15:00:00.000Z",
+      "endDatetime": "2024-02-28T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:45:53.785Z"
+      },
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Regent Seven Seas Cruise Consultation",
+      "location": {
+        "name": "Virtual Meeting"
+      },
+      "attendees": [
+        "Robert Henderson",
+        "Margaret Henderson"
+      ],
+      "agenda": "Detailed cruise planning including:\n- Master Suite selection on Voyager ship\n- Suite near midship elevators with bathtub\n- Early 6:00 PM dinner seating\n- Mobility-friendly shore excursions\n- Specialized Vatican Museums tour\n- Art history lectures\n- 45th Wedding Anniversary wine pairing dinner\n- Pre-cruise hotel accessibility requirements"
+    },
+    {
+      "id": "8d73e89d-4716-40c6-ab10-5960af257192",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-29T15:00:00.000Z",
+      "endDatetime": "2024-02-29T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:45:53.786Z"
+      },
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Business Class Flight and Pre-Cruise Hotel Consultation",
+      "location": {
+        "name": "Virtual Meeting"
+      },
+      "attendees": [
+        "Robert Henderson",
+        "Margaret Henderson"
+      ],
+      "agenda": "Flight and pre-cruise arrangements including:\n- Business class flight booking\n- Comfortable seat selection\n- Airport to cruise port car service\n- Pre-cruise hotel stay\n  * Must have elevators\n  * On-site restaurant preferred\n  * Accessibility considerations"
+    },
+    {
+      "id": "25371209-7b9a-4f9b-98a3-ea8f5898cd3a",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-21T15:00:00.000Z",
+      "endDatetime": "2024-02-21T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:46:28.010Z"
+      },
+      "notes": "Preferred contact email: rhenderson427@email.com\nKey priorities:\n- Comfortable business class flights\n- Accessible pre-cruise hotel\n- Convenient airport transfers",
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Business Class Flight and Pre-Cruise Arrangements Consultation",
+      "location": {
+        "name": "Virtual Meeting"
+      },
+      "attendees": [
+        "Robert Henderson",
+        "Margaret Henderson"
+      ],
+      "agenda": "Flight and pre-cruise arrangements:\n- Business class flight booking\n- Comfortable seat selection\n- Airport to cruise port car service\n- Pre-cruise hotel with:\n  * Elevator access\n  * On-site restaurant\n  * Accessibility considerations"
+    },
+    {
+      "id": "618b73d9-2216-46e0-a15e-7195b8bcb4b5",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-27T15:00:00.000Z",
+      "endDatetime": "2024-02-27T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:47:03.769Z"
+      },
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Business Class Flight and Pre-Cruise Arrangements Consultation",
+      "location": {
+        "name": "Virtual Meeting"
+      },
+      "attendees": [
+        "Robert Henderson",
+        "Margaret Henderson"
+      ],
+      "agenda": "Comprehensive travel arrangements including:\n- Business class flight booking\n- Comfortable seat selection\n- Airport to cruise port car service\n- Pre-cruise hotel with:\n  * Elevator access\n  * On-site restaurant\n  * Accessibility considerations"
+    },
+    {
+      "id": "8339518f-8214-4b2d-bccd-7252f1627288",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-21T15:00:00.000Z",
+      "endDatetime": "2024-02-21T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:48:08.740Z"
+      },
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Business Class Flights and Pre-Cruise Hotel Consultation",
+      "location": {
+        "name": "Virtual Meeting"
+      },
+      "attendees": [
+        "Robert Henderson",
+        "Margaret Henderson"
+      ],
+      "agenda": "Discuss travel arrangements:\n- Business class flight booking\n- Comfortable seat selection\n- Airport to cruise port car service\n- Pre-cruise hotel with:\n  * Elevator access\n  * Ground floor room options\n  * On-site restaurant\n  * Minimal walking distances"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "couple",
+    "tripPurpose": "vacation",
+    "travelStyle": "luxury",
+    "pace": "leisurely",
+    "interests": [
+      "art",
+      "history",
+      "museums"
+    ],
+    "mobilityRestrictions": "limited walking",
+    "origin": "Miami"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "f332fd88-b99f-481c-938c-db8cd09c11cd",
+  "version": 8,
+  "createdAt": "2026-01-01T23:13:57.384Z",
+  "updatedAt": "2026-01-01T23:15:28.616Z",
+  "title": "Sarah & Michael's 10th Anniversary Amalfi Coast Celebration",
+  "description": "Romantic 10-day anniversary trip celebrating 10 years of marriage with luxury experiences along the Amalfi Coast",
+  "status": "DRAFT",
+  "startDate": "2026-09-01T16:00:00.000Z",
+  "endDate": "2026-09-11T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "3433184b-c336-460f-8b82-e7692fbcc84d",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "f81875e0-771f-4a7c-ad34-ea38820a3557",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

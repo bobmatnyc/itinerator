@@ -1,0 +1,29 @@
+{
+  "id": "25b02673-2a0a-4e91-96d3-9db7a413b6ab",
+  "version": 4,
+  "createdAt": "2026-01-01T20:01:41.790Z",
+  "updatedAt": "2026-01-01T20:02:41.302Z",
+  "title": "Alex's Southeast Asia Backpacking Trip",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "solo",
+    "travelStyle": "backpacker",
+    "pace": "packed",
+    "interests": [
+      "hiking",
+      "street food",
+      "photography",
+      "night markets",
+      "hostels"
+    ],
+    "origin": "New York City"
+  }
+}

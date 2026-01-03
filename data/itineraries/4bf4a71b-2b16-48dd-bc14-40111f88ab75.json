@@ -1,0 +1,157 @@
+{
+  "id": "4bf4a71b-2b16-48dd-bc14-40111f88ab75",
+  "version": 10,
+  "createdAt": "2026-01-01T21:44:43.775Z",
+  "updatedAt": "2026-01-01T21:46:15.997Z",
+  "title": "The Johnson Family's Trip",
+  "description": "Test itinerary for family persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "9d34c1c6-2a28-485c-b6fc-7d4309931687",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "46e41412-6721-473b-bc82-ae359c00cf46",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "74eb5d2a-c615-4cc6-84b5-05b15736bd0d",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "45e0e53f-b5f1-44d6-bf84-f48deaccb521",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false,
+        "age": 8
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "2ad496b9-d845-4cb8-bbcb-0f1d784923b2",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-15T13:00:00.000Z",
+      "endDatetime": "2025-06-17T00:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:45:49.042Z"
+      },
+      "notes": "Family of 4: David, Lisa, Emma (12), and Jake (8). Accommodations needed for Jake's nut allergy.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Disney World - Magic Kingdom (2-Day Pass)",
+      "description": "Two-day pass to Magic Kingdom for the Johnson family. Includes access to all park attractions and character meet-and-greets.",
+      "location": {
+        "name": "Magic Kingdom"
+      },
+      "category": "theme_park"
+    },
+    {
+      "id": "4af45a75-9b41-4be8-92b6-b504afc60be1",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-17T13:00:00.000Z",
+      "endDatetime": "2025-06-18T00:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:45:49.043Z"
+      },
+      "notes": "Family of 4: David, Lisa, Emma (12), and Jake (8). Accommodations needed for Jake's nut allergy.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Disney World - EPCOT (1-Day Pass)",
+      "description": "One-day pass to EPCOT for the Johnson family. Includes access to all park attractions and educational experiences.",
+      "location": {
+        "name": "EPCOT"
+      },
+      "category": "theme_park"
+    },
+    {
+      "id": "71b23e1b-f3f8-4888-a06b-3f34dd6392bf",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-18T13:00:00.000Z",
+      "endDatetime": "2025-06-19T00:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:45:49.044Z"
+      },
+      "notes": "Family of 4: David, Lisa, Emma (12), and Jake (8). Accommodations needed for Jake's nut allergy.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Disney World - Hollywood Studios (1-Day Pass)",
+      "description": "One-day pass to Hollywood Studios for the Johnson family. Includes access to all park attractions, including Star Wars experiences.",
+      "location": {
+        "name": "Hollywood Studios"
+      },
+      "category": "theme_park"
+    },
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-15T19:00:00.000Z",
+      "endDatetime": "2025-06-22T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:46:15.997Z"
+      },
+      "property": {
+        "name": "Disney's Caribbean Beach Resort"
+      },
+      "location": {
+        "name": "Walt Disney World",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2025-06-15T19:00:00.000Z",
+      "checkOutDate": "2025-06-22T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Family Suite",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Pirate-themed rooms, allergy-friendly dining, Skyliner transportation",
+      "metadata": {},
+      "id": "0efed272-ff3e-45d4-bddb-0db908ef4474"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

@@ -1,0 +1,46 @@
+{
+  "id": "fc8a9fa6-f9ca-4542-a1da-61177f2d0946",
+  "version": 12,
+  "createdAt": "2026-01-02T18:00:15.652Z",
+  "updatedAt": "2026-01-02T18:03:04.611Z",
+  "title": "Tokyo Business Trip",
+  "description": "Test itinerary for business persona",
+  "status": "DRAFT",
+  "startDate": "2026-02-08T17:00:00.000Z",
+  "endDate": "2026-02-12T17:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "46033ed6-227f-4991-b90b-a7cf15d0f639",
+      "type": "ADULT",
+      "firstName": "Jennifer",
+      "lastName": "Chen",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "eb9d9f24-e29a-4d47-b8ee-4c3d993ab613",
+      "type": "ADULT",
+      "firstName": "Jennifer",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "BUSINESS",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "business",
+    "tripPurpose": "client_meetings",
+    "origin": "San Francisco"
+  }
+}

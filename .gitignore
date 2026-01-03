@@ -151,3 +151,7 @@ wheels/
 kuzu-memories/
 # pdf-parse workaround (library bug)
 test/data/05-versions-space.pdf
+
+# E2E test results
+tests/e2e/results/*.json
+tests/e2e/results/*.md

@@ -1,0 +1,76 @@
+{
+  "id": "3b7e5c01-8958-42ba-bcca-59c380c334c5",
+  "version": 6,
+  "createdAt": "2026-01-01T20:28:55.209Z",
+  "updatedAt": "2026-01-01T20:30:59.511Z",
+  "title": "The Hendersons's Trip",
+  "description": "Test itinerary for senior persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "5c4a8b97-e0d2-4777-9610-84c659b1a216",
+      "type": "SENIOR",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "79244f44-3623-4173-9723-93ab04f67712",
+      "type": "ADULT",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "b941477d-c88e-48af-ba69-436cc8e5205e",
+      "type": "ADULT",
+      "firstName": "Margaret",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "eb22cd82-0505-4a2b-9672-594f93a65404",
+      "type": "SENIOR",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "a983ca15-46f1-4f44-9077-23378160d631",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

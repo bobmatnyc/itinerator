@@ -1,0 +1,35 @@
+{
+  "id": "9e377163-4873-4a47-9adc-71a8cc499c26",
+  "version": 3,
+  "createdAt": "2026-01-01T23:24:45.048Z",
+  "updatedAt": "2026-01-01T23:24:59.815Z",
+  "title": "Jordan's European Backpacking Trip",
+  "description": "Budget-friendly 2-week European adventure for recent college graduate",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "solo",
+    "travelStyle": "backpacker",
+    "pace": "leisurely",
+    "interests": [
+      "free walking tours",
+      "museums",
+      "street food",
+      "local culture"
+    ],
+    "budgetFlexibility": 1,
+    "budget": {
+      "amount": 50,
+      "currency": "USD",
+      "period": "per_day"
+    },
+    "origin": "Boston",
+    "accommodationPreference": "hostel"
+  }
+}

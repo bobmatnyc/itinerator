@@ -1,0 +1,82 @@
+{
+  "id": "6d1e6644-9714-49d4-90f1-cae71e92c420",
+  "version": 11,
+  "createdAt": "2026-01-02T18:05:57.048Z",
+  "updatedAt": "2026-01-02T18:08:34.862Z",
+  "title": "Exploring Georgia's Hidden Gems",
+  "description": "A week-long adventure exploring the cultural richness of Georgia, from the vibrant capital of Tbilisi to the wine regions of Kakheti and the stunning mountain landscapes of Kazbegi.",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "7a97c607-d860-4be4-95a6-1a45130a3715",
+      "type": "ADULT",
+      "firstName": "Pat",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "89f14729-80b2-48c6-8889-f45adcb71fc0",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-05-15T19:00:00.000Z",
+      "endDatetime": "2024-05-18T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:08:28.120Z"
+      },
+      "notes": "Boutique design hotel in historic Tbilisi, capturing local character and modern design",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Rooms Hotel Tbilisi"
+      },
+      "location": {
+        "name": "Tbilisi",
+        "city": "Tbilisi",
+        "country": "Georgia"
+      },
+      "checkInDate": "2024-05-15T19:00:00.000Z",
+      "checkOutDate": "2024-05-18T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Design Room",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-05-16T18:00:00.000Z",
+      "endDatetime": "2024-05-16T20:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:08:34.862Z"
+      },
+      "name": "Tbilisi Sulfur Bath Experience",
+      "description": "Traditional Georgian sulfur bath experience in the historic bathhouse district",
+      "location": {
+        "name": "Abanotubani Sulfur Baths",
+        "city": "Tbilisi",
+        "country": "Georgia",
+        "type": "ATTRACTION"
+      },
+      "category": "wellness",
+      "metadata": {},
+      "id": "9cdb85eb-6f32-4641-98ba-6e036502a77e"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

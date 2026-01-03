@@ -1,0 +1,72 @@
+{
+  "id": "d687304c-b59e-43c4-aa9e-44284a53f1df",
+  "version": 16,
+  "createdAt": "2026-01-01T23:36:33.584Z",
+  "updatedAt": "2026-01-01T23:38:04.635Z",
+  "title": "Costa Rica Adventure Squad Trip",
+  "description": "Test itinerary for adventure persona",
+  "status": "DRAFT",
+  "startDate": "2026-03-02T17:00:00.000Z",
+  "endDate": "2026-03-11T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "7d8c3de0-0d50-48ad-a600-1867e83ed9f7",
+      "type": "ADULT",
+      "firstName": "Mike",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "a94e00e6-6173-4065-af56-f71f55c23b36",
+      "type": "ADULT",
+      "firstName": "Sara",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "fc0ba664-4ac0-4e7b-ad0a-678c5959b8cd",
+      "type": "ADULT",
+      "firstName": "Tom",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "4f1c54de-1352-487a-9a93-e86b1008df15",
+      "type": "ADULT",
+      "firstName": "Anna",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "group",
+    "pace": "packed",
+    "interests": [
+      "adventure sports",
+      "extreme activities",
+      "outdoor experiences"
+    ]
+  }
+}

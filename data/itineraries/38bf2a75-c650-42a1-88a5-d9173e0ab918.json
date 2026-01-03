@@ -1,0 +1,28 @@
+{
+  "id": "38bf2a75-c650-42a1-88a5-d9173e0ab918",
+  "version": 5,
+  "createdAt": "2026-01-01T23:18:22.249Z",
+  "updatedAt": "2026-01-01T23:18:37.156Z",
+  "title": "Tokyo Business Trip",
+  "description": "Test itinerary for business persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "40a1a3eb-69af-434f-a694-1f79d13c8a51",
+      "type": "ADULT",
+      "firstName": "Jennifer",
+      "lastName": "Chen",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "BUSINESS",
+  "tags": [],
+  "metadata": {}
+}

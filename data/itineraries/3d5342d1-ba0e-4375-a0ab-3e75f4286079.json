@@ -1,0 +1,35 @@
+{
+  "id": "3d5342d1-ba0e-4375-a0ab-3e75f4286079",
+  "version": 2,
+  "createdAt": "2026-01-02T05:08:28.022Z",
+  "updatedAt": "2026-01-02T05:10:40.962Z",
+  "title": "Alex the Backpacker's Trip",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "solo",
+    "travelStyle": "backpacker",
+    "pace": "packed",
+    "interests": [
+      "temples",
+      "street_food",
+      "hiking",
+      "beaches",
+      "nightlife",
+      "photography"
+    ],
+    "budgetFlexibility": 3,
+    "budget": {
+      "amount": 50,
+      "currency": "USD",
+      "period": "per_day"
+    }
+  }
+}

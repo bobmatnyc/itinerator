@@ -1,0 +1,16 @@
+{
+  "id": "19019048-04a5-420d-9792-9f342a7b78c0",
+  "version": 1,
+  "createdAt": "2026-01-01T20:06:53.754Z",
+  "updatedAt": "2026-01-01T20:06:53.754Z",
+  "title": "Jennifer Chen's Trip",
+  "description": "Test itinerary for business persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "segments": [],
+  "tags": [],
+  "metadata": {},
+  "tripType": "BUSINESS",
+  "createdBy": "test@test.com"
+}

@@ -1,0 +1,62 @@
+{
+  "id": "30e8aec8-cd58-4c9e-ad14-c33ba7af7348",
+  "version": 8,
+  "createdAt": "2026-01-02T00:54:59.200Z",
+  "updatedAt": "2026-01-02T00:57:59.997Z",
+  "title": "Budget Backpacking: Budapest, Prague, Berlin",
+  "description": "Test itinerary for budget persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "31dd6b96-a855-44b6-a7fa-30356517a9c8",
+      "type": "ADULT",
+      "firstName": "Jordan",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-11-30T20:00:00.000Z",
+      "endDatetime": "2024-12-05T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:57:59.997Z"
+      },
+      "property": {
+        "name": "Big Fish Budapest Hostel"
+      },
+      "location": {
+        "name": "Budapest",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2024-11-30T20:00:00.000Z",
+      "checkOutDate": "2024-12-05T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Shared Dormitory",
+      "roomCount": 1,
+      "amenities": [],
+      "price": {
+        "amount": 9000,
+        "currency": "USD"
+      },
+      "notes": "Budget-friendly hostel with great social scene. Free walking tours available.",
+      "metadata": {},
+      "id": "6bb5f4e9-17cc-4153-8f19-6fef6980aa86"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

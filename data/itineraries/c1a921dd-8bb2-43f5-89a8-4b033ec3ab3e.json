@@ -1,0 +1,58 @@
+{
+  "id": "c1a921dd-8bb2-43f5-89a8-4b033ec3ab3e",
+  "version": 4,
+  "createdAt": "2026-01-01T20:26:53.182Z",
+  "updatedAt": "2026-01-01T20:28:02.022Z",
+  "title": "Jennifer Chen's Trip",
+  "description": "Test itinerary for business persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "a833f855-30a5-4aa3-8bff-f088ce4f837e",
+      "type": "ADULT",
+      "firstName": "Jennifer",
+      "lastName": "Chen",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-01T20:00:00.000Z",
+      "endDatetime": "2024-02-06T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T20:28:02.021Z"
+      },
+      "property": {
+        "name": "Shibuya Stream Excel Hotel Tokyu"
+      },
+      "location": {
+        "name": "Shibuya",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2024-02-01T20:00:00.000Z",
+      "checkOutDate": "2024-02-06T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Business Room",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "24-hour business center, ideal for international work communications. Convenient for Shibuya meetings.",
+      "metadata": {},
+      "id": "d3c21afb-11ce-45bf-8d1b-1d2bf3fa5024"
+    }
+  ],
+  "tripType": "BUSINESS",
+  "tags": [],
+  "metadata": {}
+}

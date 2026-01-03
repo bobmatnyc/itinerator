@@ -33,10 +33,14 @@ export interface Address {
  * Location with optional address and coordinates
  */
 export interface Location {
-  /** Location name */
+  /** Location name (e.g., airport name, venue name) */
   name: string;
   /** IATA airport or city code */
   code?: string;
+  /** City name */
+  city?: string;
+  /** Country name */
+  country?: string;
   /** Physical address */
   address?: Address;
   /** Geographic coordinates */

@@ -1,0 +1,26 @@
+{
+  "id": "393ebbb8-4958-48c2-8b13-3af7828b4d3b",
+  "version": 5,
+  "createdAt": "2026-01-01T23:25:31.972Z",
+  "updatedAt": "2026-01-01T23:27:18.133Z",
+  "title": "Colombia Adventure: Medellín and Coffee Region",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "solo",
+    "interests": [
+      "food",
+      "urban exploration",
+      "hiking",
+      "local experiences"
+    ],
+    "origin": "Seattle"
+  }
+}

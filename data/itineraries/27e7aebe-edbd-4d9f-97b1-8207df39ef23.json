@@ -1,0 +1,142 @@
+{
+  "id": "27e7aebe-edbd-4d9f-97b1-8207df39ef23",
+  "version": 33,
+  "createdAt": "2026-01-01T21:53:03.817Z",
+  "updatedAt": "2026-01-01T21:57:07.837Z",
+  "title": "Sarah & Michael's Amalfi Coast Anniversary Trip",
+  "description": "Romantic 10-day anniversary celebration along the Amalfi Coast, featuring luxury accommodations, wine tasting, cooking class, private boat tour, and special dining experiences.",
+  "status": "DRAFT",
+  "startDate": "2026-09-01T16:00:00.000Z",
+  "endDate": "2026-09-10T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "398222f5-9a4b-42c6-94a0-6d736d1df491",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary_traveler",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "26446708-1be6-4026-b7aa-7b3797b7de17",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "d5308147-6616-4773-b72e-45a88e7eb0e4",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-01T19:00:00.000Z",
+      "endDatetime": "2026-09-06T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:56:09.892Z"
+      },
+      "notes": "Luxury suite with stunning Mediterranean views for anniversary trip",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Le Sirenuse"
+      },
+      "location": {
+        "name": "Positano"
+      },
+      "checkInDate": "2026-09-01T19:00:00.000Z",
+      "checkOutDate": "2026-09-06T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Suite with Private Terrace",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "080ce060-6014-4bca-ab2d-3e9a31de6f63",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-06T19:00:00.000Z",
+      "endDatetime": "2026-09-10T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:56:09.893Z"
+      },
+      "notes": "Romantic suite in historic 11th-century palace with panoramic Amalfi Coast views",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Belmond Hotel Caruso"
+      },
+      "location": {
+        "name": "Ravello"
+      },
+      "checkInDate": "2026-09-06T19:00:00.000Z",
+      "checkOutDate": "2026-09-10T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Suite with Infinity Pool Views",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "9b14338c-8e76-4a9c-863c-4177340ff4dc",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-03T23:00:00.000Z",
+      "endDatetime": "2026-09-04T00:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:56:38.998Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Romantic Sunset Aperitivo at Franco's Bar",
+      "description": "Intimate sunset cocktail experience at the legendary Franco's Bar, offering breathtaking views of Positano's coastline. Enjoy classic Italian aperitivo with handcrafted cocktails and stunning Mediterranean sunset views.",
+      "location": {
+        "name": "Le Sirenuse Hotel"
+      },
+      "category": "dining"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-03T23:00:00.000Z",
+      "endDatetime": "2026-09-04T01:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:57:07.836Z"
+      },
+      "name": "Sunset Aperitivo at Franco's Bar",
+      "description": "Romantic sunset aperitivo celebrating Sarah and Michael's anniversary. Enjoy handcrafted cocktails and traditional Italian appetizers with breathtaking views of Positano's coastline.",
+      "location": {
+        "name": "Le Sirenuse",
+        "type": "ATTRACTION"
+      },
+      "category": "dining",
+      "notes": "Anniversary celebration - please reserve the most romantic table with the best sunset view. Couple celebrating their wedding anniversary would appreciate special attention.",
+      "metadata": {},
+      "id": "4b547c54-3abe-45fe-90f2-1a3b22510763"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

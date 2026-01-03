@@ -1,0 +1,327 @@
+{
+  "id": "6fc16408-1a79-4960-8034-bd6f65cb0c43",
+  "version": 21,
+  "createdAt": "2026-01-02T18:01:17.453Z",
+  "updatedAt": "2026-01-02T18:04:58.134Z",
+  "title": "Budget Backpacking: Berlin, Prague, Budapest",
+  "description": "Test itinerary for budget persona",
+  "status": "DRAFT",
+  "startDate": "2026-08-15T16:00:00.000Z",
+  "endDate": "2026-09-01T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "2f76f8a9-d6ab-4a30-8089-2f985db578c7",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-15T20:00:00.000Z",
+      "endDatetime": "2024-02-20T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:03:01.613Z"
+      },
+      "notes": "Budget-friendly hostel with communal kitchen, great for meeting other travelers",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "EastSeven Berlin Hostel"
+      },
+      "location": {
+        "name": "Berlin",
+        "country": "Germany"
+      },
+      "checkInDate": "2024-02-15T20:00:00.000Z",
+      "checkOutDate": "2024-02-20T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Dormitory",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "1e489288-fb8e-424e-acff-be837f44e8fd",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-20T20:00:00.000Z",
+      "endDatetime": "2024-02-25T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:03:07.965Z"
+      },
+      "notes": "Social hostel with kitchen facilities, perfect for budget travelers",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Czech Inn Hostel"
+      },
+      "location": {
+        "name": "Prague",
+        "country": "Czech Republic"
+      },
+      "checkInDate": "2024-02-20T20:00:00.000Z",
+      "checkOutDate": "2024-02-25T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Dormitory",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "e237038d-58b5-4e10-b250-773f2183d059",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-25T20:00:00.000Z",
+      "endDatetime": "2024-03-01T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:03:14.275Z"
+      },
+      "notes": "Popular hostel with kitchen, known for great social atmosphere",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Wombats City Hostel Budapest"
+      },
+      "location": {
+        "name": "Budapest",
+        "country": "Hungary"
+      },
+      "checkInDate": "2024-02-25T20:00:00.000Z",
+      "checkOutDate": "2024-03-01T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Dormitory",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "63fe7444-f68f-44ae-938f-1dafc10d39ce",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-16T15:00:00.000Z",
+      "endDatetime": "2024-02-16T17:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:03:21.296Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Berlin Free Walking Tour",
+      "description": "Tip-based walking tour covering Berlin's key historical sites and neighborhoods",
+      "location": {
+        "name": "Berlin",
+        "country": "Germany"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "96ed515f-7536-413a-8007-c35d9bb46934",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-21T15:00:00.000Z",
+      "endDatetime": "2024-02-21T17:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:03:27.597Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Prague Free Walking Tour",
+      "description": "Tip-based tour exploring Prague's Old Town, Charles Bridge, and historic landmarks",
+      "location": {
+        "name": "Prague",
+        "country": "Czech Republic"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "78a99bef-09d4-4f74-ae3a-7428423f0694",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-08-15T19:00:00.000Z",
+      "endDatetime": "2026-08-20T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:04:09.367Z"
+      },
+      "notes": "Budget-friendly hostel with communal kitchen",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "EastSeven Berlin Hostel"
+      },
+      "location": {
+        "name": "Berlin",
+        "city": "Berlin",
+        "country": "Germany"
+      },
+      "checkInDate": "2026-08-15T19:00:00.000Z",
+      "checkOutDate": "2026-08-20T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Shared Dormitory",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "17178270-cab9-45f9-9f95-0cfb7131e5bd",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-08-20T19:00:00.000Z",
+      "endDatetime": "2026-08-25T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:04:16.064Z"
+      },
+      "notes": "Budget-friendly hostel with communal kitchen",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Czech Inn Hostel"
+      },
+      "location": {
+        "name": "Prague",
+        "city": "Prague",
+        "country": "Czech Republic"
+      },
+      "checkInDate": "2026-08-20T19:00:00.000Z",
+      "checkOutDate": "2026-08-25T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Shared Dormitory",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "2ed523a0-15ef-468c-8bc8-b40b9da50804",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-08-25T19:00:00.000Z",
+      "endDatetime": "2026-09-01T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:04:46.154Z"
+      },
+      "notes": "Popular hostel with kitchen facilities, great for meeting other travelers",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Wombats City Hostel Budapest"
+      },
+      "location": {
+        "name": "Budapest",
+        "city": "Budapest",
+        "country": "Hungary"
+      },
+      "checkInDate": "2026-08-25T19:00:00.000Z",
+      "checkOutDate": "2026-09-01T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Shared Dormitory",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "170b7415-ed70-4f05-b8bd-b24051bcf36c",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-08-16T14:00:00.000Z",
+      "endDatetime": "2026-08-16T17:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:04:58.129Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Berlin Free Walking Tour",
+      "description": "Free walking tour to explore Berlin's history and highlights",
+      "location": {
+        "name": "Berlin",
+        "city": "Berlin",
+        "country": "Germany"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "dd65f305-27a7-4bf0-805f-361ff5334250",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-08-21T14:00:00.000Z",
+      "endDatetime": "2026-08-21T17:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:04:58.131Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Prague Free Walking Tour",
+      "description": "Free walking tour to discover Prague's Old Town and key attractions",
+      "location": {
+        "name": "Prague",
+        "city": "Prague",
+        "country": "Czech Republic"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "97fbe5af-3c41-4046-93c2-f61d5b97b2db",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-08-26T14:00:00.000Z",
+      "endDatetime": "2026-08-26T17:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:04:58.132Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Budapest Free Walking Tour",
+      "description": "Free walking tour exploring Budapest's historic sites and culture",
+      "location": {
+        "name": "Budapest",
+        "city": "Budapest",
+        "country": "Hungary"
+      },
+      "category": "tour"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-08-30T01:00:00.000Z",
+      "endDatetime": "2026-08-30T04:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:04:58.134Z"
+      },
+      "name": "Szimpla Kert Ruin Bar",
+      "description": "Iconic ruin bar in Budapest, perfect for meeting fellow travelers",
+      "location": {
+        "name": "Budapest",
+        "city": "Budapest",
+        "country": "Hungary",
+        "type": "ATTRACTION"
+      },
+      "category": "nightlife",
+      "metadata": {},
+      "id": "625974d8-dc72-4adc-bc35-9448976619d1"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

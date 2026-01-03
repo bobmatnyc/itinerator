@@ -36,10 +36,11 @@ export const addressSchema = z.object({
 
 /**
  * Location schema - validates location with optional address and coordinates
+ * At least one of name, code, or city must be provided
  */
 export const locationSchema = z.object({
-  /** Location name */
-  name: z.string().min(1, 'Name is required'),
+  /** Location name (e.g., airport name) */
+  name: z.string().min(1).optional(),
   /** IATA airport or city code (normalized to 3 letters by schema-normalizer) */
   code: z
     .string()
@@ -47,13 +48,20 @@ export const locationSchema = z.object({
     .max(3, 'Code must be 3 letters or less')
     .transform((val) => val.toUpperCase())
     .optional(),
+  /** City name */
+  city: z.string().min(1).optional(),
+  /** Country name */
+  country: z.string().optional(),
   /** Physical address */
   address: addressSchema.optional(),
   /** Geographic coordinates */
   coordinates: coordinatesSchema.optional(),
   /** IANA timezone identifier */
   timezone: z.string().optional(),
-});
+}).refine(
+  (data) => data.name || data.code || data.city,
+  { message: 'At least one of name, code, or city must be provided' }
+);
 
 /**
  * Company schema - validates company/provider information

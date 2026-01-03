@@ -1,0 +1,99 @@
+{
+  "id": "7838d1d5-4968-4079-8ae0-dc647d45127f",
+  "version": 12,
+  "createdAt": "2026-01-02T04:04:28.447Z",
+  "updatedAt": "2026-01-02T04:07:06.344Z",
+  "title": "Southeast Asia Backpacking Adventure",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "startDate": "2026-03-01T17:00:00.000Z",
+  "endDate": "2026-03-22T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "18bab550-8589-4f7f-82c1-43c1bf914d04",
+      "type": "ADULT",
+      "firstName": "Alex",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "acde93f0-7cd2-48b0-8bbc-3d4ebe3f0707",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-03-01T20:00:00.000Z",
+      "endDatetime": "2026-03-04T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:06:11.348Z"
+      },
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Lub d Bangkok Siam"
+      },
+      "location": {
+        "name": "Khao San Road"
+      },
+      "checkInDate": "2026-03-01T20:00:00.000Z",
+      "checkOutDate": "2026-03-04T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Dormitory Bed",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "75359769-48c0-48ec-a487-f96822659e8a",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-03-02T00:00:00.000Z",
+      "endDatetime": "2026-03-02T02:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:07:06.342Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Street Food Tour - Khao San Road",
+      "description": "Budget-friendly street food exploration. Try local favorites like Pad Thai, mango sticky rice, and grilled skewers. Perfect for Instagram-worthy food shots!",
+      "location": {
+        "name": "Khao San Road"
+      },
+      "category": "dining"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-03-03T01:00:00.000Z",
+      "endDatetime": "2026-03-03T03:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:07:06.343Z"
+      },
+      "name": "Rambuttri Village Plaza Rooftop Bar",
+      "description": "Budget-friendly rooftop bar with amazing city views. Perfect for sunset photos and meeting other travelers.",
+      "location": {
+        "name": "Rambuttri Village Plaza",
+        "type": "ATTRACTION"
+      },
+      "category": "nightlife",
+      "metadata": {},
+      "id": "3ae79deb-c51f-493e-8548-6ada025af2a2"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

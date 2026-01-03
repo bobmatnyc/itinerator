@@ -1,0 +1,97 @@
+{
+  "id": "fda9eba1-b807-449d-9552-0a580a7d7f4b",
+  "version": 6,
+  "createdAt": "2026-01-01T21:57:39.845Z",
+  "updatedAt": "2026-01-01T21:58:48.356Z",
+  "title": "The Johnson Family's Trip",
+  "description": "Test itinerary for family persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "82fd5d90-59e5-431b-a3db-a5e165988c5a",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "parent",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "722ee960-5a5d-4995-ae00-7d4c4f26cc23",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "b1fba2c4-e313-4ef4-92c2-0150e499937b",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "4a12c342-a473-40d6-88a9-38b9e7e2c321",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 8
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-15T19:00:00.000Z",
+      "endDatetime": "2025-06-22T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:58:48.356Z"
+      },
+      "property": {
+        "name": "Hilton Orlando Bonnet Creek"
+      },
+      "location": {
+        "name": "Bonnet Creek",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2025-06-15T19:00:00.000Z",
+      "checkOutDate": "2025-06-22T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Family Suite",
+      "roomCount": 2,
+      "amenities": [],
+      "notes": "Family-friendly resort with multiple pools, waterslide, and children's pool. Close to Disney World. Requires careful management of Jake's nut allergy.",
+      "metadata": {},
+      "id": "90ba8e89-6720-4e01-b102-6c85b2ba3dc0"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

@@ -1,0 +1,71 @@
+{
+  "id": "55e550d0-9c41-4d82-97db-79ce380f94fc",
+  "version": 9,
+  "createdAt": "2026-01-02T00:37:21.336Z",
+  "updatedAt": "2026-01-02T00:38:37.937Z",
+  "title": "Sarah & Michael's Romantic Italian Anniversary Trip",
+  "description": "Test itinerary for couple persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "829d6c9b-ede2-4a5f-98da-7b975125524f",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "1eb5de86-3bbf-496c-b042-32b4d9a8ee54",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-15T19:00:00.000Z",
+      "endDatetime": "2024-09-21T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:38:37.936Z"
+      },
+      "property": {
+        "name": "Le Sirenuse"
+      },
+      "location": {
+        "name": "Positano",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2024-09-15T19:00:00.000Z",
+      "checkOutDate": "2024-09-21T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Deluxe Room with Private Terrace",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Anniversary trip - request room with best sea view and terrace",
+      "metadata": {},
+      "id": "3ef4f6ca-f6d1-4d1e-994b-e88d2860cd14"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

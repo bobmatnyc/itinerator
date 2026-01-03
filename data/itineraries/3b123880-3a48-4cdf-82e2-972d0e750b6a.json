@@ -1,0 +1,65 @@
+{
+  "id": "3b123880-3a48-4cdf-82e2-972d0e750b6a",
+  "version": 23,
+  "createdAt": "2026-01-01T23:50:09.209Z",
+  "updatedAt": "2026-01-01T23:53:15.784Z",
+  "title": "Sarah & Michael's Amalfi Coast Anniversary Trip",
+  "description": "Romantic 10-day anniversary celebration featuring luxury experiences, wine tastings, and Mediterranean views",
+  "status": "DRAFT",
+  "startDate": "2026-09-15T16:00:00.000Z",
+  "endDate": "2026-09-25T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "82a15c07-23b3-4760-b827-27be510548c3",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary_traveler",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "02396fba-b1d6-4450-9969-0335baa10001",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-20T23:30:00.000Z",
+      "endDatetime": "2026-09-21T02:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:53:15.783Z"
+      },
+      "name": "Romantic Dinner at Belvedere Restaurant",
+      "description": "Intimate dinner with panoramic views of the Amalfi Coast, featuring local Mediterranean cuisine and an extensive wine list",
+      "location": {
+        "name": "Belmond Hotel Caruso",
+        "type": "ATTRACTION"
+      },
+      "category": "dining",
+      "metadata": {},
+      "id": "2122043b-ddb1-4b6a-8aeb-2057df336f22"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

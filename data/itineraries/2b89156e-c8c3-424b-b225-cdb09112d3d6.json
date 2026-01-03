@@ -1,0 +1,32 @@
+{
+  "id": "2b89156e-c8c3-424b-b225-cdb09112d3d6",
+  "version": 3,
+  "createdAt": "2026-01-01T20:33:40.585Z",
+  "updatedAt": "2026-01-01T20:34:21.818Z",
+  "title": "Jordan's Trip",
+  "description": "Test itinerary for budget persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "solo",
+    "travelStyle": "backpacker",
+    "interests": [
+      "museums",
+      "walking tours",
+      "street food",
+      "local markets"
+    ],
+    "budget": {
+      "amount": 50,
+      "currency": "USD",
+      "period": "per_day"
+    },
+    "origin": "Boston"
+  }
+}

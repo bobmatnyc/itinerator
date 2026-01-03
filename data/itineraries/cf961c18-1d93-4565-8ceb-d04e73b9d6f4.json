@@ -1,0 +1,316 @@
+{
+  "id": "cf961c18-1d93-4565-8ceb-d04e73b9d6f4",
+  "version": 25,
+  "createdAt": "2026-01-02T05:27:21.621Z",
+  "updatedAt": "2026-01-02T05:34:38.392Z",
+  "title": "Tokyo Business Trip",
+  "description": "5-day business trip with client meetings in Shibuya",
+  "status": "DRAFT",
+  "startDate": "2026-02-19T17:00:00.000Z",
+  "endDate": "2026-02-24T17:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "84d3ee70-21ab-48b2-9989-910e4d9cffb5",
+      "type": "ADULT",
+      "firstName": "Jennifer",
+      "lastName": "Chen",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "6c007c00-19a4-41cc-9236-8689320d4f12",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-20T20:00:00.000Z",
+      "endDatetime": "2024-02-25T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:28:21.428Z"
+      },
+      "notes": "Business center access, meeting rooms available",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Shibuya Stream Excel Hotel Tokyu"
+      },
+      "location": {
+        "name": "Shibuya"
+      },
+      "checkInDate": "2024-02-20T20:00:00.000Z",
+      "checkOutDate": "2024-02-25T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Business Room",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "b761870f-48ea-49b8-b047-c33275e874da",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-20T14:00:00.000Z",
+      "endDatetime": "2024-02-20T14:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:28:28.240Z"
+      },
+      "provider": {
+        "name": "Tokyo Luxury Transfers"
+      },
+      "notes": "Private car service, direct route from airport to hotel",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "Narita Airport"
+      },
+      "dropoffLocation": {
+        "name": "Shibuya Stream Excel Hotel Tokyu"
+      }
+    },
+    {
+      "id": "3e566d39-8c7a-4786-ad76-376e43564e42",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-21T17:30:00.000Z",
+      "endDatetime": "2024-02-21T18:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:28:34.345Z"
+      },
+      "notes": "Quick business lunch spot",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Lunch at Soup Stock Tokyo",
+      "location": {
+        "name": "Shibuya"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "41849478-7aa5-48c4-96e9-64ba8542680f",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-23T17:30:00.000Z",
+      "endDatetime": "2024-02-23T18:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:28:40.296Z"
+      },
+      "notes": "Quick ramen lunch between meetings",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Lunch at Ippudo Shibuya",
+      "location": {
+        "name": "Shibuya"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "b5db0f02-8163-4bdf-8959-721774c5eeb8",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-21T19:00:00.000Z",
+      "endDatetime": "2024-02-21T21:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:28:46.866Z"
+      },
+      "notes": "Private meeting room reservation, requires advance booking",
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Business Meeting Room Reservation",
+      "location": {
+        "name": "Shibuya Stream Excel Hotel Tokyu Business Center"
+      },
+      "attendees": []
+    },
+    {
+      "id": "8c11268f-602b-4029-b4d4-416017e26cb2",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-23T19:00:00.000Z",
+      "endDatetime": "2024-02-23T21:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:28:52.919Z"
+      },
+      "notes": "Private meeting room reservation, requires advance booking",
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Business Meeting Room Reservation",
+      "location": {
+        "name": "Shibuya Stream Excel Hotel Tokyu Business Center"
+      },
+      "attendees": []
+    },
+    {
+      "id": "4515f026-d9ff-4b3f-93b4-19dd209867f8",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-20T19:00:00.000Z",
+      "endDatetime": "2024-02-20T22:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:29:38.340Z"
+      },
+      "notes": "Hotel meeting room reservation for business work",
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Business Meeting Room Reservation",
+      "location": {
+        "name": "Shibuya Stream Excel Hotel Tokyu Meeting Room"
+      },
+      "attendees": []
+    },
+    {
+      "id": "a7a943f4-46b9-46f6-98a6-0c7fb53b4b5d",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-20T15:00:00.000Z",
+      "endDatetime": "2024-02-20T15:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:30:03.256Z"
+      },
+      "provider": {
+        "name": "Tokyo Airport Transfers"
+      },
+      "notes": "Private business class transfer for Jennifer Chen",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "Narita International Airport"
+      },
+      "dropoffLocation": {
+        "name": "Shibuya Stream Excel Hotel Tokyu"
+      }
+    },
+    {
+      "id": "31dd72b2-c26b-48fd-be51-4d23a366b933",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-21T19:00:00.000Z",
+      "endDatetime": "2024-02-21T22:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:30:21.723Z"
+      },
+      "notes": "Private meeting room booking for business discussions",
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Business Meeting Room Reservation - Tuesday",
+      "location": {
+        "name": "Shibuya Stream Excel Hotel Tokyu Meeting Room"
+      },
+      "attendees": []
+    },
+    {
+      "id": "a83ef3a2-b1a7-42e9-9898-61f74746cd6d",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-02-20T20:00:00.000Z",
+      "endDatetime": "2026-02-25T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:31:49.254Z"
+      },
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Shibuya Stream Excel Hotel Tokyu"
+      },
+      "location": {
+        "name": "Shibuya"
+      },
+      "checkInDate": "2026-02-20T20:00:00.000Z",
+      "checkOutDate": "2026-02-25T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomCount": 1,
+      "boardBasis": "ROOM_ONLY",
+      "amenities": []
+    },
+    {
+      "id": "90d88764-f1ad-4b21-b0d8-4d50538c0dc6",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-02-21T17:30:00.000Z",
+      "endDatetime": "2026-02-21T19:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:32:29.142Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Lunch at Soup Stock Tokyo",
+      "description": "Quick business lunch option in Shibuya",
+      "location": {
+        "name": "Shibuya"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "af116b3a-8c54-45a0-b720-e440843afd6a",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-02-23T17:30:00.000Z",
+      "endDatetime": "2026-02-23T19:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:32:35.421Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Lunch at Ippudo Shibuya",
+      "description": "Quick ramen lunch between meetings",
+      "location": {
+        "name": "Shibuya"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "2c67f87c-33c2-4f76-aad9-3f34b58bfde0",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-02-21T19:00:00.000Z",
+      "endDatetime": "2026-02-21T22:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:32:42.534Z"
+      },
+      "notes": "Tuesday afternoon meeting room reservation",
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Business Meeting Room Reservation",
+      "location": {
+        "name": "Shibuya Stream Excel Hotel Tokyu Business Center"
+      },
+      "attendees": []
+    }
+  ],
+  "tripType": "BUSINESS",
+  "tags": [],
+  "metadata": {}
+}

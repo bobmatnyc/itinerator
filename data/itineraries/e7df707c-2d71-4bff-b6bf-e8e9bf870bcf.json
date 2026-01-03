@@ -1,0 +1,98 @@
+{
+  "id": "e7df707c-2d71-4bff-b6bf-e8e9bf870bcf",
+  "version": 7,
+  "createdAt": "2026-01-01T23:11:19.240Z",
+  "updatedAt": "2026-01-01T23:12:52.404Z",
+  "title": "Alex the Backpacker's Trip",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "bdad3d17-f9a1-4216-91b8-f84552af7cd7",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-15T09:30:00.000Z",
+      "endDatetime": "2025-09-15T11:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:12:52.400Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Wat Arun Sunrise Photography",
+      "description": "Capture the iconic Wat Arun temple at sunrise - golden light, reflections on the Chao Phraya River. Bring tripod and wide-angle lens!",
+      "location": {
+        "name": "Wat Arun Temple"
+      },
+      "category": "photography"
+    },
+    {
+      "id": "bb720252-544a-448e-b811-3db0a31b35ee",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-25T10:00:00.000Z",
+      "endDatetime": "2025-09-25T18:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:12:52.402Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Sapa Rice Terraces Trek",
+      "description": "Full-day guided trek through the stunning rice terraces of Muong Hoa Valley. Incredible landscape photography opportunities with local hill tribes.",
+      "location": {
+        "name": "Muong Hoa Valley"
+      },
+      "category": "hiking"
+    },
+    {
+      "id": "5aa4454f-3cbc-4d50-9001-f68cb1959444",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-20T11:00:00.000Z",
+      "endDatetime": "2025-09-20T17:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:12:52.403Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Doi Inthanon National Park Hiking",
+      "description": "Explore Thailand's highest peak. Hiking trails with incredible mountain views, waterfalls, and diverse wildlife. Perfect for landscape and nature photography.",
+      "location": {
+        "name": "Doi Inthanon National Park"
+      },
+      "category": "hiking"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-28T22:00:00.000Z",
+      "endDatetime": "2025-09-29T01:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:12:52.404Z"
+      },
+      "name": "Hanoi Street Food Tour - Bun Cha Obama",
+      "description": "Guided street food tour featuring the famous Bun Cha spot where Obama and Bourdain ate. Explore hidden local eateries and try multiple street food specialties!",
+      "location": {
+        "name": "Old Quarter",
+        "type": "ATTRACTION"
+      },
+      "category": "dining",
+      "metadata": {},
+      "id": "d5a5ebd3-039d-4d09-8c37-e8b8ab818390"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

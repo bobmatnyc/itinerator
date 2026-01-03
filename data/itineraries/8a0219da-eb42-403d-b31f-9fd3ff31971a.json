@@ -1,0 +1,71 @@
+{
+  "id": "8a0219da-eb42-403d-b31f-9fd3ff31971a",
+  "version": 7,
+  "createdAt": "2026-01-01T21:21:47.429Z",
+  "updatedAt": "2026-01-01T21:25:06.585Z",
+  "title": "Solo Trip to Porto",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "09ab7848-3962-44eb-a50e-e9f961211061",
+      "type": "ADULT",
+      "firstName": "Pat",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "33b401ed-cf8f-4611-8078-5be518d17de5",
+      "status": "CONFIRMED",
+      "startDatetime": "2023-09-24T13:00:00.000Z",
+      "endDatetime": "2023-09-24T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:24:07.139Z"
+      },
+      "notes": "Local guide to help interact with market vendors and understand Porto's food culture",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Mercado do Bolhão Morning Market Tour",
+      "description": "Guided tour of Porto's historic market, exploring local vendors, produce, and culinary traditions",
+      "location": {
+        "name": "Mercado do Bolhão"
+      },
+      "category": "tour"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2023-09-24T14:00:00.000Z",
+      "endDatetime": "2023-09-24T16:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:25:06.584Z"
+      },
+      "name": "Cedofeita Street Art Walking Tour",
+      "description": "Guided exploration of Porto's vibrant street art scene, uncovering the stories behind local murals and urban art",
+      "location": {
+        "name": "Cedofeita Neighborhood",
+        "type": "ATTRACTION"
+      },
+      "category": "tour",
+      "metadata": {},
+      "id": "6c27c465-72ac-42a2-97f8-cb77e2d21be2"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

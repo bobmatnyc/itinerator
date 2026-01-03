@@ -714,11 +714,38 @@ export class ToolExecutor {
     await this.ensurePersisted(itineraryId);
 
     const params = validation.data;
+
+    // Parse departure time (required) - handle both string and Date
+    const departureTime = params.departureTime instanceof Date
+      ? params.departureTime
+      : parseLocalDateTime(params.departureTime);
+
+    // Parse arrival time if provided, otherwise estimate +2 hours
+    const arrivalTime = params.arrivalTime
+      ? (params.arrivalTime instanceof Date
+          ? params.arrivalTime
+          : parseLocalDateTime(params.arrivalTime))
+      : new Date(departureTime.getTime() + 2 * 60 * 60 * 1000); // Default +2 hours
+
+    // Build origin location with available data
+    const origin = {
+      ...params.origin,
+      type: 'AIRPORT' as const,
+      name: params.origin.name || params.origin.city || params.origin.code || 'Origin',
+    };
+
+    // Build destination location with available data
+    const destination = {
+      ...params.destination,
+      type: 'AIRPORT' as const,
+      name: params.destination.name || params.destination.city || params.destination.code || 'Destination',
+    };
+
     const segment: Omit<Segment, 'id'> = {
       type: SegmentType.FLIGHT,
       status: SegmentStatus.CONFIRMED,
-      startDatetime: parseLocalDateTime(params.departureTime),
-      endDatetime: parseLocalDateTime(params.arrivalTime),
+      startDatetime: departureTime,
+      endDatetime: arrivalTime,
       travelerIds: [],
       source: 'agent',
       sourceDetails: {
@@ -727,8 +754,8 @@ export class ToolExecutor {
       },
       airline: params.airline,
       flightNumber: params.flightNumber,
-      origin: { ...params.origin, type: 'AIRPORT' },
-      destination: { ...params.destination, type: 'AIRPORT' },
+      origin,
+      destination,
       cabinClass: params.cabinClass,
       price: params.price,
       confirmationNumber: params.confirmationNumber,

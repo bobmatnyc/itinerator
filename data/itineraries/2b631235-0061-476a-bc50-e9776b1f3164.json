@@ -1,0 +1,108 @@
+{
+  "id": "2b631235-0061-476a-bc50-e9776b1f3164",
+  "version": 8,
+  "createdAt": "2026-01-01T20:24:22.088Z",
+  "updatedAt": "2026-01-01T20:26:03.574Z",
+  "title": "The Johnson Family's Trip",
+  "description": "Test itinerary for family persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "5176914f-a778-41ea-bba1-91b321857c44",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "parent",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "abc15c51-8882-4b1b-a751-b6c95f888ab9",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "c6f1954d-473d-4aba-980c-60f68e046b1a",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "5b37242f-83de-430f-ae28-5c5cb6843fbf",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "a7feae8f-3e5c-4226-9b50-a47e88a89b00",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 8
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-15T19:00:00.000Z",
+      "endDatetime": "2025-06-22T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T20:26:03.573Z"
+      },
+      "property": {
+        "name": "Sheraton Vistana Villages Resort Villas"
+      },
+      "location": {
+        "name": "Orlando",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2025-06-15T19:00:00.000Z",
+      "checkOutDate": "2025-06-22T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "2-Bedroom Villa with Kitchen",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Family villa with full kitchen, ideal for managing nut allergies. Multiple pools and water play areas.",
+      "metadata": {},
+      "id": "4279daaa-1aa4-4432-b5c4-c4ca295b4c9f"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

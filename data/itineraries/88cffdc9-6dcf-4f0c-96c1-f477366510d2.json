@@ -1,0 +1,68 @@
+{
+  "id": "88cffdc9-6dcf-4f0c-96c1-f477366510d2",
+  "version": 8,
+  "createdAt": "2026-01-01T20:54:41.925Z",
+  "updatedAt": "2026-01-01T20:56:52.451Z",
+  "title": "Southeast Asia Backpacking Adventure",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "startDate": "2026-11-01T17:00:00.000Z",
+  "endDate": "2026-11-22T17:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "505b1a60-a5be-4ab0-b7ff-758f7d972c7c",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-11-01T20:00:00.000Z",
+      "endDatetime": "2026-11-05T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T20:56:26.958Z"
+      },
+      "notes": "Rooftop bar, social hostel, great for backpackers",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Lub d Bangkok Siam"
+      },
+      "location": {
+        "name": "Bangkok"
+      },
+      "checkInDate": "2026-11-01T20:00:00.000Z",
+      "checkOutDate": "2026-11-05T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Shared Dormitory",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-11-03T23:00:00.000Z",
+      "endDatetime": "2026-11-04T02:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T20:56:52.450Z"
+      },
+      "name": "Street Food Mafia Tour",
+      "description": "Epic street food tour through Bangkok's legendary Chinatown, exploring hidden culinary gems and local favorites",
+      "location": {
+        "name": "Chinatown, Bangkok",
+        "type": "ATTRACTION"
+      },
+      "category": "food",
+      "metadata": {},
+      "id": "d548b3ce-29f6-4adc-a317-23065322f88f"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

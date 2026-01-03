@@ -1,0 +1,80 @@
+{
+  "id": "7798027f-1d46-4635-abd2-c0984b12000d",
+  "version": 6,
+  "createdAt": "2026-01-02T18:15:50.434Z",
+  "updatedAt": "2026-01-02T18:16:14.066Z",
+  "title": "The Johnson Family's Trip",
+  "description": "Test itinerary for family persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "5b9e4401-70ad-4c7a-bdc5-dc0a89efe748",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "parent",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "747f9605-a6d1-4307-9372-6cfa6b399c1a",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "25eee859-c4e1-4fff-8043-2ccb622bc8e9",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "73ca575d-eb06-4aa0-9cc8-95336280e6eb",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 8
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "family",
+    "pace": "balanced",
+    "interests": [
+      "theme parks",
+      "water activities"
+    ],
+    "dietaryRestrictions": "nut allergy",
+    "origin": "Chicago",
+    "avoidances": [
+      "early mornings"
+    ]
+  }
+}

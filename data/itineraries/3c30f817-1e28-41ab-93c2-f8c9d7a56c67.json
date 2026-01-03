@@ -1,0 +1,46 @@
+{
+  "id": "3c30f817-1e28-41ab-93c2-f8c9d7a56c67",
+  "version": 8,
+  "createdAt": "2026-01-01T22:21:36.090Z",
+  "updatedAt": "2026-01-01T22:24:03.618Z",
+  "title": "Southeast Asia Backpacking Adventure",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "429459cc-df8d-41c8-accb-652335dd34d6",
+      "type": "ADULT",
+      "firstName": "Alex",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "solo",
+    "travelStyle": "backpacker",
+    "interests": [
+      "nightlife",
+      "street food",
+      "hiking",
+      "photography",
+      "adventure"
+    ],
+    "budgetFlexibility": 2,
+    "budget": {
+      "amount": 50,
+      "currency": "USD",
+      "period": "per_day"
+    },
+    "origin": "New York City"
+  }
+}

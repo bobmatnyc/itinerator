@@ -1,0 +1,47 @@
+{
+  "id": "841f6c88-3a92-4470-812f-f91e775532b8",
+  "version": 4,
+  "createdAt": "2026-01-01T23:32:33.576Z",
+  "updatedAt": "2026-01-01T23:33:54.415Z",
+  "title": "Jennifer Chen's Trip",
+  "description": "Test itinerary for business persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-03-15T19:00:00.000Z",
+      "endDatetime": "2025-03-20T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:33:54.415Z"
+      },
+      "property": {
+        "name": "Cerulean Tower Tokyu Hotel",
+        "code": "CERULEAN_TOKYO"
+      },
+      "location": {
+        "name": "Shibuya, Tokyo",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2025-03-15T19:00:00.000Z",
+      "checkOutDate": "2025-03-20T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Business Room with Executive Lounge Access",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Requested executive lounge access. Preferred business-friendly accommodations for client meetings.",
+      "metadata": {},
+      "id": "ee71f45f-fcff-4ca5-8f25-1c8a4febf065"
+    }
+  ],
+  "tripType": "BUSINESS",
+  "tags": [],
+  "metadata": {}
+}

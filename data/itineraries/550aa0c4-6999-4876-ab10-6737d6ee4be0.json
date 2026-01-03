@@ -1,0 +1,91 @@
+{
+  "id": "550aa0c4-6999-4876-ab10-6737d6ee4be0",
+  "version": 7,
+  "createdAt": "2026-01-01T23:57:09.419Z",
+  "updatedAt": "2026-01-01T23:59:58.103Z",
+  "title": "Tokyo Business Trip",
+  "description": "Test itinerary for business persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "4ee933cf-8d46-4e17-8979-d1e530b3c0c0",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-11-13T20:00:00.000Z",
+      "endDatetime": "2024-11-17T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:58:05.937Z"
+      },
+      "notes": "Business-focused hotel with reliable WiFi, walking distance to meeting locations",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Cerulean Tower Tokyu Hotel"
+      },
+      "location": {
+        "name": "Shibuya"
+      },
+      "checkInDate": "2024-11-13T20:00:00.000Z",
+      "checkOutDate": "2024-11-17T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Business Room",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "959d8463-d32f-4d9d-9bac-7583c9a875ce",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-11-13T13:00:00.000Z",
+      "endDatetime": "2024-11-13T13:45:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:59:34.350Z"
+      },
+      "provider": {
+        "name": "Tokyo Airport Transfers"
+      },
+      "notes": "Private car service from Haneda Airport to hotel. Business traveler transfer with priority service.",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "Haneda Airport"
+      },
+      "dropoffLocation": {
+        "name": "Cerulean Tower Tokyu Hotel"
+      }
+    },
+    {
+      "type": "MEETING",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-11-14T19:00:00.000Z",
+      "endDatetime": "2024-11-14T21:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:59:58.103Z"
+      },
+      "title": "Business Meeting Room at Cerulean Tower",
+      "location": {
+        "name": "Cerulean Tower Tokyu Hotel",
+        "type": "OTHER"
+      },
+      "attendees": [],
+      "notes": "Private meeting room for Tuesday afternoon business discussions",
+      "metadata": {},
+      "id": "7e46c8e1-9dae-401e-b15d-6f65e68b24e1"
+    }
+  ],
+  "tripType": "BUSINESS",
+  "tags": [],
+  "metadata": {}
+}

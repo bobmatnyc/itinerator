@@ -1,0 +1,155 @@
+{
+  "id": "fa67e111-9f81-444e-8404-27378bb71317",
+  "version": 10,
+  "createdAt": "2026-01-01T21:03:41.293Z",
+  "updatedAt": "2026-01-01T21:06:42.922Z",
+  "title": "The Johnson Family's Trip",
+  "description": "Test itinerary for family persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "7c1d7e16-dd03-4b42-a7ca-c99d20ab44f9",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "parent",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "d5ac99e9-538c-41ef-80bc-72aacb88e05c",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "43ce99fb-152c-46a0-8ba4-b9eb3336420e",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "382dca7f-1ddb-43ab-8203-b87bb2d0e45d",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "d0b60c1b-421a-4b47-904b-4ad73b400910",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false,
+        "age": 8
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "3e3679a1-1f8c-4797-895e-cbf766d5ed8c",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-15T19:00:00.000Z",
+      "endDatetime": "2025-06-22T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:04:47.384Z"
+      },
+      "notes": "Family room with nut allergy safety protocols. Request clear allergen information for all dining options.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Disney's Animal Kingdom Lodge"
+      },
+      "location": {
+        "name": "Walt Disney World Resort"
+      },
+      "checkInDate": "2025-06-15T19:00:00.000Z",
+      "checkOutDate": "2025-06-22T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomCount": 1,
+      "boardBasis": "BED_BREAKFAST",
+      "amenities": []
+    },
+    {
+      "id": "b039c662-d397-4b7a-8cec-7823becfe181",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-15T12:15:00.000Z",
+      "endDatetime": "2025-06-15T16:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:05:40.161Z"
+      },
+      "metadata": {},
+      "type": "FLIGHT",
+      "airline": {
+        "name": "United Airlines",
+        "code": "UA"
+      },
+      "flightNumber": "UA1240",
+      "origin": {
+        "name": "Chicago O'Hare International Airport",
+        "code": "ORD"
+      },
+      "destination": {
+        "name": "Orlando International Airport",
+        "code": "MCO"
+      },
+      "cabinClass": "ECONOMY"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-15T23:00:00.000Z",
+      "endDatetime": "2025-06-16T01:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:06:42.921Z"
+      },
+      "name": "Dinner at Sanaa - Animal Kingdom Lodge",
+      "description": "African-inspired cuisine with extensive allergy safety protocols. Located in the Johnson family's hotel.",
+      "location": {
+        "name": "Disney's Animal Kingdom Lodge",
+        "type": "ATTRACTION"
+      },
+      "category": "dining",
+      "notes": "First night dinner. Allergy-friendly restaurant at hotel. Notify staff of Jake's nut allergy.",
+      "metadata": {},
+      "id": "cc39dc10-8e45-4abb-9ab4-552d97929c4f"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

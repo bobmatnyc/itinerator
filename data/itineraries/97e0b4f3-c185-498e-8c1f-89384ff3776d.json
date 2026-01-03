@@ -1,0 +1,106 @@
+{
+  "id": "97e0b4f3-c185-498e-8c1f-89384ff3776d",
+  "version": 14,
+  "createdAt": "2026-01-02T04:52:13.452Z",
+  "updatedAt": "2026-01-02T04:55:11.122Z",
+  "title": "Ho Chi Minh City Adventure",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "startDate": "2026-03-04T17:00:00.000Z",
+  "endDate": "2026-03-11T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "7c616af7-f9d6-4eab-8270-d79aa3bb63da",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-03-04T20:00:00.000Z",
+      "endDatetime": "2026-03-11T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:54:10.284Z"
+      },
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Silverland Yen Hotel"
+      },
+      "location": {
+        "name": "District 1"
+      },
+      "checkInDate": "2026-03-04T20:00:00.000Z",
+      "checkOutDate": "2026-03-11T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "bd8b6697-3179-4578-b0ec-994c93a7dd01",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-03-05T11:00:00.000Z",
+      "endDatetime": "2026-03-05T14:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:54:19.132Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Early Morning Street Food Tour",
+      "description": "Guided early morning street food tour exploring local markets and hidden culinary gems",
+      "location": {
+        "name": "Ho Chi Minh City"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "a876aa81-99e4-4a5d-b3ee-8f5bd5036e9d",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-03-06T15:00:00.000Z",
+      "endDatetime": "2026-03-06T19:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:54:19.133Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Local Home Cooking Class",
+      "description": "Intimate cooking class in a local home, learning traditional Vietnamese recipes",
+      "location": {
+        "name": "District 3"
+      },
+      "category": "cooking"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-03-07T23:00:00.000Z",
+      "endDatetime": "2026-03-08T02:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:55:11.122Z"
+      },
+      "name": "Cho Lon Evening Food Tour",
+      "description": "Explore the culinary delights of Cho Lon (Chinatown) in the evening",
+      "location": {
+        "name": "Cho Lon",
+        "type": "ATTRACTION"
+      },
+      "category": "tour",
+      "metadata": {},
+      "id": "5186f8e4-c310-425c-8e13-53e3b07b25b8"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

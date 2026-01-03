@@ -1,0 +1,98 @@
+{
+  "id": "7517dfec-a74d-4a48-9c53-1f543f7e1649",
+  "version": 14,
+  "createdAt": "2026-01-02T18:00:23.866Z",
+  "updatedAt": "2026-01-02T18:02:52.679Z",
+  "title": "Sarah & Michael's Amalfi Coast Anniversary Trip",
+  "description": "Romantic anniversary trip to the Amalfi Coast, focusing on boutique hotels, wine, and intimate experiences",
+  "status": "DRAFT",
+  "startDate": "2026-09-12T16:00:00.000Z",
+  "endDate": "2026-09-22T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "3a22f94e-3ad7-41ef-b396-5b79efda827a",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "self",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "cc187410-5f9d-44ea-847b-b053857ccc96",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "partner",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "20ee3555-2d79-48ab-9a9e-54cf4280a3a5",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-12T19:00:00.000Z",
+      "endDatetime": "2026-09-22T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:02:38.083Z"
+      },
+      "notes": "Romantic anniversary trip, request best view suite with terrace overlooking Positano",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Le Sirenuse"
+      },
+      "location": {
+        "name": "Positano",
+        "city": "Positano",
+        "country": "Italy"
+      },
+      "checkInDate": "2026-09-12T19:00:00.000Z",
+      "checkOutDate": "2026-09-22T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Sea View Suite with Terrace",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-15T23:30:00.000Z",
+      "endDatetime": "2026-09-16T01:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:02:52.678Z"
+      },
+      "name": "Anniversary Dinner at La Sponda (Le Sirenuse Michelin-starred Restaurant)",
+      "description": "Special anniversary dinner at the Michelin-starred restaurant La Sponda, featuring local Mediterranean cuisine with stunning views of Positano",
+      "location": {
+        "name": "Le Sirenuse",
+        "city": "Positano",
+        "country": "Italy",
+        "type": "ATTRACTION"
+      },
+      "category": "dining",
+      "notes": "Request romantic table with best view, anniversary celebration",
+      "metadata": {},
+      "id": "39c50d50-895d-497e-8a2d-bdc466cc5cc4"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

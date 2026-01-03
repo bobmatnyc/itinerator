@@ -1,0 +1,45 @@
+{
+  "id": "25d73a33-be41-4f61-8c7c-a327f3435a52",
+  "version": 8,
+  "createdAt": "2026-01-01T23:25:55.960Z",
+  "updatedAt": "2026-01-01T23:27:04.666Z",
+  "title": "Southeast Asia Backpacking Adventure",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-15T20:00:00.000Z",
+      "endDatetime": "2024-02-18T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:27:04.665Z"
+      },
+      "property": {
+        "name": "Lub d Bangkok Siam"
+      },
+      "location": {
+        "name": "Bangkok",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2024-02-15T20:00:00.000Z",
+      "checkOutDate": "2024-02-18T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Social backpacker hostel, great for meeting other travelers",
+      "metadata": {},
+      "id": "26fe5f0b-581c-46b8-bd9e-179a2a340a08"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

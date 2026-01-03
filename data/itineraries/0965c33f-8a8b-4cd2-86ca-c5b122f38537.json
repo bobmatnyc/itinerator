@@ -1,0 +1,74 @@
+{
+  "id": "0965c33f-8a8b-4cd2-86ca-c5b122f38537",
+  "version": 7,
+  "createdAt": "2026-01-01T21:48:28.597Z",
+  "updatedAt": "2026-01-01T21:51:19.922Z",
+  "title": "Alex's Southeast Asia Photography Adventure",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "startDate": "2026-10-01T16:00:00.000Z",
+  "endDate": "2026-10-22T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "950db1fa-21d7-4b57-acf6-8afdb8691633",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-10-01T19:00:00.000Z",
+      "endDatetime": "2025-10-06T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:50:20.048Z"
+      },
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Lub d Bangkok Siam Hostel"
+      },
+      "location": {
+        "name": "Khao San Road"
+      },
+      "checkInDate": "2025-10-01T19:00:00.000Z",
+      "checkOutDate": "2025-10-06T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Dormitory Bed",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-10-01T19:00:00.000Z",
+      "endDatetime": "2026-10-05T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:51:19.921Z"
+      },
+      "property": {
+        "name": "Lub d Bangkok Siam Hostel"
+      },
+      "location": {
+        "name": "Khao San Road",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2026-10-01T19:00:00.000Z",
+      "checkOutDate": "2026-10-05T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Dormitory Bed",
+      "roomCount": 1,
+      "amenities": [],
+      "metadata": {},
+      "id": "3a0ec21c-1bb2-4bd9-9bd1-ad0683864c60"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

@@ -1,0 +1,117 @@
+{
+  "id": "9be2ad72-88a9-49b0-9e20-e52d42b60f95",
+  "version": 16,
+  "createdAt": "2026-01-02T04:17:28.920Z",
+  "updatedAt": "2026-01-02T04:20:06.796Z",
+  "title": "Johnson Family Disney World Trip",
+  "description": "Family vacation to Orlando with Disney World and Universal Studios",
+  "status": "DRAFT",
+  "startDate": "2026-06-15T16:00:00.000Z",
+  "endDate": "2026-06-22T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "988e535e-5632-4ee1-8b35-070c8e5e28a5",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "33b42b58-6654-4a53-8875-957089301878",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "8a234416-3e2d-43bb-9185-3531db6c5735",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "f76bc81b-381f-48e8-aa89-5711abed57e1",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false,
+        "age": 8
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "863febd6-d68e-4254-8314-4776926c17a8",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-15T19:00:00.000Z",
+      "endDatetime": "2026-06-22T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:19:53.178Z"
+      },
+      "notes": "Nut allergy accommodation needed for Jake Johnson. Require nut-free meal preparations.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Disney's Caribbean Beach Resort"
+      },
+      "location": {
+        "name": "Walt Disney World Resort"
+      },
+      "checkInDate": "2026-06-15T19:00:00.000Z",
+      "checkOutDate": "2026-06-22T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Family Suite",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-16T16:00:00.000Z",
+      "endDatetime": "2026-06-16T18:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:20:06.795Z"
+      },
+      "name": "Centertown Market - Caribbean Beach Resort Dining",
+      "description": "Family-friendly food court with multiple cuisine options. Staff trained in allergy accommodations.",
+      "location": {
+        "name": "Disney's Caribbean Beach Resort",
+        "type": "ATTRACTION"
+      },
+      "category": "dining",
+      "notes": "Confirm nut-free meal options for Jake. Request chef consultation.",
+      "metadata": {},
+      "id": "1a1ca9fa-b20b-4a02-951c-dff478f4ebdc"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

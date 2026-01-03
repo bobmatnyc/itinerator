@@ -1,0 +1,136 @@
+{
+  "id": "be4f3788-5288-4160-ad68-c79e490b5e74",
+  "version": 15,
+  "createdAt": "2026-01-02T05:13:48.180Z",
+  "updatedAt": "2026-01-02T05:16:14.001Z",
+  "title": "Sarah & Michael's Amalfi Coast Anniversary Trip",
+  "description": "Test itinerary for couple persona",
+  "status": "DRAFT",
+  "startDate": "2026-08-12T16:00:00.000Z",
+  "endDate": "2026-08-22T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "31fe126a-1223-4a0e-8891-89fe4eab1118",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "bb6b016a-021c-494c-9937-45b2fb4e5057",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "82e89609-34d4-4b8e-bb28-b61e8d1e7cd1",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-08-15T22:30:00.000Z",
+      "endDatetime": "2026-08-16T00:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:15:19.889Z"
+      },
+      "notes": "Private romantic sunset cruise with champagne. Celebrate 5-year wedding anniversary.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Private Sunset Cruise - Anniversary Celebration",
+      "description": "Intimate private boat tour along the Amalfi Coast with champagne, celebrating Sarah and Michael's 5-year anniversary",
+      "location": {
+        "name": "Positano Coast"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "38d6ca3c-cbbf-4561-a20d-3135141b68ef",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-08-16T00:30:00.000Z",
+      "endDatetime": "2026-08-16T03:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:15:27.422Z"
+      },
+      "notes": "Two-Michelin-starred restaurant. Romantic anniversary dinner with tasting menu and wine pairing.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Anniversary Dinner at Don Alfonso 1890",
+      "description": "Romantic Michelin-starred dining experience with panoramic coastal views, celebrating Sarah and Michael's 5-year anniversary",
+      "location": {
+        "name": "Don Alfonso 1890"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "960c02b5-4310-40dd-9873-6803a2ebc934",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-08-18T14:00:00.000Z",
+      "endDatetime": "2026-08-18T17:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:15:34.641Z"
+      },
+      "notes": "Full couples spa treatment package including massage, aromatherapy, and relaxation time",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Couples Spa Retreat at Le Sirenuse",
+      "description": "Luxurious couples spa day with treatments and relaxation",
+      "location": {
+        "name": "Le Sirenuse Spa"
+      },
+      "category": "spa"
+    },
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-08-12T19:00:00.000Z",
+      "endDatetime": "2026-08-22T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:16:14.001Z"
+      },
+      "property": {
+        "name": "Le Sirenuse"
+      },
+      "location": {
+        "name": "Positano",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2026-08-12T19:00:00.000Z",
+      "checkOutDate": "2026-08-22T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Deluxe Sea View Room",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Anniversary trip - romantic sea view room requested",
+      "metadata": {},
+      "id": "ebb8234e-c572-41d5-9400-4e77c33f27f0"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

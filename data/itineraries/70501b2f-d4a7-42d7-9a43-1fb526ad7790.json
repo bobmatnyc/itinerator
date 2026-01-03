@@ -1,0 +1,16 @@
+{
+  "id": "70501b2f-d4a7-42d7-9a43-1fb526ad7790",
+  "version": 3,
+  "createdAt": "2026-01-01T22:48:44.984Z",
+  "updatedAt": "2026-01-01T22:48:59.458Z",
+  "title": "Adventure Squad Costa Rica Trip",
+  "description": "10-day extreme adventure trip focused on zip-lining, volcano hiking, and white water rafting",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

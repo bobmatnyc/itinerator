@@ -1,0 +1,144 @@
+{
+  "id": "20156e05-d020-461e-a2d0-80142ec6e39f",
+  "version": 15,
+  "createdAt": "2026-01-01T23:53:48.128Z",
+  "updatedAt": "2026-01-01T23:55:28.613Z",
+  "title": "The Johnson Family's Trip",
+  "description": "Test itinerary for family persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "87560ae5-aa08-438c-8a6c-a1995dabc158",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "parent",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "99db997f-dab1-4f03-a120-7a0c3a2f8171",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "ced6bd78-093a-4c95-9e41-e6fe90968e9a",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "3c7e1c11-322e-49b8-8fd0-df6ecc0fdd10",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 8
+      }
+    },
+    {
+      "id": "44fd26ab-9841-4831-ac25-409b396721d9",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "64496ff1-302c-4551-a857-e1e9b644f82b",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "b7808987-36bf-4d38-9f5d-9f9e7595485f",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "6753e5da-c2f4-49e4-afac-4cccac91f37b",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false,
+        "age": 8
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-15T19:00:00.000Z",
+      "endDatetime": "2025-06-22T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:55:28.613Z"
+      },
+      "property": {
+        "name": "Disney's Caribbean Beach Resort"
+      },
+      "location": {
+        "name": "Walt Disney World",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2025-06-15T19:00:00.000Z",
+      "checkOutDate": "2025-06-22T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Preferred Room - Family Suite",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Preferred room close to main pool area. Allergy-friendly accommodations needed for Jake (nut allergy).",
+      "metadata": {},
+      "id": "b4a906ea-f216-477e-b237-8afd7f49995b"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

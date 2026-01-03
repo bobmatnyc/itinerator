@@ -1,0 +1,89 @@
+{
+  "id": "5708ece8-d29f-41cc-a135-a675cb888c0e",
+  "version": 8,
+  "createdAt": "2026-01-02T17:46:55.113Z",
+  "updatedAt": "2026-01-02T17:47:30.549Z",
+  "title": "Johnson Family Orlando Disney Trip",
+  "description": "Family vacation to Orlando with Disney World and Universal Studios, focusing on Magic Kingdom and Harry Potter attractions",
+  "status": "DRAFT",
+  "startDate": "2026-06-01T16:00:00.000Z",
+  "endDate": "2026-06-08T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "51ca1eba-278b-4e9b-b0ec-59d03996cd2a",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "parent",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "5199cb8e-d0a6-4bff-8fb0-c9e256a71ade",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "3da6fb89-f6f8-4a7b-900d-760830c54efd",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "0cc07a8d-b8d5-404e-8080-4d2ae8d89609",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 8
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "family",
+    "travelStyle": "moderate",
+    "pace": "balanced",
+    "interests": [
+      "theme parks",
+      "water parks",
+      "family activities"
+    ],
+    "dietaryRestrictions": "[\"nut allergy\"]",
+    "origin": "Chicago",
+    "activityPreferences": [
+      "Disney World",
+      "Universal Studios",
+      "Harry Potter"
+    ],
+    "avoidances": [
+      "nut products"
+    ]
+  }
+}

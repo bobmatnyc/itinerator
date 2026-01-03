@@ -1,0 +1,103 @@
+{
+  "id": "feb101dd-ace4-42f1-abc5-fb2548df3a92",
+  "version": 4,
+  "createdAt": "2026-01-01T21:18:01.567Z",
+  "updatedAt": "2026-01-01T21:20:28.368Z",
+  "title": "Jordan's Trip",
+  "description": "Test itinerary for budget persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "5b6865b7-5b91-466a-af3b-d4a93579c3df",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-07-01T19:00:00.000Z",
+      "endDatetime": "2024-07-05T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:19:11.383Z"
+      },
+      "notes": "Social hostel with free breakfast, great for solo travelers",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Czech Inn Hostel"
+      },
+      "location": {
+        "name": "Prague"
+      },
+      "checkInDate": "2024-07-01T19:00:00.000Z",
+      "checkOutDate": "2024-07-05T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Shared Dormitory",
+      "roomCount": 1,
+      "boardBasis": "ROOM_ONLY",
+      "amenities": []
+    },
+    {
+      "id": "b09811c2-537e-475c-a8cd-5928e39c382f",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-06-08T19:00:00.000Z",
+      "endDatetime": "2024-06-12T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:19:36.053Z"
+      },
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "EastSeven Berlin Hostel"
+      },
+      "location": {
+        "name": "Berlin"
+      },
+      "checkInDate": "2024-06-08T19:00:00.000Z",
+      "checkOutDate": "2024-06-12T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Shared Dormitory",
+      "roomCount": 1,
+      "boardBasis": "ROOM_ONLY",
+      "amenities": []
+    },
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-06-01T19:00:00.000Z",
+      "endDatetime": "2024-06-05T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:20:28.368Z"
+      },
+      "property": {
+        "name": "Czech Inn Hostel"
+      },
+      "location": {
+        "name": "Prague",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2024-06-01T19:00:00.000Z",
+      "checkOutDate": "2024-06-05T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Hostel Dormitory",
+      "roomCount": 1,
+      "boardBasis": "ROOM_ONLY",
+      "amenities": [],
+      "metadata": {},
+      "id": "6879210d-ba0c-47e7-84a7-eed7dd28dc49"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

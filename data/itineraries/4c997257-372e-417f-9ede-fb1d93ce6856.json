@@ -1,0 +1,92 @@
+{
+  "id": "4c997257-372e-417f-9ede-fb1d93ce6856",
+  "version": 13,
+  "createdAt": "2026-01-02T18:09:13.459Z",
+  "updatedAt": "2026-01-02T18:11:48.520Z",
+  "title": "Business Trip to Tokyo",
+  "description": "Test itinerary for business persona",
+  "status": "DRAFT",
+  "startDate": "2026-02-19T17:00:00.000Z",
+  "endDate": "2026-02-24T17:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "181f31f7-c43b-4827-8e35-d5e6ea5ffb45",
+      "type": "ADULT",
+      "firstName": "Jennifer",
+      "lastName": "Chen",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "ad77fbc8-547e-4fdd-8d83-f47e79902fc3",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-02-19T18:30:00.000Z",
+      "endDatetime": "2026-02-19T20:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:11:40.907Z"
+      },
+      "metadata": {},
+      "type": "FLIGHT",
+      "airline": {
+        "name": "Japan Airlines",
+        "code": "JL"
+      },
+      "flightNumber": "JL60",
+      "origin": {
+        "name": "San Francisco",
+        "code": "SFO",
+        "city": "San Francisco"
+      },
+      "destination": {
+        "name": "Tokyo",
+        "code": "HND",
+        "city": "Tokyo",
+        "country": "Japan"
+      },
+      "cabinClass": "BUSINESS"
+    },
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-02-19T20:00:00.000Z",
+      "endDatetime": "2026-02-24T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:11:48.519Z"
+      },
+      "property": {
+        "name": "Cerulean Tower Tokyu Hotel"
+      },
+      "location": {
+        "name": "Shibuya",
+        "city": "Tokyo",
+        "country": "Japan",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2026-02-19T20:00:00.000Z",
+      "checkOutDate": "2026-02-24T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Business hotel with meeting rooms, business center, and pocket wifi rental available. 5-minute walk to Shibuya Station.",
+      "metadata": {},
+      "id": "5259606f-0564-4b5b-b6dc-df821cc14571"
+    }
+  ],
+  "tripType": "BUSINESS",
+  "tags": [],
+  "metadata": {}
+}

@@ -1,0 +1,71 @@
+{
+  "id": "16f5ae8d-927d-437b-a6b4-ca5d1388c38f",
+  "version": 33,
+  "createdAt": "2026-01-02T00:51:17.337Z",
+  "updatedAt": "2026-01-02T00:53:52.419Z",
+  "title": "Adventure Squad: Costa Rica Extreme",
+  "description": "10-day adrenaline-packed adventure featuring zip-lining, hiking, and white water rafting in Costa Rica's most extreme locations",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "b17d476b-4f6f-479f-8b6b-0801682c32b3",
+      "type": "ADULT",
+      "firstName": "Mike",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "b4b4b599-480a-432d-8ecb-d5b85f1260b5",
+      "type": "ADULT",
+      "firstName": "Sara",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "3cf213c6-aa32-43ad-8dba-3ef51f2340e0",
+      "type": "ADULT",
+      "firstName": "Tom",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "08afe48f-8c3a-4428-8ae4-fa5c49354221",
+      "type": "ADULT",
+      "firstName": "Anna",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "group",
+    "pace": "packed",
+    "interests": [
+      "adventure sports",
+      "hiking",
+      "extreme activities",
+      "nature"
+    ]
+  }
+}

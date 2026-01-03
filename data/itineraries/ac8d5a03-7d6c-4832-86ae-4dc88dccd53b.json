@@ -1,0 +1,29 @@
+{
+  "id": "ac8d5a03-7d6c-4832-86ae-4dc88dccd53b",
+  "version": 2,
+  "createdAt": "2026-01-01T19:56:06.223Z",
+  "updatedAt": "2026-01-01T19:56:20.443Z",
+  "title": "The Johnson Family's Trip",
+  "description": "Test itinerary for family persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "44d3d303-1fb1-4466-a2db-66cb6f16db77",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "parent",
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

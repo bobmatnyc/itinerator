@@ -1,0 +1,62 @@
+{
+  "id": "81f406d9-c32b-410a-879a-a04303443009",
+  "version": 9,
+  "createdAt": "2026-01-01T23:38:44.909Z",
+  "updatedAt": "2026-01-01T23:40:53.117Z",
+  "title": "Budget Backpacking: Prague, Budapest, Krakow",
+  "description": "Test itinerary for budget persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "a97b4bee-386d-463f-bb92-7cf008bc573f",
+      "type": "ADULT",
+      "firstName": "Jordan",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-10T19:00:00.000Z",
+      "endDatetime": "2025-09-14T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:40:53.117Z"
+      },
+      "property": {
+        "name": "Czech Inn Hostel"
+      },
+      "location": {
+        "name": "Prague",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2025-09-10T19:00:00.000Z",
+      "checkOutDate": "2025-09-14T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Shared Dormitory",
+      "roomCount": 1,
+      "amenities": [],
+      "price": {
+        "amount": 12000,
+        "currency": "USD"
+      },
+      "notes": "Budget backpacker hostel, known for social atmosphere and free walking tours. Located in Prague 2 neighborhood.",
+      "metadata": {},
+      "id": "17515b01-4ecf-4d8f-8e29-1fab0a5a882e"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

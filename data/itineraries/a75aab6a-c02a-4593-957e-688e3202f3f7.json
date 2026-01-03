@@ -1,0 +1,40 @@
+{
+  "id": "a75aab6a-c02a-4593-957e-688e3202f3f7",
+  "version": 8,
+  "createdAt": "2026-01-01T23:20:21.797Z",
+  "updatedAt": "2026-01-01T23:22:26.888Z",
+  "title": "The Hendersons's Trip",
+  "description": "Test itinerary for senior persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "46d2795c-29f8-461f-a16f-e11ae97b8ba9",
+      "type": "SENIOR",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "38785705-4f2d-4a2f-97c4-23489da08aaf",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

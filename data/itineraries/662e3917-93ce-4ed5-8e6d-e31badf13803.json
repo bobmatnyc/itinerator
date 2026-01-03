@@ -1,0 +1,79 @@
+{
+  "id": "662e3917-93ce-4ed5-8e6d-e31badf13803",
+  "version": 16,
+  "createdAt": "2026-01-02T18:04:57.917Z",
+  "updatedAt": "2026-01-02T18:07:04.372Z",
+  "title": "Johnson Family Orlando Vacation",
+  "description": "Family trip to Disney World and Universal Studios, with focus on kid-friendly activities and pool time",
+  "status": "DRAFT",
+  "startDate": "2026-06-15T16:00:00.000Z",
+  "endDate": "2026-06-22T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "5976ab72-42ec-4c5f-8b1b-dd0396073f44",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "44868e8a-f07e-42af-be50-39af30fe9e57",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "930dddc8-daa1-45fa-89e5-46b7e0b975f2",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "2fbc56e5-02b8-470e-813f-b0325757b855",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false,
+        "age": 8
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "family",
+    "tripPurpose": "vacation",
+    "travelStyle": "moderate",
+    "pace": "leisurely",
+    "interests": [
+      "theme parks",
+      "family activities",
+      "pools"
+    ],
+    "dietaryRestrictions": "nut allergy",
+    "origin": "Chicago"
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "id": "ac5ef379-103a-47da-9930-7b1ff7a1324e",
+  "version": 18,
+  "createdAt": "2026-01-02T04:10:31.587Z",
+  "updatedAt": "2026-01-02T04:12:42.550Z",
+  "title": "Sarah & Michael's 5-Year Anniversary Trip to Italy",
+  "description": "Romantic anniversary celebration along the Amalfi Coast, featuring luxury hotels, gourmet dining, and intimate experiences",
+  "status": "DRAFT",
+  "startDate": "2026-09-01T16:00:00.000Z",
+  "endDate": "2026-09-10T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "5b23430f-004a-4f7d-b012-7f3132e1a5e1",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "e9b45ea9-e678-40a2-b498-04fb84e05906",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "9d792e9b-41cc-4ee9-8652-70028999d6b9",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-01T19:00:00.000Z",
+      "endDatetime": "2026-09-06T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:12:34.405Z"
+      },
+      "notes": "5-star boutique hotel with panoramic Amalfi Coast views, infinity pool, and Michelin-starred restaurant. Perfect for anniversary celebration.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Le Sirenuse"
+      },
+      "location": {
+        "name": "Positano"
+      },
+      "checkInDate": "2026-09-01T19:00:00.000Z",
+      "checkOutDate": "2026-09-06T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Deluxe Sea View Room",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "a28e18a8-959d-4b24-85a8-c20aa454ed68",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-06T19:00:00.000Z",
+      "endDatetime": "2026-09-10T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:12:34.406Z"
+      },
+      "notes": "Luxury boutique hotel with art-filled rooms, Michelin-starred dining, and stunning views of Capri",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Capri Palace Jumeirah"
+      },
+      "location": {
+        "name": "Capri"
+      },
+      "checkInDate": "2026-09-06T19:00:00.000Z",
+      "checkOutDate": "2026-09-10T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Deluxe Art Room",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-03T23:30:00.000Z",
+      "endDatetime": "2026-09-04T02:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:12:42.549Z"
+      },
+      "name": "Anniversary Dinner at La Sponda Restaurant",
+      "description": "Michelin-starred romantic dinner celebrating 5 years of marriage, featuring panoramic views of Positano and exceptional Mediterranean cuisine",
+      "location": {
+        "name": "Le Sirenuse",
+        "type": "ATTRACTION"
+      },
+      "category": "dining",
+      "notes": "Michelin-starred restaurant with candlelit terrace and breathtaking Amalfi Coast views. Recommend wine pairing and special anniversary dessert.",
+      "metadata": {},
+      "id": "86bd7c1c-40d5-4cf9-9f4a-b3523513af71"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

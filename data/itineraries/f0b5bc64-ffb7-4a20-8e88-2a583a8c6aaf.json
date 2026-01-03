@@ -1,0 +1,191 @@
+{
+  "id": "f0b5bc64-ffb7-4a20-8e88-2a583a8c6aaf",
+  "version": 13,
+  "createdAt": "2026-01-01T23:28:09.868Z",
+  "updatedAt": "2026-01-01T23:30:19.498Z",
+  "title": "Sarah & Michael's Romantic Amalfi Coast Anniversary Trip",
+  "description": "Test itinerary for couple persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "31bab367-b2aa-46ba-bbb6-08c987fb6762",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "8825a5c4-b387-463a-b08c-a23b1e0d167f",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "e0a52ff7-c631-439c-8571-2702ad7ebec5",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-15T19:00:00.000Z",
+      "endDatetime": "2024-09-20T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:28:47.951Z"
+      },
+      "notes": "Romantic 5th anniversary stay - request special amenities",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Le Sirenuse"
+      },
+      "location": {
+        "name": "Positano"
+      },
+      "checkInDate": "2024-09-15T19:00:00.000Z",
+      "checkOutDate": "2024-09-20T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Deluxe Sea View Room",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "c5d58fbd-d365-4148-a7a3-a962b5f269bc",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-16T18:00:00.000Z",
+      "endDatetime": "2024-09-16T21:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:29:23.825Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Private Wine Tasting Tour in Amalfi Coast",
+      "description": "Exclusive private wine tasting experience exploring local vineyards and boutique wineries of the Amalfi Coast. Includes tastings of local varietals like Falanghina and Lacryma Christi, paired with local cheeses and stunning coastal views.",
+      "location": {
+        "name": "Amalfi Coast Wineries"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "a41071b3-0f15-4451-8c18-d4893caf5cb3",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-17T22:30:00.000Z",
+      "endDatetime": "2024-09-18T01:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:29:23.826Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Sunset Boat Cruise along Amalfi Coast",
+      "description": "Romantic private sunset boat cruise along the Amalfi Coast. Enjoy champagne, stunning views of Positano, Praiano, and the surrounding coastline as the sun sets over the Mediterranean.",
+      "location": {
+        "name": "Amalfi Coast"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "858f5b7a-0338-401d-8be1-7a2dbd70bd85",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-18T14:00:00.000Z",
+      "endDatetime": "2024-09-18T18:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:29:23.826Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Private Couples Cooking Class",
+      "description": "Intimate private cooking class for two. Learn to prepare traditional Amalfi Coast cuisine, including handmade pasta, local seafood dishes, and classic desserts. Enjoy your prepared meal with local wine.",
+      "location": {
+        "name": "Positano Cooking School"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "024a9e43-04a4-4818-a9b0-7d0cc42d6b93",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-19T13:00:00.000Z",
+      "endDatetime": "2024-09-19T21:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:29:23.827Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Day Trip to Capri",
+      "description": "Full-day private tour of Capri. Highlights include Blue Grotto, Faraglioni rocks, private boat tour around the island, time to explore Capri town, and lunch at a scenic restaurant.",
+      "location": {
+        "name": "Capri Island"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "5c1b0a84-1904-4e79-848b-0b68dcd4b8f9",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-16T00:00:00.000Z",
+      "endDatetime": "2024-09-16T02:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:29:23.828Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Dinner at La Sponda - Le Sirenuse Restaurant",
+      "description": "Romantic Michelin-starred dinner at La Sponda restaurant. Enjoy exquisite Mediterranean cuisine with breathtaking views of Positano and the sea. Candlelit setting with 400 candles creating an intimate atmosphere.",
+      "location": {
+        "name": "Le Sirenuse"
+      },
+      "category": "dining"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-17T23:30:00.000Z",
+      "endDatetime": "2024-09-18T02:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T23:30:19.497Z"
+      },
+      "name": "Dinner at Belvedere Restaurant - Belmond Hotel Caruso",
+      "description": "Romantic sunset dinner with panoramic Amalfi Coast views at the hotel's renowned Belvedere Restaurant",
+      "location": {
+        "name": "Belmond Hotel Caruso",
+        "type": "ATTRACTION"
+      },
+      "category": "dining",
+      "metadata": {},
+      "id": "4772b4a2-0917-4fa6-8927-215ba7672b64"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

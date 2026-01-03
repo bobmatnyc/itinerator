@@ -1,0 +1,138 @@
+{
+  "id": "71921a85-e848-4f46-9e38-545f05f2e55b",
+  "version": 11,
+  "createdAt": "2026-01-01T21:07:27.439Z",
+  "updatedAt": "2026-01-01T21:11:06.602Z",
+  "title": "Jennifer Chen's Trip",
+  "description": "Test itinerary for business persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "3a8f1e48-2332-49d6-a7a3-28ea38d3b7a9",
+      "type": "ADULT",
+      "firstName": "Jennifer",
+      "lastName": "Chen",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "c02fe546-a4dc-4645-917a-08bfe2484bac",
+      "type": "ADULT",
+      "firstName": "Jennifer",
+      "lastName": "Chen",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "fd7f2483-a35c-4573-8d99-38838b462807",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-05-14T15:05:00.000Z",
+      "endDatetime": "2024-05-15T18:25:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:09:19.557Z"
+      },
+      "metadata": {},
+      "type": "FLIGHT",
+      "airline": {
+        "name": "United Airlines",
+        "code": "UA"
+      },
+      "flightNumber": "UA837",
+      "origin": {
+        "name": "San Francisco International Airport",
+        "code": "SFO"
+      },
+      "destination": {
+        "name": "Narita International Airport",
+        "code": "NRT"
+      },
+      "cabinClass": "BUSINESS"
+    },
+    {
+      "id": "6e03da36-4040-4a66-ab44-ce444ce24526",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-05-15T18:25:00.000Z",
+      "endDatetime": "2024-05-15T18:55:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:10:01.251Z"
+      },
+      "provider": {
+        "name": "Mercedes Airport Transfers"
+      },
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "Narita International Airport"
+      },
+      "dropoffLocation": {
+        "name": "Marriott Tokyo Shibuya"
+      },
+      "vehicleDetails": "Luxury Mercedes sedan"
+    },
+    {
+      "id": "3e61b418-7eea-4c24-8812-8f0b0ac58f0c",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-05-19T18:00:00.000Z",
+      "endDatetime": "2024-05-19T18:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:10:22.804Z"
+      },
+      "notes": "Private luxury transfer for business traveler. Ensure early arrival for 4:45 PM flight.",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "Marriott Tokyo Shibuya"
+      },
+      "dropoffLocation": {
+        "name": "Narita International Airport",
+        "code": "NRT"
+      },
+      "vehicleDetails": "Mercedes Luxury Airport Transfer"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-05-15T16:30:00.000Z",
+      "endDatetime": "2024-05-15T18:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:11:06.602Z"
+      },
+      "name": "Lunch at Gonpachi Nishi-Azabu",
+      "description": "Business lunch at famous restaurant known for high-quality Japanese cuisine",
+      "location": {
+        "name": "Gonpachi Nishi-Azabu",
+        "type": "ATTRACTION"
+      },
+      "category": "dining",
+      "metadata": {},
+      "id": "a922bc4f-603c-41a3-b109-4cdd5bed3b40"
+    }
+  ],
+  "tripType": "BUSINESS",
+  "tags": [],
+  "metadata": {}
+}

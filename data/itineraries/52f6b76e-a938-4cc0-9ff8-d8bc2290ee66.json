@@ -1,0 +1,56 @@
+{
+  "id": "52f6b76e-a938-4cc0-9ff8-d8bc2290ee66",
+  "version": 14,
+  "createdAt": "2026-01-02T18:03:47.928Z",
+  "updatedAt": "2026-01-02T18:05:27.670Z",
+  "title": "Mediterranean Luxury Cruise",
+  "description": "Luxury two-week Mediterranean cruise with focus on history, art, and culture. Mobility-friendly itinerary with small group tours.",
+  "status": "DRAFT",
+  "startDate": "2026-09-01T16:00:00.000Z",
+  "endDate": "2026-09-15T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "816b301b-5437-406f-896b-3df922fd71a3",
+      "type": "SENIOR",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "261c03c5-8bbf-4593-899e-c41fdc5bf780",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "pace": "leisurely",
+    "interests": [
+      "gourmet dining",
+      "cultural experiences",
+      "scenic tours"
+    ],
+    "mobilityRestrictions": "[\"limited walking\"]",
+    "activityPreferences": [
+      "scenic drives",
+      "cultural tours",
+      "food experiences"
+    ]
+  }
+}

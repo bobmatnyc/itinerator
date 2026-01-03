@@ -1,0 +1,73 @@
+{
+  "id": "aa9db33c-a7b7-49e7-9c76-f49dc77d8803",
+  "version": 25,
+  "createdAt": "2026-01-02T00:03:54.204Z",
+  "updatedAt": "2026-01-02T00:07:11.881Z",
+  "title": "Adventure Squad: Costa Rica Extreme Sports Expedition",
+  "description": "Test itinerary for adventure persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "83d0b585-2b4d-48b5-93fc-86d142ad1121",
+      "type": "ADULT",
+      "firstName": "Mike",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "34a9a26a-90df-4e1b-a50a-600a49db95b4",
+      "type": "ADULT",
+      "firstName": "Sara",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "f0702994-780d-421c-bcc5-9cdc4cea7cba",
+      "type": "ADULT",
+      "firstName": "Tom",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "31fa72bd-6f6a-42c3-b0e8-08fd79512e11",
+      "type": "ADULT",
+      "firstName": "Anna",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "group",
+    "travelStyle": "moderate",
+    "pace": "packed",
+    "interests": [
+      "extreme sports",
+      "adventure",
+      "hiking",
+      "water sports",
+      "night tours"
+    ]
+  }
+}

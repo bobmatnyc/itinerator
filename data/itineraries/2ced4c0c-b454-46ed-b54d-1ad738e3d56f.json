@@ -1,0 +1,36 @@
+{
+  "id": "2ced4c0c-b454-46ed-b54d-1ad738e3d56f",
+  "version": 7,
+  "createdAt": "2026-01-02T18:04:15.688Z",
+  "updatedAt": "2026-01-02T18:05:37.269Z",
+  "title": "Southeast Asia Backpacking Adventure",
+  "description": "21-day backpacking trip through Southeast Asia, exploring Bangkok, Ha Long Bay, and Angkor Wat. Focus on adventure, street food, and photography.",
+  "status": "DRAFT",
+  "startDate": "2026-02-01T17:00:00.000Z",
+  "endDate": "2026-02-22T17:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "solo",
+    "travelStyle": "backpacker",
+    "pace": "balanced",
+    "interests": [
+      "hiking",
+      "food",
+      "photography",
+      "nightlife"
+    ],
+    "budget": {
+      "amount": 3000,
+      "currency": "USD",
+      "period": "total"
+    },
+    "origin": "New York City",
+    "accommodationPreference": "hostel"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "id": "6d758b0a-3a7f-461b-95f8-c3c0819be183",
+  "version": 13,
+  "createdAt": "2026-01-01T21:36:26.094Z",
+  "updatedAt": "2026-01-01T21:38:09.349Z",
+  "title": "Southeast Asia Backpacking Adventure: Thailand and Vietnam",
+  "description": "3-week backpacking adventure exploring Southeast Asia's best destinations for solo travelers",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "aee47a87-77e9-4d1a-af1d-ffb8f386c5f1",
+      "type": "ADULT",
+      "firstName": "Alex",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "c2c7b86d-b61a-40ed-96db-3361698827a4",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-03-15T19:00:00.000Z",
+      "endDatetime": "2024-03-19T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:38:09.346Z"
+      },
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Mad Monkey Bangkok"
+      },
+      "location": {
+        "name": "Khao San Road"
+      },
+      "checkInDate": "2024-03-15T19:00:00.000Z",
+      "checkOutDate": "2024-03-19T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Shared Dormitory",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "cb9687fb-4c14-4c8a-bac8-65fffca9203f",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-03-16T22:00:00.000Z",
+      "endDatetime": "2024-03-17T01:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:38:09.347Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Bangkok Chinatown Street Food Tour",
+      "description": "Guided street food tour of Bangkok's legendary Chinatown. Sample local delicacies and meet fellow travelers.",
+      "location": {
+        "name": "Yaowarat Road"
+      },
+      "category": "food"
+    },
+    {
+      "id": "258e8a04-a1c5-4eb1-a4b5-ad96aecdbbda",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-03-17T13:00:00.000Z",
+      "endDatetime": "2024-03-17T19:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:38:09.348Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Bangkok Temple Hopping Tour: Grand Palace, Wat Pho, Wat Arun",
+      "description": "Full-day temple tour covering Grand Palace, Wat Pho (Reclining Buddha), and Wat Arun. Perfect for photography and cultural exploration.",
+      "location": {
+        "name": "Bangkok Historic Center"
+      },
+      "category": "tour"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-03-18T21:30:00.000Z",
+      "endDatetime": "2024-03-18T23:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:38:09.349Z"
+      },
+      "name": "Chao Phraya River Sunset Boat Ride",
+      "description": "Scenic sunset boat ride along the Chao Phraya River, capturing Bangkok's stunning skyline and historic waterfront.",
+      "location": {
+        "name": "Chao Phraya River",
+        "type": "ATTRACTION"
+      },
+      "category": "tour",
+      "metadata": {},
+      "id": "b746f63a-0c24-420b-8317-fc08cc5cbf1d"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

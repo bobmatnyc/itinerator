@@ -1,0 +1,48 @@
+{
+  "id": "838c8bfc-f39e-4cc6-b56e-ca912e93087c",
+  "version": 7,
+  "createdAt": "2026-01-02T00:07:22.490Z",
+  "updatedAt": "2026-01-02T00:09:54.249Z",
+  "title": "European Backpacking Adventure",
+  "description": "Budget-friendly post-graduation backpacking trip through Central Europe",
+  "status": "DRAFT",
+  "startDate": "2026-07-15T16:00:00.000Z",
+  "endDate": "2026-07-29T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-07-15T19:00:00.000Z",
+      "endDatetime": "2026-07-19T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:09:54.249Z"
+      },
+      "property": {
+        "name": "Czech Inn Hostel"
+      },
+      "location": {
+        "name": "Prague",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2026-07-15T19:00:00.000Z",
+      "checkOutDate": "2026-07-19T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Dormitory Bed",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Budget-friendly hostel with kitchen facilities. Perfect for backpackers.",
+      "metadata": {},
+      "id": "a0f7387a-9675-465d-98f8-37bdd0aebb6c"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

@@ -1,0 +1,77 @@
+{
+  "id": "768e11b3-148d-4bba-81bd-9584604192fe",
+  "version": 17,
+  "createdAt": "2026-01-02T00:00:08.822Z",
+  "updatedAt": "2026-01-02T00:03:42.360Z",
+  "title": "Mediterranean Luxury Cruise",
+  "description": "Test itinerary for senior persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "1e076a84-9174-4309-8d33-70a9472ecae8",
+      "type": "SENIOR",
+      "firstName": "John",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "243a7e41-1ee6-4d83-a7f0-42f2136277af",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "655224b5-41be-4cf6-a827-fdcaa28dd293",
+      "type": "SENIOR",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary traveler",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "19d4c2bc-8f72-461d-bc6c-41ff8e18b46e",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "couple",
+    "tripPurpose": "vacation",
+    "travelStyle": "luxury",
+    "pace": "leisurely",
+    "interests": [
+      "art museums",
+      "historical sites",
+      "classical music",
+      "gourmet dining"
+    ],
+    "mobilityRestrictions": "limited walking"
+  }
+}

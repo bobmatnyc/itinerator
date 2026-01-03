@@ -1,0 +1,111 @@
+{
+  "id": "b0ae187e-0795-4e71-b7fc-141001553dbe",
+  "version": 9,
+  "createdAt": "2026-01-01T21:40:39.768Z",
+  "updatedAt": "2026-01-01T21:42:20.216Z",
+  "title": "Sarah & Michael's Anniversary Trip to Italy",
+  "description": "Test itinerary for couple persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "fbbc014b-2010-4183-a758-a8a26cc5fb35",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "7fd37fc6-10c0-4b06-8ef6-fb6d4530b91b",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "536f7807-bed0-4d09-9e85-527778c82a16",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-15T19:00:00.000Z",
+      "endDatetime": "2024-09-22T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:41:21.761Z"
+      },
+      "notes": "Luxury boutique hotel with stunning Amalfi Coast views. Perfect for anniversary celebration.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Le Sirenuse",
+        "code": "LESER-POSITANO"
+      },
+      "location": {
+        "name": "Positano"
+      },
+      "checkInDate": "2024-09-15T19:00:00.000Z",
+      "checkOutDate": "2024-09-22T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Deluxe Sea View Room",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "3b50238e-ea82-4af1-90ec-384dc4cf30b1",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-18T14:00:00.000Z",
+      "endDatetime": "2024-09-18T18:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:41:49.775Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Mamma Agata Cooking School - Half-Day Traditional Italian Cooking Experience",
+      "description": "Authentic Amalfi Coast cooking class with market tour, hands-on cooking, and wine pairing. Learn traditional Italian recipes with stunning hillside views.",
+      "location": {
+        "name": "Ravello"
+      },
+      "category": "cooking_class"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-18T23:30:00.000Z",
+      "endDatetime": "2024-09-19T01:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:42:20.215Z"
+      },
+      "name": "Dinner at La Sponda Restaurant",
+      "description": "Michelin-starred restaurant with breathtaking views of Positano's coastline. Romantic candlelit dining experience.",
+      "location": {
+        "name": "Le Sirenuse Hotel",
+        "type": "ATTRACTION"
+      },
+      "category": "dining",
+      "metadata": {},
+      "id": "ee17644f-22fc-492d-a524-69290ac73979"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

@@ -1,0 +1,28 @@
+{
+  "id": "e7e1bed4-cfd2-4126-9061-8ad91d11a7af",
+  "version": 7,
+  "createdAt": "2026-01-01T23:41:01.728Z",
+  "updatedAt": "2026-01-01T23:43:11.313Z",
+  "title": "Georgian Adventure: Tbilisi, Kazbegi, and Kakheti",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "solo",
+    "travelStyle": "moderate",
+    "interests": [
+      "food",
+      "culture",
+      "hiking",
+      "wine",
+      "local experiences"
+    ],
+    "origin": "Seattle"
+  }
+}

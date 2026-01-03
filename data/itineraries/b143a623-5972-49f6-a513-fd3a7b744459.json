@@ -1,0 +1,119 @@
+{
+  "id": "b143a623-5972-49f6-a513-fd3a7b744459",
+  "version": 12,
+  "createdAt": "2026-01-01T21:59:20.286Z",
+  "updatedAt": "2026-01-01T22:02:12.057Z",
+  "title": "Costa Rica Adventure Expedition",
+  "description": "10-day extreme adventure for four thrill-seekers from Denver - zip-lining, white water rafting, hiking, and wildlife exploration!",
+  "status": "DRAFT",
+  "startDate": "2026-02-01T17:00:00.000Z",
+  "endDate": "2026-02-10T17:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "dcafaa11-1f63-495b-9d25-f0be843178ad",
+      "type": "ADULT",
+      "firstName": "Mike",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "aa4cf0d6-ca3b-473f-8b82-29a9e3767cc9",
+      "type": "ADULT",
+      "firstName": "Sara",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "7ed04005-4913-4c10-93bf-70835acd2095",
+      "type": "ADULT",
+      "firstName": "Tom",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "f9df5a6e-9de5-4dc0-9d3e-d89231832e97",
+      "type": "ADULT",
+      "firstName": "Anna",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "78200033-347c-4533-be94-2efe20f6df09",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-02-01T20:00:00.000Z",
+      "endDatetime": "2026-02-05T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:01:24.924Z"
+      },
+      "notes": "Unobstructed Arenal Volcano view, private deck, perfect for adventure squad!",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Volcano Vista Retreat"
+      },
+      "location": {
+        "name": "La Fortuna"
+      },
+      "checkInDate": "2026-02-01T20:00:00.000Z",
+      "checkOutDate": "2026-02-05T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-02-05T20:00:00.000Z",
+      "endDatetime": "2026-02-08T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:02:12.057Z"
+      },
+      "property": {
+        "name": "Cloud Forest Canopy House"
+      },
+      "location": {
+        "name": "Monteverde",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2026-02-05T20:00:00.000Z",
+      "checkOutDate": "2026-02-08T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Epic cloud forest view accommodation for adventure squad!",
+      "metadata": {},
+      "id": "d98dcdc9-087b-4f39-b341-4ddd4dd9d34c"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

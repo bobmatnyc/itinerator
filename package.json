@@ -30,6 +30,11 @@
     "eval:promptfoo": "npx promptfoo eval --config evals/promptfoo.yaml",
     "eval:promptfoo:view": "npx promptfoo view",
     "eval:compare": "npx promptfoo eval --config evals/promptfoo.yaml && npx promptfoo view",
+    "test:persona": "tsx tests/e2e/traveler-persona-agent.ts",
+    "test:persona:solo": "tsx tests/e2e/traveler-persona-agent.ts --type solo",
+    "test:persona:couple": "tsx tests/e2e/traveler-persona-agent.ts --type couple",
+    "test:persona:family": "tsx tests/e2e/traveler-persona-agent.ts --type family",
+    "test:persona:verify": "tsx tests/e2e/verify-persona-agent.ts",
     "typecheck": "tsc --noEmit",
     "version:bump": "node scripts/bump-version.js"
   },

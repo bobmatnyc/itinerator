@@ -1,0 +1,62 @@
+{
+  "id": "9e2bf5b7-8be0-4a29-8dfe-c62dfc859a78",
+  "version": 10,
+  "createdAt": "2026-01-01T20:31:12.674Z",
+  "updatedAt": "2026-01-01T20:31:53.547Z",
+  "title": "Adventure Squad: Costa Rica Expedition",
+  "description": "10-day adrenaline-packed adventure through Costa Rica's rainforests and wilderness",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "802f1748-b5cf-4011-809e-4f32847b1b4a",
+      "type": "ADULT",
+      "firstName": "Sara",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "group planner",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "7728fb57-3eb7-4c79-a73d-0767051f2877",
+      "type": "ADULT",
+      "firstName": "Mike",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "d76c1de9-e139-47f9-9c75-b50ae9c73245",
+      "type": "ADULT",
+      "firstName": "Tom",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "94b5e26c-b117-469b-a82e-75a17cc704a3",
+      "type": "ADULT",
+      "firstName": "Anna",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

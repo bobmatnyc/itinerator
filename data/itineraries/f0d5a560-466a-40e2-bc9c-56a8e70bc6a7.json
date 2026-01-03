@@ -1,0 +1,170 @@
+{
+  "id": "f0d5a560-466a-40e2-bc9c-56a8e70bc6a7",
+  "version": 31,
+  "createdAt": "2026-01-02T04:30:34.362Z",
+  "updatedAt": "2026-01-02T04:36:18.867Z",
+  "title": "Henderson Anniversary Mediterranean Cruise",
+  "description": "Luxury anniversary cruise with accessibility considerations, focusing on Italian and Greek ports",
+  "status": "DRAFT",
+  "startDate": "2026-04-11T16:00:00.000Z",
+  "endDate": "2026-04-20T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "48c98ba6-f7c5-49b8-a2a7-0638cbde8d8d",
+      "type": "SENIOR",
+      "firstName": "Robert",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "0f5b6ec3-781f-4f96-95a7-dd3cbe3e5fc4",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "9f08caeb-2b09-4367-8713-6865419601c0",
+      "type": "SENIOR",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "22cc30e6-d493-4da8-8e4b-895365f73b63",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "5238f799-49d5-4bba-8b9d-813c4af1b9e1",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-04-15T23:30:00.000Z",
+      "endDatetime": "2026-04-16T01:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:34:20.205Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Anniversary Dinner at Chartreuse",
+      "description": "Romantic anniversary dinner at the French fine dining restaurant",
+      "location": {
+        "name": "Regent Seven Seas Cruises"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "8952cde4-c4d9-48c2-8f9a-f6eb90a373c2",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-04-16T23:30:00.000Z",
+      "endDatetime": "2026-04-17T01:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:34:26.407Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Dinner at Prime 7 Steakhouse",
+      "description": "Elegant steakhouse dining experience",
+      "location": {
+        "name": "Regent Seven Seas Cruises"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "2929782e-e409-4868-987e-1b2ae460ad92",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-04-17T23:30:00.000Z",
+      "endDatetime": "2026-04-18T01:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:34:32.408Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Dinner at Pacific Rim",
+      "description": "Asian fusion dining experience",
+      "location": {
+        "name": "Regent Seven Seas Cruises"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "95da7b82-1b2c-4b2d-80cd-da6f07bbb89c",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-04-14T14:00:00.000Z",
+      "endDatetime": "2026-04-14T18:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:36:10.649Z"
+      },
+      "notes": "Wheelchair accessible, includes rest breaks, focuses on art and historical sites with limited mobility requirements",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Venice Art and History Tour",
+      "description": "Accessible tour of Venice featuring St. Mark's Basilica, Doge's Palace, and art galleries with minimal walking and comfortable coach transportation",
+      "location": {
+        "name": "Venice"
+      },
+      "category": "tour"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-04-17T15:00:00.000Z",
+      "endDatetime": "2026-04-17T19:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T04:36:18.867Z"
+      },
+      "name": "Santorini Cultural Panorama Tour",
+      "description": "Scenic coach tour of Santorini featuring village viewpoints, cultural highlights, and minimal walking",
+      "location": {
+        "name": "Santorini",
+        "type": "ATTRACTION"
+      },
+      "category": "tour",
+      "notes": "Wheelchair accessible, includes scenic views of Oia village, traditional village visit with limited mobility requirements",
+      "metadata": {},
+      "id": "8769af9d-2ad5-42e2-b510-bef5013e0a2f"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

@@ -1,0 +1,43 @@
+{
+  "id": "3c92e201-ab66-47b2-bd4c-21bd2a759ed1",
+  "version": 10,
+  "createdAt": "2026-01-02T17:53:38.373Z",
+  "updatedAt": "2026-01-02T17:55:20.170Z",
+  "title": "Sarah & Michael's Amalfi Coast Anniversary Trip",
+  "description": "Test itinerary for couple persona",
+  "status": "DRAFT",
+  "startDate": "2026-09-01T16:00:00.000Z",
+  "endDate": "2026-09-10T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "dfe206f1-0d7a-436b-9ef7-973efb430659",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "92647e66-7454-445a-9bff-d7a9c6547464",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

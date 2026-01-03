@@ -1,0 +1,29 @@
+{
+  "id": "81ccae20-00c8-485d-8728-33af13d473a0",
+  "version": 2,
+  "createdAt": "2026-01-01T20:08:58.253Z",
+  "updatedAt": "2026-01-01T20:09:41.007Z",
+  "title": "Sarah & Michael's Trip",
+  "description": "Test itinerary for couple persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "travelerType": "couple",
+    "tripPurpose": "anniversary",
+    "travelStyle": "luxury",
+    "pace": "leisurely",
+    "interests": [
+      "food",
+      "wine",
+      "spa",
+      "romantic experiences"
+    ],
+    "origin": "Los Angeles"
+  }
+}

@@ -1,0 +1,277 @@
+{
+  "id": "fa283f3b-63f3-4cfb-b9a4-09528bfd8cfc",
+  "version": 28,
+  "createdAt": "2026-01-01T22:27:42.218Z",
+  "updatedAt": "2026-01-01T22:31:15.118Z",
+  "title": "Sarah & Michael's Amalfi Coast Anniversary Trip",
+  "description": "Test itinerary for couple persona",
+  "status": "DRAFT",
+  "startDate": "2026-09-16T16:00:00.000Z",
+  "endDate": "2026-09-26T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "198f8b43-57bc-4cec-ac1f-2a5676e48813",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "d6815649-eedb-462a-86fd-7fab4996d251",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "e37ea9b9-abd8-4ed5-b829-c2758c1898fb",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-07-15T19:00:00.000Z",
+      "endDatetime": "2024-07-21T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:28:55.468Z"
+      },
+      "notes": "Anniversary stay - romantic sea view room",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Le Sirenuse"
+      },
+      "location": {
+        "name": "Positano"
+      },
+      "checkInDate": "2024-07-15T19:00:00.000Z",
+      "checkOutDate": "2024-07-21T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Sea View Room with Private Balcony",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "1cc5493f-b06e-48e8-85d0-dd3cc838c2b4",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-16T19:00:00.000Z",
+      "endDatetime": "2024-09-22T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:29:23.900Z"
+      },
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Le Sirenuse"
+      },
+      "location": {
+        "name": "Positano"
+      },
+      "checkInDate": "2024-09-16T19:00:00.000Z",
+      "checkOutDate": "2024-09-22T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Sea View Room with Terrace",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "2a05bd21-f4fd-4537-ab8e-2d3a6156dd80",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-22T19:00:00.000Z",
+      "endDatetime": "2024-09-26T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:29:23.901Z"
+      },
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Belmond Hotel Caruso"
+      },
+      "location": {
+        "name": "Ravello"
+      },
+      "checkInDate": "2024-09-22T19:00:00.000Z",
+      "checkOutDate": "2024-09-26T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Deluxe Sea View Room",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "b4facb58-3928-4a72-872f-77dc949c6918",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-16T19:00:00.000Z",
+      "endDatetime": "2025-09-21T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:29:53.707Z"
+      },
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Le Sirenuse"
+      },
+      "location": {
+        "name": "Positano"
+      },
+      "checkInDate": "2025-09-16T19:00:00.000Z",
+      "checkOutDate": "2025-09-21T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Sea View Room with Private Balcony",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "a4159f94-041d-4bda-9b3f-41750025b70d",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-21T19:00:00.000Z",
+      "endDatetime": "2025-09-26T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:29:53.709Z"
+      },
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Belmond Hotel Caruso"
+      },
+      "location": {
+        "name": "Ravello"
+      },
+      "checkInDate": "2025-09-21T19:00:00.000Z",
+      "checkOutDate": "2025-09-26T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Coastal View Suite",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "2617cfd7-a9d2-4e61-a1ae-6300050d685f",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-16T19:00:00.000Z",
+      "endDatetime": "2026-09-21T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:30:23.671Z"
+      },
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Le Sirenuse"
+      },
+      "location": {
+        "name": "Positano"
+      },
+      "checkInDate": "2026-09-16T19:00:00.000Z",
+      "checkOutDate": "2026-09-21T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Sea View Room with Private Balcony",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "52c59e87-9f31-408b-a857-7160b75560e5",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-21T19:00:00.000Z",
+      "endDatetime": "2026-09-26T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:30:23.672Z"
+      },
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Belmond Hotel Caruso"
+      },
+      "location": {
+        "name": "Ravello"
+      },
+      "checkInDate": "2026-09-21T19:00:00.000Z",
+      "checkOutDate": "2026-09-26T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Coastal View Suite",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "6d16278e-1144-439f-a8c2-5fd714e89cd3",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-20T23:30:00.000Z",
+      "endDatetime": "2026-09-21T01:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:30:50.708Z"
+      },
+      "notes": "Celebrate 5-year wedding anniversary. Request special anniversary treatment.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Anniversary Dinner at Don Alfonso 1890",
+      "description": "Special anniversary celebration dinner - 5-year anniversary for Sarah and Michael",
+      "location": {
+        "name": "Don Alfonso 1890"
+      },
+      "category": "dining"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-18T13:00:00.000Z",
+      "endDatetime": "2026-09-18T17:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:31:15.117Z"
+      },
+      "name": "Private Boat Tour along Amalfi Coast",
+      "description": "Private morning boat tour with champagne and gourmet picnic, capturing the stunning morning light along the Amalfi Coast",
+      "location": {
+        "name": "Positano",
+        "type": "ATTRACTION"
+      },
+      "category": "tour",
+      "notes": "Early morning departure to capture the best coastal light. Includes champagne and gourmet picnic.",
+      "metadata": {},
+      "id": "a2cd1f56-a899-473b-813d-f6c53932b015"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

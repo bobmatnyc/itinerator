@@ -25,14 +25,16 @@ const toolDateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Must be YYYY-MM-
 
 /**
  * add_flight arguments schema
+ * Only origin, destination, and departureTime are required
+ * All other fields are optional to support minimal flight info from search results
  */
 export const addFlightArgsSchema = z.object({
-  airline: companySchema,
-  flightNumber: z.string(),
+  airline: companySchema.optional(),
+  flightNumber: z.string().optional(),
   origin: locationSchema,
   destination: locationSchema,
   departureTime: toolDatetimeSchema,
-  arrivalTime: toolDatetimeSchema,
+  arrivalTime: toolDatetimeSchema.optional(),
   cabinClass: cabinClassSchema.optional(),
   price: moneyInputSchema.optional(),
   confirmationNumber: z.string().optional(),

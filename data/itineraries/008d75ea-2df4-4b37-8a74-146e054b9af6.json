@@ -1,0 +1,369 @@
+{
+  "id": "008d75ea-2df4-4b37-8a74-146e054b9af6",
+  "version": 31,
+  "createdAt": "2026-01-01T21:59:24.993Z",
+  "updatedAt": "2026-01-01T22:03:39.014Z",
+  "title": "Mediterranean Cruise with Regent Seven Seas",
+  "description": "Test itinerary for senior persona",
+  "status": "DRAFT",
+  "startDate": "2026-09-02T16:00:00.000Z",
+  "endDate": "2026-09-14T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "16326941-2549-4a90-9daa-d5519a0f6548",
+      "type": "SENIOR",
+      "firstName": "Robert",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "43dd654b-acfc-47c7-8f9c-7c4c397eecc8",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Henderson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "681bf0d1-1733-47d9-b245-c16feebd4ab2",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-03T14:00:00.000Z",
+      "endDatetime": "2024-09-03T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:01:28.439Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Art History Lecture Series",
+      "description": "Onboard art history lectures exploring Mediterranean art and culture",
+      "location": {
+        "name": "Seven Seas Explorer"
+      },
+      "category": "enrichment"
+    },
+    {
+      "id": "9f2ee798-6607-4652-b1a4-6d7be69b287b",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-05T22:00:00.000Z",
+      "endDatetime": "2024-09-05T23:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:01:28.440Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Mediterranean Wine Tasting Experience",
+      "description": "Comprehensive wine tasting of Mediterranean regional wines",
+      "location": {
+        "name": "Seven Seas Explorer"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "7a62a6c8-4585-4235-803b-ea30dfff2d4e",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-01T19:00:00.000Z",
+      "endDatetime": "2024-09-02T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:01:28.441Z"
+      },
+      "notes": "Pre-cruise stay. Request ground floor or close to elevator. Wheelchair accessibility needed.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Four Seasons Miami"
+      },
+      "location": {
+        "name": "Miami"
+      },
+      "checkInDate": "2024-09-01T19:00:00.000Z",
+      "checkOutDate": "2024-09-02T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Deluxe Suite",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "fa84b5f5-ef14-43e8-8538-4242f61497ce",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-01T18:00:00.000Z",
+      "endDatetime": "2024-09-01T18:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:01:52.699Z"
+      },
+      "provider": {
+        "name": "Luxury Miami Transfers"
+      },
+      "notes": "Wheelchair-accessible vehicle, assistance with luggage for mature travelers",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "Miami International Airport"
+      },
+      "dropoffLocation": {
+        "name": "Four Seasons Miami"
+      },
+      "vehicleDetails": "Luxury Sedan with luggage assistance"
+    },
+    {
+      "id": "c2e7c6e9-8d97-4fbf-a38b-d426ce7309c1",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-02T14:00:00.000Z",
+      "endDatetime": "2024-09-02T14:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:02:26.415Z"
+      },
+      "notes": "Wheelchair accessibility required, luggage assistance for cruise embarkation",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "Four Seasons Miami"
+      },
+      "dropoffLocation": {
+        "name": "Miami Cruise Port"
+      },
+      "vehicleDetails": "Luxury sedan with luggage assistance"
+    },
+    {
+      "id": "b57d29d7-3072-42fd-8168-29e4802b23eb",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-09-04T18:00:00.000Z",
+      "endDatetime": "2024-09-04T20:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:02:26.416Z"
+      },
+      "notes": "Mediterranean art and culture lectures during sea days",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Art History Lecture Series",
+      "location": {
+        "name": "Seven Seas Explorer"
+      },
+      "category": "lecture"
+    },
+    {
+      "id": "df04f71c-16a1-498a-9c50-639fc0e9801b",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-01T19:00:00.000Z",
+      "endDatetime": "2025-09-02T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:03:01.668Z"
+      },
+      "notes": "Wheelchair accessible room, priority assistance required",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Four Seasons Miami"
+      },
+      "location": {
+        "name": "Miami"
+      },
+      "checkInDate": "2025-09-01T19:00:00.000Z",
+      "checkOutDate": "2025-09-02T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Deluxe Suite",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "01c47b69-125f-447f-a6ae-269b3cac2d71",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-05T23:00:00.000Z",
+      "endDatetime": "2025-09-06T00:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:03:01.669Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Mediterranean Wine Tasting Experience",
+      "location": {
+        "name": "Seven Seas Explorer"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "d9da915a-49a0-4fd5-8bd2-e8b735a2a9cf",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-03T18:00:00.000Z",
+      "endDatetime": "2025-09-03T19:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:03:01.671Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Art History Lecture Series",
+      "location": {
+        "name": "Seven Seas Explorer"
+      },
+      "category": "enrichment"
+    },
+    {
+      "id": "b4d07fa6-220a-4deb-b829-bc843b41e87c",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-01T18:00:00.000Z",
+      "endDatetime": "2025-09-01T18:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:03:01.672Z"
+      },
+      "notes": "Luggage assistance required, priority wheelchair service",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "Miami International Airport"
+      },
+      "dropoffLocation": {
+        "name": "Four Seasons Miami"
+      },
+      "vehicleDetails": "Luxury Sedan with Wheelchair Accessibility"
+    },
+    {
+      "id": "4ea1f0ed-30cd-412e-ab5e-f5cbdc551ed3",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-09-02T15:00:00.000Z",
+      "endDatetime": "2025-09-02T15:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:03:01.673Z"
+      },
+      "notes": "Luggage assistance required, priority wheelchair service",
+      "metadata": {},
+      "type": "TRANSFER",
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "Four Seasons Miami"
+      },
+      "dropoffLocation": {
+        "name": "Miami Cruise Port"
+      },
+      "vehicleDetails": "Luxury Sedan with Wheelchair Accessibility"
+    },
+    {
+      "id": "65f6b0fd-c73c-404c-8459-56d007c4d4b4",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-05T22:00:00.000Z",
+      "endDatetime": "2026-09-05T23:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:03:39.010Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Mediterranean Wine Tasting Experience",
+      "location": {
+        "name": "Seven Seas Explorer"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "77d5fb5e-58aa-45e2-859e-08f0a96f7dab",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-03T14:00:00.000Z",
+      "endDatetime": "2026-09-03T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:03:39.011Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Art History Lecture Series",
+      "location": {
+        "name": "Seven Seas Explorer"
+      },
+      "category": "enrichment"
+    },
+    {
+      "id": "37494b3e-712f-4631-901f-9f8d51258821",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-06T23:30:00.000Z",
+      "endDatetime": "2026-09-07T01:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:03:39.012Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Dinner at Prime 7 Steakhouse",
+      "location": {
+        "name": "Seven Seas Explorer"
+      },
+      "category": "dining"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-10T23:30:00.000Z",
+      "endDatetime": "2026-09-11T01:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:03:39.013Z"
+      },
+      "name": "Dinner at Prime 7 Steakhouse",
+      "location": {
+        "name": "Seven Seas Explorer",
+        "type": "ATTRACTION"
+      },
+      "category": "dining",
+      "metadata": {},
+      "id": "006d4483-8c0c-4d9e-9dcf-968f7c361000"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

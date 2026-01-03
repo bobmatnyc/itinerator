@@ -1,0 +1,51 @@
+{
+  "id": "5e69d3e4-3514-4cf2-8d8a-2c1aaf027f65",
+  "version": 17,
+  "createdAt": "2026-01-02T18:13:12.377Z",
+  "updatedAt": "2026-01-02T18:15:07.619Z",
+  "title": "Mediterranean Cultural Cruise for Retired Professors",
+  "description": "Luxury 14-day Mediterranean cruise focusing on cultural and historical experiences, with mobility-friendly considerations",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "afec54b5-72cd-4820-b915-d2e6d8fe718b",
+      "type": "SENIOR",
+      "firstName": "John",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "72630b15-7afd-4ac9-8578-f2edfa2975c8",
+      "type": "SENIOR",
+      "firstName": "Margaret",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {},
+  "tripPreferences": {
+    "tripPurpose": "cultural exploration",
+    "travelStyle": "luxury",
+    "pace": "leisurely",
+    "interests": [
+      "art museums",
+      "historical sites",
+      "classical archaeology",
+      "fine dining"
+    ],
+    "mobilityRestrictions": "wheelchair accessible, limited walking"
+  }
+}

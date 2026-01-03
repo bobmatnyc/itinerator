@@ -428,53 +428,176 @@ CRITICAL: If the summary shows "⚠️ EXISTING BOOKINGS" with luxury/premium pr
           });
         }
 
-        // Make a second call to get natural language response with tool results
-        const toolResultMessages: ChatCompletionMessageParam[] = toolResults.map((result) => ({
-          role: 'tool' as const,
-          tool_call_id: result.toolCallId,
-          content: JSON.stringify(result.result || { error: result.error }),
-        }));
+        // Tool chaining loop: Continue calling tools until model returns text-only response
+        // Max 5 rounds to prevent infinite loops
+        const MAX_TOOL_ROUNDS = 5;
+        let currentToolRound = 1;
+        let currentMessages = messages;
+        let currentAssistantMessage = assistantMessage;
+        let currentToolCalls = toolCalls;
+        let currentToolResults = toolResults;
+        let allToolCallsMade = [...ourToolCalls]; // Track all tool calls across rounds
 
-        const finalResponse = await this.client.chat.completions.create({
-          model: this.config.model || DEFAULT_MODEL,
-          messages: [
-            ...messages,
-            {
+        while (currentToolRound <= MAX_TOOL_ROUNDS) {
+          const toolResultMessages: ChatCompletionMessageParam[] = currentToolResults.map((result) => ({
+            role: 'tool' as const,
+            tool_call_id: result.toolCallId,
+            content: JSON.stringify(result.result || { error: result.error }),
+          }));
+
+          const nextResponse = await this.client.chat.completions.create({
+            model: this.config.model || DEFAULT_MODEL,
+            messages: [
+              ...currentMessages,
+              {
+                role: 'assistant',
+                content: currentAssistantMessage.content,
+                tool_calls: currentToolCalls,
+              },
+              ...toolResultMessages,
+            ],
+            tools, // Pass tools to enable tool chaining
+            max_tokens: this.config.maxTokens,
+            temperature: this.config.temperature,
+          });
+
+          const nextChoice = nextResponse.choices[0];
+          if (!nextChoice) {
+            return err({
+              type: 'llm_api_error',
+              error: 'No response from LLM in tool chain',
+              retryable: true,
+            });
+          }
+
+          const nextAssistantMessage = nextChoice.message;
+          const nextToolCalls = nextAssistantMessage.tool_calls;
+
+          // Track token usage
+          const nextInputTokens = nextResponse.usage?.prompt_tokens || 0;
+          const nextOutputTokens = nextResponse.usage?.completion_tokens || 0;
+
+          // Check if we got more tool calls
+          if (nextToolCalls && nextToolCalls.length > 0) {
+            // Convert to our ToolCall format
+            const nextOurToolCalls: ToolCall[] = nextToolCalls.map((tc) => ({
+              id: tc.id,
+              type: 'function',
+              function: {
+                name: tc.function.name,
+                arguments: tc.function.arguments,
+              },
+            }));
+
+            // Add assistant message with tool calls
+            await this.sessionManager.addMessage(sessionId, {
               role: 'assistant',
-              content: assistantMessage.content,
-              tool_calls: toolCalls,
-            },
-            ...toolResultMessages,
-          ],
-          tools, // Include tools so model can generate natural language responses or chain tool calls
-          max_tokens: this.config.maxTokens,
-          temperature: this.config.temperature,
-        });
+              content: nextAssistantMessage.content || '',
+              toolCalls: nextOurToolCalls,
+              tokens: { input: nextInputTokens, output: nextOutputTokens },
+            });
 
-        const finalChoice = finalResponse.choices[0];
-        const finalMessage = finalChoice?.message.content || '';
+            // Execute tool calls sequentially
+            const nextExecutionResults: ToolExecutionResult[] = [];
+            for (const tc of nextOurToolCalls) {
+              const result = await this.toolExecutor.execute({
+                sessionId,
+                itineraryId: session.itineraryId,
+                toolCall: tc,
+              });
+              nextExecutionResults.push(result);
+            }
 
-        // Add final assistant message
-        await this.sessionManager.addMessage(sessionId, {
-          role: 'assistant',
-          content: finalMessage,
-          tokens: {
-            input: finalResponse.usage?.prompt_tokens || 0,
-            output: finalResponse.usage?.completion_tokens || 0,
-          },
-        });
+            // Collect modified segment IDs and check for mode switches
+            for (const result of nextExecutionResults) {
+              if (result.success && result.metadata?.segmentId) {
+                segmentsModified.push(result.metadata.segmentId);
+              }
+              if (result.success && typeof result.result === 'object' && result.result !== null) {
+                const resultObj = result.result as Record<string, unknown>;
+                if (resultObj.action === 'switch_agent' && resultObj.newMode === 'trip_designer') {
+                  session.agentMode = 'trip_designer';
+                  await this.sessionManager.updateSession(session);
+                }
+              }
+            }
 
-        // Store conversation in knowledge graph (async, don't wait)
-        this.storeConversation(sessionId, userMessage, finalMessage).catch((error) => {
-          console.warn('Failed to store conversation:', error);
-        });
+            // Add tool results as messages
+            for (const result of nextExecutionResults) {
+              await this.sessionManager.addMessage(sessionId, {
+                role: 'tool',
+                content: this.truncateToolResult(result.result || { error: result.error }),
+                toolResults: [result],
+              });
+            }
 
-        // Return agent response
-        return ok({
-          message: finalMessage,
-          itineraryUpdated: segmentsModified.length > 0,
-          segmentsModified,
-          toolCallsMade: ourToolCalls,
+            // Prepare for next round
+            currentToolRound++;
+            currentMessages = [
+              ...currentMessages,
+              {
+                role: 'assistant',
+                content: currentAssistantMessage.content,
+                tool_calls: currentToolCalls,
+              },
+              ...toolResultMessages,
+            ];
+            currentAssistantMessage = nextAssistantMessage;
+            currentToolCalls = nextToolCalls;
+            currentToolResults = nextExecutionResults;
+            allToolCallsMade.push(...nextOurToolCalls);
+
+            if (currentToolRound > MAX_TOOL_ROUNDS) {
+              // Max rounds reached, return with what we have
+              const finalMessage = nextAssistantMessage.content || "I've completed the tool operations.";
+              await this.sessionManager.addMessage(sessionId, {
+                role: 'assistant',
+                content: finalMessage,
+                tokens: { input: nextInputTokens, output: nextOutputTokens },
+              });
+
+              this.storeConversation(sessionId, userMessage, finalMessage).catch((error) => {
+                console.warn('Failed to store conversation:', error);
+              });
+
+              return ok({
+                message: finalMessage,
+                itineraryUpdated: segmentsModified.length > 0,
+                segmentsModified,
+                toolCallsMade: allToolCallsMade,
+              });
+            }
+          } else {
+            // No more tool calls, we're done
+            const finalMessage = nextAssistantMessage.content || '';
+
+            // Add final assistant message
+            await this.sessionManager.addMessage(sessionId, {
+              role: 'assistant',
+              content: finalMessage,
+              tokens: { input: nextInputTokens, output: nextOutputTokens },
+            });
+
+            // Store conversation in knowledge graph (async, don't wait)
+            this.storeConversation(sessionId, userMessage, finalMessage).catch((error) => {
+              console.warn('Failed to store conversation:', error);
+            });
+
+            // Return agent response
+            return ok({
+              message: finalMessage,
+              itineraryUpdated: segmentsModified.length > 0,
+              segmentsModified,
+              toolCallsMade: allToolCallsMade,
+            });
+          }
+        }
+
+        // Should never reach here, but just in case
+        return err({
+          type: 'llm_api_error',
+          error: 'Tool chaining loop exited unexpectedly',
+          retryable: true,
         });
       } else {
         // No tool calls, just a message
@@ -883,36 +1006,45 @@ CRITICAL: If the summary shows "⚠️ EXISTING BOOKINGS" with luxury/premium pr
           });
         }
 
-        // Make second call to get natural language response
-        console.log(`[chatStream] ====== SECOND STREAM PHASE ======`);
-        console.log(`[chatStream] Starting second stream to get natural language response...`);
-        const toolResultMessages: ChatCompletionMessageParam[] = executionResults.map((result) => ({
-          role: 'tool' as const,
-          tool_call_id: result.toolCallId,
-          content: JSON.stringify(result.result || { error: result.error }),
-        }));
+        // Tool chaining loop: Continue calling tools until model returns text-only response
+        // Max 5 rounds to prevent infinite loops
+        const MAX_TOOL_ROUNDS = 5;
+        let currentToolRound = 1;
+        let currentMessages = messages;
+        let currentToolCalls = toolCalls;
+        let currentExecutionResults = executionResults;
+        let finalContent = '';
 
-        // Log tool result sizes for debugging
-        console.log(`[chatStream] Tool result sizes:`, toolResultMessages.map((msg, i) => ({
-          index: i,
-          toolCallId: (msg as { tool_call_id?: string }).tool_call_id?.substring(0, 20),
-          contentLength: typeof msg.content === 'string' ? msg.content.length : 0,
-        })));
+        while (currentToolRound <= MAX_TOOL_ROUNDS) {
+          console.log(`[chatStream] ====== TOOL CHAIN ROUND ${currentToolRound} ======`);
+          console.log(`[chatStream] Starting stream ${currentToolRound + 1} to process tool results...`);
 
-        // Calculate total context size
-        const baseMessagesSize = JSON.stringify(messages).length;
-        const toolResultsSize = JSON.stringify(toolResultMessages).length;
-        const totalContextSize = baseMessagesSize + toolResultsSize;
-        console.log(`[chatStream] Context sizes: base=${baseMessagesSize}, toolResults=${toolResultsSize}, total=${totalContextSize}`);
+          const toolResultMessages: ChatCompletionMessageParam[] = currentExecutionResults.map((result) => ({
+            role: 'tool' as const,
+            tool_call_id: result.toolCallId,
+            content: JSON.stringify(result.result || { error: result.error }),
+          }));
 
-        const finalStream = await this.client.chat.completions.create({
-          model: this.config.model || DEFAULT_MODEL,
-          messages: [
-            ...messages,
+          // Log tool result sizes for debugging
+          console.log(`[chatStream] Tool result sizes:`, toolResultMessages.map((msg, i) => ({
+            index: i,
+            toolCallId: (msg as { tool_call_id?: string }).tool_call_id?.substring(0, 20),
+            contentLength: typeof msg.content === 'string' ? msg.content.length : 0,
+          })));
+
+          // Calculate total context size
+          const baseMessagesSize = JSON.stringify(currentMessages).length;
+          const toolResultsSize = JSON.stringify(toolResultMessages).length;
+          const totalContextSize = baseMessagesSize + toolResultsSize;
+          console.log(`[chatStream] Context sizes: base=${baseMessagesSize}, toolResults=${toolResultsSize}, total=${totalContextSize}`);
+
+          // Build messages for next stream
+          const nextStreamMessages: ChatCompletionMessageParam[] = [
+            ...currentMessages,
             {
               role: 'assistant',
               content: fullContent,
-              tool_calls: toolCalls.map((tc) => ({
+              tool_calls: currentToolCalls.map((tc) => ({
                 id: tc.id,
                 type: 'function' as const,
                 function: {
@@ -922,70 +1054,226 @@ CRITICAL: If the summary shows "⚠️ EXISTING BOOKINGS" with luxury/premium pr
               })),
             },
             ...toolResultMessages,
-            // Add a prompt to guide the model to respond naturally based on tool results
-            {
-              role: 'user' as const,
-              content: 'Now please synthesize the tool results and respond to my original request with helpful, specific information. Do NOT call any more tools - just provide a conversational response based on what you learned.',
-            },
-          ],
-          // Note: Intentionally NOT passing tools here to force a text response
-          // Tool chaining is not implemented in the second stream processing loop
-          max_tokens: this.config.maxTokens,
-          temperature: this.config.temperature,
-          stream: true,
-        });
+          ];
 
-        console.log(`[chatStream] Second stream created WITHOUT tools (forcing text response)`);
+          const nextStream = await this.client.chat.completions.create({
+            model: this.config.model || DEFAULT_MODEL,
+            messages: nextStreamMessages,
+            tools, // Pass tools to enable tool chaining
+            max_tokens: this.config.maxTokens,
+            temperature: this.config.temperature,
+            stream: true,
+          });
 
-        let finalContent = '';
-        let finalChunkCount = 0;
-        for await (const chunk of finalStream) {
-          finalChunkCount++;
-          const choice = chunk.choices[0];
-          const delta = choice?.delta;
-          const finishReason = choice?.finish_reason;
+          console.log(`[chatStream] Stream ${currentToolRound + 1} created WITH tools (tool chaining enabled)`);
 
-          // Log second stream chunks with full details
-          console.log(`[chatStream] Second stream chunk ${finalChunkCount}: content=${delta?.content?.length || 0}, finish=${finishReason || 'none'}, role=${delta?.role || 'none'}`);
+          let streamContent = '';
+          let streamToolCalls: ToolCall[] = [];
+          let streamToolCallsInProgress: Map<number, Partial<ToolCall>> = new Map();
+          let streamChunkCount = 0;
 
-          // If no content, log the full chunk to diagnose issues
-          if (!delta?.content && finalChunkCount <= 5) {
-            console.log(`[chatStream] Second stream chunk ${finalChunkCount} RAW:`, JSON.stringify({
-              id: chunk.id,
-              model: chunk.model,
-              choices: chunk.choices?.map(c => ({
-                index: c.index,
-                delta: c.delta,
-                finish_reason: c.finish_reason,
-              })),
-              usage: chunk.usage,
-            }));
+          for await (const chunk of nextStream) {
+            streamChunkCount++;
+            const choice = chunk.choices[0];
+            const delta = choice?.delta;
+            const finishReason = choice?.finish_reason;
+
+            console.log(`[chatStream] Stream ${currentToolRound + 1} chunk ${streamChunkCount}: content=${delta?.content?.length || 0}, tools=${delta?.tool_calls?.length || 0}, finish=${finishReason || 'none'}`);
+
+            // Track token usage
+            if (chunk.usage) {
+              totalInputTokens += chunk.usage.prompt_tokens || 0;
+              totalOutputTokens += chunk.usage.completion_tokens || 0;
+            }
+
+            if (!delta) continue;
+
+            // Handle text content
+            if (delta.content) {
+              streamContent += delta.content;
+              console.log(`[chatStream] Yielding text from stream ${currentToolRound + 1}: ${delta.content.length} chars`);
+              yield { type: 'text', content: delta.content };
+            }
+
+            // Handle tool calls - same accumulation logic as first stream
+            if (delta.tool_calls) {
+              console.log(`[chatStream] Stream ${currentToolRound + 1} tool_calls delta:`, JSON.stringify(delta.tool_calls, null, 2));
+
+              for (const toolCallDelta of delta.tool_calls) {
+                const index = toolCallDelta.index;
+                if (index === undefined) {
+                  console.log(`[chatStream] WARNING: tool call delta missing index:`, JSON.stringify(toolCallDelta));
+                  continue;
+                }
+
+                let toolCall = streamToolCallsInProgress.get(index);
+
+                if (!toolCall) {
+                  toolCall = {
+                    id: toolCallDelta.id || '',
+                    type: 'function',
+                    function: {
+                      name: toolCallDelta.function?.name || '',
+                      arguments: toolCallDelta.function?.arguments || '',
+                    },
+                  };
+                  streamToolCallsInProgress.set(index, toolCall);
+                  console.log(`[chatStream] Started tool call at index ${index}: ${toolCall.function?.name}`);
+                } else {
+                  if (toolCallDelta.id) {
+                    toolCall.id = toolCallDelta.id;
+                  }
+                  if (toolCall.function) {
+                    if (toolCallDelta.function?.name) {
+                      toolCall.function.name += toolCallDelta.function.name;
+                    }
+                    if (toolCallDelta.function?.arguments) {
+                      toolCall.function.arguments += toolCallDelta.function.arguments;
+                      console.log(`[chatStream] Appended ${toolCallDelta.function.arguments.length} chars to tool call ${index}`);
+                    }
+                  }
+                }
+              }
+            }
+
+            // Finalize tool calls when stream finishes with tool_calls
+            if (finishReason === 'tool_calls') {
+              console.log(`[chatStream] Stream ${currentToolRound + 1} finished with tool_calls, finalizing ${streamToolCallsInProgress.size} tool calls`);
+              for (const [index, toolCall] of streamToolCallsInProgress.entries()) {
+                if (toolCall.id && toolCall.function) {
+                  const completeToolCall = toolCall as ToolCall;
+                  streamToolCalls.push(completeToolCall);
+                  console.log(`[chatStream] Finalized tool call: ${completeToolCall.function.name}`);
+
+                  let args: any = {};
+                  const argsStr = completeToolCall.function.arguments || '';
+                  if (argsStr.trim().length > 0) {
+                    try {
+                      args = JSON.parse(argsStr);
+                    } catch (parseError) {
+                      console.error(`[chatStream] Failed to parse tool arguments for ${completeToolCall.function.name}:`, parseError);
+                    }
+                  }
+                  yield {
+                    type: 'tool_call',
+                    name: completeToolCall.function.name,
+                    arguments: args,
+                  };
+                }
+              }
+              streamToolCallsInProgress.clear();
+            }
           }
 
-          // Log if there are unexpected tool calls in the response
-          if (delta?.tool_calls) {
-            console.warn(`[chatStream] WARNING: Second stream returned tool_calls (unexpected):`, JSON.stringify(delta.tool_calls));
-          }
+          console.log(`[chatStream] Stream ${currentToolRound + 1} ended, content length: ${streamContent.length}, toolCalls: ${streamToolCalls.length}`);
 
-          // Track token usage from second call
-          if (chunk.usage) {
-            totalInputTokens += chunk.usage.prompt_tokens || 0;
-            totalOutputTokens += chunk.usage.completion_tokens || 0;
-          }
+          // Check if we got more tool calls
+          if (streamToolCalls.length > 0) {
+            // Execute the new tool calls
+            console.log(`[chatStream] Executing ${streamToolCalls.length} tool calls from round ${currentToolRound + 1}`);
 
-          if (delta?.content) {
-            finalContent += delta.content;
-            console.log(`[chatStream] Yielding text from second stream: ${delta.content.length} chars`);
-            yield { type: 'text', content: delta.content };
+            // Add assistant message with tool calls
+            await this.sessionManager.addMessage(sessionId, {
+              role: 'assistant',
+              content: streamContent,
+              toolCalls: streamToolCalls,
+            });
+
+            // Execute tool calls sequentially
+            const newExecutionResults: ToolExecutionResult[] = [];
+            for (const tc of streamToolCalls) {
+              const result = await this.toolExecutor.execute({
+                sessionId,
+                itineraryId: session.itineraryId,
+                toolCall: tc,
+              });
+              newExecutionResults.push(result);
+            }
+
+            const successCount = newExecutionResults.filter(r => r.success).length;
+            const failureCount = newExecutionResults.length - successCount;
+            console.log(`[chatStream] Tool results: ${successCount} success, ${failureCount} failure`);
+
+            // Emit tool results
+            for (let i = 0; i < newExecutionResults.length; i++) {
+              const result = newExecutionResults[i];
+              const toolCall = streamToolCalls[i];
+
+              yield {
+                type: 'tool_result',
+                name: toolCall.function.name,
+                result: result.result,
+                success: result.success,
+              };
+
+              // Track modified segments
+              if (result.success) {
+                if (result.metadata?.segmentId) {
+                  console.log(`[chatStream] Segment modified:`, result.metadata.segmentId);
+                  segmentsModified.push(result.metadata.segmentId);
+                } else if (typeof result.result === 'object' && result.result !== null) {
+                  const resultObj = result.result as Record<string, unknown>;
+                  if (resultObj.segmentId && typeof resultObj.segmentId === 'string') {
+                    console.log(`[chatStream] Segment modified via result.segmentId:`, resultObj.segmentId);
+                    segmentsModified.push(resultObj.segmentId as any);
+                  }
+                }
+              }
+
+              // Track itinerary metadata changes
+              if (result.success && typeof result.result === 'object' && result.result !== null) {
+                const resultObj = result.result as Record<string, unknown>;
+                if (resultObj.itineraryChanged === true) {
+                  console.log(`[chatStream] Itinerary metadata changed`);
+                  itineraryMetadataChanged = true;
+                }
+              }
+
+              // Check for mode switches
+              if (result.success && typeof result.result === 'object' && result.result !== null) {
+                const resultObj = result.result as Record<string, unknown>;
+                if (resultObj.action === 'switch_agent' && resultObj.newMode === 'trip_designer') {
+                  session.agentMode = 'trip_designer';
+                  await this.sessionManager.updateSession(session);
+                }
+              }
+            }
+
+            // Add tool results as messages
+            for (const result of newExecutionResults) {
+              await this.sessionManager.addMessage(sessionId, {
+                role: 'tool',
+                content: this.truncateToolResult(result.result || { error: result.error }),
+                toolResults: [result],
+              });
+            }
+
+            // Prepare for next round
+            currentToolRound++;
+            currentMessages = nextStreamMessages;
+            currentToolCalls = streamToolCalls;
+            currentExecutionResults = newExecutionResults;
+            fullContent = streamContent;
+
+            if (currentToolRound > MAX_TOOL_ROUNDS) {
+              console.warn(`[chatStream] Max tool rounds (${MAX_TOOL_ROUNDS}) reached, forcing final response`);
+              finalContent = streamContent || "I've completed the tool operations. Let me know if you need anything else!";
+              break;
+            }
+          } else {
+            // No more tool calls - we're done
+            finalContent = streamContent;
+            console.log(`[chatStream] No more tool calls, tool chaining complete after ${currentToolRound} rounds`);
+            break;
           }
         }
-        console.log(`[chatStream] ====== FINALIZING ======`);
-        console.log(`[chatStream] Second stream ended, received ${finalChunkCount} chunks, finalContent length: ${finalContent.length}`);
 
-        // Handle empty second stream response
+        console.log(`[chatStream] ====== FINALIZING ======`);
+        console.log(`[chatStream] Tool chaining complete, finalContent length: ${finalContent.length}`);
+
+        // Handle empty final response
         if (finalContent.length === 0) {
-          console.warn(`[chatStream] WARNING: Second stream returned empty content! Generating fallback response.`);
-          // Provide a fallback message so user isn't left with nothing
+          console.warn(`[chatStream] WARNING: Final stream returned empty content! Generating fallback response.`);
           finalContent = "I've processed your request. Let me know if you need anything else!";
           yield { type: 'text', content: finalContent };
         }

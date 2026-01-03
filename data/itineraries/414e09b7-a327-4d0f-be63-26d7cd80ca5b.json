@@ -1,0 +1,28 @@
+{
+  "id": "414e09b7-a327-4d0f-be63-26d7cd80ca5b",
+  "version": 5,
+  "createdAt": "2026-01-01T20:07:27.251Z",
+  "updatedAt": "2026-01-01T20:07:42.849Z",
+  "title": "Alex's Southeast Asia Backpacking Trip",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "6e430b98-36ab-4128-af91-6f2e95a55400",
+      "type": "ADULT",
+      "firstName": "Alex",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

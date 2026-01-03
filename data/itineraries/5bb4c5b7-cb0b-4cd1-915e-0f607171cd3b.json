@@ -1,0 +1,58 @@
+{
+  "id": "5bb4c5b7-cb0b-4cd1-915e-0f607171cd3b",
+  "version": 8,
+  "createdAt": "2026-01-02T00:33:56.289Z",
+  "updatedAt": "2026-01-02T00:37:12.679Z",
+  "title": "Southeast Asia Backpacking Adventure",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "e9c5beb1-f9bf-4709-ab8f-96f824068878",
+      "type": "ADULT",
+      "firstName": "Alex",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-10-15T19:00:00.000Z",
+      "endDatetime": "2026-10-19T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:37:12.679Z"
+      },
+      "property": {
+        "name": "Lub d Bangkok Siam"
+      },
+      "location": {
+        "name": "Bangkok",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2026-10-15T19:00:00.000Z",
+      "checkOutDate": "2026-10-19T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Shared Dormitory",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Rooftop hostel with secure lockers, perfect for photographers. Close to city center.",
+      "metadata": {},
+      "id": "0d081750-4221-4f37-8038-b7548cc12a91"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

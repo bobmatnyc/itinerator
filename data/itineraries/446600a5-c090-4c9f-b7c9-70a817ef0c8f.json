@@ -1,0 +1,216 @@
+{
+  "id": "446600a5-c090-4c9f-b7c9-70a817ef0c8f",
+  "version": 26,
+  "createdAt": "2026-01-02T05:46:17.318Z",
+  "updatedAt": "2026-01-02T05:55:24.900Z",
+  "title": "Jordan's Budget Eastern Europe Backpacking Trip",
+  "description": "Budget backpacking adventure through Eastern Europe, maximizing free museum days and budget-friendly experiences",
+  "status": "DRAFT",
+  "startDate": "2026-06-01T16:00:00.000Z",
+  "endDate": "2026-06-15T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "963218a4-4ddf-4297-b8bf-3f149630e8bc",
+      "type": "ADULT",
+      "firstName": "Jordan",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "9ac9f685-6f0e-4329-9aef-f7510312fb74",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-15T19:00:00.000Z",
+      "endDatetime": "2026-06-20T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:48:04.086Z"
+      },
+      "price": {
+        "amount": 1500,
+        "currency": "USD"
+      },
+      "notes": "Budget-friendly hostel, great for backpackers. Located in a historic building.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Czech Inn Hostel"
+      },
+      "location": {
+        "name": "Prague"
+      },
+      "checkInDate": "2026-06-15T19:00:00.000Z",
+      "checkOutDate": "2026-06-20T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Shared Dormitory",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "f6b7a5ca-b399-4901-86c1-d1c1b4effe5a",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-20T19:00:00.000Z",
+      "endDatetime": "2026-06-25T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:48:10.807Z"
+      },
+      "price": {
+        "amount": 1500,
+        "currency": "USD"
+      },
+      "notes": "Popular hostel with social atmosphere. Great for meeting other travelers.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Wombats City Hostel"
+      },
+      "location": {
+        "name": "Budapest"
+      },
+      "checkInDate": "2026-06-20T19:00:00.000Z",
+      "checkOutDate": "2026-06-25T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Shared Dormitory",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "5a136a89-07c1-432d-af51-adb9ec34e6db",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-25T19:00:00.000Z",
+      "endDatetime": "2026-06-29T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:48:17.885Z"
+      },
+      "price": {
+        "amount": 1200,
+        "currency": "USD"
+      },
+      "notes": "Famous for free dinner, great for budget travelers. Social hostel with lots of activities.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Greg & Tom Beer Hostel"
+      },
+      "location": {
+        "name": "Krakow"
+      },
+      "checkInDate": "2026-06-25T19:00:00.000Z",
+      "checkOutDate": "2026-06-29T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Shared Dormitory",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "7612ea35-5bb4-4244-a9df-a82b0b2b6590",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-16T14:00:00.000Z",
+      "endDatetime": "2026-06-16T16:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:48:24.939Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Prague Free Walking Tour",
+      "description": "Tip-based walking tour covering Prague's historic center, including Old Town Square, Astronomical Clock, and Jewish Quarter",
+      "location": {
+        "name": "Old Town Square"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "fa35e277-daf4-47a4-a6a0-fec3581dccae",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-01T19:00:00.000Z",
+      "endDatetime": "2026-06-06T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:51:50.717Z"
+      },
+      "notes": "Budget-friendly hostel with free breakfast. Located in a great area for exploring Prague.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Czech Inn Hostel"
+      },
+      "location": {
+        "name": "Prague"
+      },
+      "checkInDate": "2026-06-02",
+      "checkOutDate": "2026-06-06T15:00:00.000Z",
+      "checkInTime": "14:00",
+      "checkOutTime": "11:00",
+      "roomType": "Shared Dormitory",
+      "roomCount": 1,
+      "boardBasis": "BED_BREAKFAST",
+      "amenities": []
+    },
+    {
+      "id": "9f296ebc-76a0-4a6a-8ec9-8c9a76f8dbb1",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-02T14:00:00.000Z",
+      "endDatetime": "2026-06-02T16:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:51:57.858Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Prague Free Walking Tour",
+      "description": "Comprehensive walking tour of Prague's historic center. Great for first-time visitors to get oriented.",
+      "location": {
+        "name": "Old Town Square"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "7f684e21-1223-482c-a874-c63ed5800709",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-02T23:00:00.000Z",
+      "endDatetime": "2026-06-03T00:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:52:05.129Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Dinner at Lokál Dlouhááá",
+      "description": "Budget-friendly traditional Czech cuisine in a local favorite restaurant",
+      "location": {
+        "name": "Lokál Dlouhááá"
+      },
+      "category": "dining"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

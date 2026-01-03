@@ -1,0 +1,142 @@
+{
+  "id": "09a4c9f2-4a60-46a7-a703-c630f4281312",
+  "version": 20,
+  "createdAt": "2026-01-02T18:08:37.681Z",
+  "updatedAt": "2026-01-02T18:14:44.200Z",
+  "title": "Sarah & Michael's 10th Anniversary in Ravello",
+  "description": "Romantic 10-day anniversary trip featuring wine harvest experiences, luxury accommodations, and intimate coastal exploration",
+  "status": "DRAFT",
+  "startDate": "2026-09-11T16:00:00.000Z",
+  "endDate": "2026-09-20T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "1a0788c5-feaf-42e7-8dac-93d19d7f1191",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "4eeb6d0e-fa8e-48ff-920b-ab61880db4f5",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "ea5bcd87-e7be-489f-be03-dcf3b4bba615",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-11T19:00:00.000Z",
+      "endDatetime": "2026-09-20T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:12:00.876Z"
+      },
+      "notes": "10th Anniversary Special - Requested Full Coast Panorama View Suite",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Belmond Hotel Caruso"
+      },
+      "location": {
+        "name": "Ravello",
+        "city": "Ravello",
+        "country": "Italy"
+      },
+      "checkInDate": "2026-09-11T19:00:00.000Z",
+      "checkOutDate": "2026-09-20T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Sea View Suite - Full Amalfi Coast Panorama",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "08d6af82-8b62-48f9-bde4-7fc1b04faf9f",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-15T23:30:00.000Z",
+      "endDatetime": "2026-09-16T02:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:12:16.003Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Anniversary Dinner at Belmond Hotel Caruso's Michelin-Starred Restaurant",
+      "description": "Romantic anniversary dinner at the hotel's acclaimed Michelin-starred restaurant, featuring local Campanian cuisine and wine pairings",
+      "location": {
+        "name": "Belmond Hotel Caruso",
+        "city": "Ravello",
+        "country": "Italy"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "f38e39b4-fe57-446d-9944-fa9d99a8c0bb",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-15T23:30:00.000Z",
+      "endDatetime": "2026-09-16T02:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:13:55.117Z"
+      },
+      "notes": "10th Wedding Anniversary Celebration - Request best table with coastal view",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Anniversary Dinner at Ristorante Belvedere",
+      "description": "Special Michelin-starred anniversary dinner celebration",
+      "location": {
+        "name": "Belmond Hotel Caruso",
+        "city": "Ravello",
+        "country": "Italy"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "a3ea33e9-572c-49a6-bdf4-4c6bf44afac7",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-09-17T14:00:00.000Z",
+      "endDatetime": "2026-09-17T18:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T18:14:02.854Z"
+      },
+      "notes": "Anniversary wine experience - private tour with local winemaker",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Private Coastal Winery Experience",
+      "description": "Exclusive private wine tour during harvest season, including grape picking, winery tour, and intimate tasting",
+      "location": {
+        "name": "Tramonti Winery",
+        "city": "Tramonti",
+        "country": "Italy"
+      },
+      "category": "tour"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

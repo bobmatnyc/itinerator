@@ -1,0 +1,396 @@
+{
+  "id": "1e633224-4666-4316-8ae9-b38868c49b96",
+  "version": 27,
+  "createdAt": "2026-01-01T20:59:11.401Z",
+  "updatedAt": "2026-01-01T21:02:46.609Z",
+  "title": "Sarah & Michael's Anniversary Trip to Amalfi Coast",
+  "description": "Test itinerary for couple persona",
+  "status": "DRAFT",
+  "startDate": "2026-06-20T16:00:00.000Z",
+  "endDate": "2026-06-30T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "9e3dcb99-d33b-466c-be18-1b7b20315725",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "082b5faf-bd05-435e-96ad-9366c13bb642",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "d278e8d2-8156-4166-9c1f-06a613e49bfa",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "73d9145c-5904-48c0-bc6c-6c2c78255900",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "e1787297-0a57-4e88-bc76-3f4632cb6045",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "b9b55eb8-a4e7-44d7-a27a-72a73b7d8609",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "30c20a79-670a-4032-ba94-a44200600825",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "f66ae74f-0ccd-452f-b173-e9552585851c",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "2b107107-275f-4759-adbd-9402c092a8a7",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-20T19:00:00.000Z",
+      "endDatetime": "2025-06-25T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:00:23.509Z"
+      },
+      "notes": "Anniversary trip - request romantic room with terrace overlooking the sea",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Le Sirenuse"
+      },
+      "location": {
+        "name": "Positano"
+      },
+      "checkInDate": "2025-06-20T19:00:00.000Z",
+      "checkOutDate": "2025-06-25T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Deluxe Sea View Room with Terrace",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "0bc6e835-eb58-4af7-a1ce-c39855522c83",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-20T19:00:00.000Z",
+      "endDatetime": "2026-06-25T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:01:03.636Z"
+      },
+      "notes": "Anniversary trip - 5-year celebration. Please add romantic touches to room. Couple celebrating milestone anniversary.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Le Sirenuse"
+      },
+      "location": {
+        "name": "Positano"
+      },
+      "checkInDate": "2026-06-20T19:00:00.000Z",
+      "checkOutDate": "2026-06-25T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Deluxe Sea View Room with Terrace",
+      "roomCount": 1,
+      "amenities": []
+    },
+    {
+      "id": "ebd0b4af-5ce6-4811-b5c1-0853a52f1f43",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-21T00:00:00.000Z",
+      "endDatetime": "2026-06-21T02:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:01:03.637Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Dinner at La Sponda - First Night",
+      "description": "Romantic anniversary dinner at Michelin-starred restaurant with panoramic coastal views",
+      "location": {
+        "name": "Le Sirenuse"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "ff53eee4-9405-4da9-8a94-53296025a7b2",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-26T00:00:00.000Z",
+      "endDatetime": "2026-06-26T02:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:01:03.639Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Dinner at La Sponda - Final Night",
+      "description": "Farewell romantic dinner at Michelin-starred restaurant",
+      "location": {
+        "name": "Le Sirenuse"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "f5e6f553-6dcc-49ca-9cd9-cd9db0d81e05",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-22T23:00:00.000Z",
+      "endDatetime": "2026-06-23T01:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:01:03.640Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Private Sunset Boat Tour",
+      "description": "Romantic private sunset boat tour with champagne along the Amalfi Coast for anniversary celebration",
+      "location": {
+        "name": "Amalfi Coast"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "bfff3140-d090-4dbd-af59-5c8d17ed2074",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-23T14:00:00.000Z",
+      "endDatetime": "2026-06-23T18:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:01:03.641Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Couples' Spa Day at Terme Manzi",
+      "description": "Luxurious couples' spa treatment with thermal baths and relaxation",
+      "location": {
+        "name": "Terme Manzi Hotel & Spa"
+      },
+      "category": "spa"
+    },
+    {
+      "id": "343bd96a-148a-424c-8e6c-0688a064bbc8",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-24T14:00:00.000Z",
+      "endDatetime": "2026-06-24T17:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:01:03.643Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Private Pasta Cooking Class",
+      "description": "Intimate pasta-making cooking class with local chef",
+      "location": {
+        "name": "Positano"
+      },
+      "category": "culinary"
+    },
+    {
+      "id": "e3cabc3a-df8d-4d40-88fd-6c55783bdd17",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-25T15:00:00.000Z",
+      "endDatetime": "2026-06-25T20:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:01:03.644Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Private Wine Tour in Campania",
+      "description": "Private wine tour exploring local Campanian varietals like Aglianico and Falanghina",
+      "location": {
+        "name": "Campania Wine Region"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "bad7c263-e433-4101-a9b3-808cb2d32e7c",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-27T19:00:00.000Z",
+      "endDatetime": "2026-06-27T21:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:02:46.602Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Coastal Wine Tasting Experience",
+      "description": "Intimate wine tasting with panoramic Mediterranean views, featuring local Campanian wines",
+      "location": {
+        "name": "Capri Coastal Winery"
+      },
+      "category": "wine_tasting"
+    },
+    {
+      "id": "c75426dc-a376-41ac-8faf-314562e6497d",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-27T00:00:00.000Z",
+      "endDatetime": "2026-06-27T02:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:02:46.604Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Dinner at Il Riccio",
+      "description": "Michelin-starred seafood restaurant with breathtaking views",
+      "location": {
+        "name": "Il Riccio Restaurant"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "4d4c1c03-e0eb-4e4c-b648-5b8b5b8fccab",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-29T00:00:00.000Z",
+      "endDatetime": "2026-06-29T02:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:02:46.605Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Dinner at Da Paolino",
+      "description": "Romantic dinner under the iconic lemon trees of Capri",
+      "location": {
+        "name": "Da Paolino Lemon Tree Restaurant"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "b4e49241-4885-476c-aa80-62af7be86b86",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-30T00:00:00.000Z",
+      "endDatetime": "2026-06-30T02:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:02:46.607Z"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Dinner at Mammà Restaurant",
+      "description": "Cliffside dining with panoramic sunset views of Capri",
+      "location": {
+        "name": "Mammà Restaurant"
+      },
+      "category": "dining"
+    },
+    {
+      "type": "TRANSFER",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-06-25T15:00:00.000Z",
+      "endDatetime": "2026-06-25T16:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T21:02:46.609Z"
+      },
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "Le Sirenuse, Positano",
+        "type": "OTHER"
+      },
+      "dropoffLocation": {
+        "name": "J.K. Place Capri",
+        "type": "OTHER"
+      },
+      "notes": "Private boat transfer between Positano and Capri with stunning coastal views",
+      "metadata": {},
+      "id": "c169f047-2fee-45c8-b8b4-1bf13d21a8aa"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

@@ -1,0 +1,62 @@
+{
+  "id": "438050ba-122d-47cc-8af9-7d7d99946b94",
+  "version": 8,
+  "createdAt": "2026-01-02T17:48:27.925Z",
+  "updatedAt": "2026-01-02T17:49:42.216Z",
+  "title": "Tokyo Business Trip",
+  "description": "5-day business trip with client meetings in Shibuya",
+  "status": "DRAFT",
+  "startDate": "2026-03-10T16:00:00.000Z",
+  "endDate": "2026-03-15T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "4dc45091-3f6d-4f7d-a9a6-73a74479d507",
+      "type": "ADULT",
+      "firstName": "Jennifer",
+      "lastName": "Chen",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-03-10T19:00:00.000Z",
+      "endDatetime": "2026-03-15T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T17:49:42.216Z"
+      },
+      "property": {
+        "name": "Shibuya Stream Excel Hotel Tokyu"
+      },
+      "location": {
+        "name": "Shibuya",
+        "city": "Tokyo",
+        "country": "Japan",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2026-03-10T19:00:00.000Z",
+      "checkOutDate": "2026-03-15T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Business Room",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Hotel with meeting rooms, high-speed wifi, and business amenities",
+      "metadata": {},
+      "id": "556f2044-8a7f-4bc7-af08-66b100cb778f"
+    }
+  ],
+  "tripType": "BUSINESS",
+  "tags": [],
+  "metadata": {}
+}

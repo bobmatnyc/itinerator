@@ -1,0 +1,153 @@
+{
+  "id": "14f960db-ee51-4ab9-a28b-f26a56da2508",
+  "version": 10,
+  "createdAt": "2026-01-01T22:38:11.561Z",
+  "updatedAt": "2026-01-01T22:41:35.934Z",
+  "title": "Jennifer Chen's Business Trip to Tokyo",
+  "description": "Test itinerary for business persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "ffc7ef25-464f-430f-8eb2-cfb6df06cb05",
+      "type": "ADULT",
+      "firstName": "Jennifer",
+      "lastName": "Chen",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "4e051245-2f85-44f0-b3b7-b520f5f1534b",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-19T19:00:00.000Z",
+      "endDatetime": "2024-02-24T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:38:53.631Z"
+      },
+      "notes": "Business-friendly hotel with WiFi, work desk. Closest to Shibuya Station.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Tokyu Stay Shibuya Shin-Minamiguchi",
+        "code": "TOKYU-SHIBUYA"
+      },
+      "location": {
+        "name": "Shibuya, Tokyo"
+      },
+      "checkInDate": "2024-02-19T19:00:00.000Z",
+      "checkOutDate": "2024-02-24T16:00:00.000Z",
+      "checkInTime": "14:00",
+      "checkOutTime": "11:00",
+      "roomType": "Business King",
+      "roomCount": 1,
+      "boardBasis": "ROOM_ONLY",
+      "amenities": []
+    },
+    {
+      "id": "1b261489-deef-44e3-ba12-53e7c59f75fd",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-19T04:30:00.000Z",
+      "endDatetime": "2024-02-19T11:45:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:40:25.821Z"
+      },
+      "metadata": {},
+      "type": "FLIGHT",
+      "airline": {
+        "name": "All Nippon Airways",
+        "code": "NH"
+      },
+      "flightNumber": "NH10",
+      "origin": {
+        "name": "San Francisco International Airport",
+        "code": "SFO"
+      },
+      "destination": {
+        "name": "Haneda Airport",
+        "code": "HND"
+      },
+      "cabinClass": "BUSINESS"
+    },
+    {
+      "id": "43d2bef3-2a27-4194-b242-04783918c343",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-20T14:00:00.000Z",
+      "endDatetime": "2024-02-22T23:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:40:49.009Z"
+      },
+      "notes": "Includes high-speed WiFi, meeting room access, and business amenities",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "WeWork Private Office - Shibuya",
+      "description": "Private office space for 3 days, 9 AM to 6 PM daily",
+      "location": {
+        "name": "WeWork Shibuya Scramble"
+      },
+      "category": "business"
+    },
+    {
+      "id": "7d38eb9f-50a1-45d9-9d33-e259f15f9c60",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-22T00:00:00.000Z",
+      "endDatetime": "2024-02-22T02:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:41:13.174Z"
+      },
+      "notes": "Reservation for 4 people, table suitable for business conversation",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Client Dinner at Ukai-tei Omotesando",
+      "description": "Business dinner for 4 people - teppanyaki restaurant",
+      "location": {
+        "name": "Ukai-tei Omotesando"
+      },
+      "category": "dining"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-19T12:30:00.000Z",
+      "endDatetime": "2024-02-19T14:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:41:35.934Z"
+      },
+      "name": "Pocket WiFi Pickup at Haneda Airport",
+      "location": {
+        "name": "Haneda Airport International Terminal",
+        "type": "ATTRACTION"
+      },
+      "category": "transfer",
+      "provider": {
+        "name": "Japan Wireless"
+      },
+      "notes": "Unlimited data pocket wifi for entire stay. Pickup at airport information counter. Ensure device is fully charged and activated for immediate use.",
+      "metadata": {},
+      "id": "2f58f572-7c10-4bf1-b624-7a4386a9aff1"
+    }
+  ],
+  "tripType": "BUSINESS",
+  "tags": [],
+  "metadata": {}
+}

@@ -1,0 +1,53 @@
+{
+  "id": "7c8d34be-baa4-47b7-b417-bf4fa15d3928",
+  "version": 6,
+  "createdAt": "2026-01-01T19:55:06.815Z",
+  "updatedAt": "2026-01-01T19:55:52.547Z",
+  "title": "Sarah & Michael's Amalfi Coast Anniversary Trip",
+  "description": "10-day romantic foodie journey along the Amalfi Coast, focusing on unique experiences and stunning views",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "531a8fcb-f0d0-40e3-982c-54c6f0b45350",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Unknown",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "0261960e-e030-43f9-b087-8c55dec82660",
+      "type": "ADULT",
+      "firstName": "Michael",
+      "lastName": "Unknown",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "255b5774-f667-4d0a-a92b-7d30fe91696b",
+      "type": "ADULT",
+      "firstName": "Sarah",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

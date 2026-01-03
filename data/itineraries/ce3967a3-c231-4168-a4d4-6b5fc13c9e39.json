@@ -1,0 +1,237 @@
+{
+  "id": "ce3967a3-c231-4168-a4d4-6b5fc13c9e39",
+  "version": 16,
+  "createdAt": "2026-01-02T05:43:06.581Z",
+  "updatedAt": "2026-01-02T05:45:55.072Z",
+  "title": "Adventure Squad Costa Rica Expedition",
+  "description": "Test itinerary for adventure persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "5711036f-8c44-4418-b618-4c12436ab956",
+      "type": "ADULT",
+      "firstName": "Mike",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "67fa2372-5e7a-45ab-9415-1e0aa9f77bd0",
+      "type": "ADULT",
+      "firstName": "Sara",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "5219446d-14bb-4ae7-b471-ba27de8ddac0",
+      "type": "ADULT",
+      "firstName": "Tom",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "7e0e1992-7052-47a4-9969-3c9dde770ade",
+      "type": "ADULT",
+      "firstName": "Anna",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "89fe5780-d1d8-461b-870f-9c133ebde036",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-01-15T14:00:00.000Z",
+      "endDatetime": "2026-01-15T17:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:44:26.952Z"
+      },
+      "provider": {
+        "name": "Sky Trek Arenal"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Arenal Volcano Extreme Zip-Line Canopy Tour",
+      "description": "Ultimate zip-lining experience with the longest and highest lines in Arenal. Multiple extreme routes crossing volcanic landscapes, including:\n- 7 consecutive zip-lines\n- Highest line reaches 660 feet above the ground\n- Total cable length over 1.5 miles\n- Challenging routes that will make Tom's Hawaii zip-line look like child's play!",
+      "location": {
+        "name": "Arenal Volcano National Park"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "07fe21f3-2f56-42ff-8837-82cec8c36652",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-01-18T14:00:00.000Z",
+      "endDatetime": "2026-01-18T18:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:44:34.721Z"
+      },
+      "provider": {
+        "name": "Selvatura Park"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Monteverde Cloud Forest Extreme Canopy Adventure",
+      "description": "Mind-blowing multi-level canopy tour through the misty cloud forest:\n- 12 zip-line routes\n- Includes a 'Tarzan Swing' over deep forest canyons\n- Suspension bridges with heart-stopping heights\n- Advanced routes that test even experienced adventurers\n- Stunning views of untouched rainforest ecosystem",
+      "location": {
+        "name": "Monteverde Cloud Forest Reserve"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "09424b26-7ac7-4eea-85d6-4c369b54631d",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-01-21T11:00:00.000Z",
+      "endDatetime": "2026-01-21T19:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:44:42.848Z"
+      },
+      "provider": {
+        "name": "Corcovado Expeditions"
+      },
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Osa Peninsula Extreme Rainforest Expedition",
+      "description": "Off-the-grid wilderness adventure in one of the most remote national parks in the world:\n- Advanced jungle trekking through primary rainforest\n- Wildlife encounters with rare species (jaguars, tapirs, scarlet macaws)\n- Challenging multi-day hiking routes\n- Survival-style expedition with expert guides\n- Includes river crossings, extreme terrain navigation\n- Completely off the tourist path - true adventure!",
+      "location": {
+        "name": "Corcovado National Park"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "52df51ea-5ae9-44cc-ab88-93c3977ec88c",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-01-16T14:00:00.000Z",
+      "endDatetime": "2026-01-16T18:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:45:08.513Z"
+      },
+      "notes": "Extreme adventure - highest and longest zip-lines in Costa Rica. Multiple lines crossing volcanic terrain. Requires signed waiver and good physical condition.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Arenal Extreme Mega Zip-Line Challenge",
+      "description": "The ULTIMATE zip-line experience featuring the longest and highest lines in Arenal. Multiple extreme lines crossing deep canyons and volcanic landscapes, including a record-breaking 2,400-foot mega-line that will make Tom's Hawaii photos look like a playground ride!",
+      "location": {
+        "name": "Arenal Volcano National Park"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "de7c122e-98b3-4d0a-8f4d-b526ff257db7",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-01-17T11:00:00.000Z",
+      "endDatetime": "2026-01-17T17:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:45:16.223Z"
+      },
+      "notes": "Advanced difficulty. Requires excellent physical fitness, proper hiking gear, and signed liability waiver. Not for the faint of heart!",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Arenal Volcano Extreme Summit Conquest",
+      "description": "The most challenging volcano hike in Arenal - a grueling 6-hour trek across volcanic terrain, lava fields, and treacherous landscapes. Technical climbing, steep ascents, and views that will push your limits!",
+      "location": {
+        "name": "Arenal Volcano National Park"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "893928c3-22ee-415b-9adb-285ed01f7610",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-01-19T13:00:00.000Z",
+      "endDatetime": "2026-01-19T18:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:45:23.661Z"
+      },
+      "notes": "Ultimate adventure package - multiple extreme zip-lines, vertigo-inducing suspension bridges, and challenging forest terrain.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Monteverde Cloud Forest Extreme Canopy Expedition",
+      "description": "The most intense canopy experience in Monteverde - featuring the longest and highest suspension bridges, heart-stopping zip-lines through the cloud forest, and near-vertical descents that will test your courage!",
+      "location": {
+        "name": "Monteverde Cloud Forest Reserve"
+      },
+      "category": "tour"
+    },
+    {
+      "id": "7b6e764d-bb33-4a72-96a9-be0bf09fd27a",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-01-22T11:00:00.000Z",
+      "endDatetime": "2026-01-22T19:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:45:31.418Z"
+      },
+      "notes": "Extreme off-grid adventure. Limited group size. Requires top physical condition, previous adventure experience, and signed extensive waiver.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Osa Peninsula Extreme Rainforest Survival Challenge",
+      "description": "The most remote and challenging adventure in the Osa Peninsula - a full-day extreme expedition combining technical jungle trekking, near-vertical zip-lines through untouched rainforest, and survival skills in one of the most biodiverse regions on the planet!",
+      "location": {
+        "name": "Corcovado National Park"
+      },
+      "category": "tour"
+    },
+    {
+      "type": "ACTIVITY",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-01-19T13:00:00.000Z",
+      "endDatetime": "2026-01-19T17:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T05:45:55.072Z"
+      },
+      "name": "Monteverde Extreme Rainforest Canopy Challenge",
+      "description": "The ULTIMATE zip-line experience - 15 consecutive ultra-high zip-lines spanning over 2 miles, with drops up to 600 feet and speeds reaching 45 mph. Includes a 'Tarzan Swing' and a near-vertical descent that will make Tom's Hawaii photos look like a kiddie ride!",
+      "location": {
+        "name": "Monteverde Cloud Forest",
+        "type": "ATTRACTION"
+      },
+      "category": "tour",
+      "notes": "Extreme adrenaline experience. Highest and longest zip-lines in Central America. Professional guides, full safety equipment provided.",
+      "metadata": {},
+      "id": "07f1581a-d392-4aba-b78b-cdd5d619c1a8"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

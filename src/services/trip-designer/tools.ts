@@ -53,63 +53,60 @@ export const ADD_FLIGHT_TOOL: ToolDefinition = {
   type: 'function',
   function: {
     name: 'add_flight',
-    description: 'Add a flight segment to the itinerary with airline, flight number, and route details',
+    description: 'Add a RECOMMENDED flight to the itinerary. This does NOT book the flight - it adds a flight recommendation that the user can review and book later. MUST be called after search_flights to add your recommended option to the itinerary. Provide as much detail as available from search results, but only origin, destination, and departure date are required.',
     parameters: {
       type: 'object',
       properties: {
         airline: {
           type: 'object',
-          description: 'Airline operating the flight',
+          description: 'Airline operating the flight (optional if not known)',
           properties: {
             name: { type: 'string', description: 'Full airline name (e.g., "United Airlines")' },
             code: { type: 'string', description: 'IATA airline code (e.g., "UA")' },
           },
-          required: ['name', 'code'],
         },
         flightNumber: {
           type: 'string',
-          description: 'Flight number including airline code (e.g., "UA123")',
+          description: 'Flight number including airline code (e.g., "UA123") - optional if not known',
         },
         origin: {
           type: 'object',
-          description: 'Origin airport',
+          description: 'Origin airport or city (at minimum provide airport code or city name)',
           properties: {
-            name: { type: 'string', description: 'Airport name' },
-            code: { type: 'string', description: 'IATA airport code (e.g., "SFO")' },
-            city: { type: 'string', description: 'City name' },
-            country: { type: 'string', description: 'Country name' },
+            name: { type: 'string', description: 'Airport name (optional)' },
+            code: { type: 'string', description: 'IATA airport code (e.g., "SFO") - provide if known' },
+            city: { type: 'string', description: 'City name - provide if airport code not known' },
+            country: { type: 'string', description: 'Country name (optional)' },
           },
-          required: ['name', 'code'],
         },
         destination: {
           type: 'object',
-          description: 'Destination airport',
+          description: 'Destination airport or city (at minimum provide airport code or city name)',
           properties: {
-            name: { type: 'string', description: 'Airport name' },
-            code: { type: 'string', description: 'IATA airport code (e.g., "JFK")' },
-            city: { type: 'string', description: 'City name' },
-            country: { type: 'string', description: 'Country name' },
+            name: { type: 'string', description: 'Airport name (optional)' },
+            code: { type: 'string', description: 'IATA airport code (e.g., "JFK") - provide if known' },
+            city: { type: 'string', description: 'City name - provide if airport code not known' },
+            country: { type: 'string', description: 'Country name (optional)' },
           },
-          required: ['name', 'code'],
         },
         departureTime: {
           type: 'string',
           format: 'date-time',
-          description: 'Departure date and time in ISO 8601 format',
+          description: 'Departure date (and time if known) in ISO 8601 format. If only date is known, use format YYYY-MM-DD',
         },
         arrivalTime: {
           type: 'string',
           format: 'date-time',
-          description: 'Arrival date and time in ISO 8601 format',
+          description: 'Arrival date and time in ISO 8601 format (optional if not known)',
         },
         cabinClass: {
           type: 'string',
-          description: 'Cabin class',
+          description: 'Cabin class (optional)',
           enum: ['ECONOMY', 'PREMIUM_ECONOMY', 'BUSINESS', 'FIRST'],
         },
         price: {
           type: 'object',
-          description: 'Flight price',
+          description: 'Flight price (optional)',
           properties: {
             amount: { type: 'number', description: 'Price amount' },
             currency: { type: 'string', description: 'Currency code (e.g., "USD")' },
@@ -117,14 +114,14 @@ export const ADD_FLIGHT_TOOL: ToolDefinition = {
         },
         confirmationNumber: {
           type: 'string',
-          description: 'Booking confirmation number',
+          description: 'Booking confirmation number (optional)',
         },
         notes: {
           type: 'string',
-          description: 'Additional notes about the flight',
+          description: 'Additional notes about the flight (optional - can include search result details)',
         },
       },
-      required: ['airline', 'flightNumber', 'origin', 'destination', 'departureTime', 'arrivalTime'],
+      required: ['origin', 'destination', 'departureTime'],
     },
   },
 };
@@ -137,7 +134,7 @@ export const ADD_HOTEL_TOOL: ToolDefinition = {
   type: 'function',
   function: {
     name: 'add_hotel',
-    description: 'REQUIRED CALL when user mentions ANY accommodation (hotel, resort, Airbnb, "staying at", etc.). Add a hotel or accommodation segment to the itinerary. You MUST call this tool immediately when user mentions where they are staying - verbal acknowledgment alone will NOT save the data. Example: User says "We\'re staying at Hotel L\'Esplanade" → You MUST call this tool with property details BEFORE responding.',
+    description: 'Add a RECOMMENDED hotel or accommodation to the itinerary. This does NOT book the hotel - it adds a hotel recommendation that the user can review and book later. REQUIRED CALL when user mentions ANY accommodation (hotel, resort, Airbnb, "staying at", etc.) OR after calling search_hotels. You MUST call this tool immediately when user mentions where they are staying - verbal acknowledgment alone will NOT save the data. Example: User says "We\'re staying at Hotel L\'Esplanade" → You MUST call this tool with property details BEFORE responding.',
     parameters: {
       type: 'object',
       properties: {
@@ -222,7 +219,7 @@ export const ADD_ACTIVITY_TOOL: ToolDefinition = {
   type: 'function',
   function: {
     name: 'add_activity',
-    description: 'REQUIRED CALL when user mentions ANY dining/activity (restaurant, tour, museum, show, etc.) OR when you recommend one. Add an activity, tour, dining experience, or attraction to the itinerary. You MUST call this tool immediately when mentioning restaurants or activities - verbal discussion alone will NOT save the data. Example: User says "Dinner at Le Tastevin" OR you recommend "Ocean 82 has great seafood" → You MUST call this tool with activity details BEFORE/DURING your response.',
+    description: 'Add a RECOMMENDED activity, tour, dining experience, or attraction to the itinerary. This does NOT book the activity - it adds a recommendation that the user can review and book later. REQUIRED CALL when user mentions ANY dining/activity (restaurant, tour, museum, show, etc.) OR when you recommend one. You MUST call this tool immediately when mentioning restaurants or activities - verbal discussion alone will NOT save the data. Example: User says "Dinner at Le Tastevin" OR you recommend "Ocean 82 has great seafood" → You MUST call this tool with activity details BEFORE/DURING your response.',
     parameters: {
       type: 'object',
       properties: {
@@ -696,7 +693,7 @@ export const SEARCH_FLIGHTS_TOOL: ToolDefinition = {
   type: 'function',
   function: {
     name: 'search_flights',
-    description: 'Search for flight prices and availability using Google Flights via SERP API',
+    description: 'Search for flight prices and availability using Google Flights via SERP API. After calling this, you MUST call add_flight to add the recommended option to the itinerary.',
     parameters: {
       type: 'object',
       properties: {
@@ -742,7 +739,7 @@ export const SEARCH_HOTELS_TOOL: ToolDefinition = {
   type: 'function',
   function: {
     name: 'search_hotels',
-    description: 'Search for hotel prices and availability using Google Hotels via SERP API',
+    description: 'Search for hotel prices and availability using Google Hotels via SERP API. After calling this, you MUST call add_hotel to add the recommended option to the itinerary.',
     parameters: {
       type: 'object',
       properties: {
@@ -1082,6 +1079,8 @@ export const ESSENTIAL_TOOLS: ToolDefinition[] = [
   ADD_HOTEL_TOOL,
   ADD_ACTIVITY_TOOL,
   SEARCH_WEB_TOOL,
+  SEARCH_FLIGHTS_TOOL,
+  SEARCH_HOTELS_TOOL,
 ];
 
 /**

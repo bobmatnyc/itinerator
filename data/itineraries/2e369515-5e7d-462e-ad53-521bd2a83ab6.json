@@ -1,0 +1,16 @@
+{
+  "id": "2e369515-5e7d-462e-ad53-521bd2a83ab6",
+  "version": 1,
+  "createdAt": "2026-01-01T23:09:34.148Z",
+  "updatedAt": "2026-01-01T23:09:34.148Z",
+  "title": "Sarah & Michael's Trip",
+  "description": "Test itinerary for couple persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "segments": [],
+  "tags": [],
+  "metadata": {},
+  "tripType": "LEISURE",
+  "createdBy": "test@test.com"
+}

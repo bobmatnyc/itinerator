@@ -1,0 +1,62 @@
+{
+  "id": "a87fe903-639d-4ddd-ae92-5e8133d09b81",
+  "version": 8,
+  "createdAt": "2026-01-02T17:57:29.661Z",
+  "updatedAt": "2026-01-02T17:59:47.584Z",
+  "title": "Southeast Asia Backpacking Adventure",
+  "description": "3-week backpacking trip through Thailand, Vietnam, and Cambodia. Focus on budget travel, photography, hiking, and cultural experiences.",
+  "status": "DRAFT",
+  "startDate": "2026-11-01T17:00:00.000Z",
+  "endDate": "2026-11-22T17:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "038319eb-d5e0-4835-b621-d866861a2998",
+      "type": "ADULT",
+      "firstName": "Alex",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "FLIGHT",
+      "status": "CONFIRMED",
+      "startDatetime": "2026-11-04T05:00:00.000Z",
+      "endDatetime": "2026-11-04T07:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T17:59:47.584Z"
+      },
+      "origin": {
+        "code": "JFK",
+        "city": "New York City",
+        "type": "AIRPORT",
+        "name": "New York City"
+      },
+      "destination": {
+        "code": "BKK",
+        "city": "Bangkok",
+        "type": "AIRPORT",
+        "name": "Bangkok"
+      },
+      "price": {
+        "amount": 68000,
+        "currency": "USD"
+      },
+      "notes": "Flight with layover in Seoul - great for meeting fellow travelers!",
+      "metadata": {},
+      "id": "97d11904-3c75-4e15-9ff3-79d7c471092e"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

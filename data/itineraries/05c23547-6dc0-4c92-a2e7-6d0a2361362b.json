@@ -1,0 +1,30 @@
+{
+  "id": "05c23547-6dc0-4c92-a2e7-6d0a2361362b",
+  "version": 9,
+  "createdAt": "2026-01-02T18:10:48.033Z",
+  "updatedAt": "2026-01-02T18:13:09.150Z",
+  "title": "Budget European Adventure: Paris, Amsterdam, Berlin",
+  "description": "Test itinerary for budget persona",
+  "status": "DRAFT",
+  "startDate": "2026-09-15T16:00:00.000Z",
+  "endDate": "2026-09-29T16:00:00.000Z",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "22a6b7c9-e58e-4d8c-af5a-c5e2f583df27",
+      "type": "ADULT",
+      "firstName": "Jordan",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

@@ -1,0 +1,196 @@
+{
+  "id": "8e4c1c66-b7a8-4da7-8bc1-40bed798b012",
+  "version": 11,
+  "createdAt": "2026-01-02T00:41:04.061Z",
+  "updatedAt": "2026-01-02T00:43:46.455Z",
+  "title": "The Johnson Family's Trip",
+  "description": "Test itinerary for family persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "37be63cd-8c8b-42b2-a46d-01b9f8efd6ea",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "parent",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "a3c1e123-2124-4de3-b6ba-bb5669ef9828",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "19ab4623-82a5-46a0-9188-0ae3348c033a",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "8b206099-1b40-4547-885e-aedb14b7baef",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "b51b22db-f69f-4f14-a8a8-c397b16af3ca",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "child",
+        "isPrimary": false,
+        "age": 8
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "id": "886b5b50-66ea-4c60-9f77-fce1651c7ee1",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-15T19:00:00.000Z",
+      "endDatetime": "2025-06-22T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:42:09.118Z"
+      },
+      "notes": "Family of 4 (2 adults, 2 children). Require allergy-friendly dining options. Interested in pool cabana rental.",
+      "metadata": {},
+      "type": "HOTEL",
+      "property": {
+        "name": "Marriott's Grande Vista"
+      },
+      "location": {
+        "name": "Orlando"
+      },
+      "checkInDate": "2025-06-15T19:00:00.000Z",
+      "checkOutDate": "2025-06-22T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Family Suite",
+      "roomCount": 1,
+      "boardBasis": "BED_BREAKFAST",
+      "amenities": []
+    },
+    {
+      "id": "36027ba4-0dd1-41ca-b801-b7224819e3e9",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-16T13:00:00.000Z",
+      "endDatetime": "2025-06-16T14:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:43:46.453Z"
+      },
+      "metadata": {},
+      "type": "MEETING",
+      "title": "Resort Restaurant Allergy Consultation",
+      "location": {
+        "name": "Marriott's Grande Vista Restaurant"
+      },
+      "attendees": [
+        "David Johnson",
+        "Lisa Johnson",
+        "Resort Restaurant Manager"
+      ],
+      "agenda": "Discuss Jake's nut allergy and resort's allergy management protocols"
+    },
+    {
+      "id": "9ab8679b-bdb9-4899-a34b-cbb9c3a158af",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-15T22:00:00.000Z",
+      "endDatetime": "2025-06-16T00:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:43:46.453Z"
+      },
+      "notes": "Allergy-friendly restaurant. Nut-free meal preparation required.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Arrival Night Dinner",
+      "location": {
+        "name": "Marriott's Grande Vista Restaurant"
+      },
+      "category": "dining"
+    },
+    {
+      "id": "526ee968-1506-405b-8c07-e86637e39968",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-18T22:30:00.000Z",
+      "endDatetime": "2025-06-19T00:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:43:46.454Z"
+      },
+      "notes": "Allergy-friendly restaurant. Nut-free meal preparation required.",
+      "metadata": {},
+      "type": "ACTIVITY",
+      "name": "Mid-Week Dinner",
+      "location": {
+        "name": "Marriott's Grande Vista Restaurant"
+      },
+      "category": "dining"
+    },
+    {
+      "type": "TRANSFER",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-15T18:00:00.000Z",
+      "endDatetime": "2025-06-15T18:30:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-02T00:43:46.455Z"
+      },
+      "transferType": "PRIVATE",
+      "pickupLocation": {
+        "name": "Orlando International Airport",
+        "type": "OTHER"
+      },
+      "dropoffLocation": {
+        "name": "Marriott's Grande Vista",
+        "type": "OTHER"
+      },
+      "notes": "Private airport transfer for Johnson family. Ensure vehicle can accommodate family of 4 and luggage.",
+      "metadata": {},
+      "id": "15b8664d-4ffa-497b-868b-d05d2b31b899"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

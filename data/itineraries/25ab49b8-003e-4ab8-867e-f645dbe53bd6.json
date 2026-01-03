@@ -1,0 +1,59 @@
+{
+  "id": "25ab49b8-003e-4ab8-867e-f645dbe53bd6",
+  "version": 6,
+  "createdAt": "2026-01-01T19:57:33.173Z",
+  "updatedAt": "2026-01-01T19:58:36.885Z",
+  "title": "Jennifer Chen's Tokyo Business Trip",
+  "description": "Test itinerary for business persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "f7332ab5-62ae-4de9-bedd-be7cced09c8b",
+      "type": "ADULT",
+      "firstName": "Jennifer",
+      "lastName": "Chen",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2024-02-04T20:00:00.000Z",
+      "endDatetime": "2024-02-09T16:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T19:58:36.884Z"
+      },
+      "property": {
+        "name": "Shibuya Stream Excel Hotel Tokyu",
+        "code": "SHIBUYA_STREAM_EXCEL"
+      },
+      "location": {
+        "name": "Shibuya Stream Complex",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2024-02-04T20:00:00.000Z",
+      "checkOutDate": "2024-02-09T16:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Business Room - High Floor",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Request high floor with business amenities. Desk space, high-speed WiFi essential.",
+      "metadata": {},
+      "id": "490078db-2d42-49c2-8f20-7fd6a02bf0c4"
+    }
+  ],
+  "tripType": "BUSINESS",
+  "tags": [],
+  "metadata": {}
+}

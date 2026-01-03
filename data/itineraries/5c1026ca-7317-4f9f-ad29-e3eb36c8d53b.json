@@ -1,0 +1,16 @@
+{
+  "id": "5c1026ca-7317-4f9f-ad29-e3eb36c8d53b",
+  "version": 1,
+  "createdAt": "2026-01-02T00:10:54.234Z",
+  "updatedAt": "2026-01-02T00:10:54.234Z",
+  "title": "Curious Traveler's Trip",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "segments": [],
+  "tags": [],
+  "metadata": {},
+  "tripType": "LEISURE",
+  "createdBy": "test@test.com"
+}

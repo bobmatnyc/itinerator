@@ -1,0 +1,106 @@
+{
+  "id": "ea695374-d027-4925-9206-06c38c570c18",
+  "version": 11,
+  "createdAt": "2026-01-01T22:32:58.952Z",
+  "updatedAt": "2026-01-01T22:35:09.651Z",
+  "title": "The Johnson Family's Trip",
+  "description": "Test itinerary for family persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [
+    {
+      "id": "934eb229-df0b-4748-8d69-dac7e6453d0c",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Johnson",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "primary",
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "cca4c291-4a47-41a5-a661-eb5b3d0a11c9",
+      "type": "ADULT",
+      "firstName": "David",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": true
+      }
+    },
+    {
+      "id": "43bd296c-b293-4d64-b632-80fd07b20e6b",
+      "type": "ADULT",
+      "firstName": "Lisa",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "relationship": "spouse",
+        "isPrimary": false
+      }
+    },
+    {
+      "id": "4caf2aee-0498-4df0-855b-f794e00ae300",
+      "type": "CHILD",
+      "firstName": "Emma",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false,
+        "age": 12
+      }
+    },
+    {
+      "id": "c5f43b24-82ab-400e-bdd7-df6a351d9fea",
+      "type": "CHILD",
+      "firstName": "Jake",
+      "lastName": "Traveler",
+      "loyaltyPrograms": [],
+      "specialRequests": [],
+      "metadata": {
+        "isPrimary": false,
+        "age": 8
+      }
+    }
+  ],
+  "createdBy": "test@test.com",
+  "segments": [
+    {
+      "type": "HOTEL",
+      "status": "CONFIRMED",
+      "startDatetime": "2025-06-15T19:00:00.000Z",
+      "endDatetime": "2025-06-22T15:00:00.000Z",
+      "travelerIds": [],
+      "source": "agent",
+      "sourceDetails": {
+        "mode": "chat",
+        "timestamp": "2026-01-01T22:35:09.650Z"
+      },
+      "property": {
+        "name": "Marriott's Grande Vista"
+      },
+      "location": {
+        "name": "Orlando",
+        "type": "HOTEL"
+      },
+      "checkInDate": "2025-06-15T19:00:00.000Z",
+      "checkOutDate": "2025-06-22T15:00:00.000Z",
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "roomType": "Family Suite with Kitchenette",
+      "roomCount": 1,
+      "amenities": [],
+      "notes": "Nut-free kitchen protocols required. Cabana reserved for pool day. Detailed allergy management plan needed.",
+      "metadata": {},
+      "id": "11330d44-f98e-4b0f-9974-07028321f73b"
+    }
+  ],
+  "tripType": "LEISURE",
+  "tags": [],
+  "metadata": {}
+}

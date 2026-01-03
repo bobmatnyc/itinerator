@@ -1,0 +1,16 @@
+{
+  "id": "16676425-f86b-4ea5-bbff-fae99f3d44fe",
+  "version": 1,
+  "createdAt": "2026-01-01T20:19:06.617Z",
+  "updatedAt": "2026-01-01T20:19:06.617Z",
+  "title": "Alex the Backpacker's Trip",
+  "description": "Test itinerary for solo persona",
+  "status": "DRAFT",
+  "destinations": [],
+  "travelers": [],
+  "segments": [],
+  "tags": [],
+  "metadata": {},
+  "tripType": "LEISURE",
+  "createdBy": "test@test.com"
+}
