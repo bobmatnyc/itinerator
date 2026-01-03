@@ -62,12 +62,16 @@ export function createCollectionManagerRouter(
         });
       }
 
+      // Get user email from X-User-Email header for ownership tracking
+      const userEmail = req.headers['x-user-email'] as string | undefined;
+
       const result = await collectionService.createItinerary({
         title,
         description: description || '',
         startDate: new Date(startDate),
         endDate: new Date(endDate),
         draft: draft === true, // Only save to disk if not a draft
+        createdBy: userEmail, // Set ownership to current user
       });
 
       if (!result.success) {
@@ -91,7 +95,7 @@ export function createCollectionManagerRouter(
 
   /**
    * GET /api/v1/itineraries/:id
-   * Get full itinerary with segments
+   * Get full itinerary with segments (ownership verified)
    */
   router.get('/:id', async (req: Request, res: Response) => {
     try {
@@ -99,6 +103,9 @@ export function createCollectionManagerRouter(
       if (!id) {
         return res.status(400).json({ error: 'Missing ID parameter' });
       }
+
+      // Get user email from X-User-Email header
+      const userEmail = req.headers['x-user-email'] as string | undefined;
 
       // Use itineraryService for full itinerary (with segments)
       // Fall back to collectionService summary if itineraryService not available
@@ -110,6 +117,19 @@ export function createCollectionManagerRouter(
             message: result.error.message,
           });
         }
+
+        // Verify ownership
+        const itinerary = result.value;
+        if (userEmail && itinerary.createdBy) {
+          const createdBy = itinerary.createdBy.toLowerCase().trim();
+          const reqUser = userEmail.toLowerCase().trim();
+          if (createdBy !== reqUser) {
+            return res.status(403).json({
+              message: 'Access denied: You do not have permission to view this itinerary',
+            });
+          }
+        }
+
         return res.json(result.value);
       }
 
@@ -133,12 +153,29 @@ export function createCollectionManagerRouter(
 
   /**
    * PATCH /api/v1/itineraries/:id
-   * Update itinerary metadata (title, description, dates, status, tags)
+   * Update itinerary metadata (title, description, dates, status, tags) - ownership verified
    */
   router.patch('/:id', async (req: Request, res: Response) => {
     try {
       const id = req.params.id as ItineraryId;
       const { title, description, startDate, endDate, status, tripType, tags } = req.body;
+
+      // Get user email from X-User-Email header
+      const userEmail = req.headers['x-user-email'] as string | undefined;
+
+      // Verify ownership before updating
+      if (collectionService) {
+        const summaryResult = await collectionService.getItinerarySummary(id);
+        if (summaryResult.success && userEmail && summaryResult.value.createdBy) {
+          const createdBy = summaryResult.value.createdBy.toLowerCase().trim();
+          const reqUser = userEmail.toLowerCase().trim();
+          if (createdBy !== reqUser) {
+            return res.status(403).json({
+              message: 'Access denied: You do not have permission to update this itinerary',
+            });
+          }
+        }
+      }
 
       const updates: Parameters<typeof collectionService.updateMetadata>[1] = {};
 
@@ -170,11 +207,29 @@ export function createCollectionManagerRouter(
 
   /**
    * DELETE /api/v1/itineraries/:id
-   * Delete itinerary
+   * Delete itinerary (ownership verified)
    */
   router.delete('/:id', async (req: Request, res: Response) => {
     try {
       const id = req.params.id as ItineraryId;
+
+      // Get user email from X-User-Email header
+      const userEmail = req.headers['x-user-email'] as string | undefined;
+
+      // Verify ownership before deleting
+      if (collectionService) {
+        const summaryResult = await collectionService.getItinerarySummary(id);
+        if (summaryResult.success && userEmail && summaryResult.value.createdBy) {
+          const createdBy = summaryResult.value.createdBy.toLowerCase().trim();
+          const reqUser = userEmail.toLowerCase().trim();
+          if (createdBy !== reqUser) {
+            return res.status(403).json({
+              message: 'Access denied: You do not have permission to delete this itinerary',
+            });
+          }
+        }
+      }
+
       const result = await collectionService.deleteItinerary(id);
 
       if (!result.success) {

@@ -35,28 +35,22 @@ import { summarizeItineraryMinimal, summarizeItinerary, generateMismatchWarning 
 
 /**
  * Default model for Trip Designer
+ * Can be overridden via TRIP_DESIGNER_MODEL environment variable
  *
- * Model Selection (2025-12-23):
- * - Claude 3.5 Haiku: Recommended replacement for deprecated Claude 3 Haiku
- * - Better format compliance, perfect ONE question rule, cost-effective
- * - See: tests/eval/results/EVALUATION_SUMMARY.md
- *
- * Available Haiku models (OpenRouter):
- * - claude-3-haiku: $0.25/1M (deprecated soon)
- * - claude-3.5-haiku: $0.80/1M (current, recommended)
- * - claude-haiku-4.5: $1.00/1M (latest)
- *
- * Can be overridden via TripDesignerConfig.model
+ * Recommended models:
+ * - anthropic/claude-haiku-4.5 (default - fast, cheap, reliable)
+ * - openai/gpt-4o (premium - reliable tool calling)
+ * - anthropic/claude-sonnet-4 (high intelligence)
  */
-const DEFAULT_MODEL = 'anthropic/claude-3.5-haiku';
+const DEFAULT_MODEL = process.env.TRIP_DESIGNER_MODEL || 'anthropic/claude-haiku-4.5';
 
 /**
- * Claude 3.5 Haiku pricing (USD per 1M tokens)
- * See: https://openrouter.ai/anthropic/claude-3.5-haiku
+ * Claude Haiku 4.5 pricing (USD per 1M tokens)
+ * See: https://openrouter.ai/anthropic/claude-haiku-4.5
  */
 const CLAUDE_PRICING = {
-  inputCostPer1M: 0.80,
-  outputCostPer1M: 4.00,
+  inputCostPer1M: 1.00,
+  outputCostPer1M: 5.00,
 };
 
 /**
@@ -895,6 +889,37 @@ CRITICAL: If the summary shows "⚠️ EXISTING BOOKINGS" with luxury/premium pr
           }
         }
         toolCallsInProgress.clear();
+      }
+
+      // If no native tool calls, try to parse from JSON content
+      if (toolCalls.length === 0 && fullContent.includes('tool_calls')) {
+        console.log(`[chatStream] No native tool calls detected, checking for JSON-embedded tool_calls...`);
+        const parsedTools = this.parseToolCallsFromContent(fullContent);
+        if (parsedTools.length > 0) {
+          console.log(`[chatStream] Parsed ${parsedTools.length} tool calls from JSON content`);
+          toolCalls = parsedTools;
+
+          // Emit tool_call events for each parsed tool
+          for (const toolCall of parsedTools) {
+            let args: any = {};
+            const argsStr = toolCall.function.arguments || '';
+            if (argsStr.trim().length > 0) {
+              try {
+                args = JSON.parse(argsStr);
+              } catch (parseError) {
+                console.error(`[chatStream] Failed to parse tool arguments for ${toolCall.function.name}:`, parseError);
+                console.error(`[chatStream] Arguments were:`, argsStr);
+              }
+            }
+            yield {
+              type: 'tool_call',
+              name: toolCall.function.name,
+              arguments: args,
+            };
+          }
+        } else {
+          console.log(`[chatStream] No tool_calls found in JSON content`);
+        }
       }
 
       // Handle tool calls if any
@@ -1909,6 +1934,55 @@ Use this relevant knowledge to inform your responses, but prioritize the current
 
     // Return content as-is if no JSON found
     return content;
+  }
+
+  /**
+   * Parse tool calls from JSON content
+   * The model may output JSON with embedded tool_calls instead of using native API calls
+   */
+  private parseToolCallsFromContent(content: string): ToolCall[] {
+    try {
+      // Find JSON block in content (code-fenced)
+      const jsonMatch = content.match(/```json\s*([\s\S]*?)\s*```/);
+      if (!jsonMatch) {
+        // Try naked JSON
+        const nakedJsonMatch = content.match(/\{[\s\S]*"tool_calls"\s*:\s*\[[\s\S]*\][\s\S]*\}/);
+        if (!nakedJsonMatch) {
+          return [];
+        }
+
+        const parsed = JSON.parse(nakedJsonMatch[0]);
+        if (parsed.tool_calls && Array.isArray(parsed.tool_calls)) {
+          return parsed.tool_calls.map((tc: any, index: number) => ({
+            id: `parsed_tool_${Date.now()}_${index}`,
+            type: 'function' as const,
+            function: {
+              name: tc.name,
+              arguments: JSON.stringify(tc.arguments || {}),
+            },
+          }));
+        }
+        return [];
+      }
+
+      const jsonStr = jsonMatch[1];
+      const parsed = JSON.parse(jsonStr);
+
+      if (parsed.tool_calls && Array.isArray(parsed.tool_calls)) {
+        return parsed.tool_calls.map((tc: any, index: number) => ({
+          id: `parsed_tool_${Date.now()}_${index}`,
+          type: 'function' as const,
+          function: {
+            name: tc.name,
+            arguments: JSON.stringify(tc.arguments || {}),
+          },
+        }));
+      }
+      return [];
+    } catch (e) {
+      console.log('[chatStream] Failed to parse tool calls from content:', e);
+      return [];
+    }
   }
 
   /**

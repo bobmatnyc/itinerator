@@ -876,36 +876,64 @@ Do NOT just say "that sounds good" or "I like that" - you must EXPLICITLY REQUES
   }
 
   /**
-   * Get itinerary details via API
+   * Get itinerary details via API with retry logic for eventual consistency
    */
-  private async getItinerary(): Promise<Itinerary> {
+  private async getItinerary(retries = 3, delayMs = 1000): Promise<Itinerary> {
     if (!this.itineraryId) {
       throw new Error('No itinerary ID');
     }
 
-    let response = await fetch(`${this.apiBaseUrl}/itineraries/${this.itineraryId}`, {
-      headers: this.getHeaders()
-    });
+    let lastError: Error | null = null;
 
-    // Retry once on 403 with fresh authentication
-    if (response.status === 403) {
-      console.log('🔄 Session expired, re-authenticating...');
-      await this.authenticate();
-      response = await fetch(`${this.apiBaseUrl}/itineraries/${this.itineraryId}`, {
-        headers: this.getHeaders()
-      });
-    }
+    for (let attempt = 0; attempt < retries; attempt++) {
+      try {
+        let response = await fetch(`${this.apiBaseUrl}/itineraries/${this.itineraryId}`, {
+          headers: this.getHeaders()
+        });
 
-    if (!response.ok) {
-      const error = await response.text();
-      if (this.verbose) {
-        console.error(`❌ Failed to get itinerary: ${response.status}`);
-        console.error(`Response: ${error}`);
+        // Retry once on 403 with fresh authentication
+        if (response.status === 403) {
+          console.log('🔄 Session expired, re-authenticating...');
+          await this.authenticate();
+          response = await fetch(`${this.apiBaseUrl}/itineraries/${this.itineraryId}`, {
+            headers: this.getHeaders()
+          });
+        }
+
+        if (!response.ok) {
+          const error = await response.text();
+          if (this.verbose) {
+            console.error(`❌ Failed to get itinerary (attempt ${attempt + 1}/${retries}): ${response.status}`);
+            console.error(`Response: ${error}`);
+          }
+          throw new Error(`Failed to get itinerary: ${response.status} ${error}`);
+        }
+
+        const itinerary = await response.json();
+
+        // If this is a retry and we got a valid response, log success
+        if (attempt > 0 && this.verbose) {
+          console.log(`✅ Successfully retrieved itinerary on attempt ${attempt + 1}`);
+        }
+
+        return itinerary;
+      } catch (error) {
+        lastError = error instanceof Error ? error : new Error(String(error));
+
+        // If we have retries left, wait before trying again
+        if (attempt < retries - 1) {
+          if (this.verbose) {
+            console.log(`⏳ Waiting ${delayMs}ms before retry ${attempt + 2}/${retries}...`);
+          }
+          await new Promise(resolve => setTimeout(resolve, delayMs));
+          // Exponential backoff
+          delayMs *= 1.5;
+        }
       }
-      throw new Error(`Failed to get itinerary: ${response.status} ${error}`);
     }
 
-    return await response.json();
+    // All retries exhausted
+    throw lastError || new Error('Failed to get itinerary after all retries');
   }
 
   /**
@@ -1005,10 +1033,16 @@ Do NOT just say "that sounds good" or "I like that" - you must EXPLICITLY REQUES
       }
 
       // 5. Get final itinerary
-      itinerary = await this.getItinerary();
+      // Wait for storage to complete any pending writes
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
-      // 6. Validate itinerary
-      const validation = this.validateItinerary(itinerary);
+      // Reload itinerary from API to get latest state with all segments
+      // This ensures we're not validating against a stale cached object
+      const finalItinerary = await this.getItinerary();
+      itinerary = finalItinerary;
+
+      // 6. Validate itinerary using fresh data
+      const validation = this.validateItinerary(finalItinerary);
 
       const duration = Date.now() - this.startTime;
 
