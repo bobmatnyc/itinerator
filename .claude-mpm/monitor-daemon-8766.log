@@ -1,0 +1,56 @@
+✓ Found existing .claude-mpm/ directory in /Users/masa/Projects/itinerizer-ts
+
+[36m╭─── Claude MPM v5.4.28 ───────────────────────────────────────────────────────────────────────────╮[0m
+│                         │ Recent activity                                                        │
+│   Welcome back masa!    │ 0d8d542 • 17 hours ago • fix: update to Claude 3.5 Haiku (Claude 3...  │
+│                         │ 1497d13 • 18 hours ago • feat: update models based on evaluation r...  │
+│                         │ 795a77f • 18 hours ago • feat: add comprehensive E2E testing frame...  │
+│                         │ ───────────────────────────────────────────────────────────────────────│
+│     [36m▐▛███▜▌ ▐▛███▜▌[0m     │ What's new                                                             │
+│   [36m▝▜█████▛▘▝▜█████▛▘[0m    │ No changelog available                                                 │
+│     [36m▘▘ ▝▝    ▘▘ ▝▝[0m      │                                                                        │
+│                         │ /mpm-help for more                                                     │
+│ Sonnet 4.5 · Claude MPM │ ───────────────────────────────────────────────────────────────────────│
+│ ...ojects/itinerizer-ts │ MPM Commands                                                           │
+│                         │   /mpm        - MPM overview                                           │
+│                         │   /mpm-agents - Show agents                                            │
+│                         │   /mpm-doctor - Run diagnostics                                        │
+│                         │                                                                        │
+│                         │ Type / for autocomplete                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Syncing Claude Code hooks... ✓
+                              Syncing agents 49/49 (100%) - universal/research.md
+✓ Agents: 43 deployed / 42 cached
+Syncing skill files 1/461 (0%)
+Syncing skill files 346/461 (75%)
+Syncing skill files 461/461 (100%)
+Deploying skill directories 119/119 (100%)
+✓ Runtime skills linked
+✓ Output styles ready
+Launching Claude: Ready
+⏳ Starting Claude Code... (this may take a few seconds)
+Server initialized for aiohttp.
+2025-12-23 16:22:24 - engineio.server - INFO - Server initialized for aiohttp.
+tNwKWOOQhRlBT1pzAAAA: Sending packet OPEN data {'sid': 'tNwKWOOQhRlBT1pzAAAA', 'upgrades': ['websocket'], 'pingTimeout': 60000, 'pingInterval': 30000, 'maxPayload': 1000000}
+2025-12-23 16:22:25 - engineio.server - INFO - tNwKWOOQhRlBT1pzAAAA: Sending packet OPEN data {'sid': 'tNwKWOOQhRlBT1pzAAAA', 'upgrades': ['websocket'], 'pingTimeout': 60000, 'pingInterval': 30000, 'maxPayload': 1000000}
+tNwKWOOQhRlBT1pzAAAA: Received request to upgrade to websocket
+2025-12-23 16:22:25 - engineio.server - INFO - tNwKWOOQhRlBT1pzAAAA: Received request to upgrade to websocket
+tNwKWOOQhRlBT1pzAAAA: Upgrade to websocket successful
+2025-12-23 16:22:25 - engineio.server - INFO - tNwKWOOQhRlBT1pzAAAA: Upgrade to websocket successful
+tNwKWOOQhRlBT1pzAAAA: Received packet MESSAGE data 0{}
+2025-12-23 16:22:25 - engineio.server - INFO - tNwKWOOQhRlBT1pzAAAA: Received packet MESSAGE data 0{}
+emitting event "dashboard:welcome" to TEch90X4-24ZW7zVAAAB [/]
+2025-12-23 16:22:25 - socketio.server - INFO - emitting event "dashboard:welcome" to TEch90X4-24ZW7zVAAAB [/]
+tNwKWOOQhRlBT1pzAAAA: Sending packet MESSAGE data 2["dashboard:welcome",{"message":"Connected to Claude MPM Unified Monitor","session_id":"TEch90X4-24ZW7zVAAAB","server_info":{"service":"unified-monitor","version":"1.0.0"}}]
+2025-12-23 16:22:25 - engineio.server - INFO - tNwKWOOQhRlBT1pzAAAA: Sending packet MESSAGE data 2["dashboard:welcome",{"message":"Connected to Claude MPM Unified Monitor","session_id":"TEch90X4-24ZW7zVAAAB","server_info":{"service":"unified-monitor","version":"1.0.0"}}]
+emitting event "dashboard:client:count" to all [/]
+2025-12-23 16:22:25 - socketio.server - INFO - emitting event "dashboard:client:count" to all [/]
+tNwKWOOQhRlBT1pzAAAA: Sending packet MESSAGE data 2["dashboard:client:count",{"count":1}]
+2025-12-23 16:22:25 - engineio.server - INFO - tNwKWOOQhRlBT1pzAAAA: Sending packet MESSAGE data 2["dashboard:client:count",{"count":1}]
+tNwKWOOQhRlBT1pzAAAA: Sending packet MESSAGE data 0{"sid":"TEch90X4-24ZW7zVAAAB"}
+2025-12-23 16:22:25 - engineio.server - INFO - tNwKWOOQhRlBT1pzAAAA: Sending packet MESSAGE data 0{"sid":"TEch90X4-24ZW7zVAAAB"}
+emitting event "dashboard:client:count" to all [/]
+2025-12-23 16:22:26 - socketio.server - INFO - emitting event "dashboard:client:count" to all [/]
+tNwKWOOQhRlBT1pzAAAA: Sending packet MESSAGE data 2["dashboard:client:count",{"count":0}]
+2025-12-23 16:22:26 - engineio.server - INFO - tNwKWOOQhRlBT1pzAAAA: Sending packet MESSAGE data 2["dashboard:client:count",{"count":0}]

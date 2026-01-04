@@ -34,7 +34,11 @@ Thumbs.db
 *.swp
 *.swo
 *~
-.claude/
+
+# Claude Code - track agent configs, ignore cache/sessions
+.claude/cache/
+.claude/sessions/
+.claude/settings.local.json
 
 # Logs
 logs/
@@ -81,14 +85,7 @@ $RECYCLE.BIN/
 *.sublime-workspace
 *.temp
 .Python
-.claude-mpm/*.log
-.claude-mpm/cache/
-.claude-mpm/logs/
-.claude-mpm/sessions/
-.claude-mpm/tmp/
 .claude.json
-.claude/cache/
-.claude/sessions/
 .conda/
 .coverage
 .coverage.*
@@ -136,9 +133,12 @@ venv/
 virtualenv/
 wheels/
 
-# Claude MPM - ignore except memories (agents deployed at runtime)
-.claude-mpm/*
-!.claude-mpm/memories/
+# Claude MPM - track configs and memories, ignore runtime files
+.claude-mpm/cache/
+.claude-mpm/logs/
+.claude-mpm/sessions/
+.claude-mpm/tmp/
+.claude-mpm/*.log
 
 # Large files
 *.pdf
