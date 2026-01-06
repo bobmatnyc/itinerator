@@ -14,6 +14,7 @@
   import { modal } from '$lib/stores/modal.svelte';
   import Header from '$lib/components/Header.svelte';
   import ItineraryListItem from '$lib/components/ItineraryListItem.svelte';
+  import { Notebook, MapTrifold } from 'phosphor-svelte';
 
   let { children }: { children?: Snippet } = $props();
 
@@ -120,7 +121,9 @@
             </div>
           {:else if $itineraries.length === 0}
             <div class="empty-state">
-              <div class="empty-state-icon">📋</div>
+              <div class="empty-state-icon">
+                <Notebook size={48} weight="duotone" class="text-gray-400" />
+              </div>
               <p class="text-minimal-text mb-2 font-semibold">No itineraries yet</p>
               <p class="text-minimal-text-muted mb-4 text-sm">Start planning your next adventure!</p>
               <button
@@ -150,7 +153,9 @@
       <!-- RIGHT PANE: Detail View (slot content) -->
       <div class="detail-pane">
         <div class="empty-detail-state">
-          <div class="empty-detail-icon">🗺️</div>
+          <div class="empty-detail-icon">
+            <MapTrifold size={48} weight="duotone" class="text-gray-400" />
+          </div>
           <p class="text-minimal-text mb-2 font-semibold">Select an itinerary</p>
           <p class="text-minimal-text-muted text-sm">Choose from the list to view details</p>
         </div>
@@ -225,7 +230,8 @@
   }
 
   .empty-state-icon {
-    font-size: 3rem;
+    display: flex;
+    justify-content: center;
     margin-bottom: 1rem;
   }
 
@@ -240,7 +246,8 @@
   }
 
   .empty-detail-icon {
-    font-size: 3rem;
+    display: flex;
+    justify-content: center;
     margin-bottom: 1rem;
   }
 

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { Airplane, MapPin, Calendar, Users, CurrencyDollar, Star, Lightbulb, ArrowLeft } from 'phosphor-svelte';
+
   // New Trip Helper View - shown when creating a new trip with no segments yet
 
   interface Props {
@@ -71,7 +73,9 @@
   <div class="helper-content">
     <!-- Header -->
     <div class="header-section">
-      <div class="header-icon">✈️</div>
+      <div class="header-icon">
+        <Airplane size={48} weight="duotone" class="animate-float" />
+      </div>
       <h1 class="header-title">Let's Plan Your Trip!</h1>
       <p class="header-subtitle">I'll ask you a few questions to create the perfect itinerary</p>
     </div>
@@ -82,7 +86,9 @@
       <p class="info-subtitle">Click any item to start planning</p>
       <div class="checklist">
         <button class="checklist-item" onclick={() => handleItemClick(prompts.destination)} type="button">
-          <div class="checklist-icon">📍</div>
+          <div class="checklist-icon">
+            <MapPin size={24} weight="duotone" class="text-blue-600" />
+          </div>
           <div class="checklist-content">
             <div class="checklist-label">Destination</div>
             <div class="checklist-description">Where you want to go</div>
@@ -90,7 +96,9 @@
         </button>
 
         <button class="checklist-item" onclick={() => handleItemClick(prompts.dates)} type="button">
-          <div class="checklist-icon">📅</div>
+          <div class="checklist-icon">
+            <Calendar size={24} weight="duotone" class="text-green-600" />
+          </div>
           <div class="checklist-content">
             <div class="checklist-label">Dates</div>
             <div class="checklist-description">When you're traveling</div>
@@ -98,7 +106,9 @@
         </button>
 
         <button class="checklist-item" onclick={() => handleItemClick(prompts.travelers)} type="button">
-          <div class="checklist-icon">👥</div>
+          <div class="checklist-icon">
+            <Users size={24} weight="duotone" class="text-purple-600" />
+          </div>
           <div class="checklist-content">
             <div class="checklist-label">Who's Traveling</div>
             <div class="checklist-description">Solo, couple, family, or group</div>
@@ -106,7 +116,9 @@
         </button>
 
         <button class="checklist-item" onclick={() => handleItemClick(prompts.budget)} type="button">
-          <div class="checklist-icon">💰</div>
+          <div class="checklist-icon">
+            <CurrencyDollar size={24} weight="duotone" class="text-yellow-600" />
+          </div>
           <div class="checklist-content">
             <div class="checklist-label">Budget & Style</div>
             <div class="checklist-description">Your travel preferences</div>
@@ -114,7 +126,9 @@
         </button>
 
         <button class="checklist-item" onclick={() => handleItemClick(prompts.interests)} type="button">
-          <div class="checklist-icon">⭐</div>
+          <div class="checklist-icon">
+            <Star size={24} weight="duotone" class="text-orange-600" />
+          </div>
           <div class="checklist-content">
             <div class="checklist-label">Interests & Activities</div>
             <div class="checklist-description">What you want to experience</div>
@@ -125,7 +139,9 @@
 
     <!-- Tip -->
     <div class="tip-section">
-      <div class="tip-icon">💡</div>
+      <div class="tip-icon">
+        <Lightbulb size={20} weight="duotone" class="text-yellow-600" />
+      </div>
       <p class="tip-text">
         <strong>Tip:</strong> Answer in the chat panel on the left, or use the quick-select options I provide.
         Feel free to share as much or as little detail as you'd like!
@@ -134,7 +150,9 @@
 
     <!-- Getting Started -->
     <div class="cta-section">
-      <div class="cta-icon">👈</div>
+      <div class="cta-icon">
+        <ArrowLeft size={24} weight="bold" class="text-blue-600 animate-point-left" />
+      </div>
       <p class="cta-text">Ready to start? Look at the chat panel on the left to begin!</p>
     </div>
   </div>
@@ -213,8 +231,12 @@
   }
 
   .header-icon {
-    font-size: 3rem;
+    display: flex;
+    justify-content: center;
     margin-bottom: 0.5rem;
+  }
+
+  :global(.animate-float) {
     animation: float 3s ease-in-out infinite;
   }
 
@@ -296,7 +318,9 @@
   }
 
   .checklist-icon {
-    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
   }
 
@@ -332,7 +356,8 @@
   }
 
   .tip-icon {
-    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
     flex-shrink: 0;
   }
 
@@ -371,7 +396,11 @@
   }
 
   .cta-icon {
-    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+  }
+
+  :global(.animate-point-left) {
     animation: pointLeft 1.5s ease-in-out infinite;
   }
 

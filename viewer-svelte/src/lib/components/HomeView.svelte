@@ -2,6 +2,7 @@
   import { authStore } from '$lib/stores/auth.svelte';
   import { itineraries } from '$lib/stores/itineraries.svelte';
   import { hasAIAccess } from '$lib/stores/settings.svelte';
+  import { Tray, Airplane, MapPin, Calendar, FolderOpen, HandWaving, Lightbulb, Beach } from 'phosphor-svelte';
 
   let {
     onQuickPromptClick,
@@ -21,40 +22,40 @@
     return 'there';
   });
 
-  // Action cards
+  // Action cards with Phosphor icons
   const actionCards = [
     {
       id: 'import-itinerary',
       text: 'Import Itinerary',
-      icon: '📥',
+      icon: Tray,
       description: 'Upload PDF, ICS, or image files',
       isImport: true
     },
     {
       id: 'weekend-getaway',
       text: 'Plan a weekend getaway',
-      icon: '🏖️',
+      icon: Beach,
       description: 'Create a quick 2-3 day trip',
       isImport: false
     },
     {
       id: 'upcoming-trip',
       text: 'Help me with my upcoming trip',
-      icon: '✈️',
+      icon: Airplane,
       description: 'Get assistance with trip planning',
       isImport: false
     },
     {
       id: 'find-activities',
       text: 'Find activities for my destination',
-      icon: '🎯',
+      icon: MapPin,
       description: 'Discover things to do',
       isImport: false
     },
     {
       id: 'optimize-itinerary',
       text: 'Optimize my travel schedule',
-      icon: '📅',
+      icon: Calendar,
       description: 'Improve your itinerary flow',
       isImport: false
     }
@@ -78,14 +79,14 @@
   <div class="home-content">
     <!-- Welcome Section -->
     <div class="welcome-section">
-      <div class="welcome-icon">👋</div>
+      <div class="welcome-icon"><HandWaving size={64} weight="duotone" /></div>
       <h1 class="welcome-title">Welcome back, {displayName()}!</h1>
       <p class="welcome-subtitle">Ready to plan your next adventure?</p>
     </div>
 
     <!-- Itinerary Summary -->
     <div class="summary-card">
-      <div class="summary-icon">🗂️</div>
+      <div class="summary-icon"><FolderOpen size={48} weight="duotone" /></div>
       <div class="summary-content">
         <div class="summary-number">{$itineraries.length}</div>
         <div class="summary-label">
@@ -110,13 +111,13 @@
             title={!aiAccessAvailable ? 'API key required - visit Profile to add one' : ''}
             type="button"
           >
-            <div class="prompt-icon">{action.icon}</div>
+            <div class="prompt-icon"><svelte:component this={action.icon} size={32} weight="duotone" /></div>
             <div class="prompt-content">
               <div class="prompt-text">{action.text}</div>
               <div class="prompt-description">{action.description}</div>
             </div>
             {#if !aiAccessAvailable}
-              <div class="prompt-lock-icon">🔒</div>
+              <div class="prompt-lock-icon"><svelte:component this={action.icon} size={14} weight="fill" /></div>
             {/if}
           </button>
         {/each}
@@ -125,7 +126,7 @@
 
     <!-- Help Section -->
     <div class="help-section">
-      <div class="help-icon">💡</div>
+      <div class="help-icon"><Lightbulb size={24} weight="duotone" /></div>
       <p class="help-text">
         New to Itinerizer? Check out our <a href="/help" class="help-link">Help & Documentation</a> to learn more.
       </p>
@@ -163,21 +164,11 @@
   }
 
   .welcome-icon {
-    font-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 1rem;
-    animation: wave 2s ease-in-out infinite;
-  }
-
-  @keyframes wave {
-    0%, 100% {
-      transform: rotate(0deg);
-    }
-    25% {
-      transform: rotate(20deg);
-    }
-    75% {
-      transform: rotate(-20deg);
-    }
+    color: #3b82f6;
   }
 
   .welcome-title {
@@ -206,7 +197,10 @@
   }
 
   .summary-icon {
-    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3b82f6;
   }
 
   .summary-content {
@@ -304,8 +298,11 @@
   }
 
   .prompt-icon {
-    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
+    color: #6b7280;
   }
 
   .prompt-content {
@@ -339,7 +336,10 @@
   }
 
   .help-icon {
-    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3b82f6;
   }
 
   .help-text {

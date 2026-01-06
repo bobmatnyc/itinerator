@@ -7,6 +7,7 @@
   import type { CurrencyCode } from '$lib/types/currency';
   import { validateSegmentTime, applyTimeFix } from '$lib/types/time-validator';
   import type { TimeValidationResult } from '$lib/types/time-validator';
+  import { Airplane, Buildings, MapPin, Car, Calendar, ForkKnife, MoonStars, SunHorizon, FileText, Robot, PencilSimple, Note } from 'phosphor-svelte';
 
   // Extended segment type for hotel night tracking
   type ExpandedSegment = Segment & {
@@ -95,36 +96,36 @@
     });
   }
 
-  // Get emoji icon for segment type
-  function getSegmentIcon(type: string): string {
-    const icons: Record<string, string> = {
-      'RESTAURANT': '🍽️',
-      'DINING': '🍽️',
-      'ACTIVITY': '🎯',
-      'ATTRACTION': '🏛️',
-      'TOUR': '🎫',
-      'HOTEL': '🏨',
-      'ACCOMMODATION': '🏨',
-      'FLIGHT': '✈️',
-      'TRANSFER': '🚗',
-      'CAR_RENTAL': '🚙',
-      'MEETING': '📅',
-      'CUSTOM': '📌'
+  // Get Phosphor icon component for segment type
+  function getSegmentIcon(type: string) {
+    const icons: Record<string, any> = {
+      'RESTAURANT': ForkKnife,
+      'DINING': ForkKnife,
+      'ACTIVITY': MapPin,
+      'ATTRACTION': Buildings,
+      'TOUR': MapPin,
+      'HOTEL': Buildings,
+      'ACCOMMODATION': Buildings,
+      'FLIGHT': Airplane,
+      'TRANSFER': Car,
+      'CAR_RENTAL': Car,
+      'MEETING': Calendar,
+      'CUSTOM': Note
     };
-    return icons[type] || '📍';
+    return icons[type] || MapPin;
   }
 
-  // Get source label and icon
-  function getSourceLabel(source: SegmentSource): { icon: string; text: string } {
+  // Get source label and icon component
+  function getSourceLabel(source: SegmentSource): { icon: any; text: string } {
     switch (source) {
       case 'import':
-        return { icon: '📄', text: 'Imported' };
+        return { icon: FileText, text: 'Imported' };
       case 'agent':
-        return { icon: '🤖', text: 'Auto-generated' };
+        return { icon: Robot, text: 'Auto-generated' };
       case 'manual':
-        return { icon: '✏️', text: 'User added' };
+        return { icon: PencilSimple, text: 'User added' };
       default:
-        return { icon: '📌', text: source };
+        return { icon: Note, text: source };
     }
   }
 
@@ -233,7 +234,7 @@
   {/if}
   <!-- Title with icon and edit controls -->
   <div class="flex items-start gap-3">
-    <span class="text-2xl">{getSegmentIcon(segment.type)}</span>
+    <span class="segment-icon-wrapper"><svelte:component this={getSegmentIcon(segment.type)} size={32} weight="duotone" /></span>
     <div class="flex-1 min-w-0">
       <h4 class="font-medium text-minimal-text">
         {getSegmentTitle(segment)}
@@ -291,7 +292,7 @@
     {/if}
     <span class="text-gray-300">·</span>
     <span class="inline-flex items-center gap-1 text-xs">
-      <span>{getSourceLabel(segment.source).icon}</span>
+      <svelte:component this={getSourceLabel(segment.source).icon} size={14} weight="regular" />
       <span>{getSourceLabel(segment.source).text}</span>
     </span>
 
@@ -392,6 +393,13 @@
 
   .hidden {
     display: none;
+  }
+
+  .segment-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
   }
 
   .edit-icon-button,

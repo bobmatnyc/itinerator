@@ -2,6 +2,7 @@
   import { goto } from '$app/navigation';
   import { createItinerary } from '$lib/stores/itineraries.svelte';
   import { toast } from '$lib/stores/toast.svelte';
+  import { Airplane } from 'phosphor-svelte';
 
   let creating = $state(false);
 
@@ -32,7 +33,9 @@
 
 <div class="welcome-container">
   <div class="welcome-content">
-    <div class="welcome-icon">✈️</div>
+    <div class="welcome-icon">
+      <Airplane size={64} weight="duotone" class="text-blue-600" />
+    </div>
     <h2 class="welcome-title">Select an itinerary</h2>
     <p class="welcome-text">
       Choose an itinerary from the list to view details, edit, or chat with the AI assistant.
@@ -66,7 +69,8 @@
   }
 
   .welcome-icon {
-    font-size: 4rem;
+    display: flex;
+    justify-content: center;
     margin-bottom: 1.5rem;
   }
 

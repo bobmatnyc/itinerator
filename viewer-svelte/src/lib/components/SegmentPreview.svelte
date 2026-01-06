@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { ExtractedSegment } from '$lib/types';
+  import { Airplane, House, Target, Car, Note } from 'phosphor-svelte';
 
   let { segments }: { segments: ExtractedSegment[] } = $props();
 
@@ -14,15 +15,15 @@
     });
   }
 
-  function getSegmentIcon(type: string): string {
-    const icons: Record<string, string> = {
-      FLIGHT: '✈️',
-      HOTEL: '🏨',
-      ACTIVITY: '🎯',
-      TRANSFER: '🚗',
-      CUSTOM: '📝'
+  function getSegmentIcon(type: string): typeof Airplane {
+    const icons: Record<string, typeof Airplane> = {
+      FLIGHT: Airplane,
+      HOTEL: House,
+      ACTIVITY: Target,
+      TRANSFER: Car,
+      CUSTOM: Note
     };
-    return icons[type] || '📝';
+    return icons[type] || Note;
   }
 
   function getSegmentTitle(segment: ExtractedSegment): string {
@@ -83,9 +84,12 @@
     <div class="segment-list">
       {#each segments as segment, i (i)}
         {@const badge = getConfidenceBadge(segment.confidence)}
+        {@const IconComponent = getSegmentIcon(segment.type)}
         <div class="segment-item">
           <div class="segment-header">
-            <span class="segment-icon">{getSegmentIcon(segment.type)}</span>
+            <span class="segment-icon">
+              <svelte:component this={IconComponent} size={24} weight="duotone" class="text-blue-600" />
+            </span>
             <div class="segment-info">
               <div class="segment-title-row">
                 <h4 class="segment-title">{getSegmentTitle(segment)}</h4>
@@ -163,8 +167,9 @@
   }
 
   .segment-icon {
-    font-size: 1.5rem;
-    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
   }
 

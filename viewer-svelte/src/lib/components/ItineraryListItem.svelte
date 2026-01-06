@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { ItineraryListItem } from '$lib/types';
+  import { Trash } from 'phosphor-svelte';
 
   let {
     itinerary,
@@ -103,7 +104,7 @@
         type="button"
         aria-label="Delete {getTitle()}"
       >
-        🗑️
+        <Trash size={16} weight="regular" class="text-red-600" />
       </button>
     {/if}
   </div>

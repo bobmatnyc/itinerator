@@ -26,6 +26,7 @@
   import type { StructuredQuestion } from '../types';
   import QuickResponses from './QuickResponses.svelte';
   import { generateQuickResponses, shouldShowQuickResponses } from '../utils/quick-responses';
+  import { Key, Calendar, Sparkle, Check, MagnifyingGlass, PencilSimple, Wrench, ArrowClockwise, CalendarBlank, Trash, X } from 'phosphor-svelte';
 
   /**
    * Agent configuration
@@ -722,7 +723,7 @@
 <div class="chatpanel">
   {#if !aiAccessAvailable}
     <div class="chatpanel-no-access">
-      <div class="chatpanel-no-access-icon">🔑</div>
+      <div class="chatpanel-no-access-icon"><Key size={48} weight="duotone" /></div>
       <p class="chatpanel-no-access-text">AI features require an API key</p>
       <p class="chatpanel-no-access-hint">
         Add your OpenRouter API key in <a href="/profile" class="chatpanel-profile-link">Profile settings</a> to enable Trip Designer and other AI-powered features.
@@ -737,14 +738,14 @@
 
   {#if showUpdatingIndicator}
     <div class="chatpanel-updating-banner">
-      <div class="chatpanel-updating-icon">✨</div>
+      <div class="chatpanel-updating-icon"><Sparkle size={16} weight="fill" /></div>
       <span>Updating itinerary...</span>
     </div>
   {/if}
 
   {#if showUpdateSuccess}
     <div class="chatpanel-success-toast">
-      <div class="chatpanel-success-icon">✓</div>
+      <div class="chatpanel-success-icon"><Check size={16} weight="bold" /></div>
       <span>Itinerary updated!</span>
     </div>
   {/if}
@@ -799,11 +800,11 @@
           <div class="chatpanel-suspense">
             <div class="chatpanel-suspense-icon">
               {#if $currentToolCall.includes('search')}
-                🔍
+                <MagnifyingGlass size={20} weight="duotone" />
               {:else if $currentToolCall.includes('update') || $currentToolCall.includes('add')}
-                ✏️
+                <PencilSimple size={20} weight="duotone" />
               {:else}
-                🔧
+                <Wrench size={20} weight="duotone" />
               {/if}
             </div>
             <div class="chatpanel-suspense-content">
@@ -980,7 +981,7 @@
   {#if showPastDatesQuestion && pastDatesInfo}
     <div class="chatpanel-past-dates-overlay">
       <div class="chatpanel-past-dates-card">
-        <div class="chatpanel-past-dates-icon">📅</div>
+        <div class="chatpanel-past-dates-icon"><Calendar size={40} weight="duotone" /></div>
         <div class="chatpanel-past-dates-title">Trip Dates Are in the Past</div>
         <div class="chatpanel-past-dates-message">
           This itinerary is scheduled for <strong>{pastDatesInfo.currentStart}</strong> to <strong>{pastDatesInfo.currentEnd}</strong>, which has already passed.
@@ -1009,7 +1010,7 @@
                 <span class="button-detail">Please wait</span>
               </span>
             {:else}
-              <span class="button-icon">🔄</span>
+              <span class="button-icon"><ArrowClockwise size={20} weight="bold" /></span>
               <span class="button-text">
                 <span class="button-label">Update to Next Year</span>
                 <span class="button-detail">{pastDatesInfo.nextStart} – {pastDatesInfo.nextEnd}</span>
@@ -1022,7 +1023,7 @@
             disabled={isUpdatingDates}
             type="button"
           >
-            <span class="button-icon">📆</span>
+            <span class="button-icon"><CalendarBlank size={20} weight="regular" /></span>
             <span class="button-text">
               <span class="button-label">Choose Different Dates</span>
               <span class="button-detail">I'll help you pick new dates</span>
@@ -1034,7 +1035,7 @@
             disabled={isUpdatingDates}
             type="button"
           >
-            <span class="button-icon">❌</span>
+            <span class="button-icon"><X size={20} weight="bold" /></span>
             <span class="button-text">
               <span class="button-label">Cancel Planning</span>
               <span class="button-detail">Exit without changes</span>
@@ -1086,7 +1087,7 @@
         type="button"
         title="Clear conversation"
       >
-        🗑️
+        <Trash size={18} weight="regular" />
       </button>
 
       <textarea

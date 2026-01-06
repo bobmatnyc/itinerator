@@ -2,6 +2,7 @@
   import type { SegmentType, Segment } from '$lib/types';
   import SegmentEditor from './SegmentEditor.svelte';
   import { toast } from '$lib/stores/toast.svelte';
+  import { Airplane, Buildings, MapPin, Car, Note } from 'phosphor-svelte';
 
   let {
     open = $bindable(false),
@@ -85,7 +86,7 @@
               onclick={() => selectType('FLIGHT')}
               type="button"
             >
-              <span class="segment-type-icon">✈️</span>
+              <span class="segment-type-icon"><Airplane size={40} weight="regular" /></span>
               <span class="segment-type-label">Flight</span>
             </button>
 
@@ -94,7 +95,7 @@
               onclick={() => selectType('HOTEL')}
               type="button"
             >
-              <span class="segment-type-icon">🏨</span>
+              <span class="segment-type-icon"><Buildings size={40} weight="regular" /></span>
               <span class="segment-type-label">Hotel</span>
             </button>
 
@@ -103,7 +104,7 @@
               onclick={() => selectType('ACTIVITY')}
               type="button"
             >
-              <span class="segment-type-icon">🎯</span>
+              <span class="segment-type-icon"><MapPin size={40} weight="regular" /></span>
               <span class="segment-type-label">Activity</span>
             </button>
 
@@ -112,7 +113,7 @@
               onclick={() => selectType('TRANSFER')}
               type="button"
             >
-              <span class="segment-type-icon">🚗</span>
+              <span class="segment-type-icon"><Car size={40} weight="regular" /></span>
               <span class="segment-type-label">Transfer</span>
             </button>
 
@@ -121,7 +122,7 @@
               onclick={() => selectType('CUSTOM')}
               type="button"
             >
-              <span class="segment-type-icon">📝</span>
+              <span class="segment-type-icon"><Note size={40} weight="regular" /></span>
               <span class="segment-type-label">Custom</span>
             </button>
           </div>
@@ -233,7 +234,10 @@
   }
 
   .segment-type-icon {
-    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
   }
 
   .segment-type-label {

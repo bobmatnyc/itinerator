@@ -8,6 +8,7 @@
   import ScratchpadPanel from './ScratchpadPanel.svelte';
   import { updateSegment, deleteSegment, addSegment, updateItinerary } from '$lib/stores/itineraries.svelte';
   import { toast } from '$lib/stores/toast.svelte';
+  import { Calendar, Download, Lightbulb, Pencil } from 'phosphor-svelte';
 
   let {
     itinerary,
@@ -424,14 +425,16 @@
             onclick={startEditingMetadata}
             type="button"
           >
-            ✏️ Edit Details
+            <Pencil size={16} weight="regular" class="inline-block mr-1" />
+            Edit Details
           </button>
           <button
             class="minimal-button"
             onclick={() => showImportDialog = true}
             type="button"
           >
-            📥 Import
+            <Download size={16} weight="regular" class="inline-block mr-1" />
+            Import
           </button>
         </div>
         <button
@@ -439,7 +442,8 @@
           onclick={() => scratchpadOpen = true}
           type="button"
         >
-          💡 Recommendations
+          <Lightbulb size={16} weight="regular" class="inline-block mr-1" />
+          Recommendations
           {#if scratchpad.items.length > 0}
             <span class="scratchpad-badge">{scratchpad.items.length}</span>
           {/if}
@@ -569,7 +573,7 @@
         <div>
           <!-- Day header -->
           <div class="flex items-center gap-2 mb-3">
-            <span class="text-lg">📅</span>
+            <Calendar size={18} weight="regular" class="text-minimal-text-muted" />
             <h4 class="text-sm font-semibold text-minimal-text">
               {day.dateDisplay}
             </h4>
