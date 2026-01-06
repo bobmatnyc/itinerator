@@ -30,6 +30,7 @@
   import VisualizationPane from '$lib/components/VisualizationPane.svelte';
   import VisualizationTimeline from '$lib/components/VisualizationTimeline.svelte';
   import type { Itinerary } from '$lib/types';
+  import { List, Calendar, MapTrifold, Users, Notebook } from 'phosphor-svelte';
 
   interface AgentConfig {
     mode: 'trip-designer' | 'help';
@@ -302,11 +303,11 @@
             <MainPane
               title={$selectedItinerary.title}
               tabs={[
-                { id: 'itinerary', label: 'Detail' },
-                { id: 'calendar', label: 'Calendar' },
-                { id: 'map', label: 'Map' },
-                { id: 'travelers', label: 'Travelers' },
-                { id: 'notebook', label: 'Notebook' }
+                { id: 'itinerary', label: 'Detail', icon: List },
+                { id: 'calendar', label: 'Calendar', icon: Calendar },
+                { id: 'map', label: 'Map', icon: MapTrifold },
+                { id: 'travelers', label: 'Travelers', icon: Users },
+                { id: 'notebook', label: 'Notebook', icon: Notebook }
               ]}
               activeTab={navigationStore.detailTab}
               onTabChange={(tab) => navigationStore.setDetailTab(tab as any)}

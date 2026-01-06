@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte';
+  import type { Snippet, Component } from 'svelte';
 
   interface SubTab {
     id: string;
     label: string;
-    icon?: string;
+    icon?: Component;
   }
 
   interface Props {
@@ -55,7 +55,8 @@
               type="button"
             >
               {#if tab.icon}
-                <span class="tab-icon">{tab.icon}</span>
+                {@const IconComponent = tab.icon}
+                <IconComponent size={16} weight="regular" />
               {/if}
               {tab.label}
             </button>

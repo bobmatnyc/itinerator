@@ -373,10 +373,18 @@
           timeZone: 'UTC',
         });
 
-        return {
-          date: dateKey,
-          dateDisplay,
-          segments: segments.sort((a, b) => {
+        // Debug: Log segments before sorting
+        if (typeof window !== 'undefined') {
+          console.log(`[DEBUG] Segments for ${dateKey} BEFORE sort:`, segments.map(s => ({
+            name: 'name' in s ? s.name : s.type,
+            startDatetime: s.startDatetime,
+            parsed: new Date(s.startDatetime).toLocaleString(),
+            timestamp: new Date(s.startDatetime).getTime()
+          })));
+        }
+
+        // Use spread to avoid mutating original array (important for Svelte reactivity)
+        const sortedSegments = [...segments].sort((a, b) => {
             // Hotels/accommodations should always be last for the day (unless it's a checkout)
             const aIsStay = (a.type === 'HOTEL' || a.type === 'ACCOMMODATION') && !a._hotelNightInfo?.isCheckout;
             const bIsStay = (b.type === 'HOTEL' || b.type === 'ACCOMMODATION') && !b._hotelNightInfo?.isCheckout;
@@ -394,7 +402,22 @@
             if (isNaN(bTime)) return -1;
 
             return aTime - bTime;
-          }),
+          });
+
+        // Debug: Log segments after sorting
+        if (typeof window !== 'undefined') {
+          console.log(`[DEBUG] Segments for ${dateKey} AFTER sort:`, sortedSegments.map(s => ({
+            name: 'name' in s ? s.name : s.type,
+            startDatetime: s.startDatetime,
+            parsed: new Date(s.startDatetime).toLocaleString(),
+            timestamp: new Date(s.startDatetime).getTime()
+          })));
+        }
+
+        return {
+          date: dateKey,
+          dateDisplay,
+          segments: sortedSegments,
         };
       })
       .sort((a, b) => a.date.localeCompare(b.date));
@@ -409,7 +432,7 @@
       destination={destinationName}
       imageCount={5}
       interval={8000}
-      opacity={0.15}
+      opacity={0.75}
     />
   {/if}
 
