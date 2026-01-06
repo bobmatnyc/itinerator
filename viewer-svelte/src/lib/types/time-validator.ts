@@ -1,6 +1,6 @@
 /**
  * Time validation types for viewer
- * Re-exports from core library
+ * Re-exports from local utils
  */
 
 export {
@@ -11,4 +11,4 @@ export {
   validateItineraryTimes,
   getTimeValidationSummary,
   applyTimeFix
-} from 'itinerator';
+} from '$lib/utils/time-validator';

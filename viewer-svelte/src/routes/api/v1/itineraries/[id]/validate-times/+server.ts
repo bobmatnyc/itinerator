@@ -6,17 +6,16 @@
 
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { getItineraryService } from '$lib/server/services';
-import { validateItineraryTimes, getTimeValidationSummary, applyTimeFix } from 'itinerator';
-import type { SegmentId, Segment } from 'itinerator';
+import { validateItineraryTimes, getTimeValidationSummary, applyTimeFix } from '$lib/utils/time-validator';
+import type { Segment } from '$lib/types';
 
 /**
  * GET /api/v1/itineraries/[id]/validate-times
  * Validate all segment times in an itinerary
  */
-export const GET: RequestHandler = async ({ params }) => {
+export const GET: RequestHandler = async ({ params, locals }) => {
   try {
-    const itineraryService = getItineraryService();
+    const { itineraryService } = locals.services;
     const result = await itineraryService.getItinerary(params.id);
 
     if (result.err) {
@@ -51,9 +50,9 @@ export const GET: RequestHandler = async ({ params }) => {
  * Apply suggested time fixes to segments
  * Body: { segmentIds?: string[], applyAll?: boolean }
  */
-export const POST: RequestHandler = async ({ params, request }) => {
+export const POST: RequestHandler = async ({ params, request, locals }) => {
   try {
-    const itineraryService = getItineraryService();
+    const { itineraryService } = locals.services;
     const result = await itineraryService.getItinerary(params.id);
 
     if (result.err) {
@@ -87,7 +86,7 @@ export const POST: RequestHandler = async ({ params, request }) => {
         const fixedSegment = applyTimeFix(issue.segment, issue.validation.suggestedTime);
         const updateResult = await itineraryService.updateSegment(
           params.id,
-          issue.segment.id as SegmentId,
+          issue.segment.id,
           fixedSegment
         );
 
