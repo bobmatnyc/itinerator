@@ -593,6 +593,9 @@
                   editMode={inManualEditMode}
                   onEdit={inManualEditMode ? () => handleEditSegment(segment.id) : undefined}
                   onDelete={inManualEditMode ? () => handleDeleteSegment(segment.id) : undefined}
+                  onTimeFix={async (fixedSegment) => {
+                    await updateSegment(itinerary.id, segment.id, fixedSegment);
+                  }}
                   {targetCurrency}
                 />
               {/if}

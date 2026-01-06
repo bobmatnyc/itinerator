@@ -3,7 +3,10 @@
   import { generateSegmentLinks } from '$lib/utils/segment-links';
   import type { SegmentLink } from '$lib/utils/segment-links';
   import PriceDisplay from './PriceDisplay.svelte';
+  import TimeValidationBadge from './TimeValidationBadge.svelte';
   import type { CurrencyCode } from '$lib/types/currency';
+  import { validateSegmentTime, applyTimeFix } from '$lib/types/time-validator';
+  import type { TimeValidationResult } from '$lib/types/time-validator';
 
   // Extended segment type for hotel night tracking
   type ExpandedSegment = Segment & {
@@ -19,14 +22,19 @@
     editMode = false,
     onEdit,
     onDelete,
+    onTimeFix,
     targetCurrency = 'USD'
   }: {
     segment: ExpandedSegment;
     editMode?: boolean;
     onEdit?: () => void;
     onDelete?: () => void;
+    onTimeFix?: (segment: Segment) => void;
     targetCurrency?: CurrencyCode;
   } = $props();
+
+  // Validate segment time
+  const timeValidation = $derived(validateSegmentTime(segment));
 
   // Get segment title based on type
   function getSegmentTitle(segment: ExpandedSegment): string {
@@ -286,6 +294,20 @@
       <span>{getSourceLabel(segment.source).icon}</span>
       <span>{getSourceLabel(segment.source).text}</span>
     </span>
+
+    <!-- Time validation badge -->
+    {#if !timeValidation.isValid}
+      <span class="text-gray-300">·</span>
+      <TimeValidationBadge
+        validation={timeValidation}
+        onFix={(suggestedTime) => {
+          if (onTimeFix) {
+            const fixedSegment = applyTimeFix(segment, suggestedTime);
+            onTimeFix(fixedSegment);
+          }
+        }}
+      />
+    {/if}
   </div>
 
   <!-- Source details (for agent-generated segments) -->

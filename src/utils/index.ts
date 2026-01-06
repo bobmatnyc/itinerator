@@ -8,4 +8,5 @@ export * from './price-parser.js';
 export * from './price-converter.js';
 export * from './scratchpad.js';
 export * from './segment-links.js';
+export * from './time-validator.js';
 export * from './version.js';
