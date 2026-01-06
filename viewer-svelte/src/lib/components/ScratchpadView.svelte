@@ -4,6 +4,8 @@
   import { getItemsByType } from '$lib/types/scratchpad';
   import { generateSegmentLinks } from '$lib/utils/segment-links';
   import type { SegmentLink } from '$lib/utils/segment-links';
+  import { Airplane, House, Target, Car, Calendar, MapPin, Lightbulb, X } from 'phosphor-svelte';
+  import type { Component } from 'svelte';
 
   let {
     scratchpad,
@@ -26,11 +28,11 @@
   let tabItems = $derived(getItemsByType(scratchpad, activeTab));
 
   // Available segment types
-  const segmentTypes: Array<{ type: Segment['type']; label: string; icon: string }> = [
-    { type: 'FLIGHT', label: 'Flights', icon: '✈️' },
-    { type: 'HOTEL', label: 'Hotels', icon: '🏨' },
-    { type: 'ACTIVITY', label: 'Activities', icon: '🎯' },
-    { type: 'TRANSFER', label: 'Transport', icon: '🚗' }
+  const segmentTypes: Array<{ type: Segment['type']; label: string; icon: Component }> = [
+    { type: 'FLIGHT', label: 'Flights', icon: Airplane },
+    { type: 'HOTEL', label: 'Hotels', icon: House },
+    { type: 'ACTIVITY', label: 'Activities', icon: Target },
+    { type: 'TRANSFER', label: 'Transport', icon: Car }
   ];
 
   // Get segment title based on type
@@ -67,17 +69,17 @@
     }
   }
 
-  // Get emoji icon for segment type
-  function getSegmentIcon(type: string): string {
-    const icons: Record<string, string> = {
-      'FLIGHT': '✈️',
-      'HOTEL': '🏨',
-      'ACTIVITY': '🎯',
-      'TRANSFER': '🚗',
-      'MEETING': '📅',
-      'CUSTOM': '📌'
+  // Get icon component for segment type
+  function getSegmentIconComponent(type: string): Component {
+    const icons: Record<string, Component> = {
+      'FLIGHT': Airplane,
+      'HOTEL': House,
+      'ACTIVITY': Target,
+      'TRANSFER': Car,
+      'MEETING': Calendar,
+      'CUSTOM': MapPin
     };
-    return icons[type] || '📍';
+    return icons[type] || MapPin;
   }
 
   // Get priority badge classes
@@ -152,7 +154,7 @@
 <div class="scratchpad-view space-y-4">
   <!-- Tab navigation -->
   <div class="flex gap-2 border-b border-gray-200">
-    {#each segmentTypes as { type, label, icon }}
+    {#each segmentTypes as { type, label, icon: IconComponent }}
       {@const count = scratchpad.items.filter((item) => item.segment.type === type).length}
       <button
         class="tab-button"
@@ -160,7 +162,7 @@
         onclick={() => (activeTab = type)}
         type="button"
       >
-        <span class="text-lg">{icon}</span>
+        <IconComponent size={20} />
         <span>{label}</span>
         {#if count > 0}
           <span class="count-badge">{count}</span>
@@ -172,16 +174,22 @@
   <!-- Items list -->
   <div class="items-container space-y-3">
     {#if tabItems.length === 0}
+      {@const ActiveIcon = segmentTypes.find((t) => t.type === activeTab)?.icon}
       <div class="empty-state minimal-card p-8 text-center">
-        <div class="text-4xl mb-2">{segmentTypes.find((t) => t.type === activeTab)?.icon}</div>
+        <div class="mb-2">
+          {#if ActiveIcon}
+            <ActiveIcon size={48} />
+          {/if}
+        </div>
         <p class="text-minimal-text-muted">No {segmentTypes.find((t) => t.type === activeTab)?.label.toLowerCase()} recommendations yet</p>
       </div>
     {:else}
       {#each tabItems as item (item.id)}
+        {@const ItemIcon = getSegmentIconComponent(item.segment.type)}
         <div class="minimal-card p-4 space-y-3 border-l-4 border-l-purple-400">
           <!-- Header with icon, title, and priority -->
           <div class="flex items-start gap-3">
-            <span class="text-2xl">{getSegmentIcon(item.segment.type)}</span>
+            <ItemIcon size={24} />
             <div class="flex-1 min-w-0">
               <div class="flex items-start gap-2">
                 <h4 class="font-medium text-minimal-text flex-1">
@@ -206,8 +214,9 @@
             </p>
           {/if}
           {#if item.reason}
-            <p class="text-xs text-minimal-accent italic ml-11">
-              💡 {item.reason}
+            <p class="text-xs text-minimal-accent italic ml-11 flex items-start gap-1">
+              <Lightbulb size={14} class="mt-0.5 flex-shrink-0" />
+              <span>{item.reason}</span>
             </p>
           {/if}
 
@@ -289,7 +298,8 @@
               type="button"
               title="Remove from scratchpad"
             >
-              ✕ Remove
+              <X size={14} weight="bold" />
+              <span>Remove</span>
             </button>
           </div>
         </div>
@@ -385,6 +395,9 @@
   }
 
   .remove-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
     padding: 0.375rem 0.75rem;
     font-size: 0.75rem;
     font-weight: 500;
