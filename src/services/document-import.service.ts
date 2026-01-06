@@ -19,7 +19,7 @@ import { MarkdownConverterService } from './markdown-converter.service.js';
 import { PDFExtractorService } from './pdf-extractor.service.js';
 import { SegmentContinuityService } from './segment-continuity.service.js';
 import { GapType, type LocationGap } from './segment-continuity.service.js';
-import type { Segment, FlightSegment, TransferSegment } from '../domain/types/segment.js';
+import type { Segment, FlightSegment, TransferSegment, HotelSegment, ActivitySegment, MeetingSegment } from '../domain/types/segment.js';
 import { SegmentType } from '../domain/types/common.js';
 import { generateSegmentId } from '../domain/types/branded.js';
 import { TravelAgentService } from './travel-agent.service.js';
@@ -866,57 +866,67 @@ export class DocumentImportService {
       const updatedSegment = { ...segment };
 
       if (segment.type === SegmentType.FLIGHT) {
-        if (segment.origin) {
-          const query = this.geocodingService.buildLocationQuery(segment.origin);
+        const flightSegment = segment as FlightSegment;
+        const updatedFlight = updatedSegment as FlightSegment;
+        if (flightSegment.origin) {
+          const query = this.geocodingService.buildLocationQuery(flightSegment.origin);
           const coords = coordinatesByQuery.get(query);
-          if (coords && !segment.origin.coordinates) {
-            updatedSegment.origin = { ...segment.origin, coordinates: coords };
+          if (coords && !flightSegment.origin.coordinates) {
+            updatedFlight.origin = { ...flightSegment.origin, coordinates: coords };
           }
         }
-        if (segment.destination) {
-          const query = this.geocodingService.buildLocationQuery(segment.destination);
+        if (flightSegment.destination) {
+          const query = this.geocodingService.buildLocationQuery(flightSegment.destination);
           const coords = coordinatesByQuery.get(query);
-          if (coords && !segment.destination.coordinates) {
-            updatedSegment.destination = { ...segment.destination, coordinates: coords };
+          if (coords && !flightSegment.destination.coordinates) {
+            updatedFlight.destination = { ...flightSegment.destination, coordinates: coords };
           }
         }
       } else if (segment.type === SegmentType.HOTEL) {
-        if (segment.location) {
-          const query = this.geocodingService.buildLocationQuery(segment.location);
+        const hotelSegment = segment as HotelSegment;
+        const updatedHotel = updatedSegment as HotelSegment;
+        if (hotelSegment.location) {
+          const query = this.geocodingService.buildLocationQuery(hotelSegment.location);
           const coords = coordinatesByQuery.get(query);
-          if (coords && !segment.location.coordinates) {
-            updatedSegment.location = { ...segment.location, coordinates: coords };
+          if (coords && !hotelSegment.location.coordinates) {
+            updatedHotel.location = { ...hotelSegment.location, coordinates: coords };
           }
         }
       } else if (segment.type === SegmentType.MEETING) {
-        if (segment.location) {
-          const query = this.geocodingService.buildLocationQuery(segment.location);
+        const meetingSegment = segment as MeetingSegment;
+        const updatedMeeting = updatedSegment as MeetingSegment;
+        if (meetingSegment.location) {
+          const query = this.geocodingService.buildLocationQuery(meetingSegment.location);
           const coords = coordinatesByQuery.get(query);
-          if (coords && !segment.location.coordinates) {
-            updatedSegment.location = { ...segment.location, coordinates: coords };
+          if (coords && !meetingSegment.location.coordinates) {
+            updatedMeeting.location = { ...meetingSegment.location, coordinates: coords };
           }
         }
       } else if (segment.type === SegmentType.ACTIVITY) {
-        if (segment.location) {
-          const query = this.geocodingService.buildLocationQuery(segment.location);
+        const activitySegment = segment as ActivitySegment;
+        const updatedActivity = updatedSegment as ActivitySegment;
+        if (activitySegment.location) {
+          const query = this.geocodingService.buildLocationQuery(activitySegment.location);
           const coords = coordinatesByQuery.get(query);
-          if (coords && !segment.location.coordinates) {
-            updatedSegment.location = { ...segment.location, coordinates: coords };
+          if (coords && !activitySegment.location.coordinates) {
+            updatedActivity.location = { ...activitySegment.location, coordinates: coords };
           }
         }
       } else if (segment.type === SegmentType.TRANSFER) {
-        if (segment.pickupLocation) {
-          const query = this.geocodingService.buildLocationQuery(segment.pickupLocation);
+        const transferSegment = segment as TransferSegment;
+        const updatedTransfer = updatedSegment as TransferSegment;
+        if (transferSegment.pickupLocation) {
+          const query = this.geocodingService.buildLocationQuery(transferSegment.pickupLocation);
           const coords = coordinatesByQuery.get(query);
-          if (coords && !segment.pickupLocation.coordinates) {
-            updatedSegment.pickupLocation = { ...segment.pickupLocation, coordinates: coords };
+          if (coords && !transferSegment.pickupLocation.coordinates) {
+            updatedTransfer.pickupLocation = { ...transferSegment.pickupLocation, coordinates: coords };
           }
         }
-        if (segment.dropoffLocation) {
-          const query = this.geocodingService.buildLocationQuery(segment.dropoffLocation);
+        if (transferSegment.dropoffLocation) {
+          const query = this.geocodingService.buildLocationQuery(transferSegment.dropoffLocation);
           const coords = coordinatesByQuery.get(query);
-          if (coords && !segment.dropoffLocation.coordinates) {
-            updatedSegment.dropoffLocation = { ...segment.dropoffLocation, coordinates: coords };
+          if (coords && !transferSegment.dropoffLocation.coordinates) {
+            updatedTransfer.dropoffLocation = { ...transferSegment.dropoffLocation, coordinates: coords };
           }
         }
       }

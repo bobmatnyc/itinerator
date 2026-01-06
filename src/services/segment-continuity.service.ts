@@ -158,8 +158,10 @@ export class SegmentContinuityService {
 
     if (segment.type === 'TRANSFER') {
       const transfer = segment as TransferSegment;
-      const pickupIsAirport = transfer.pickupLocation?.type === 'AIRPORT' || transfer.pickupLocation?.code;
-      const dropoffIsAirport = transfer.dropoffLocation?.type === 'AIRPORT' || transfer.dropoffLocation?.code;
+      const pickupIsAirport = Boolean(transfer.pickupLocation?.code) ||
+        (transfer.pickupLocation?.name?.toLowerCase().includes('airport') ?? false);
+      const dropoffIsAirport = Boolean(transfer.dropoffLocation?.code) ||
+        (transfer.dropoffLocation?.name?.toLowerCase().includes('airport') ?? false);
       return pickupIsAirport || dropoffIsAirport;
     }
 

@@ -470,9 +470,9 @@ export class MarkdownConverterService {
   private extractSectionData(type: MarkdownSection['type'], content: string): Record<string, unknown> {
     switch (type) {
       case 'flight':
-        return this.extractFlightData(content);
+        return this.extractFlightData(content) as Record<string, unknown>;
       case 'hotel':
-        return this.extractHotelData(content);
+        return this.extractHotelData(content) as Record<string, unknown>;
       default:
         return {};
     }

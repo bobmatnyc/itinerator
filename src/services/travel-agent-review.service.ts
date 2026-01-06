@@ -274,12 +274,13 @@ export class TravelAgentReviewService {
     if (segment.type !== SegmentType.TRANSFER) return false;
 
     const transfer = segment as TransferSegment;
+    // Check if location has IATA code (airport code) or name contains "Airport"
     const pickupIsAirport =
-      transfer.pickupLocation?.type === 'AIRPORT' ||
-      Boolean(transfer.pickupLocation?.code);
+      Boolean(transfer.pickupLocation?.code) ||
+      (transfer.pickupLocation?.name?.toLowerCase().includes('airport') ?? false);
     const dropoffIsAirport =
-      transfer.dropoffLocation?.type === 'AIRPORT' ||
-      Boolean(transfer.dropoffLocation?.code);
+      Boolean(transfer.dropoffLocation?.code) ||
+      (transfer.dropoffLocation?.name?.toLowerCase().includes('airport') ?? false);
 
     return pickupIsAirport || dropoffIsAirport;
   }
@@ -337,8 +338,8 @@ export class TravelAgentReviewService {
   private isSameCity(loc1: any, loc2: any): boolean {
     // If one is an airport and the other is not, they're different locations
     // even if they're in the same city (airport transfers are needed)
-    const loc1IsAirport = loc1.type === 'AIRPORT' || Boolean(loc1.code);
-    const loc2IsAirport = loc2.type === 'AIRPORT' || Boolean(loc2.code);
+    const loc1IsAirport = Boolean(loc1.code) || (loc1.name?.toLowerCase().includes('airport') ?? false);
+    const loc2IsAirport = Boolean(loc2.code) || (loc2.name?.toLowerCase().includes('airport') ?? false);
 
     if (loc1IsAirport !== loc2IsAirport) {
       // One is airport, one is not - definitely need transfer
@@ -379,8 +380,8 @@ export class TravelAgentReviewService {
     // Calculate reasonable transfer start time
     // For airport arrival: start shortly after flight lands
     // For airport departure: end well before flight departs
-    const isAirportPickup = pickup.type === 'AIRPORT' || pickup.code;
-    const isAirportDropoff = dropoff.type === 'AIRPORT' || dropoff.code;
+    const isAirportPickup = Boolean(pickup.code) || (pickup.name?.toLowerCase().includes('airport') ?? false);
+    const isAirportDropoff = Boolean(dropoff.code) || (dropoff.name?.toLowerCase().includes('airport') ?? false);
 
     let transferStart: Date;
     let transferEnd: Date;
@@ -423,13 +424,15 @@ export class TravelAgentReviewService {
       pickupLocation: {
         name: pickup.name,
         code: pickup.code,
-        type: pickup.type,
+        city: pickup.city,
+        country: pickup.country,
         address: pickup.address,
       },
       dropoffLocation: {
         name: dropoff.name,
         code: dropoff.code,
-        type: dropoff.type,
+        city: dropoff.city,
+        country: dropoff.country,
         address: dropoff.address,
       },
       notes: 'Auto-generated transfer for airport connection',

@@ -59,9 +59,10 @@ export const scratchpadByTypeSchema = z.object({
 });
 
 /**
- * Scratchpad schema
+ * Base scratchpad object schema
+ * Type annotation provided to avoid excessive type inference length
  */
-export const scratchpadSchema = z.object({
+const baseScratchpadSchema: z.ZodObject<any> = z.object({
   /** Parent itinerary ID */
   itineraryId: itineraryIdSchema,
   /** All scratchpad items */
@@ -69,6 +70,12 @@ export const scratchpadSchema = z.object({
   /** Items organized by segment type */
   byType: scratchpadByTypeSchema,
 });
+
+/**
+ * Scratchpad schema
+ * Type annotation provided to avoid excessive type inference length
+ */
+export const scratchpadSchema: any = baseScratchpadSchema;
 
 /**
  * Swap result schema

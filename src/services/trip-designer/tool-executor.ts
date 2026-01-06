@@ -21,6 +21,7 @@ import { isWeaviateKnowledgeService } from '../knowledge-factory.js';
 import { summarizeItineraryForTool } from './itinerary-summarizer.js';
 import { parseLocalDate, parseLocalDateTime } from '../../utils/date-parser.js';
 import { GeocodingService } from '../geocoding.service.js';
+import { validateSegmentTime } from '../../utils/time-validator.js';
 import {
   addFlightArgsSchema,
   addHotelArgsSchema,
@@ -846,6 +847,30 @@ export class ToolExecutor {
     // CRITICAL: Extract the newly added segment ID from the returned itinerary
     // SegmentService.add() returns the full itinerary, so get the last segment
     const addedSegment = result.value.segments[result.value.segments.length - 1];
+
+    // Validate segment time and provide feedback if invalid (only for warnings/errors)
+    const flightValidation = validateSegmentTime(addedSegment);
+    if (!flightValidation.isValid && flightValidation.severity !== 'info') {
+      // Format current time for feedback
+      const currentHour = addedSegment.startDatetime.getHours();
+      const currentMinutes = addedSegment.startDatetime.getMinutes();
+      const currentTime = `${currentHour.toString().padStart(2, '0')}:${currentMinutes.toString().padStart(2, '0')}`;
+      const flightInfo = `${params.airline?.name || 'Flight'} ${params.flightNumber || ''}`.trim();
+
+      return {
+        success: false,
+        requiresCorrection: true,
+        segmentId: addedSegment.id,
+        issue: flightValidation.issue,
+        details: flightValidation.details,
+        currentTime,
+        suggestedTime: flightValidation.suggestedTime,
+        severity: flightValidation.severity,
+        category: flightValidation.category,
+        message: `Time validation warning for ${flightInfo}. ${flightValidation.issue}. Departure time: ${currentTime}. Please verify the departure time is correct.`
+      };
+    }
+
     return { success: true, segmentId: addedSegment.id };
   }
 
@@ -914,6 +939,29 @@ export class ToolExecutor {
     // CRITICAL: Extract the newly added segment ID from the returned itinerary
     // SegmentService.add() returns the full itinerary, so get the last segment
     const addedSegment = result.value.segments[result.value.segments.length - 1];
+
+    // Validate segment time and provide feedback if invalid
+    const hotelValidation = validateSegmentTime(addedSegment);
+    if (!hotelValidation.isValid) {
+      // Format current time for feedback
+      const currentHour = addedSegment.startDatetime.getHours();
+      const currentMinutes = addedSegment.startDatetime.getMinutes();
+      const currentTime = `${currentHour.toString().padStart(2, '0')}:${currentMinutes.toString().padStart(2, '0')}`;
+
+      return {
+        success: false,
+        requiresCorrection: true,
+        segmentId: addedSegment.id,
+        issue: hotelValidation.issue,
+        details: hotelValidation.details,
+        currentTime,
+        suggestedTime: hotelValidation.suggestedTime,
+        severity: hotelValidation.severity,
+        category: hotelValidation.category,
+        message: `Time validation failed for hotel "${params.property.name}". ${hotelValidation.issue}. Current check-in time: ${currentTime}${hotelValidation.suggestedTime ? `, suggested: ${hotelValidation.suggestedTime}` : ''}. Please correct the time by calling update_segment with the corrected check-in time.`
+      };
+    }
+
     return { success: true, segmentId: addedSegment.id };
   }
 
@@ -984,6 +1032,29 @@ export class ToolExecutor {
     // CRITICAL: Extract the newly added segment ID from the returned itinerary
     // SegmentService.add() returns the full itinerary, so get the last segment
     const addedSegment = result.value.segments[result.value.segments.length - 1];
+
+    // Validate segment time and provide feedback if invalid
+    const activityValidation = validateSegmentTime(addedSegment);
+    if (!activityValidation.isValid) {
+      // Format current time for feedback
+      const currentHour = addedSegment.startDatetime.getHours();
+      const currentMinutes = addedSegment.startDatetime.getMinutes();
+      const currentTime = `${currentHour.toString().padStart(2, '0')}:${currentMinutes.toString().padStart(2, '0')}`;
+
+      return {
+        success: false,
+        requiresCorrection: true,
+        segmentId: addedSegment.id,
+        issue: activityValidation.issue,
+        details: activityValidation.details,
+        currentTime,
+        suggestedTime: activityValidation.suggestedTime,
+        severity: activityValidation.severity,
+        category: activityValidation.category,
+        message: `Time validation failed for "${params.name}". ${activityValidation.issue}. Current time: ${currentTime}${activityValidation.suggestedTime ? `, suggested: ${activityValidation.suggestedTime}` : ''}. Please correct the time by calling update_segment or creating a new activity with the corrected time.`
+      };
+    }
+
     return { success: true, segmentId: addedSegment.id };
   }
 
@@ -1039,6 +1110,30 @@ export class ToolExecutor {
     // CRITICAL: Extract the newly added segment ID from the returned itinerary
     // SegmentService.add() returns the full itinerary, so get the last segment
     const addedSegment = result.value.segments[result.value.segments.length - 1];
+
+    // Validate segment time and provide feedback if invalid (only for warnings/errors)
+    const transferValidation = validateSegmentTime(addedSegment);
+    if (!transferValidation.isValid && transferValidation.severity !== 'info') {
+      // Format current time for feedback
+      const currentHour = addedSegment.startDatetime.getHours();
+      const currentMinutes = addedSegment.startDatetime.getMinutes();
+      const currentTime = `${currentHour.toString().padStart(2, '0')}:${currentMinutes.toString().padStart(2, '0')}`;
+      const transferInfo = `${params.transferType} from ${params.pickupLocation.name} to ${params.dropoffLocation.name}`;
+
+      return {
+        success: false,
+        requiresCorrection: true,
+        segmentId: addedSegment.id,
+        issue: transferValidation.issue,
+        details: transferValidation.details,
+        currentTime,
+        suggestedTime: transferValidation.suggestedTime,
+        severity: transferValidation.severity,
+        category: transferValidation.category,
+        message: `Time validation warning for ${transferInfo}. ${transferValidation.issue}. Pickup time: ${currentTime}. Please verify the time is correct.`
+      };
+    }
+
     return { success: true, segmentId: addedSegment.id };
   }
 

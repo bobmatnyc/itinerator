@@ -13,10 +13,13 @@ export type {
   SegmentRule,
   RuleEngineConfig,
   ValidationResult,
-  RuleId,
 } from './itinerary-rules.js';
 
-export { RuleId, datesOverlap, datetimesOverlap, isSameLocation, getDurationMinutes, hasOvernightGap } from './itinerary-rules.js';
+// Export RuleId separately (both const object and type)
+export { RuleId } from './itinerary-rules.js';
+export type { RuleId as RuleIdType } from './itinerary-rules.js';
+
+export { datesOverlap, datetimesOverlap, isSameLocation, getDurationMinutes, hasOvernightGap } from './itinerary-rules.js';
 
 // Core rules
 export {

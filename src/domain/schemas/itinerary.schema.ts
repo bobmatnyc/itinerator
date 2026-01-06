@@ -18,59 +18,65 @@ import { travelPreferencesSchema, travelerSchema } from './traveler.schema.js';
 import { scratchpadSchema } from './scratchpad.schema.js';
 
 /**
- * Full itinerary schema - validates complete itinerary
+ * Base itinerary object schema - before refinements
+ * Type annotation provided to avoid excessive type inference length
  */
-export const itinerarySchema = z
-  .object({
-    /** Unique itinerary identifier */
-    id: itineraryIdSchema,
-    /** Version number for optimistic locking */
-    version: z.number().int().positive('Version must be positive').default(1),
-    /** Creation timestamp */
-    createdAt: dateSchema,
-    /** Last update timestamp */
-    updatedAt: dateSchema,
-    /** Itinerary title */
-    title: z.string().min(1, 'Title is required').max(255, 'Title too long'),
-    /** Trip description */
-    description: z.string().optional(),
-    /** Itinerary status */
-    status: itineraryStatusSchema.default('DRAFT'),
-    /** Trip start date - optional, collected by trip designer */
-    startDate: dateSchema.nullable().optional(),
-    /** Trip end date - optional, collected by trip designer */
-    endDate: dateSchema.nullable().optional(),
-    /** Origin location */
-    origin: locationSchema.optional(),
-    /** Destination locations */
-    destinations: z.array(locationSchema).default([]),
-    /** Travelers on this itinerary */
-    travelers: z.array(travelerSchema).default([]),
-    /** Primary traveler ID */
-    primaryTravelerId: travelerIdSchema.optional(),
-    /** User who created the itinerary */
-    createdBy: z.string().optional(),
-    /** All segments in the itinerary */
-    segments: z.array(segmentSchema).default([]),
-    /** Total price for the entire trip */
-    totalPrice: moneySchema.optional(),
-    /** Default currency (ISO 4217) */
-    currency: currencyCodeSchema.optional(),
-    /** Type of trip */
-    tripType: tripTypeSchema.optional(),
-    /** Cost center for business trips */
-    costCenter: z.string().optional(),
-    /** Project code for business trips */
-    projectCode: z.string().optional(),
-    /** Travel preferences */
-    preferences: travelPreferencesSchema.optional(),
-    /** Scratchpad for alternative segment recommendations */
-    scratchpad: scratchpadSchema.optional(),
-    /** Tags for organization */
-    tags: z.array(z.string()).default([]),
-    /** Additional metadata */
-    metadata: z.record(z.unknown()).default({}),
-  })
+const baseItinerarySchema: z.ZodObject<any> = z.object({
+  /** Unique itinerary identifier */
+  id: itineraryIdSchema,
+  /** Version number for optimistic locking */
+  version: z.number().int().positive('Version must be positive').default(1),
+  /** Creation timestamp */
+  createdAt: dateSchema,
+  /** Last update timestamp */
+  updatedAt: dateSchema,
+  /** Itinerary title */
+  title: z.string().min(1, 'Title is required').max(255, 'Title too long'),
+  /** Trip description */
+  description: z.string().optional(),
+  /** Itinerary status */
+  status: itineraryStatusSchema.default('DRAFT'),
+  /** Trip start date - optional, collected by trip designer */
+  startDate: dateSchema.nullable().optional(),
+  /** Trip end date - optional, collected by trip designer */
+  endDate: dateSchema.nullable().optional(),
+  /** Origin location */
+  origin: locationSchema.optional(),
+  /** Destination locations */
+  destinations: z.array(locationSchema).default([]),
+  /** Travelers on this itinerary */
+  travelers: z.array(travelerSchema).default([]),
+  /** Primary traveler ID */
+  primaryTravelerId: travelerIdSchema.optional(),
+  /** User who created the itinerary */
+  createdBy: z.string().optional(),
+  /** All segments in the itinerary */
+  segments: z.array(segmentSchema).default([]),
+  /** Total price for the entire trip */
+  totalPrice: moneySchema.optional(),
+  /** Default currency (ISO 4217) */
+  currency: currencyCodeSchema.optional(),
+  /** Type of trip */
+  tripType: tripTypeSchema.optional(),
+  /** Cost center for business trips */
+  costCenter: z.string().optional(),
+  /** Project code for business trips */
+  projectCode: z.string().optional(),
+  /** Travel preferences */
+  preferences: travelPreferencesSchema.optional(),
+  /** Scratchpad for alternative segment recommendations */
+  scratchpad: scratchpadSchema.optional(),
+  /** Tags for organization */
+  tags: z.array(z.string()).default([]),
+  /** Additional metadata */
+  metadata: z.record(z.unknown()).default({}),
+});
+
+/**
+ * Full itinerary schema - validates complete itinerary
+ * Type annotation provided to avoid excessive type inference length
+ */
+export const itinerarySchema: any = baseItinerarySchema
   .refine((data) => {
     // Only validate date order if both dates are provided
     if (data.startDate && data.endDate) {
