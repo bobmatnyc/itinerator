@@ -13,6 +13,10 @@ export default defineConfig({
 	},
 	// Include markdown files as assets for ?raw imports
 	assetsInclude: ['**/*.md'],
+	// Fix SSR issues with packages that use .svelte files
+	ssr: {
+		noExternal: ['phosphor-svelte']
+	},
 	server: {
 		port: 5176,
 		host: true,
