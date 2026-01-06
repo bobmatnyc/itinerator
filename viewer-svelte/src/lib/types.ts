@@ -165,6 +165,7 @@ export interface Itinerary {
   travelers?: Traveler[];
   tripPreferences?: TripTravelerPreferences;
   tags: string[];
+  scratchpad?: Scratchpad;
   createdAt: string;
   updatedAt: string;
 }

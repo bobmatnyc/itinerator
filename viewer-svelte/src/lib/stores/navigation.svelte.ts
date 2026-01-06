@@ -21,7 +21,7 @@ export type LeftPaneTab = 'chat' | 'itineraries';
 /**
  * Detail view tabs (for itinerary detail view)
  */
-export type DetailTab = 'itinerary' | 'calendar' | 'map' | 'travelers' | 'docs' | 'faq';
+export type DetailTab = 'itinerary' | 'calendar' | 'map' | 'travelers' | 'notebook' | 'docs' | 'faq';
 
 /**
  * Agent chat modes
@@ -292,7 +292,7 @@ class NavigationStore {
    * Type guard for DetailTab
    */
   private isValidDetailTab(tab: string): tab is DetailTab {
-    return ['itinerary', 'calendar', 'map', 'travelers', 'docs', 'faq'].includes(tab);
+    return ['itinerary', 'calendar', 'map', 'travelers', 'notebook', 'docs', 'faq'].includes(tab);
   }
 
   /**

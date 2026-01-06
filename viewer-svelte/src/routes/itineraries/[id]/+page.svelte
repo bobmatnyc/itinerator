@@ -25,6 +25,7 @@
   import MapView from '$lib/components/MapView.svelte';
   import TravelersView from '$lib/components/TravelersView.svelte';
   import ItineraryDetail from '$lib/components/ItineraryDetail.svelte';
+  import ScratchpadView from '$lib/components/ScratchpadView.svelte';
   import EditModeToggle from '$lib/components/EditModeToggle.svelte';
   import VisualizationPane from '$lib/components/VisualizationPane.svelte';
   import VisualizationTimeline from '$lib/components/VisualizationTimeline.svelte';
@@ -304,7 +305,8 @@
                 { id: 'itinerary', label: 'Detail' },
                 { id: 'calendar', label: 'Calendar' },
                 { id: 'map', label: 'Map' },
-                { id: 'travelers', label: 'Travelers' }
+                { id: 'travelers', label: 'Travelers' },
+                { id: 'notebook', label: 'Notebook' }
               ]}
               activeTab={navigationStore.detailTab}
               onTabChange={(tab) => navigationStore.setDetailTab(tab as any)}
@@ -337,6 +339,54 @@
                 <MapView itinerary={$selectedItinerary} />
               {:else if navigationStore.detailTab === 'travelers'}
                 <TravelersView itinerary={$selectedItinerary} />
+              {:else if navigationStore.detailTab === 'notebook'}
+                <ScratchpadView
+                  scratchpad={$selectedItinerary.scratchpad || { items: [], createdAt: new Date(), updatedAt: new Date() }}
+                  itinerarySegments={$selectedItinerary.segments || []}
+                  onSwap={async (scratchpadItemId, existingSegmentId) => {
+                    try {
+                      const response = await fetch(`/api/v1/itineraries/${$selectedItinerary.id}/scratchpad/${scratchpadItemId}/swap`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ existingSegmentId })
+                      });
+                      if (!response.ok) throw new Error('Failed to swap segment');
+                      await selectItinerary($selectedItinerary.id);
+                      toast.success('Segment swapped successfully');
+                    } catch (error) {
+                      console.error('Failed to swap segment:', error);
+                      toast.error('Failed to swap segment. Please try again.');
+                    }
+                  }}
+                  onAddToDay={async (scratchpadItemId, dayNumber) => {
+                    try {
+                      const response = await fetch(`/api/v1/itineraries/${$selectedItinerary.id}/scratchpad/${scratchpadItemId}/add`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ dayNumber })
+                      });
+                      if (!response.ok) throw new Error('Failed to add segment');
+                      await selectItinerary($selectedItinerary.id);
+                      toast.success('Segment added to itinerary');
+                    } catch (error) {
+                      console.error('Failed to add segment:', error);
+                      toast.error('Failed to add segment. Please try again.');
+                    }
+                  }}
+                  onRemove={async (itemId) => {
+                    try {
+                      const response = await fetch(`/api/v1/itineraries/${$selectedItinerary.id}/scratchpad/${itemId}`, {
+                        method: 'DELETE'
+                      });
+                      if (!response.ok) throw new Error('Failed to remove from scratchpad');
+                      await selectItinerary($selectedItinerary.id);
+                      toast.success('Removed from recommendations');
+                    } catch (error) {
+                      console.error('Failed to remove from scratchpad:', error);
+                      toast.error('Failed to remove. Please try again.');
+                    }
+                  }}
+                />
               {/if}
             </MainPane>
           {/if}

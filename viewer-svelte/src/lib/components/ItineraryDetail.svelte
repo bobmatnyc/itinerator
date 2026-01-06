@@ -376,14 +376,14 @@
           date: dateKey,
           dateDisplay,
           segments: segments.sort((a, b) => {
-            // Hotels/accommodations should always be last for the day
-            const aIsStay = a.type === 'HOTEL' || a.type === 'ACCOMMODATION';
-            const bIsStay = b.type === 'HOTEL' || b.type === 'ACCOMMODATION';
+            // Hotels/accommodations should always be last for the day (unless it's a checkout)
+            const aIsStay = (a.type === 'HOTEL' || a.type === 'ACCOMMODATION') && !a._hotelNightInfo?.isCheckout;
+            const bIsStay = (b.type === 'HOTEL' || b.type === 'ACCOMMODATION') && !b._hotelNightInfo?.isCheckout;
 
-            if (aIsStay && !bIsStay) return 1;  // a (hotel) goes after b
-            if (!aIsStay && bIsStay) return -1; // b (hotel) goes after a
+            if (aIsStay && !bIsStay) return 1;  // a (hotel night) goes after b
+            if (!aIsStay && bIsStay) return -1; // b (hotel night) goes after a
 
-            // For same type, sort chronologically
+            // For same type or both non-stay, sort chronologically
             const aTime = new Date(a.startDatetime).getTime();
             const bTime = new Date(b.startDatetime).getTime();
 
