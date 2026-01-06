@@ -1,6 +1,11 @@
 <script lang="ts">
   import type { Segment } from '$lib/types';
-  import type { Scratchpad, ScratchpadItem, ScratchpadPriority } from '$lib/types/scratchpad';
+  import type {
+    Scratchpad,
+    ScratchpadItem,
+    ScratchpadPriority,
+    GeographyRecommendation
+  } from '$lib/types/scratchpad';
   import { getItemsByType } from '$lib/types/scratchpad';
   import { generateSegmentLinks } from '$lib/utils/segment-links';
   import type { SegmentLink } from '$lib/utils/segment-links';
@@ -12,20 +17,28 @@
     itinerarySegments,
     onSwap,
     onAddToDay,
-    onRemove
+    onRemove,
+    onRemoveGeography
   }: {
     scratchpad: Scratchpad;
     itinerarySegments: Segment[];
     onSwap: (scratchpadItemId: string, existingSegmentId: string) => void;
     onAddToDay: (scratchpadItemId: string, dayNumber: number) => void;
     onRemove: (itemId: string) => void;
+    onRemoveGeography?: (geographyId: string) => void;
   } = $props();
 
-  // Tab state
-  let activeTab = $state<Segment['type']>('FLIGHT');
+  // Tab state - can be a segment type or 'GEOGRAPHY'
+  type TabType = Segment['type'] | 'GEOGRAPHY';
+  let activeTab = $state<TabType>('FLIGHT');
 
   // Get items for current tab
-  let tabItems = $derived(getItemsByType(scratchpad, activeTab));
+  let tabItems = $derived(
+    activeTab === 'GEOGRAPHY' ? [] : getItemsByType(scratchpad, activeTab as Segment['type'])
+  );
+
+  // Get geography items
+  let geographyItems = $derived(scratchpad.geography || []);
 
   // Available segment types
   const segmentTypes: Array<{ type: Segment['type']; label: string; icon: Component }> = [
@@ -33,6 +46,12 @@
     { type: 'HOTEL', label: 'Hotels', icon: House },
     { type: 'ACTIVITY', label: 'Activities', icon: Target },
     { type: 'TRANSFER', label: 'Transport', icon: Car }
+  ];
+
+  // All tabs including geography
+  const allTabs: Array<{ type: TabType; label: string; icon: Component }> = [
+    ...segmentTypes,
+    { type: 'GEOGRAPHY', label: 'Geography', icon: MapPin }
   ];
 
   // Get segment title based on type
@@ -154,8 +173,11 @@
 <div class="scratchpad-view space-y-4">
   <!-- Tab navigation -->
   <div class="flex gap-2 border-b border-gray-200">
-    {#each segmentTypes as { type, label, icon: IconComponent }}
-      {@const count = scratchpad.items.filter((item) => item.segment.type === type).length}
+    {#each allTabs as { type, label, icon: IconComponent }}
+      {@const count =
+        type === 'GEOGRAPHY'
+          ? geographyItems.length
+          : scratchpad.items.filter((item) => item.segment.type === type).length}
       <button
         class="tab-button"
         class:active={activeTab === type}
@@ -173,15 +195,107 @@
 
   <!-- Items list -->
   <div class="items-container space-y-3">
-    {#if tabItems.length === 0}
-      {@const ActiveIcon = segmentTypes.find((t) => t.type === activeTab)?.icon}
+    {#if activeTab === 'GEOGRAPHY'}
+      <!-- Geography recommendations view -->
+      {#if geographyItems.length === 0}
+        <div class="empty-state minimal-card p-8 text-center">
+          <div class="mb-2">
+            <MapPin size={48} />
+          </div>
+          <p class="text-minimal-text-muted">No geography recommendations yet</p>
+        </div>
+      {:else}
+        {#each geographyItems as geo (geo.id)}
+          <div class="minimal-card p-4 space-y-3 border-l-4 border-l-green-400">
+            <!-- Header with icon, name, and priority -->
+            <div class="flex items-start gap-3">
+              <MapPin size={24} />
+              <div class="flex-1 min-w-0">
+                <div class="flex items-start gap-2">
+                  <h4 class="font-medium text-minimal-text flex-1">
+                    {geo.name}
+                  </h4>
+                  <span class="minimal-badge {getPriorityBadgeClass(geo.priority)}">
+                    {getPriorityLabel(geo.priority)}
+                  </span>
+                </div>
+                <p class="text-sm text-minimal-text-muted mt-0.5">
+                  {geo.type.charAt(0).toUpperCase() + geo.type.slice(1)} in {geo.city}
+                  {#if geo.country}, {geo.country}{/if}
+                </p>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <p class="text-sm text-minimal-text ml-11">
+              {geo.description}
+            </p>
+
+            <!-- Highlights -->
+            {#if geo.highlights && geo.highlights.length > 0}
+              <div class="ml-11">
+                <p class="text-xs font-medium text-minimal-text-muted mb-1">Highlights:</p>
+                <ul class="text-sm text-minimal-text space-y-0.5">
+                  {#each geo.highlights as highlight}
+                    <li class="flex items-start gap-1">
+                      <span class="text-minimal-accent">•</span>
+                      <span>{highlight}</span>
+                    </li>
+                  {/each}
+                </ul>
+              </div>
+            {/if}
+
+            <!-- Best For -->
+            {#if geo.bestFor && geo.bestFor.length > 0}
+              <div class="ml-11">
+                <p class="text-xs font-medium text-minimal-text-muted mb-1">Best for:</p>
+                <div class="flex flex-wrap gap-1">
+                  {#each geo.bestFor as category}
+                    <span class="minimal-badge bg-blue-100 text-blue-700 border-blue-200">
+                      {category}
+                    </span>
+                  {/each}
+                </div>
+              </div>
+            {/if}
+
+            <!-- Notes -->
+            {#if geo.notes}
+              <p class="text-xs text-minimal-accent italic ml-11 flex items-start gap-1">
+                <Lightbulb size={14} class="mt-0.5 flex-shrink-0" />
+                <span>{geo.notes}</span>
+              </p>
+            {/if}
+
+            <!-- Action buttons -->
+            <div class="flex flex-wrap gap-2 ml-11">
+              {#if onRemoveGeography}
+                <button
+                  class="remove-button"
+                  onclick={() => onRemoveGeography?.(geo.id)}
+                  type="button"
+                  title="Remove from scratchpad"
+                >
+                  <X size={14} weight="bold" />
+                  <span>Remove</span>
+                </button>
+              {/if}
+            </div>
+          </div>
+        {/each}
+      {/if}
+    {:else if tabItems.length === 0}
+      {@const ActiveIcon = allTabs.find((t) => t.type === activeTab)?.icon}
       <div class="empty-state minimal-card p-8 text-center">
         <div class="mb-2">
           {#if ActiveIcon}
             <ActiveIcon size={48} />
           {/if}
         </div>
-        <p class="text-minimal-text-muted">No {segmentTypes.find((t) => t.type === activeTab)?.label.toLowerCase()} recommendations yet</p>
+        <p class="text-minimal-text-muted">
+          No {allTabs.find((t) => t.type === activeTab)?.label.toLowerCase()} recommendations yet
+        </p>
       </div>
     {:else}
       {#each tabItems as item (item.id)}

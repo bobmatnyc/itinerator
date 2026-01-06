@@ -22,9 +22,48 @@ export type ScratchpadSource = 'designer' | 'agent' | 'user' | 'search';
 export type ScratchpadPriority = 'high' | 'medium' | 'low';
 
 /**
+ * Geography type - neighborhood, district, area, or region
+ */
+export type GeographyType = 'neighborhood' | 'district' | 'area' | 'region';
+
+/**
  * Branded type for Scratchpad Item IDs
  */
 export type ScratchpadItemId = string & { readonly __brand: 'ScratchpadItemId' };
+
+/**
+ * A geography recommendation (neighborhood, district, etc.)
+ */
+export interface GeographyRecommendation {
+  /** Unique identifier */
+  id: string;
+  /** Parent itinerary ID */
+  itineraryId: ItineraryId;
+  /** Name of the area (e.g., "Shibuya", "Shinjuku") */
+  name: string;
+  /** Type of geography */
+  type: GeographyType;
+  /** Parent city */
+  city: string;
+  /** Country (optional) */
+  country?: string;
+  /** Overview description */
+  description: string;
+  /** Key attractions, vibes */
+  highlights: string[];
+  /** What this area is best for (e.g., "Shopping", "Nightlife", "Food") */
+  bestFor: string[];
+  /** Source of this recommendation */
+  source: ScratchpadSource;
+  /** Why this was recommended */
+  notes?: string;
+  /** Priority level */
+  priority: ScratchpadPriority;
+  /** When it was added */
+  addedAt: Date;
+  /** Tags for filtering and organization */
+  tags: string[];
+}
 
 /**
  * A single item in the scratchpad - an alternative segment recommendation
@@ -59,6 +98,8 @@ export interface Scratchpad {
   itineraryId: ItineraryId;
   /** All scratchpad items (flat list) */
   items: ScratchpadItem[];
+  /** Geography recommendations */
+  geography: GeographyRecommendation[];
   /** Items organized by segment type for quick filtering */
   byType: ScratchpadByType;
 }

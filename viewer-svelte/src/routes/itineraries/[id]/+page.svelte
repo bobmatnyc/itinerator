@@ -342,7 +342,7 @@
                 <TravelersView itinerary={$selectedItinerary} />
               {:else if navigationStore.detailTab === 'notebook'}
                 <ScratchpadView
-                  scratchpad={$selectedItinerary.scratchpad || { items: [], createdAt: new Date(), updatedAt: new Date() }}
+                  scratchpad={$selectedItinerary.scratchpad || { items: [], geography: [], createdAt: new Date(), updatedAt: new Date() }}
                   itinerarySegments={$selectedItinerary.segments || []}
                   onSwap={async (scratchpadItemId, existingSegmentId) => {
                     try {

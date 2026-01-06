@@ -108,6 +108,7 @@
         addedBy: 'Trip Designer'
       }
     ],
+    geography: [],
     createdAt: new Date(),
     updatedAt: new Date()
   };

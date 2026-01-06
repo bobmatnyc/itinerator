@@ -1,7 +1,14 @@
 // Core types for the viewer application
 
 // Re-export scratchpad types
-export type { Scratchpad, ScratchpadItem, ScratchpadPriority } from './types/scratchpad';
+export type {
+  Scratchpad,
+  ScratchpadItem,
+  ScratchpadPriority,
+  GeographyRecommendation,
+  GeographyType,
+  ScratchpadSource
+} from './types/scratchpad';
 export { getItemsByType, getCountByType } from './types/scratchpad';
 
 export interface Location {

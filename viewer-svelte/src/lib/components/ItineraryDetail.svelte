@@ -31,6 +31,7 @@
   let scratchpadOpen = $state(false);
   let scratchpad = $state<Scratchpad>({
     items: [],
+    geography: [],
     createdAt: new Date(),
     updatedAt: new Date()
   });

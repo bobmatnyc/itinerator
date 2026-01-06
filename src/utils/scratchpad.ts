@@ -44,6 +44,7 @@ export function createEmptyScratchpad(itineraryId: ItineraryId): Scratchpad {
   return {
     itineraryId,
     items: [],
+    geography: [],
     byType: {
       [SegmentTypeEnum.FLIGHT]: [],
       [SegmentTypeEnum.HOTEL]: [],

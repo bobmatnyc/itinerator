@@ -18,9 +18,48 @@ export const scratchpadSourceSchema = z.enum(['designer', 'agent', 'user', 'sear
 export const scratchpadPrioritySchema = z.enum(['high', 'medium', 'low']);
 
 /**
+ * Geography type schema
+ */
+export const geographyTypeSchema = z.enum(['neighborhood', 'district', 'area', 'region']);
+
+/**
  * Scratchpad item ID schema (UUID)
  */
 export const scratchpadItemIdSchema = z.string().uuid('Must be a valid UUID');
+
+/**
+ * Geography recommendation schema
+ */
+export const geographyRecommendationSchema = z.object({
+  /** Unique identifier */
+  id: z.string().uuid('Must be a valid UUID'),
+  /** Parent itinerary ID */
+  itineraryId: itineraryIdSchema,
+  /** Name of the area */
+  name: z.string().min(1, 'Name is required'),
+  /** Type of geography */
+  type: geographyTypeSchema,
+  /** Parent city */
+  city: z.string().min(1, 'City is required'),
+  /** Country (optional) */
+  country: z.string().optional(),
+  /** Overview description */
+  description: z.string().min(1, 'Description is required'),
+  /** Key attractions, vibes */
+  highlights: z.array(z.string()).default([]),
+  /** What this area is best for */
+  bestFor: z.array(z.string()).default([]),
+  /** Source of this recommendation */
+  source: scratchpadSourceSchema,
+  /** Why this was recommended */
+  notes: z.string().optional(),
+  /** Priority level */
+  priority: scratchpadPrioritySchema,
+  /** When it was added */
+  addedAt: dateSchema,
+  /** Tags for filtering and organization */
+  tags: z.array(z.string()).default([]),
+});
 
 /**
  * Scratchpad item schema
@@ -67,6 +106,8 @@ const baseScratchpadSchema: z.ZodObject<any> = z.object({
   itineraryId: itineraryIdSchema,
   /** All scratchpad items */
   items: z.array(scratchpadItemSchema).default([]),
+  /** Geography recommendations */
+  geography: z.array(geographyRecommendationSchema).default([]),
   /** Items organized by segment type */
   byType: scratchpadByTypeSchema,
 });
