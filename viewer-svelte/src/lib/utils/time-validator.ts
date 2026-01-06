@@ -70,17 +70,33 @@ export interface SegmentTimeIssue {
 }
 
 /**
+ * Parse date from string or Date
+ */
+function parseDate(date: Date | string | undefined | null): Date | null {
+  if (!date) return null;
+  if (date instanceof Date) return date;
+  try {
+    const parsed = new Date(date);
+    return isNaN(parsed.getTime()) ? null : parsed;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Get hour from date (0-23)
  */
-function getHour(date: Date): number {
-  return date.getHours();
+function getHour(date: Date | string | undefined | null): number {
+  const parsed = parseDate(date);
+  return parsed ? parsed.getHours() : 0;
 }
 
 /**
  * Get minutes from date (0-59)
  */
-function getMinutes(date: Date): number {
-  return date.getMinutes();
+function getMinutes(date: Date | string | undefined | null): number {
+  const parsed = parseDate(date);
+  return parsed ? parsed.getMinutes() : 0;
 }
 
 /**
@@ -448,6 +464,11 @@ function validateTransferTime(segment: Segment & { type: 'TRANSFER' }): TimeVali
  * @returns Validation result with issue details and suggestions
  */
 export function validateSegmentTime(segment: Segment): TimeValidationResult {
+  // Return valid if no startDatetime to validate
+  if (!segment.startDatetime) {
+    return { isValid: true };
+  }
+
   // First check for semantic time mismatches (applies to all segment types)
   const semanticValidation = validateSemanticTime(segment);
   if (semanticValidation) {
