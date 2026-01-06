@@ -15,6 +15,7 @@ import { locationSchema } from './location.schema.js';
 import { currencyCodeSchema, moneySchema } from './money.schema.js';
 import { segmentSchema } from './segment.schema.js';
 import { travelPreferencesSchema, travelerSchema } from './traveler.schema.js';
+import { scratchpadSchema } from './scratchpad.schema.js';
 
 /**
  * Full itinerary schema - validates complete itinerary
@@ -63,6 +64,8 @@ export const itinerarySchema = z
     projectCode: z.string().optional(),
     /** Travel preferences */
     preferences: travelPreferencesSchema.optional(),
+    /** Scratchpad for alternative segment recommendations */
+    scratchpad: scratchpadSchema.optional(),
     /** Tags for organization */
     tags: z.array(z.string()).default([]),
     /** Additional metadata */

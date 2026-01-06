@@ -74,6 +74,8 @@ export const addActivityArgsSchema = z.object({
   provider: companySchema.optional(),
   confirmationNumber: z.string().optional(),
   notes: z.string().optional(),
+  bookingUrl: z.string().url().optional(),
+  bookingProvider: z.string().optional(),
 });
 
 /**
@@ -333,4 +335,33 @@ export const addTravelerArgsSchema = z.object({
   dateOfBirth: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Must be YYYY-MM-DD format').optional(),
   relationship: z.string().optional(), // e.g., "partner", "spouse", "child", "friend", "parent"
   isPrimary: z.boolean().optional(),
+});
+
+// =============================================================================
+// Scratchpad Tools
+// =============================================================================
+
+/**
+ * add_to_scratchpad arguments schema
+ * Stores alternative recommendations for later consideration
+ */
+export const addToScratchpadArgsSchema = z.object({
+  segment: z.object({
+    type: z.enum(['ACTIVITY', 'HOTEL', 'FLIGHT', 'TRANSFER']),
+    name: z.string().min(1, 'Segment name is required'),
+    description: z.string().optional(),
+    location: z.object({
+      name: z.string().optional(),
+      city: z.string().optional(),
+      country: z.string().optional(),
+    }).optional(),
+    startTime: z.string().optional(),
+    price: z.object({
+      amount: z.number(),
+      currency: z.string(),
+    }).optional(),
+  }),
+  notes: z.string().min(1, 'Notes are required to explain why this is an alternative'),
+  priority: z.enum(['high', 'medium', 'low']),
+  tags: z.array(z.string()).optional(),
 });

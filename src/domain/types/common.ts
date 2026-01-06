@@ -48,6 +48,7 @@ export type SegmentType = (typeof SegmentType)[keyof typeof SegmentType];
 export const SegmentStatus = {
   TENTATIVE: 'TENTATIVE',
   CONFIRMED: 'CONFIRMED',
+  OPTION: 'OPTION', // Alternative being considered (not yet confirmed)
   WAITLISTED: 'WAITLISTED',
   CANCELLED: 'CANCELLED',
   COMPLETED: 'COMPLETED',

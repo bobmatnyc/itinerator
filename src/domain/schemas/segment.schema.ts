@@ -97,6 +97,15 @@ const baseSegmentFields = {
   inferred: z.boolean().optional(),
   /** Explanation of why segment was inferred (e.g., "Geographic gap between JFK and Manhattan Grand") */
   inferredReason: z.string().optional(),
+  /** Primary review/booking link URL */
+  sourceUrl: z.string().url().optional(),
+  /** Provider name for primary link (e.g., 'tripadvisor', 'yelp', 'google') */
+  sourceProvider: z.string().optional(),
+  /** Alternate review/booking links */
+  alternateUrls: z.array(z.object({
+    url: z.string().url(),
+    provider: z.string()
+  })).optional(),
 } as const;
 
 // ===========================
@@ -110,14 +119,14 @@ const flightSegmentBaseSchema = z.object({
   ...baseSegmentFields,
   /** Segment type discriminator */
   type: z.literal('FLIGHT'),
-  /** Operating airline */
-  airline: companySchema,
-  /** Flight number (e.g., AA123, BA4567, or combined B6887/B6788) */
-  flightNumber: z.string().regex(/^[A-Z0-9]{2,3}\d{1,4}([\/\-][A-Z0-9]{2,3}\d{1,4})?$/, 'Invalid flight number format'),
-  /** Origin airport */
-  origin: locationSchema,
-  /** Destination airport */
-  destination: locationSchema,
+  /** Operating airline (optional - may not be known when creating flight placeholder) */
+  airline: companySchema.optional(),
+  /** Flight number (e.g., AA123, BA4567, or combined B6887/B6788) - optional until confirmed */
+  flightNumber: z.string().regex(/^[A-Z0-9]{2,3}\d{1,4}([\/\-][A-Z0-9]{2,3}\d{1,4})?$/, 'Invalid flight number format').optional(),
+  /** Origin airport (optional - may not be known when creating flight placeholder) */
+  origin: locationSchema.optional(),
+  /** Destination airport (optional - may not be known when creating flight placeholder) */
+  destination: locationSchema.optional(),
   /** Departure terminal */
   departureTerminal: z.string().optional(),
   /** Arrival terminal */
@@ -260,6 +269,10 @@ const activitySegmentBaseSchema = z.object({
   category: z.string().optional(),
   /** Voucher or ticket number */
   voucherNumber: z.string().optional(),
+  /** Booking URL (link to GetYourGuide, Viator, etc.) */
+  bookingUrl: z.string().url().optional(),
+  /** Booking provider name (e.g., 'getyourguide', 'viator', 'klook') */
+  bookingProvider: z.string().optional(),
 });
 
 /**

@@ -9,6 +9,7 @@ import type { Location } from './location.js';
 import type { Money } from './money.js';
 import type { Segment } from './segment.js';
 import type { TravelPreferences, Traveler, TripTravelerPreferences } from './traveler.js';
+import type { Scratchpad } from './scratchpad.js';
 
 /**
  * Complete itinerary representing a trip
@@ -58,6 +59,8 @@ export interface Itinerary {
   preferences?: TravelPreferences;
   /** Trip-level traveler preferences (for trip planning) */
   tripPreferences?: TripTravelerPreferences;
+  /** Scratchpad for alternative segment recommendations */
+  scratchpad?: Scratchpad;
   /** Tags for organization */
   tags: string[];
   /** Additional metadata */

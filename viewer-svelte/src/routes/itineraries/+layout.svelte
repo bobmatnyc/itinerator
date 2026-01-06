@@ -8,6 +8,7 @@
     itinerariesLoading,
     itinerariesError,
     loadItineraries,
+    createItinerary,
   } from '$lib/stores/itineraries.svelte';
   import { toast } from '$lib/stores/toast.svelte';
   import { modal } from '$lib/stores/modal.svelte';
@@ -19,12 +20,38 @@
   // Get currently selected itinerary ID from URL
   let selectedId = $derived($page.params.id);
 
+  let creating = $state(false);
+
   onMount(() => {
     loadItineraries();
   });
 
   function handleSelect(id: string) {
     goto(`/itineraries/${id}`);
+  }
+
+  async function handleCreateNew() {
+    if (creating) return;
+    creating = true;
+    try {
+      const today = new Date().toISOString().split('T')[0];
+      const nextWeek = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+
+      const newItinerary = await createItinerary({
+        title: 'New Trip',
+        description: '',
+        startDate: today,
+        endDate: nextWeek
+      });
+
+      // Navigate to the new itinerary with AI mode enabled
+      await goto(`/itineraries/${newItinerary.id}?mode=ai`);
+    } catch (error) {
+      console.error('Failed to create itinerary:', error);
+      toast.error(error instanceof Error ? error.message : 'Failed to create itinerary');
+    } finally {
+      creating = false;
+    }
   }
 
   async function handleDelete(itinerary: any) {
@@ -70,10 +97,11 @@
           <h1 class="list-title">My Itineraries</h1>
           <button
             class="minimal-button primary"
-            onclick={() => goto('/')}
+            onclick={handleCreateNew}
+            disabled={creating}
             type="button"
           >
-            New
+            {creating ? 'Creating...' : 'New'}
           </button>
         </div>
 
@@ -97,10 +125,11 @@
               <p class="text-minimal-text-muted mb-4 text-sm">Start planning your next adventure!</p>
               <button
                 class="minimal-button primary"
-                onclick={() => goto('/')}
+                onclick={handleCreateNew}
+                disabled={creating}
                 type="button"
               >
-                Create Your First Itinerary
+                {creating ? 'Creating...' : 'Create Your First Itinerary'}
               </button>
             </div>
           {:else}

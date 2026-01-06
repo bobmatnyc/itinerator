@@ -6,7 +6,7 @@
    * - Fetches multiple images from Unsplash API
    * - Auto-rotates through images every 8 seconds
    * - Smooth fade transitions between images
-   * - Subtle opacity (15%) for readability
+   * - Moderate opacity (35%) for visibility while maintaining readability
    * - Gradient overlay for text contrast
    */
 
@@ -30,7 +30,7 @@
     destination,
     imageCount = 5,
     interval = 8000,
-    opacity = 0.15
+    opacity = 0.35
   }: Props = $props();
 
   let images = $state<UnsplashImage[]>([]);

@@ -106,6 +106,7 @@ export const segmentTypeSchema = z.enum([
 export const segmentStatusSchema = z.enum([
   'TENTATIVE',
   'CONFIRMED',
+  'OPTION', // Alternative being considered (not yet confirmed)
   'WAITLISTED',
   'CANCELLED',
   'COMPLETED',

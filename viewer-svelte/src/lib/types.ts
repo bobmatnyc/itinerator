@@ -1,5 +1,9 @@
 // Core types for the viewer application
 
+// Re-export scratchpad types
+export type { Scratchpad, ScratchpadItem, ScratchpadPriority } from './types/scratchpad';
+export { getItemsByType, getCountByType } from './types/scratchpad';
+
 export interface Location {
   name: string;
   city?: string;
@@ -35,6 +39,10 @@ export interface BaseSegment {
   metadata?: Record<string, unknown>;
   inferred?: boolean;
   inferredReason?: string;
+  // Review/booking links
+  sourceUrl?: string;
+  sourceProvider?: string;
+  alternateUrls?: Array<{ url: string; provider: string }>;
 }
 
 export interface FlightSegment extends BaseSegment {
@@ -65,6 +73,10 @@ export interface ActivitySegment extends BaseSegment {
   name: string;
   description?: string;
   location: Location;
+  category?: string;
+  voucherNumber?: string;
+  bookingUrl?: string;
+  bookingProvider?: string;
 }
 
 export interface TransferSegment extends BaseSegment {
@@ -74,13 +86,42 @@ export interface TransferSegment extends BaseSegment {
   dropoffLocation: Location;
 }
 
+export interface MeetingSegment extends BaseSegment {
+  type: 'MEETING';
+  title: string;
+  location: Location;
+  organizer?: string;
+  attendees?: string[];
+  agenda?: string;
+  meetingUrl?: string;
+}
+
 export interface CustomSegment extends BaseSegment {
   type: 'CUSTOM';
   title: string;
   description?: string;
+  location?: Location;
 }
 
-export type Segment = FlightSegment | HotelSegment | ActivitySegment | TransferSegment | CustomSegment;
+export type Segment = FlightSegment | HotelSegment | MeetingSegment | ActivitySegment | TransferSegment | CustomSegment;
+
+export interface TravelStyle {
+  budget: 'budget' | 'moderate' | 'luxury' | 'ultra-luxury';
+  pace: 'relaxed' | 'moderate' | 'packed';
+  interests: string[];
+  diningPreferences: string[];
+  accommodationPreferences: string[];
+}
+
+export interface TravelPreferences {
+  seatPreference?: 'AISLE' | 'WINDOW' | 'MIDDLE';
+  mealPreference?: string;
+  hotelChainPreference?: string[];
+  accessibility?: string[];
+  homeCountry?: string;
+  homeCurrency?: string;
+  travelStyle?: TravelStyle;
+}
 
 export interface Traveler {
   id: string;
@@ -94,6 +135,7 @@ export interface Traveler {
   passportNumber?: string;
   passportExpiry?: string;
   passportCountry?: string;
+  preferences?: TravelPreferences;
 }
 
 export interface TripTravelerPreferences {
@@ -107,6 +149,7 @@ export interface TripTravelerPreferences {
   accommodationPreference?: string;
   activityPreferences?: string[];
   avoidances?: string[];
+  homeCurrency?: string;
 }
 
 export interface Itinerary {

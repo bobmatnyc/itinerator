@@ -28,6 +28,7 @@ import {
   addTransferArgsSchema,
   addMeetingArgsSchema,
   addTravelerArgsSchema,
+  addToScratchpadArgsSchema,
   updateItineraryArgsSchema,
   updatePreferencesArgsSchema,
   getSegmentArgsSchema,
@@ -81,6 +82,15 @@ export class ToolExecutor {
   private currentItinerary?: any; // Cache current itinerary for context
 
   constructor(private readonly deps: ToolExecutorDependencies = {}) {}
+
+  /**
+   * Generate a booking URL for an activity
+   * Creates a search link to GetYourGuide by default
+   */
+  private generateActivityBookingUrl(activityName: string, location: string): string {
+    const query = encodeURIComponent(`${activityName} ${location}`);
+    return `https://www.getyourguide.com/s/?q=${query}`;
+  }
 
   /**
    * Execute a tool call
@@ -141,6 +151,10 @@ export class ToolExecutor {
 
         case 'add_traveler':
           result = await this.handleAddTraveler(itineraryId, args);
+          break;
+
+        case 'add_to_scratchpad':
+          result = await this.handleAddToScratchpad(itineraryId, args);
           break;
 
         case 'add_flight':
@@ -697,6 +711,67 @@ export class ToolExecutor {
   }
 
   /**
+   * Add to scratchpad handler
+   * Stores alternative recommendations for later consideration
+   */
+  private async handleAddToScratchpad(itineraryId: ItineraryId, args: unknown): Promise<unknown> {
+    // Validate arguments
+    const validation = addToScratchpadArgsSchema.safeParse(args);
+    if (!validation.success) {
+      throw new Error(`Invalid add_to_scratchpad arguments: ${validation.error.message}`);
+    }
+
+    if (!this.deps.itineraryService) {
+      throw new Error('ItineraryService not configured');
+    }
+
+    // Get current itinerary
+    const itinResult = await this.deps.itineraryService.get(itineraryId);
+    if (!itinResult.success) {
+      throw new Error(`Failed to get itinerary: ${itinResult.error.message}`);
+    }
+
+    const itinerary = itinResult.value;
+
+    // Initialize scratchpad if needed
+    if (!itinerary.scratchpad) {
+      itinerary.scratchpad = [];
+    }
+
+    const params = validation.data;
+
+    // Create scratchpad item
+    const scratchpadItem = {
+      id: generateSegmentId(),
+      segment: params.segment,
+      notes: params.notes,
+      priority: params.priority,
+      tags: params.tags || [],
+      addedAt: new Date(),
+    };
+
+    // Add to scratchpad
+    itinerary.scratchpad.push(scratchpadItem);
+    itinerary.updatedAt = new Date();
+
+    // Save updated itinerary
+    const saveResult = await this.deps.itineraryService.update(itineraryId, {
+      scratchpad: itinerary.scratchpad,
+    });
+
+    if (!saveResult.success) {
+      throw new Error(`Failed to add to scratchpad: ${saveResult.error.message}`);
+    }
+
+    return {
+      success: true,
+      scratchpadId: scratchpadItem.id,
+      message: `Added "${params.segment.name}" to scratchpad as ${params.priority} priority alternative`,
+      itineraryChanged: true,
+    };
+  }
+
+  /**
    * Add flight handler
    */
   private async handleAddFlight(itineraryId: ItineraryId, args: unknown): Promise<unknown> {
@@ -872,6 +947,10 @@ export class ToolExecutor {
       endTime = new Date(startTime.getTime() + 2 * 60 * 60 * 1000);
     }
 
+    // Generate booking URL if not provided
+    const bookingUrl = params.bookingUrl || this.generateActivityBookingUrl(params.name, params.location.city || params.location.name);
+    const bookingProvider = params.bookingProvider || 'GetYourGuide';
+
     const segment: Omit<Segment, 'id'> = {
       type: SegmentType.ACTIVITY,
       status: SegmentStatus.CONFIRMED,
@@ -891,6 +970,8 @@ export class ToolExecutor {
       price: params.price,
       confirmationNumber: params.confirmationNumber,
       voucherNumber: params.confirmationNumber,
+      bookingUrl,
+      bookingProvider,
       notes: params.notes,
       metadata: {},
     } as any;

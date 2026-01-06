@@ -282,6 +282,14 @@ export const ADD_ACTIVITY_TOOL: ToolDefinition = {
           type: 'string',
           description: 'Additional notes, requirements, or what\'s included',
         },
+        bookingUrl: {
+          type: 'string',
+          description: 'Booking URL for the activity (e.g., GetYourGuide, Viator, Klook search link)',
+        },
+        bookingProvider: {
+          type: 'string',
+          description: 'Booking provider name (e.g., "GetYourGuide", "Viator", "Klook")',
+        },
       },
       required: ['name', 'location', 'startTime'],
     },
@@ -1056,6 +1064,80 @@ export const ADD_TRAVELER_TOOL: ToolDefinition = {
 };
 
 /**
+ * Tool: add_to_scratchpad
+ * Add an alternative recommendation to the scratchpad for later consideration
+ */
+export const ADD_TO_SCRATCHPAD_TOOL: ToolDefinition = {
+  type: 'function',
+  function: {
+    name: 'add_to_scratchpad',
+    description: 'Add an alternative recommendation to the scratchpad for later consideration. Use this for backup options, alternatives, or suggestions that the user might want to consider but are not the primary recommendation. The primary recommendation should go directly to the itinerary via add_activity, add_hotel, etc.',
+    parameters: {
+      type: 'object',
+      properties: {
+        segment: {
+          type: 'object',
+          description: 'The segment to add as an alternative (same structure as add_activity, add_hotel, etc.)',
+          properties: {
+            type: {
+              type: 'string',
+              enum: ['ACTIVITY', 'HOTEL', 'FLIGHT', 'TRANSFER'],
+              description: 'Type of segment',
+            },
+            name: {
+              type: 'string',
+              description: 'Name of the activity, hotel, or other segment',
+            },
+            description: {
+              type: 'string',
+              description: 'Description of the segment',
+            },
+            location: {
+              type: 'object',
+              description: 'Location details',
+              properties: {
+                name: { type: 'string' },
+                city: { type: 'string' },
+                country: { type: 'string' },
+              },
+            },
+            startTime: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Start date/time (ISO 8601 format)',
+            },
+            price: {
+              type: 'object',
+              description: 'Price information',
+              properties: {
+                amount: { type: 'number' },
+                currency: { type: 'string' },
+              },
+            },
+          },
+          required: ['type', 'name'],
+        },
+        notes: {
+          type: 'string',
+          description: 'Why this is being recommended as an alternative (e.g., "Backup option if first choice is booked", "Budget-friendly alternative", "More romantic ambiance")',
+        },
+        priority: {
+          type: 'string',
+          enum: ['high', 'medium', 'low'],
+          description: 'Priority level for this alternative - high = strong backup, medium = good option, low = just a suggestion',
+        },
+        tags: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Tags to categorize this alternative (e.g., ["backup", "romantic", "budget-friendly", "family-friendly", "adventure"])',
+        },
+      },
+      required: ['segment', 'notes', 'priority'],
+    },
+  },
+};
+
+/**
  * Help agent tools
  * Minimal set for answering help questions and switching to Trip Designer
  */
@@ -1078,6 +1160,7 @@ export const ESSENTIAL_TOOLS: ToolDefinition[] = [
   ADD_FLIGHT_TOOL,
   ADD_HOTEL_TOOL,
   ADD_ACTIVITY_TOOL,
+  ADD_TO_SCRATCHPAD_TOOL,
   SEARCH_WEB_TOOL,
   SEARCH_FLIGHTS_TOOL,
   SEARCH_HOTELS_TOOL,
@@ -1097,6 +1180,7 @@ export const ALL_TOOLS: ToolDefinition[] = [
   ADD_ACTIVITY_TOOL,
   ADD_TRANSFER_TOOL,
   ADD_MEETING_TOOL,
+  ADD_TO_SCRATCHPAD_TOOL,
   UPDATE_SEGMENT_TOOL,
   DELETE_SEGMENT_TOOL,
   MOVE_SEGMENT_TOOL,
@@ -1127,6 +1211,7 @@ export const ToolName = {
   ADD_ACTIVITY: 'add_activity',
   ADD_TRANSFER: 'add_transfer',
   ADD_MEETING: 'add_meeting',
+  ADD_TO_SCRATCHPAD: 'add_to_scratchpad',
   UPDATE_SEGMENT: 'update_segment',
   DELETE_SEGMENT: 'delete_segment',
   MOVE_SEGMENT: 'move_segment',

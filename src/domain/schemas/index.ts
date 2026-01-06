@@ -38,6 +38,7 @@ export { currencyCodeSchema, moneyInputSchema, moneySchema } from './money.schem
 export {
   loyaltyProgramSchema,
   travelPreferencesSchema,
+  travelStyleSchema,
   travelerInputSchema,
   travelerSchema,
   type TravelerCreateInput,
@@ -64,6 +65,24 @@ export {
   type TransferSegmentInput,
 } from './segment.schema.js';
 
+// Scratchpad schemas
+export {
+  addToScratchpadSchema,
+  scratchpadByTypeSchema,
+  scratchpadItemIdSchema,
+  scratchpadItemSchema,
+  scratchpadPrioritySchema,
+  scratchpadSchema,
+  scratchpadSourceSchema,
+  swapResultSchema,
+  type AddToScratchpadInput,
+  type ScratchpadInput,
+  type ScratchpadItemInput,
+  type ScratchpadItemOutput,
+  type ScratchpadOutput,
+  type SwapResultOutput,
+} from './scratchpad.schema.js';
+
 // Itinerary schemas
 export {
   itineraryCreateSchema,
@@ -83,6 +102,7 @@ export {
   addMeetingArgsSchema,
   addTransferArgsSchema,
   addTravelerArgsSchema,
+  addToScratchpadArgsSchema,
   deleteSegmentArgsSchema,
   geocodeLocationArgsSchema,
   getDistanceArgsSchema,

@@ -4,6 +4,8 @@
   import { apiClient } from '../api';
   import TravelerFormDialog from './TravelerFormDialog.svelte';
   import PreferencesFormDialog from './PreferencesFormDialog.svelte';
+  import TravelerPreferencesDialog from './TravelerPreferencesDialog.svelte';
+  import type { TravelPreferences } from '../types';
 
   let { itinerary = $bindable() }: { itinerary: Itinerary } = $props();
 
@@ -16,7 +18,11 @@
   // Dialog state
   let travelerDialogOpen = $state(false);
   let preferencesDialogOpen = $state(false);
+  let travelerPreferencesDialogOpen = $state(false);
   let editingTraveler = $state<Traveler | undefined>(undefined);
+  let editingTravelerPreferences = $state<{ traveler: Traveler; preferences: TravelPreferences } | undefined>(undefined);
+  let showDeleteModal = $state(false);
+  let travelerToDelete = $state<string | null>(null);
 
   // Open dialogs
   function openAddTraveler() {
@@ -33,6 +39,14 @@
     preferencesDialogOpen = true;
   }
 
+  function openEditTravelerPreferences(traveler: Traveler) {
+    editingTravelerPreferences = {
+      traveler,
+      preferences: traveler.preferences || {}
+    };
+    travelerPreferencesDialogOpen = true;
+  }
+
   // Save handlers
   async function handleSaveTraveler(data: Partial<Traveler>) {
     if (editingTraveler) {
@@ -40,21 +54,50 @@
       const updated = await apiClient.updateTraveler(itinerary.id, editingTraveler.id, data);
       itinerary = updated;
     } else {
-      // Add new traveler
-      const updated = await apiClient.addTraveler(itinerary.id, data);
+      // Add new traveler - firstName and lastName are validated by the form
+      const updated = await apiClient.addTraveler(itinerary.id, data as {
+        firstName: string;
+        lastName: string;
+        type?: string;
+        email?: string;
+        phone?: string;
+      });
       itinerary = updated;
     }
   }
 
-  async function handleRemoveTraveler(travelerId: string) {
-    if (!confirm('Are you sure you want to remove this traveler?')) return;
+  function handleDeleteClick(travelerId: string) {
+    travelerToDelete = travelerId;
+    showDeleteModal = true;
+  }
 
-    const updated = await apiClient.deleteTraveler(itinerary.id, travelerId);
-    itinerary = updated;
+  async function confirmDelete() {
+    if (travelerToDelete) {
+      const updated = await apiClient.deleteTraveler(itinerary.id, travelerToDelete);
+      itinerary = updated;
+    }
+    showDeleteModal = false;
+    travelerToDelete = null;
+  }
+
+  function cancelDelete() {
+    showDeleteModal = false;
+    travelerToDelete = null;
   }
 
   async function handleSavePreferences(data: Partial<TripTravelerPreferences>) {
     const updated = await apiClient.updateTripPreferences(itinerary.id, data);
+    itinerary = updated;
+  }
+
+  async function handleSaveTravelerPreferences(data: TravelPreferences) {
+    if (!editingTravelerPreferences) return;
+
+    const updated = await apiClient.updateTraveler(
+      itinerary.id,
+      editingTravelerPreferences.traveler.id,
+      { preferences: data }
+    );
     itinerary = updated;
   }
 
@@ -110,10 +153,13 @@
                 </h3>
                 <div class="traveler-actions">
                   <span class="traveler-type">{getTravelerTypeLabel(traveler.type)}</span>
+                  <button class="btn-icon" onclick={() => openEditTravelerPreferences(traveler)} title="Preferences">
+                    ⚙️
+                  </button>
                   <button class="btn-icon" onclick={() => openEditTraveler(traveler)} title="Edit">
                     ✏️
                   </button>
-                  <button class="btn-icon" onclick={() => handleRemoveTraveler(traveler.id)} title="Remove">
+                  <button class="btn-icon" onclick={() => handleDeleteClick(traveler.id)} title="Remove">
                     🗑️
                   </button>
                 </div>
@@ -129,6 +175,16 @@
                   <span class="detail-label">Phone:</span>
                   {traveler.phone}
                 </p>
+              {/if}
+              {#if traveler.preferences?.travelStyle}
+                <div class="traveler-preferences-summary">
+                  <span class="preference-badge">
+                    {traveler.preferences.travelStyle.budget} • {traveler.preferences.travelStyle.pace}
+                  </span>
+                  {#if traveler.preferences.homeCurrency}
+                    <span class="preference-badge">{traveler.preferences.homeCurrency}</span>
+                  {/if}
+                </div>
               {/if}
             </div>
           {/each}
@@ -236,6 +292,27 @@
   onSave={handleSavePreferences}
   onCancel={() => {}}
 />
+
+<TravelerPreferencesDialog
+  bind:open={travelerPreferencesDialogOpen}
+  preferences={editingTravelerPreferences?.preferences}
+  onSave={handleSaveTravelerPreferences}
+  onCancel={() => {}}
+/>
+
+<!-- Delete Confirmation Modal -->
+{#if showDeleteModal}
+  <div class="modal-backdrop" onclick={cancelDelete} role="button" tabindex="-1">
+    <div class="modal-content" onclick={(e) => e.stopPropagation()} role="dialog">
+      <h3>Delete Traveler</h3>
+      <p>Are you sure you want to remove this traveler?</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick={cancelDelete}>Cancel</button>
+        <button class="btn-delete" onclick={confirmDelete}>Delete</button>
+      </div>
+    </div>
+  </div>
+{/if}
 
 <style>
   .travelers-view {
@@ -359,6 +436,26 @@
     margin-right: 0.5rem;
   }
 
+  .traveler-preferences-summary {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .preference-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background-color: #dbeafe;
+    color: #1e40af;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+
   .preferences-grid {
     display: grid;
     gap: 1rem;
@@ -423,6 +520,68 @@
     text-align: center;
     padding: 2rem;
     font-style: italic;
+  }
+
+  /* Delete Modal */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .modal-content h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .modal-content p {
+    margin: 0 0 1rem;
+    color: #6b7280;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+  }
+
+  .btn-cancel {
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    background: white;
+    border-radius: 0.375rem;
+    cursor: pointer;
+  }
+
+  .btn-cancel:hover {
+    background: #f3f4f6;
+  }
+
+  .btn-delete {
+    padding: 0.5rem 1rem;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+  }
+
+  .btn-delete:hover {
+    background: #dc2626;
   }
 
   /* Mobile responsiveness */

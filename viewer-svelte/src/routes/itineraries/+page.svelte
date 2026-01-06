@@ -1,5 +1,33 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { createItinerary } from '$lib/stores/itineraries.svelte';
+  import { toast } from '$lib/stores/toast.svelte';
+
+  let creating = $state(false);
+
+  async function handleCreateNew() {
+    if (creating) return;
+    creating = true;
+    try {
+      const today = new Date().toISOString().split('T')[0];
+      const nextWeek = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+
+      const newItinerary = await createItinerary({
+        title: 'New Trip',
+        description: '',
+        startDate: today,
+        endDate: nextWeek
+      });
+
+      // Navigate to the new itinerary with AI mode enabled
+      await goto(`/itineraries/${newItinerary.id}?mode=ai`);
+    } catch (error) {
+      console.error('Failed to create itinerary:', error);
+      toast.error(error instanceof Error ? error.message : 'Failed to create itinerary');
+    } finally {
+      creating = false;
+    }
+  }
 </script>
 
 <div class="welcome-container">
@@ -12,10 +40,11 @@
     <div class="welcome-actions">
       <button
         class="minimal-button primary"
-        onclick={() => goto('/')}
+        onclick={handleCreateNew}
+        disabled={creating}
         type="button"
       >
-        Create New Itinerary
+        {creating ? 'Creating...' : 'Create New Itinerary'}
       </button>
     </div>
   </div>

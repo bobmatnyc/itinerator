@@ -24,6 +24,22 @@ export const loyaltyProgramSchema = z.object({
 });
 
 /**
+ * Travel style schema
+ */
+export const travelStyleSchema = z.object({
+  /** Budget level */
+  budget: z.enum(['budget', 'moderate', 'luxury', 'ultra-luxury']).default('moderate'),
+  /** Travel pace */
+  pace: z.enum(['relaxed', 'moderate', 'packed']).default('moderate'),
+  /** Areas of interest */
+  interests: z.array(z.string()).default([]),
+  /** Dining preferences */
+  diningPreferences: z.array(z.string()).default([]),
+  /** Accommodation preferences */
+  accommodationPreferences: z.array(z.string()).default([]),
+});
+
+/**
  * Travel preferences schema
  */
 export const travelPreferencesSchema = z.object({
@@ -35,6 +51,16 @@ export const travelPreferencesSchema = z.object({
   hotelChainPreference: z.array(z.string()).optional(),
   /** Accessibility requirements */
   accessibility: z.array(z.string()).optional(),
+  /** Home country for currency conversion */
+  homeCountry: z.string().default('USA'),
+  /** Home currency (ISO 4217 code) */
+  homeCurrency: z
+    .string()
+    .length(3, 'Currency must be 3-letter ISO 4217 code')
+    .transform((val) => val.toUpperCase())
+    .default('USD'),
+  /** Travel style preferences */
+  travelStyle: travelStyleSchema.optional(),
 });
 
 /**

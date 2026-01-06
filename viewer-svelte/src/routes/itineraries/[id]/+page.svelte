@@ -11,6 +11,7 @@
     selectedItineraryLoading,
     selectItinerary,
     deleteItinerary,
+    createItinerary,
   } from '$lib/stores/itineraries.svelte';
   import { visualizationStore } from '$lib/stores/visualization.svelte';
   import { navigationStore } from '$lib/stores/navigation.svelte';
@@ -44,6 +45,8 @@
   let resizeStartX = $state(0);
   let resizeStartWidth = $state(0);
 
+  let creating = $state(false);
+
   // Visualization state from store
   let isPaneVisible = $derived(visualizationStore.isPaneVisible);
   let historyLength = $derived(visualizationStore.history.length);
@@ -60,6 +63,9 @@
   // Load itineraries and selected itinerary
   onMount(() => {
     loadItineraries();
+
+    // Sync navigation state from URL parameters
+    navigationStore.syncFromUrl($page.url.searchParams);
 
     // Add mouse event listeners for resizing
     const handleMouseMove = (e: MouseEvent) => {
@@ -162,6 +168,30 @@
       toast.error(errorMessage);
     }
   }
+
+  async function handleCreateNew() {
+    if (creating) return;
+    creating = true;
+    try {
+      const today = new Date().toISOString().split('T')[0];
+      const nextWeek = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+
+      const newItinerary = await createItinerary({
+        title: 'New Trip',
+        description: '',
+        startDate: today,
+        endDate: nextWeek
+      });
+
+      // Navigate to the new itinerary with AI mode enabled
+      await goto(`/itineraries/${newItinerary.id}?mode=ai`);
+    } catch (error) {
+      console.error('Failed to create itinerary:', error);
+      toast.error(error instanceof Error ? error.message : 'Failed to create itinerary');
+    } finally {
+      creating = false;
+    }
+  }
 </script>
 
 <div class="app-container">
@@ -184,10 +214,11 @@
           <h1 class="list-title">My Itineraries</h1>
           <button
             class="minimal-button primary"
-            onclick={() => goto('/')}
+            onclick={handleCreateNew}
+            disabled={creating}
             type="button"
           >
-            New
+            {creating ? 'Creating...' : 'New'}
           </button>
         </div>
 
@@ -211,10 +242,11 @@
               <p class="text-minimal-text-muted mb-4 text-sm">Start planning your next adventure!</p>
               <button
                 class="minimal-button primary"
-                onclick={() => goto('/')}
+                onclick={handleCreateNew}
+                disabled={creating}
                 type="button"
               >
-                Create Your First Itinerary
+                {creating ? 'Creating...' : 'Create Your First Itinerary'}
               </button>
             </div>
           {:else}

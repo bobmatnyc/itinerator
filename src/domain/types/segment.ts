@@ -76,6 +76,12 @@ interface BaseSegment {
   inferred?: boolean;
   /** Explanation of why segment was inferred (e.g., "Geographic gap between JFK and Manhattan Grand") */
   inferredReason?: string;
+  /** Primary review/booking link URL */
+  sourceUrl?: string;
+  /** Provider name for primary link (e.g., 'tripadvisor', 'yelp', 'google') */
+  sourceProvider?: string;
+  /** Alternate review/booking links */
+  alternateUrls?: Array<{ url: string; provider: string }>;
 }
 
 /**
@@ -83,14 +89,14 @@ interface BaseSegment {
  */
 export interface FlightSegment extends BaseSegment {
   type: typeof SegmentType.FLIGHT;
-  /** Operating airline */
-  airline: Company;
-  /** Flight number */
-  flightNumber: string;
-  /** Origin airport */
-  origin: Location;
-  /** Destination airport */
-  destination: Location;
+  /** Operating airline (optional - may not be known when creating flight placeholder) */
+  airline?: Company;
+  /** Flight number (optional - may not be known until confirmed) */
+  flightNumber?: string;
+  /** Origin airport (optional - may not be known when creating flight placeholder) */
+  origin?: Location;
+  /** Destination airport (optional - may not be known when creating flight placeholder) */
+  destination?: Location;
   /** Departure terminal */
   departureTerminal?: string;
   /** Arrival terminal */
@@ -174,6 +180,10 @@ export interface ActivitySegment extends BaseSegment {
   category?: string;
   /** Voucher or ticket number */
   voucherNumber?: string;
+  /** Booking URL (link to GetYourGuide, Viator, etc.) */
+  bookingUrl?: string;
+  /** Booking provider name (e.g., 'getyourguide', 'viator', 'klook') */
+  bookingProvider?: string;
 }
 
 /**

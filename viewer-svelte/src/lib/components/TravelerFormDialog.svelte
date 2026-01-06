@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Traveler } from '../types';
+  import { formatPhoneNumber } from '$lib/utils/phone-format';
 
   let {
     open = $bindable(false),
@@ -24,6 +25,28 @@
 
   // Validation
   let isValid = $derived(firstName.trim().length > 0 && lastName.trim().length > 0);
+
+  // Phone formatting handler
+  function handlePhoneInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const cursorPosition = input.selectionStart || 0;
+    const previousLength = input.value.length;
+
+    // Format the phone number
+    const formatted = formatPhoneNumber(input.value);
+    phone = formatted;
+
+    // Preserve cursor position relative to digits
+    // This prevents cursor from jumping when formatting adds characters
+    const lengthDiff = formatted.length - previousLength;
+    const newPosition = cursorPosition + lengthDiff;
+
+    // Apply the formatted value and restore cursor position
+    setTimeout(() => {
+      input.value = formatted;
+      input.setSelectionRange(newPosition, newPosition);
+    }, 0);
+  }
 
   async function handleSubmit() {
     if (!isValid) return;
@@ -130,7 +153,8 @@
             id="phone"
             type="tel"
             bind:value={phone}
-            placeholder="+1 (555) 123-4567"
+            oninput={handlePhoneInput}
+            placeholder="(555) 123-4567"
           />
         </div>
 

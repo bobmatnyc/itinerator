@@ -205,8 +205,14 @@ class NavigationStore {
     const mode = params.get('mode');
     const view = params.get('view');
 
-    // Handle mode parameter
-    if (mode === 'help') {
+    // Handle mode parameter for edit mode (ai/manual)
+    if (mode === 'ai' || mode === 'manual') {
+      this.editMode = mode;
+      // When switching to AI mode, ensure chat panel is visible
+      if (mode === 'ai') {
+        this.leftPaneTab = 'chat';
+      }
+    } else if (mode === 'help') {
       this.goToHelp();
       return;
     }

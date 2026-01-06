@@ -92,3 +92,7 @@ export {
   createVectraKnowledgeService,
 } from './knowledge-factory.js';
 export type { KnowledgeBackend } from './knowledge-factory.js';
+
+// Currency exchange service
+export { CurrencyExchangeService } from './currency-exchange.service.js';
+export type { CurrencyExchangeConfig } from './currency-exchange.service.js';

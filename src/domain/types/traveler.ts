@@ -19,6 +19,22 @@ export interface LoyaltyProgram {
 }
 
 /**
+ * Travel style preferences
+ */
+export interface TravelStyle {
+  /** Budget level */
+  budget: 'budget' | 'moderate' | 'luxury' | 'ultra-luxury';
+  /** Travel pace */
+  pace: 'relaxed' | 'moderate' | 'packed';
+  /** Areas of interest */
+  interests: string[];
+  /** Dining preferences */
+  diningPreferences: string[];
+  /** Accommodation preferences */
+  accommodationPreferences: string[];
+}
+
+/**
  * Travel preferences (per-traveler)
  */
 export interface TravelPreferences {
@@ -30,6 +46,12 @@ export interface TravelPreferences {
   hotelChainPreference?: string[];
   /** Accessibility requirements */
   accessibility?: string[];
+  /** Home country for currency conversion */
+  homeCountry?: string;
+  /** Home currency (ISO 4217 code) */
+  homeCurrency?: string;
+  /** Travel style preferences */
+  travelStyle?: TravelStyle;
 }
 
 /**

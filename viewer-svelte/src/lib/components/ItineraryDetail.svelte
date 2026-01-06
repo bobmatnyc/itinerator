@@ -1,10 +1,11 @@
 <script lang="ts">
-  import type { Itinerary, Segment } from '$lib/types';
+  import type { Itinerary, Segment, Scratchpad, ScratchpadItem } from '$lib/types';
   import SegmentCard from './SegmentCard.svelte';
   import SegmentEditor from './SegmentEditor.svelte';
   import AddSegmentModal from './AddSegmentModal.svelte';
   import DestinationBackgroundSlideshow from './DestinationBackgroundSlideshow.svelte';
   import ImportDialog from './ImportDialog.svelte';
+  import ScratchpadPanel from './ScratchpadPanel.svelte';
   import { updateSegment, deleteSegment, addSegment, updateItinerary } from '$lib/stores/itineraries.svelte';
   import { toast } from '$lib/stores/toast.svelte';
 
@@ -26,6 +27,12 @@
   let editingSegmentId = $state<string | null>(null);
   let showAddSegmentModal = $state(false);
   let showImportDialog = $state(false);
+  let scratchpadOpen = $state(false);
+  let scratchpad = $state<Scratchpad>({
+    items: [],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  });
 
   // Manual edit mode state
   let isEditingMetadata = $state(false);
@@ -36,6 +43,9 @@
 
   // Auto-enable editing when in manual mode
   let inManualEditMode = $derived(editMode === 'manual');
+
+  // Get target currency for price conversions (from trip preferences or default to USD)
+  let targetCurrency = $derived((itinerary.tripPreferences?.homeCurrency as any) || 'USD');
 
   function handleEditManually() {
     if (onEditManually) {
@@ -124,6 +134,74 @@
 
   function handleCancelDelete() {
     showDeleteConfirm = false;
+  }
+
+  // Scratchpad handlers
+  async function handleSwap(scratchpadItemId: string, existingSegmentId: string) {
+    try {
+      const response = await fetch(`/api/v1/itineraries/${itinerary.id}/scratchpad/${scratchpadItemId}/swap`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ existingSegmentId })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to swap segment');
+      }
+
+      // Remove from scratchpad
+      scratchpad.items = scratchpad.items.filter(item => item.id !== scratchpadItemId);
+      scratchpad.updatedAt = new Date();
+
+      toast.success('Segment swapped successfully');
+    } catch (error) {
+      console.error('Failed to swap segment:', error);
+      toast.error('Failed to swap segment. Please try again.');
+    }
+  }
+
+  async function handleAddToDay(scratchpadItemId: string, dayNumber: number) {
+    try {
+      const response = await fetch(`/api/v1/itineraries/${itinerary.id}/scratchpad/${scratchpadItemId}/add`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ dayNumber })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add segment');
+      }
+
+      // Remove from scratchpad
+      scratchpad.items = scratchpad.items.filter(item => item.id !== scratchpadItemId);
+      scratchpad.updatedAt = new Date();
+
+      toast.success('Segment added to itinerary');
+    } catch (error) {
+      console.error('Failed to add segment:', error);
+      toast.error('Failed to add segment. Please try again.');
+    }
+  }
+
+  async function handleRemoveFromScratchpad(itemId: string) {
+    try {
+      const response = await fetch(`/api/v1/itineraries/${itinerary.id}/scratchpad/${itemId}`, {
+        method: 'DELETE'
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to remove from scratchpad');
+      }
+
+      // Remove from local state
+      scratchpad.items = scratchpad.items.filter(item => item.id !== itemId);
+      scratchpad.updatedAt = new Date();
+
+      toast.success('Removed from recommendations');
+    } catch (error) {
+      console.error('Failed to remove from scratchpad:', error);
+      toast.error('Failed to remove. Please try again.');
+    }
   }
 
   // Format date range - use UTC to avoid timezone issues
@@ -297,10 +375,25 @@
         return {
           date: dateKey,
           dateDisplay,
-          segments: segments.sort(
-            (a, b) =>
-              new Date(a.startDatetime).getTime() - new Date(b.startDatetime).getTime()
-          ),
+          segments: segments.sort((a, b) => {
+            // Hotels/accommodations should always be last for the day
+            const aIsStay = a.type === 'HOTEL' || a.type === 'ACCOMMODATION';
+            const bIsStay = b.type === 'HOTEL' || b.type === 'ACCOMMODATION';
+
+            if (aIsStay && !bIsStay) return 1;  // a (hotel) goes after b
+            if (!aIsStay && bIsStay) return -1; // b (hotel) goes after a
+
+            // For same type, sort chronologically
+            const aTime = new Date(a.startDatetime).getTime();
+            const bTime = new Date(b.startDatetime).getTime();
+
+            // Handle invalid dates
+            if (isNaN(aTime) && isNaN(bTime)) return 0;
+            if (isNaN(aTime)) return 1;  // Put invalid dates at the end
+            if (isNaN(bTime)) return -1;
+
+            return aTime - bTime;
+          }),
         };
       })
       .sort((a, b) => a.date.localeCompare(b.date));
@@ -325,19 +418,31 @@
     {#if inManualEditMode && !isEditingMetadata}
       <!-- Manual mode: Show edit button -->
       <div class="metadata-header">
+        <div class="button-group">
+          <button
+            class="minimal-button"
+            onclick={startEditingMetadata}
+            type="button"
+          >
+            ✏️ Edit Details
+          </button>
+          <button
+            class="minimal-button"
+            onclick={() => showImportDialog = true}
+            type="button"
+          >
+            📥 Import
+          </button>
+        </div>
         <button
-          class="minimal-button"
-          onclick={startEditingMetadata}
+          class="minimal-button recommendations-button"
+          onclick={() => scratchpadOpen = true}
           type="button"
         >
-          ✏️ Edit Details
-        </button>
-        <button
-          class="minimal-button"
-          onclick={() => showImportDialog = true}
-          type="button"
-        >
-          📥 Import
+          💡 Recommendations
+          {#if scratchpad.items.length > 0}
+            <span class="scratchpad-badge">{scratchpad.items.length}</span>
+          {/if}
         </button>
       </div>
     {/if}
@@ -488,6 +593,7 @@
                   editMode={inManualEditMode}
                   onEdit={inManualEditMode ? () => handleEditSegment(segment.id) : undefined}
                   onDelete={inManualEditMode ? () => handleDeleteSegment(segment.id) : undefined}
+                  {targetCurrency}
                 />
               {/if}
             {/each}
@@ -672,7 +778,31 @@
 
   /* Metadata editor styles */
   .metadata-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 1rem;
+  }
+
+  .recommendations-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+  }
+
+  .scratchpad-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    padding: 0 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    background-color: #6366f1;
+    color: white;
   }
 
   .metadata-editor {
@@ -748,3 +878,13 @@
     onComplete={handleImportComplete}
   />
 {/if}
+
+<!-- Scratchpad Panel -->
+<ScratchpadPanel
+  bind:isOpen={scratchpadOpen}
+  {scratchpad}
+  itinerarySegments={itinerary.segments}
+  onSwap={handleSwap}
+  onAddToDay={handleAddToDay}
+  onRemove={handleRemoveFromScratchpad}
+/>

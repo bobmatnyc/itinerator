@@ -203,6 +203,17 @@
         return undefined;
     }
   }
+
+  // Sort segments with hotels/accommodations last
+  function sortSegments(segments: ExpandedSegment[]): ExpandedSegment[] {
+    return [...segments].sort((a, b) => {
+      const aIsStay = a.type === 'HOTEL' || a.type === 'ACCOMMODATION';
+      const bIsStay = b.type === 'HOTEL' || b.type === 'ACCOMMODATION';
+      if (aIsStay && !bIsStay) return 1;
+      if (!aIsStay && bIsStay) return -1;
+      return new Date(a.startDatetime).getTime() - new Date(b.startDatetime).getTime();
+    });
+  }
 </script>
 
 <div class="calendar-view">
@@ -281,7 +292,7 @@
               {date.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
             </h3>
             <div class="segments-list">
-              {#each segments.sort((a, b) => new Date(a.startDatetime).getTime() - new Date(b.startDatetime).getTime()) as segment}
+              {#each sortSegments(segments) as segment}
                 <div class="segment-item">
                   <span class="segment-time">{formatTime(segment.startDatetime)}</span>
                   <span class="segment-title">{getSegmentTitle(segment)}</span>
@@ -301,7 +312,7 @@
               {date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
             </h2>
             <div class="segments-list-detailed">
-              {#each segments.sort((a, b) => new Date(a.startDatetime).getTime() - new Date(b.startDatetime).getTime()) as segment}
+              {#each sortSegments(segments) as segment}
                 {@const description = getSegmentDescription(segment)}
                 {@const location = getSegmentLocation(segment)}
                 <div class="segment-card">

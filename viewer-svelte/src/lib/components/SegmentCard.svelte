@@ -1,5 +1,9 @@
 <script lang="ts">
   import type { Segment, SegmentSource } from '$lib/types';
+  import { generateSegmentLinks } from '$lib/utils/segment-links';
+  import type { SegmentLink } from '$lib/utils/segment-links';
+  import PriceDisplay from './PriceDisplay.svelte';
+  import type { CurrencyCode } from '$lib/types/currency';
 
   // Extended segment type for hotel night tracking
   type ExpandedSegment = Segment & {
@@ -14,12 +18,14 @@
     segment,
     editMode = false,
     onEdit,
-    onDelete
+    onDelete,
+    targetCurrency = 'USD'
   }: {
     segment: ExpandedSegment;
     editMode?: boolean;
     onEdit?: () => void;
     onDelete?: () => void;
+    targetCurrency?: CurrencyCode;
   } = $props();
 
   // Get segment title based on type
@@ -83,14 +89,21 @@
 
   // Get emoji icon for segment type
   function getSegmentIcon(type: string): string {
-    switch (type) {
-      case 'FLIGHT': return '✈️';
-      case 'HOTEL': return '🏨';
-      case 'ACTIVITY': return '🎯';
-      case 'TRANSFER': return '🚗';
-      case 'CUSTOM': return '📝';
-      default: return '📌';
-    }
+    const icons: Record<string, string> = {
+      'RESTAURANT': '🍽️',
+      'DINING': '🍽️',
+      'ACTIVITY': '🎯',
+      'ATTRACTION': '🏛️',
+      'TOUR': '🎫',
+      'HOTEL': '🏨',
+      'ACCOMMODATION': '🏨',
+      'FLIGHT': '✈️',
+      'TRANSFER': '🚗',
+      'CAR_RENTAL': '🚙',
+      'MEETING': '📅',
+      'CUSTOM': '📌'
+    };
+    return icons[type] || '📍';
   }
 
   // Get source label and icon
@@ -120,9 +133,96 @@
         return '#d1d5db'; // gray-300
     }
   }
+
+  // Get review/booking links for this segment
+  const links = $derived(generateSegmentLinks(segment));
+
+  // Get background image URL based on segment content
+  function getSegmentImageUrl(segment: ExpandedSegment): string | null {
+    // Extract query from segment name/title
+    let query = '';
+    switch (segment.type) {
+      case 'HOTEL':
+        query = segment.property?.name || '';
+        break;
+      case 'ACTIVITY':
+        query = segment.name || '';
+        break;
+      case 'RESTAURANT':
+      case 'DINING':
+        query = segment.name || '';
+        break;
+      case 'ATTRACTION':
+      case 'TOUR':
+        query = segment.name || '';
+        break;
+      case 'FLIGHT':
+        query = `${segment.destination?.city || segment.destination?.name || ''} airport`;
+        break;
+      case 'TRANSFER':
+        query = segment.dropoffLocation?.city || segment.dropoffLocation?.name || '';
+        break;
+      default:
+        query = segment.title || segment.name || '';
+    }
+
+    // Add location context if available
+    const location = segment.location?.city || segment.location?.name || '';
+    if (location && query) {
+      query = `${query} ${location}`;
+    }
+
+    if (!query) {
+      // Fallback to deterministic image based on segment ID
+      const seed = segment.id || 'default';
+      return `https://picsum.photos/seed/${encodeURIComponent(seed)}/400/200`;
+    }
+
+    // Use Unsplash Source for relevant images
+    return `https://source.unsplash.com/400x200/?${encodeURIComponent(query)}`;
+  }
+
+  let imageUrl = $derived(getSegmentImageUrl(segment));
+  let imageLoaded = $state(false);
+  let imageError = $state(false);
+
+  // Helper to get price info from segment
+  function getSegmentPrice(segment: Segment): { amount: number; currency: string } | null {
+    // Check for totalPrice first (most comprehensive)
+    if ('totalPrice' in segment && segment.totalPrice && typeof segment.totalPrice === 'object') {
+      const price = segment.totalPrice as { amount: number; currency: string };
+      if (price.amount && price.currency) {
+        return price;
+      }
+    }
+
+    // Fallback to base price
+    if ('price' in segment && segment.price && typeof segment.price === 'object') {
+      const price = segment.price as { amount: number; currency: string };
+      if (price.amount && price.currency) {
+        return price;
+      }
+    }
+
+    return null;
+  }
+
+  let priceInfo = $derived(getSegmentPrice(segment));
 </script>
 
-<div class="minimal-card p-4 space-y-2 border-l-4" style="border-left-color: {getSourceBorderColor(segment.source)}">
+<div
+  class="minimal-card segment-card p-4 space-y-2 border-l-4"
+  style="border-left-color: {getSourceBorderColor(segment.source)}; {imageUrl && imageLoaded && !imageError ? `background-image: linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.95)), url(${imageUrl})` : ''}"
+>
+  {#if imageUrl}
+    <img
+      src={imageUrl}
+      alt=""
+      class="hidden"
+      onload={() => imageLoaded = true}
+      onerror={() => imageError = true}
+    />
+  {/if}
   <!-- Title with icon and edit controls -->
   <div class="flex items-start gap-3">
     <span class="text-2xl">{getSegmentIcon(segment.type)}</span>
@@ -133,6 +233,11 @@
       {#if getSegmentSubtitle(segment)}
         <p class="text-sm text-minimal-text-muted mt-0.5">
           {getSegmentSubtitle(segment)}
+        </p>
+      {/if}
+      {#if (segment.type === 'ACTIVITY' || segment.type === 'CUSTOM') && segment.description}
+        <p class="text-sm text-minimal-text mt-1 line-clamp-3">
+          {segment.description}
         </p>
       {/if}
     </div>
@@ -205,6 +310,49 @@
     </p>
   {/if}
 
+  <!-- Price with currency conversion -->
+  {#if priceInfo}
+    <div class="text-sm ml-11 flex items-center gap-2">
+      <span class="text-minimal-text-muted">Price:</span>
+      <PriceDisplay
+        amount={priceInfo.amount}
+        currency={priceInfo.currency}
+        {targetCurrency}
+        showConversion={priceInfo.currency !== targetCurrency}
+      />
+    </div>
+  {/if}
+
+  <!-- Review/Booking links (for all segment types) -->
+  {#if links.length > 0}
+    <div class="segment-links ml-11">
+      {#each links as link}
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="segment-link"
+        >
+          {link.provider}
+        </a>
+      {/each}
+    </div>
+  {/if}
+
+  <!-- Legacy booking link for activities (fallback if stored) -->
+  {#if segment.type === 'ACTIVITY' && segment.bookingUrl && !links.length}
+    <div class="ml-11 mt-2">
+      <a
+        href={segment.bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="booking-link"
+      >
+        Book on {segment.bookingProvider || 'Provider'} →
+      </a>
+    </div>
+  {/if}
+
   <!-- Inferred indicator -->
   {#if segment.inferred}
     <div class="text-xs text-minimal-accent ml-11">
@@ -214,6 +362,16 @@
 </div>
 
 <style>
+  .segment-card {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .hidden {
+    display: none;
+  }
+
   .edit-icon-button,
   .delete-icon-button {
     background: none;
@@ -236,5 +394,58 @@
   .delete-icon-button:hover {
     background-color: #fef2f2;
     color: #dc2626;
+  }
+
+  /* Review/booking links container */
+  .segment-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Individual link pill */
+  .segment-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.625rem;
+    background-color: #f3f4f6;
+    color: #4b5563;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+
+  .segment-link:hover {
+    background-color: #e5e7eb;
+    color: #1f2937;
+  }
+
+  /* Legacy booking link (fallback) */
+  .booking-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #3b82f6;
+    background-color: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .booking-link:hover {
+    background-color: #dbeafe;
+    border-color: #93c5fd;
+    color: #2563eb;
+  }
+
+  .booking-link:active {
+    background-color: #bfdbfe;
   }
 </style>

@@ -180,7 +180,16 @@ export class JsonItineraryStorage implements ItineraryStorage {
       }
 
       // Safe cast: Zod brand is compatible with our brand
-      return ok(result.data as unknown as Itinerary);
+      const itinerary = result.data as unknown as Itinerary;
+
+      // Sort segments chronologically by startDatetime
+      if (itinerary.segments && itinerary.segments.length > 0) {
+        itinerary.segments.sort((a, b) =>
+          new Date(a.startDatetime).getTime() - new Date(b.startDatetime).getTime()
+        );
+      }
+
+      return ok(itinerary);
     } catch (error) {
       return err(
         createStorageError('READ_ERROR', `Failed to load itinerary ${id}`, {
@@ -244,6 +253,14 @@ export class JsonItineraryStorage implements ItineraryStorage {
           if (result.success) {
             // Safe cast: Zod brand is compatible with our brand
             const itinerary = result.data as unknown as Itinerary;
+
+            // Sort segments chronologically by startDatetime
+            if (itinerary.segments && itinerary.segments.length > 0) {
+              itinerary.segments.sort((a, b) =>
+                new Date(a.startDatetime).getTime() - new Date(b.startDatetime).getTime()
+              );
+            }
+
             summaries.push({
               id: itinerary.id,
               title: itinerary.title,
