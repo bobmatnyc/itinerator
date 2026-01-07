@@ -17,7 +17,7 @@ import { createTripDesignerWithKey } from '$hooks/hooks.server.js';
  */
 export const POST: RequestHandler = async ({ params, request, locals }) => {
 	const userEmail = locals.userEmail || 'anonymous';
-	const sessionId = params.sessionId;
+	const sessionId = params.sessionId as SessionId;
 	console.log(`[TripDesigner] Chat request | user=${userEmail} | session=${sessionId}`);
 
 	// Get API key from header or use cached service
@@ -41,8 +41,6 @@ export const POST: RequestHandler = async ({ params, request, locals }) => {
 			message: 'Trip Designer disabled: No API key provided. Set your OpenRouter API key in Profile settings.'
 		});
 	}
-
-	const sessionId = params.sessionId as SessionId;
 
 	const body = await request.json();
 	const { message } = body;
