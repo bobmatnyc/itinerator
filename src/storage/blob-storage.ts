@@ -278,22 +278,90 @@ export class BlobItineraryStorage implements ItineraryStorage {
 
   /**
    * List itineraries for a specific user
-   * Returns summaries filtered by createdBy, sorted by updatedAt descending
+   * Returns summaries where user is owner, editor, or viewer (with role field populated)
+   * Sorted by updatedAt descending
    */
   async listByUser(userEmail: string): Promise<Result<ItinerarySummary[], StorageError>> {
-    const listResult = await this.list();
+    try {
+      // List all blobs with the itineraries prefix
+      const { blobs } = await list({ prefix: this.prefix });
 
-    if (!listResult.success) {
-      return listResult;
+      const summaries: ItinerarySummary[] = [];
+      const normalizedEmail = userEmail.toLowerCase().trim();
+
+      // Load each blob and extract summary
+      for (const blob of blobs) {
+        try {
+          // Fetch blob content
+          const response = await fetch(blob.url);
+
+          if (!response.ok) {
+            // Skip blobs that can't be fetched
+            continue;
+          }
+
+          const json = await response.text();
+          const parsed = this.deserialize(json);
+
+          // Validate with schema
+          const result = itinerarySchema.safeParse(parsed);
+
+          if (result.success) {
+            const itinerary = result.data as unknown as Itinerary;
+
+            // Determine user's role
+            let userRole: 'owner' | 'editor' | 'viewer' | undefined = undefined;
+
+            if (itinerary.permissions) {
+              // Check permissions field
+              const { owners, editors, viewers } = itinerary.permissions;
+              if (owners.map(e => e.toLowerCase()).includes(normalizedEmail)) {
+                userRole = 'owner';
+              } else if (editors.map(e => e.toLowerCase()).includes(normalizedEmail)) {
+                userRole = 'editor';
+              } else if (viewers.map(e => e.toLowerCase()).includes(normalizedEmail)) {
+                userRole = 'viewer';
+              }
+            } else {
+              // Backward compatibility: if no permissions, check createdBy
+              const createdBy = itinerary.createdBy?.toLowerCase().trim();
+              if (createdBy === normalizedEmail) {
+                userRole = 'owner';
+              }
+            }
+
+            // Only include if user has any role
+            if (userRole) {
+              summaries.push({
+                id: itinerary.id,
+                title: itinerary.title,
+                status: itinerary.status,
+                startDate: itinerary.startDate,
+                endDate: itinerary.endDate,
+                travelerCount: itinerary.travelers.length,
+                segmentCount: itinerary.segments.length,
+                updatedAt: itinerary.updatedAt,
+                createdBy: itinerary.createdBy,
+                role: userRole,
+              });
+            }
+          }
+        } catch {
+          // Skip invalid blobs
+        }
+      }
+
+      // Sort by updatedAt descending
+      summaries.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+
+      return ok(summaries);
+    } catch (error) {
+      return err(
+        createStorageError('READ_ERROR', 'Failed to list itineraries from Blob', {
+          error: error instanceof Error ? error.message : String(error),
+        })
+      );
     }
-
-    // Filter by user email (case-insensitive)
-    const normalizedEmail = userEmail.toLowerCase().trim();
-    const userItineraries = listResult.value.filter(
-      (summary) => summary.createdBy?.toLowerCase().trim() === normalizedEmail
-    );
-
-    return ok(userItineraries);
   }
 
   /**

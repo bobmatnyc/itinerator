@@ -1,8 +1,8 @@
 /**
  * Individual itinerary routes
- * GET /api/v1/itineraries/:id - Get itinerary with segments (ownership verified)
- * PATCH /api/v1/itineraries/:id - Update itinerary metadata (ownership verified)
- * DELETE /api/v1/itineraries/:id - Delete itinerary (ownership verified)
+ * GET /api/v1/itineraries/:id - Get itinerary with segments (permission verified)
+ * PATCH /api/v1/itineraries/:id - Update itinerary metadata (permission verified)
+ * DELETE /api/v1/itineraries/:id - Delete itinerary (permission verified)
  */
 
 import { json, error } from '@sveltejs/kit';
@@ -10,47 +10,11 @@ import type { RequestHandler } from './$types';
 import type { ItineraryId } from '$domain/types/branded.js';
 
 /**
- * Verify that the current user owns the itinerary
- * @returns true if user owns itinerary, false otherwise
- */
-async function verifyOwnership(
-	id: ItineraryId,
-	userEmail: string | null,
-	storage: any
-): Promise<boolean> {
-	console.log('[verifyOwnership] Checking ownership:', { id, userEmail });
-
-	if (!userEmail) {
-		console.log('[verifyOwnership] No userEmail provided');
-		return false;
-	}
-
-	const loadResult = await storage.load(id);
-	if (!loadResult.success) {
-		console.log('[verifyOwnership] Failed to load itinerary:', loadResult.error?.message);
-		return false;
-	}
-
-	const itinerary = loadResult.value;
-	const createdBy = itinerary.createdBy?.toLowerCase().trim();
-	const reqUser = userEmail.toLowerCase().trim();
-	const isOwner = createdBy === reqUser;
-
-	console.log('[verifyOwnership] Comparison:', {
-		createdBy,
-		reqUser,
-		isOwner
-	});
-
-	return isOwner;
-}
-
-/**
  * GET /api/v1/itineraries/:id
- * Get full itinerary with segments (ownership verified)
+ * Get full itinerary with segments (permission verified)
  */
 export const GET: RequestHandler = async ({ params, locals }) => {
-	const { itineraryService, storage } = locals.services;
+	const { itineraryService, permissionService } = locals.services;
 	const { userEmail } = locals;
 	const id = params.id as ItineraryId;
 
@@ -58,41 +22,57 @@ export const GET: RequestHandler = async ({ params, locals }) => {
 		throw error(400, { message: 'Missing ID parameter' });
 	}
 
-	// Verify ownership
-	const isOwner = await verifyOwnership(id, userEmail, storage);
-	if (!isOwner) {
-		throw error(403, {
-			message: 'Access denied: You do not have permission to view this itinerary'
-		});
+	if (!userEmail) {
+		throw error(401, { message: 'User email not found in session' });
 	}
 
-	// Use itineraryService for full itinerary (with segments)
+	// Load itinerary
 	const result = await itineraryService.getItinerary(id);
 	if (!result.success) {
-		throw error(404, {
-			message: 'Itinerary not found: ' + result.error.message
-		});
+		throw error(404, { message: 'Itinerary not found' });
 	}
 
-	return json(result.value);
+	const itinerary = result.value;
+
+	// Initialize permissions if needed (migration)
+	const migratedItinerary = permissionService.initializePermissions(itinerary);
+
+	// Check permission
+	if (!permissionService.canView(migratedItinerary, userEmail)) {
+		throw error(404, { message: 'Itinerary not found' }); // Don't leak existence
+	}
+
+	return json(migratedItinerary);
 };
 
 /**
  * PATCH /api/v1/itineraries/:id
  * Update itinerary metadata (title, description, dates, status, tags)
- * Ownership verified before update
+ * Permission verified before update (requires editor or owner)
  */
 export const PATCH: RequestHandler = async ({ params, request, locals }) => {
-	const { collectionService, storage } = locals.services;
+	const { collectionService, itineraryService, permissionService } = locals.services;
 	const { userEmail } = locals;
 	const id = params.id as ItineraryId;
 
-	// Verify ownership
-	const isOwner = await verifyOwnership(id, userEmail, storage);
-	if (!isOwner) {
-		throw error(403, {
-			message: 'Access denied: You do not have permission to update this itinerary'
-		});
+	if (!userEmail) {
+		throw error(401, { message: 'User email not found in session' });
+	}
+
+	// Load itinerary
+	const loadResult = await itineraryService.getItinerary(id);
+	if (!loadResult.success) {
+		throw error(404, { message: 'Itinerary not found' });
+	}
+
+	const itinerary = loadResult.value;
+
+	// Initialize permissions if needed (migration)
+	const migratedItinerary = permissionService.initializePermissions(itinerary);
+
+	// Check permission - must be editor or owner
+	if (!permissionService.canEdit(migratedItinerary, userEmail)) {
+		throw error(403, { message: 'Access denied: You do not have permission to edit this itinerary' });
 	}
 
 	const body = await request.json();
@@ -111,7 +91,7 @@ export const PATCH: RequestHandler = async ({ params, request, locals }) => {
 	const result = await collectionService.updateMetadata(id, updates);
 
 	if (!result.success) {
-		throw error(404, {
+		throw error(500, {
 			message: 'Failed to update itinerary: ' + result.error.message
 		});
 	}
@@ -121,26 +101,38 @@ export const PATCH: RequestHandler = async ({ params, request, locals }) => {
 
 /**
  * DELETE /api/v1/itineraries/:id
- * Delete itinerary (ownership verified)
+ * Delete itinerary (permission verified - requires owner)
  */
 export const DELETE: RequestHandler = async ({ params, locals }) => {
-	const { collectionService, storage, tripDesignerService } = locals.services;
+	const { collectionService, itineraryService, permissionService, tripDesignerService } = locals.services;
 	const { userEmail } = locals;
 	const id = params.id as ItineraryId;
 
-	// Verify ownership
-	const isOwner = await verifyOwnership(id, userEmail, storage);
-	if (!isOwner) {
-		throw error(403, {
-			message: 'Access denied: You do not have permission to delete this itinerary'
-		});
+	if (!userEmail) {
+		throw error(401, { message: 'User email not found in session' });
+	}
+
+	// Load itinerary
+	const loadResult = await itineraryService.getItinerary(id);
+	if (!loadResult.success) {
+		throw error(404, { message: 'Itinerary not found' });
+	}
+
+	const itinerary = loadResult.value;
+
+	// Initialize permissions if needed (migration)
+	const migratedItinerary = permissionService.initializePermissions(itinerary);
+
+	// Check permission - must be owner
+	if (!permissionService.canDelete(migratedItinerary, userEmail)) {
+		throw error(403, { message: 'Access denied: Only owners can delete itineraries' });
 	}
 
 	const result = await collectionService.deleteItinerary(id);
 
 	if (!result.success) {
-		throw error(404, {
-			message: 'Itinerary not found: ' + result.error.message
+		throw error(500, {
+			message: 'Failed to delete itinerary: ' + result.error.message
 		});
 	}
 

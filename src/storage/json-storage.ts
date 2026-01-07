@@ -296,28 +296,100 @@ export class JsonItineraryStorage implements ItineraryStorage {
 
   /**
    * List itineraries for a specific user
-   * Returns summaries filtered by createdBy, sorted by updatedAt descending
+   * Returns summaries where user is owner, editor, or viewer (with role field populated)
+   * Sorted by updatedAt descending
    */
   async listByUser(userEmail: string): Promise<Result<ItinerarySummary[], StorageError>> {
     console.log('[listByUser] filtering for:', userEmail);
-    const listResult = await this.list();
 
-    if (!listResult.success) {
-      return listResult;
+    try {
+      // Ensure directory exists
+      await mkdir(this.basePath, { recursive: true });
+
+      // Read directory
+      const files = await readdir(this.basePath);
+      const jsonFiles = files.filter((f) => f.endsWith('.json'));
+
+      const summaries: ItinerarySummary[] = [];
+      const normalizedEmail = userEmail.toLowerCase().trim();
+
+      for (const file of jsonFiles) {
+        const filePath = join(this.basePath, file);
+
+        try {
+          const data = await readFile(filePath, 'utf-8');
+          const parsed = this.deserialize(data);
+
+          // Validate with schema
+          const result = itinerarySchema.safeParse(parsed);
+
+          if (result.success) {
+            const itinerary = result.data as unknown as Itinerary;
+
+            // Sort segments chronologically by startDatetime
+            if (itinerary.segments && itinerary.segments.length > 0) {
+              itinerary.segments.sort((a, b) =>
+                new Date(a.startDatetime).getTime() - new Date(b.startDatetime).getTime()
+              );
+            }
+
+            // Determine user's role
+            let userRole: 'owner' | 'editor' | 'viewer' | undefined = undefined;
+
+            if (itinerary.permissions) {
+              // Check permissions field
+              const { owners, editors, viewers } = itinerary.permissions;
+              if (owners.map(e => e.toLowerCase()).includes(normalizedEmail)) {
+                userRole = 'owner';
+              } else if (editors.map(e => e.toLowerCase()).includes(normalizedEmail)) {
+                userRole = 'editor';
+              } else if (viewers.map(e => e.toLowerCase()).includes(normalizedEmail)) {
+                userRole = 'viewer';
+              }
+            } else {
+              // Backward compatibility: if no permissions, check createdBy
+              const createdBy = itinerary.createdBy?.toLowerCase().trim();
+              if (createdBy === normalizedEmail) {
+                userRole = 'owner';
+              }
+            }
+
+            // Only include if user has any role
+            if (userRole) {
+              summaries.push({
+                id: itinerary.id,
+                title: itinerary.title,
+                status: itinerary.status,
+                startDate: itinerary.startDate,
+                endDate: itinerary.endDate,
+                travelerCount: itinerary.travelers.length,
+                segmentCount: itinerary.segments.length,
+                updatedAt: itinerary.updatedAt,
+                createdBy: itinerary.createdBy,
+                role: userRole,
+              });
+            }
+          } else {
+            // Log validation errors to help identify data issues
+            console.warn(`Skipping invalid itinerary file: ${file}`, result.error.errors);
+          }
+        } catch (error) {
+          // Skip invalid files silently (likely corrupted or incomplete)
+        }
+      }
+
+      // Sort by updatedAt descending
+      summaries.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+
+      console.log('[listByUser] found:', summaries.length, 'itineraries for user');
+      return ok(summaries);
+    } catch (error) {
+      return err(
+        createStorageError('READ_ERROR', 'Failed to list itineraries', {
+          error: error instanceof Error ? error.message : String(error),
+        })
+      );
     }
-
-    console.log('[listByUser] total itineraries:', listResult.value.length);
-
-    // Filter by user email (case-insensitive)
-    const normalizedEmail = userEmail.toLowerCase().trim();
-    const userItineraries = listResult.value.filter((summary) => {
-      const summaryEmail = summary.createdBy?.toLowerCase().trim();
-      console.log('[listByUser] comparing:', { summaryEmail, normalizedEmail, match: summaryEmail === normalizedEmail });
-      return summaryEmail === normalizedEmail;
-    });
-
-    console.log('[listByUser] found:', userItineraries.length, 'itineraries for user');
-    return ok(userItineraries);
   }
 
   /**

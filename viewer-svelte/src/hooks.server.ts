@@ -25,6 +25,7 @@ import { ItineraryService } from '../../src/services/itinerary.service.js';
 import { ItineraryCollectionService } from '../../src/services/itinerary-collection.service.js';
 import { SegmentService } from '../../src/services/segment.service.js';
 import { DependencyService } from '../../src/services/dependency.service.js';
+import { PermissionService } from '../../src/services/permission.service.js';
 
 // Type-only imports for optional services (don't load modules)
 import type { DocumentImportService } from '../../src/services/document-import.service.js';
@@ -48,6 +49,7 @@ interface Services {
 	collectionService: ItineraryCollectionService;
 	segmentService: SegmentService;
 	dependencyService: DependencyService;
+	permissionService: PermissionService;
 	importService: DocumentImportService | null;
 	travelAgentService: TravelAgentService | null;
 	travelAgentFacade: TravelAgentFacade;
@@ -121,6 +123,7 @@ async function initializeServices(): Promise<Services> {
 		const collectionService = new ItineraryCollectionService(storage);
 		const segmentService = new SegmentService(storage);
 		const dependencyService = new DependencyService(storage);
+		const permissionService = new PermissionService();
 		console.log('✅ Core services initialized');
 
 		// OPTIONAL SERVICES - Only initialize if API keys are configured
@@ -239,6 +242,7 @@ async function initializeServices(): Promise<Services> {
 			collectionService,
 			segmentService,
 			dependencyService,
+			permissionService,
 			importService,
 			travelAgentService,
 			travelAgentFacade,

@@ -56,4 +56,6 @@ export interface ItinerarySummary {
   updatedAt: Date;
   /** User who created the itinerary */
   createdBy?: string;
+  /** User's permission role (owner/editor/viewer) - populated by listByUser() */
+  role?: 'owner' | 'editor' | 'viewer';
 }
