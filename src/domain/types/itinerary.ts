@@ -12,6 +12,18 @@ import type { TravelPreferences, Traveler, TripTravelerPreferences } from './tra
 import type { Scratchpad } from './scratchpad.js';
 
 /**
+ * Itinerary permissions for collaborative trip planning
+ */
+export interface ItineraryPermissions {
+  /** Users with full control (can delete, manage permissions) */
+  owners: string[];
+  /** Users who can modify itinerary content */
+  editors: string[];
+  /** Users with read-only access */
+  viewers: string[];
+}
+
+/**
  * Complete itinerary representing a trip
  */
 export interface Itinerary {
@@ -43,6 +55,8 @@ export interface Itinerary {
   primaryTravelerId?: TravelerId;
   /** User who created the itinerary */
   createdBy?: string;
+  /** Permissions for collaborative access */
+  permissions?: ItineraryPermissions;
   /** All segments in the itinerary */
   segments: Segment[];
   /** Total price for the entire trip */

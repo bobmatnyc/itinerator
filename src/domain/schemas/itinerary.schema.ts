@@ -18,6 +18,28 @@ import { travelPreferencesSchema, travelerSchema } from './traveler.schema.js';
 import { scratchpadSchema } from './scratchpad.schema.js';
 
 /**
+ * Itinerary permissions schema for collaborative access
+ */
+export const permissionsSchema = z.object({
+  /** Users with full control (emails normalized to lowercase) */
+  owners: z.array(z.string().email().toLowerCase()).min(1, 'At least one owner is required'),
+  /** Users who can modify itinerary content */
+  editors: z.array(z.string().email().toLowerCase()).default([]),
+  /** Users with read-only access */
+  viewers: z.array(z.string().email().toLowerCase()).default([]),
+}).refine(
+  (data) => {
+    // Ensure no user appears in multiple roles
+    const allUsers = [...data.owners, ...data.editors, ...data.viewers];
+    const uniqueUsers = new Set(allUsers);
+    return allUsers.length === uniqueUsers.size;
+  },
+  {
+    message: 'A user cannot have multiple permission roles',
+  }
+);
+
+/**
  * Base itinerary object schema - before refinements
  * Type annotation provided to avoid excessive type inference length
  */
@@ -50,6 +72,8 @@ const baseItinerarySchema: z.ZodObject<any> = z.object({
   primaryTravelerId: travelerIdSchema.optional(),
   /** User who created the itinerary */
   createdBy: z.string().optional(),
+  /** Permissions for collaborative access */
+  permissions: permissionsSchema.optional(),
   /** All segments in the itinerary */
   segments: z.array(segmentSchema).default([]),
   /** Total price for the entire trip */
@@ -93,6 +117,19 @@ export const itinerarySchema: any = baseItinerarySchema
     {
       message: 'Primary traveler must be in travelers list',
       path: ['primaryTravelerId'],
+    }
+  )
+  .refine(
+    (data) => {
+      // If permissions and createdBy are both present, ensure createdBy is an owner
+      if (data.permissions && data.createdBy) {
+        return data.permissions.owners.includes(data.createdBy.toLowerCase());
+      }
+      return true;
+    },
+    {
+      message: 'Creator must be an owner',
+      path: ['permissions', 'owners'],
     }
   );
 

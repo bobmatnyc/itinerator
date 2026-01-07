@@ -10,6 +10,10 @@ export type { CreateItineraryInput } from './itinerary-collection.service.js';
 // Content-level itinerary operations
 export { ItineraryService } from './itinerary.service.js';
 
+// Permission management
+export { PermissionService } from './permission.service.js';
+export type { PermissionRole } from './permission.service.js';
+
 // Travel Agent facade
 export { TravelAgentFacade } from './travel-agent-facade.service.js';
 export type {
