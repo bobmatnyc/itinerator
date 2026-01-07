@@ -16,6 +16,9 @@ import { createTripDesignerWithKey } from '$hooks/hooks.server.js';
  * Headers: X-OpenRouter-API-Key (optional, overrides env var)
  */
 export const POST: RequestHandler = async ({ request, locals }) => {
+	const userEmail = locals.userEmail || 'anonymous';
+	console.log(`[TripDesigner] Session creation started | user=${userEmail}`);
+
 	const { itineraryService } = locals.services;
 
 	// Get API key from header or use cached service
@@ -67,10 +70,13 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	);
 
 	if (!sessionResult.success) {
+		console.log(`[TripDesigner] Session creation FAILED | user=${userEmail} | error=${sessionResult.error.message}`);
 		throw error(500, {
 			message: 'Failed to create session: ' + sessionResult.error.message
 		});
 	}
+
+	console.log(`[TripDesigner] Session created | user=${userEmail} | session=${sessionResult.value} | itinerary=${itineraryId || 'none'} | mode=${mode}`);
 
 	return json(
 		{

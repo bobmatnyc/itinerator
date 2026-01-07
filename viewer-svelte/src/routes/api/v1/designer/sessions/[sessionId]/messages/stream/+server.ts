@@ -16,6 +16,10 @@ import { createTripDesignerWithKey } from '$hooks/hooks.server.js';
  * Send a message to a chat session with SSE streaming
  */
 export const POST: RequestHandler = async ({ params, request, locals }) => {
+	const userEmail = locals.userEmail || 'anonymous';
+	const sessionId = params.sessionId;
+	console.log(`[TripDesigner] Chat request | user=${userEmail} | session=${sessionId}`);
+
 	// Get API key from header or use cached service
 	const headerApiKey = request.headers.get('X-OpenRouter-API-Key');
 	let tripDesignerService = locals.services.tripDesignerService;
@@ -48,6 +52,10 @@ export const POST: RequestHandler = async ({ params, request, locals }) => {
 			message: 'Invalid message: message must be a non-empty string'
 		});
 	}
+
+	// Log the user's query
+	const truncatedMessage = message.length > 200 ? message.substring(0, 200) + '...' : message;
+	console.log(`[TripDesigner] User query | user=${userEmail} | session=${sessionId} | message="${truncatedMessage}"`);
 
 	// Create a ReadableStream for SSE
 	const stream = new ReadableStream({
@@ -89,6 +97,7 @@ export const POST: RequestHandler = async ({ params, request, locals }) => {
 							break;
 
 						case 'done':
+							console.log(`[TripDesigner] Response complete | user=${userEmail} | session=${sessionId} | tokens=${event.tokens || 'n/a'} | cost=$${event.cost?.toFixed(4) || 'n/a'} | updated=${event.itineraryUpdated}`);
 							writeEvent('done', {
 								itineraryUpdated: event.itineraryUpdated,
 								segmentsModified: event.segmentsModified || [],
@@ -98,6 +107,7 @@ export const POST: RequestHandler = async ({ params, request, locals }) => {
 							break;
 
 						case 'error':
+							console.log(`[TripDesigner] Stream error | user=${userEmail} | session=${sessionId} | error=${event.message}`);
 							writeEvent('error', { message: event.message });
 							break;
 					}
@@ -106,9 +116,11 @@ export const POST: RequestHandler = async ({ params, request, locals }) => {
 				// Close the stream
 				controller.close();
 			} catch (streamError) {
+				const errorMsg = streamError instanceof Error ? streamError.message : 'Stream error';
+				console.log(`[TripDesigner] Stream exception | user=${userEmail} | session=${sessionId} | error=${errorMsg}`);
 				// Send error event
 				writeEvent('error', {
-					message: streamError instanceof Error ? streamError.message : 'Stream error'
+					message: errorMsg
 				});
 				controller.close();
 			}
