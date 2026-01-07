@@ -175,6 +175,11 @@ export interface Itinerary {
   scratchpad?: Scratchpad;
   createdAt: string;
   updatedAt: string;
+  permissions?: {
+    owners: string[];
+    editors: string[];
+    viewers: string[];
+  };
 }
 
 export interface ItineraryListItem {
@@ -191,6 +196,12 @@ export interface ItineraryListItem {
   tags?: string[];
   createdAt?: string;
   updatedAt: string;
+  permissions?: {
+    owners: string[];
+    editors: string[];
+    viewers: string[];
+  };
+  userRole?: 'owner' | 'editor' | 'viewer' | 'none';
 }
 
 // Import types

@@ -12,6 +12,7 @@ import { writable, derived, get } from 'svelte/store';
 import type { Itinerary, ItineraryListItem, ModelConfig, Segment } from '../types';
 import { apiClient } from '../api';
 import { eventBus } from './events';
+import { authStore } from './auth.svelte';
 
 /**
  * Data structure for creating a new itinerary
@@ -65,7 +66,29 @@ class ItinerariesStore {
       console.log('[Store] Fetching itineraries...');
       const data = await apiClient.getItineraries();
       console.log('[Store] Received itineraries:', data.length, data);
-      itineraries.set(data);
+
+      // Add userRole to each itinerary based on current user
+      const userEmail = authStore.userEmail;
+      const enrichedData = data.map(itinerary => {
+        let userRole: 'owner' | 'editor' | 'viewer' | 'none' = 'none';
+
+        if (userEmail && itinerary.permissions) {
+          if (itinerary.permissions.owners?.includes(userEmail)) {
+            userRole = 'owner';
+          } else if (itinerary.permissions.editors?.includes(userEmail)) {
+            userRole = 'editor';
+          } else if (itinerary.permissions.viewers?.includes(userEmail)) {
+            userRole = 'viewer';
+          }
+        }
+
+        return {
+          ...itinerary,
+          userRole
+        };
+      });
+
+      itineraries.set(enrichedData);
     } catch (err) {
       console.error('[Store] Failed to load itineraries:', err);
       // Set empty array instead of error to show empty state UI

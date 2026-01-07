@@ -6,9 +6,11 @@
   import DestinationBackgroundSlideshow from './DestinationBackgroundSlideshow.svelte';
   import ImportDialog from './ImportDialog.svelte';
   import ScratchpadPanel from './ScratchpadPanel.svelte';
+  import ShareModal from './ShareModal.svelte';
   import { updateSegment, deleteSegment, addSegment, updateItinerary } from '$lib/stores/itineraries.svelte';
   import { toast } from '$lib/stores/toast.svelte';
-  import { Calendar, Download, Lightbulb, Pencil } from 'phosphor-svelte';
+  import { authStore } from '$lib/stores/auth.svelte';
+  import { Calendar, Download, Lightbulb, Pencil, ShareNetwork, Crown, PencilSimple, Eye } from 'phosphor-svelte';
 
   let {
     itinerary,
@@ -29,6 +31,7 @@
   let showAddSegmentModal = $state(false);
   let showImportDialog = $state(false);
   let scratchpadOpen = $state(false);
+  let showShareModal = $state(false);
   let scratchpad = $state<Scratchpad>({
     items: [],
     geography: [],
@@ -48,6 +51,52 @@
 
   // Get target currency for price conversions (from trip preferences or default to USD)
   let targetCurrency = $derived((itinerary.tripPreferences?.homeCurrency as any) || 'USD');
+
+  // Get current user's role in itinerary
+  let userRole = $derived.by(() => {
+    const userEmail = authStore.userEmail;
+    if (!userEmail || !itinerary.permissions) return 'none';
+
+    if (itinerary.permissions.owners?.includes(userEmail)) return 'owner';
+    if (itinerary.permissions.editors?.includes(userEmail)) return 'editor';
+    if (itinerary.permissions.viewers?.includes(userEmail)) return 'viewer';
+    return 'none';
+  });
+
+  // Check if user is owner
+  let isOwner = $derived(userRole === 'owner');
+
+  // Get collaborators list
+  let collaborators = $derived.by(() => {
+    const perms = itinerary.permissions;
+    if (!perms) return [];
+
+    const collabs = [
+      ...(perms.owners || []).map(email => ({ email, role: 'owner' as const })),
+      ...(perms.editors || []).map(email => ({ email, role: 'editor' as const })),
+      ...(perms.viewers || []).map(email => ({ email, role: 'viewer' as const }))
+    ];
+
+    return collabs;
+  });
+
+  function getRoleIcon(role: string) {
+    switch (role) {
+      case 'owner': return Crown;
+      case 'editor': return PencilSimple;
+      case 'viewer': return Eye;
+      default: return Eye;
+    }
+  }
+
+  function getRoleBadgeClass(role: string) {
+    switch (role) {
+      case 'owner': return 'role-badge-owner';
+      case 'editor': return 'role-badge-editor';
+      case 'viewer': return 'role-badge-viewer';
+      default: return 'role-badge-viewer';
+    }
+  }
 
   function handleEditManually() {
     if (onEditManually) {
@@ -460,6 +509,16 @@
             <Download size={16} weight="regular" class="inline-block mr-1" />
             Import
           </button>
+          {#if isOwner}
+            <button
+              class="minimal-button"
+              onclick={() => showShareModal = true}
+              type="button"
+            >
+              <ShareNetwork size={16} weight="regular" class="inline-block mr-1" />
+              Share
+            </button>
+          {/if}
         </div>
         <button
           class="minimal-button recommendations-button"
@@ -472,6 +531,29 @@
             <span class="scratchpad-badge">{scratchpad.items.length}</span>
           {/if}
         </button>
+      </div>
+    {/if}
+
+    <!-- Collaborators section (visible in all modes) -->
+    {#if collaborators.length > 1}
+      <div class="collaborators-header">
+        <h4 class="collaborators-title">Collaborators ({collaborators.length})</h4>
+        <div class="collaborators-list-compact">
+          {#each collaborators.slice(0, 5) as collaborator}
+            {@const Icon = getRoleIcon(collaborator.role)}
+            <div class="collaborator-avatar" title="{collaborator.email} ({collaborator.role})">
+              <Icon size={14} weight="bold" class={getRoleBadgeClass(collaborator.role)} />
+              <span class="collaborator-initials">
+                {collaborator.email.substring(0, 2).toUpperCase()}
+              </span>
+            </div>
+          {/each}
+          {#if collaborators.length > 5}
+            <div class="collaborator-avatar more">
+              +{collaborators.length - 5}
+            </div>
+          {/if}
+        </div>
       </div>
     {/if}
 
@@ -635,6 +717,16 @@
   </div>
   </div>
 </div>
+
+<!-- Share Modal -->
+{#if isOwner && authStore.userEmail}
+  <ShareModal
+    itineraryId={itinerary.id}
+    bind:isOpen={showShareModal}
+    onClose={() => showShareModal = false}
+    currentUserEmail={authStore.userEmail}
+  />
+{/if}
 
 <!-- Delete Confirmation Modal -->
 {#if showDeleteConfirm}
@@ -891,6 +983,71 @@
     justify-content: flex-end;
     gap: 0.5rem;
     margin-top: 1rem;
+  }
+
+  /* Collaborators section */
+  .collaborators-header {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .collaborators-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #6b7280;
+    margin: 0 0 0.75rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .collaborators-list-compact {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .collaborator-avatar {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #374151;
+    transition: all 0.2s;
+  }
+
+  .collaborator-avatar:hover {
+    background-color: #f3f4f6;
+    border-color: #d1d5db;
+  }
+
+  .collaborator-avatar.more {
+    background-color: #e5e7eb;
+    color: #6b7280;
+    font-weight: 600;
+  }
+
+  .collaborator-initials {
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  /* Role badge colors for icons */
+  :global(.role-badge-owner) {
+    color: #d97706;
+  }
+
+  :global(.role-badge-editor) {
+    color: #2563eb;
+  }
+
+  :global(.role-badge-viewer) {
+    color: #6b7280;
   }
 </style>
 

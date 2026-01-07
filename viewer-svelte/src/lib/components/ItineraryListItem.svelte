@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { ItineraryListItem } from '$lib/types';
-  import { Trash } from 'phosphor-svelte';
+  import { Trash, Crown, PencilSimple, Eye, Users } from 'phosphor-svelte';
 
   let {
     itinerary,
@@ -13,6 +13,46 @@
     onclick?: () => void;
     ondelete?: (itinerary: ItineraryListItem) => void;
   } = $props();
+
+  // Get role icon and styling
+  function getRoleIcon(role: string | undefined) {
+    switch (role) {
+      case 'owner': return Crown;
+      case 'editor': return PencilSimple;
+      case 'viewer': return Eye;
+      default: return Crown; // Default to owner for backward compatibility
+    }
+  }
+
+  function getRoleName(role: string | undefined): string {
+    if (!role) return 'Owner';
+    return role.charAt(0).toUpperCase() + role.slice(1);
+  }
+
+  function getRoleClass(role: string | undefined): string {
+    switch (role) {
+      case 'owner': return 'role-owner';
+      case 'editor': return 'role-editor';
+      case 'viewer': return 'role-viewer';
+      default: return 'role-owner';
+    }
+  }
+
+  // Check if itinerary is shared
+  let isShared = $derived.by(() => {
+    if (!itinerary.permissions) return false;
+    const totalUsers = (itinerary.permissions.owners?.length || 0) +
+                      (itinerary.permissions.editors?.length || 0) +
+                      (itinerary.permissions.viewers?.length || 0);
+    return totalUsers > 1;
+  });
+
+  let collaboratorCount = $derived.by(() => {
+    if (!itinerary.permissions) return 0;
+    return (itinerary.permissions.owners?.length || 0) +
+           (itinerary.permissions.editors?.length || 0) +
+           (itinerary.permissions.viewers?.length || 0);
+  });
 
   // Format date for display - use UTC to avoid timezone issues
   function formatDate(dateStr?: string): string {
@@ -83,11 +123,27 @@
       </h3>
 
       <div class="flex flex-col gap-1 text-xs text-minimal-text-muted">
-        <div class="flex items-center gap-2">
-          {#if getDateRange()}
-            <span>{getDateRange()}</span>
-            <span>•</span>
+        <div class="flex items-center gap-2 flex-wrap">
+          <!-- Role badge -->
+          {@const RoleIcon = getRoleIcon(itinerary.userRole)}
+          <span class="role-badge {getRoleClass(itinerary.userRole)}">
+            <RoleIcon size={12} weight="bold" />
+            <span>{getRoleName(itinerary.userRole)}</span>
+          </span>
+
+          <!-- Shared indicator -->
+          {#if isShared}
+            <span class="shared-badge" title="{collaboratorCount} collaborators">
+              <Users size={12} weight="bold" />
+              <span>{collaboratorCount}</span>
+            </span>
           {/if}
+
+          {#if getDateRange()}
+            <span>•</span>
+            <span>{getDateRange()}</span>
+          {/if}
+          <span>•</span>
           <span>{itinerary.segmentCount} seg{itinerary.segmentCount !== 1 ? 's' : ''}</span>
         </div>
         <div class="text-xs text-minimal-text-muted">
@@ -171,5 +227,43 @@
 
   .delete-btn:active {
     transform: scale(0.95);
+  }
+
+  /* Role and shared badges */
+  .role-badge,
+  .shared-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+
+  .role-badge.role-owner {
+    background-color: #fef3c7;
+    color: #92400e;
+    border-color: #fbbf24;
+  }
+
+  .role-badge.role-editor {
+    background-color: #dbeafe;
+    color: #1e40af;
+    border-color: #60a5fa;
+  }
+
+  .role-badge.role-viewer {
+    background-color: #f3f4f6;
+    color: #374151;
+    border-color: #d1d5db;
+  }
+
+  .shared-badge {
+    background-color: #e0e7ff;
+    color: #4338ca;
+    border-color: #a5b4fc;
   }
 </style>
