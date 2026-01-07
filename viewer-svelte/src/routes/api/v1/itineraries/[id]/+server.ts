@@ -32,17 +32,20 @@ export const GET: RequestHandler = async ({ params, locals }) => {
 		throw error(404, { message: 'Itinerary not found' });
 	}
 
-	const itinerary = result.value;
+	let itinerary = result.value;
 
 	// Initialize permissions if needed (migration)
-	const migratedItinerary = permissionService.initializePermissions(itinerary);
+	if (!itinerary.permissions || itinerary.permissions.owners.length === 0) {
+		itinerary = permissionService.initializePermissions(itinerary);
+		await locals.services.storage.save(itinerary);
+	}
 
 	// Check permission
-	if (!permissionService.canView(migratedItinerary, userEmail)) {
+	if (!permissionService.canView(itinerary, userEmail)) {
 		throw error(404, { message: 'Itinerary not found' }); // Don't leak existence
 	}
 
-	return json(migratedItinerary);
+	return json(itinerary);
 };
 
 /**
@@ -65,13 +68,16 @@ export const PATCH: RequestHandler = async ({ params, request, locals }) => {
 		throw error(404, { message: 'Itinerary not found' });
 	}
 
-	const itinerary = loadResult.value;
+	let itinerary = loadResult.value;
 
 	// Initialize permissions if needed (migration)
-	const migratedItinerary = permissionService.initializePermissions(itinerary);
+	if (!itinerary.permissions || itinerary.permissions.owners.length === 0) {
+		itinerary = permissionService.initializePermissions(itinerary);
+		await locals.services.storage.save(itinerary);
+	}
 
 	// Check permission - must be editor or owner
-	if (!permissionService.canEdit(migratedItinerary, userEmail)) {
+	if (!permissionService.canEdit(itinerary, userEmail)) {
 		throw error(403, { message: 'Access denied: You do not have permission to edit this itinerary' });
 	}
 
@@ -118,13 +124,16 @@ export const DELETE: RequestHandler = async ({ params, locals }) => {
 		throw error(404, { message: 'Itinerary not found' });
 	}
 
-	const itinerary = loadResult.value;
+	let itinerary = loadResult.value;
 
 	// Initialize permissions if needed (migration)
-	const migratedItinerary = permissionService.initializePermissions(itinerary);
+	if (!itinerary.permissions || itinerary.permissions.owners.length === 0) {
+		itinerary = permissionService.initializePermissions(itinerary);
+		await locals.services.storage.save(itinerary);
+	}
 
 	// Check permission - must be owner
-	if (!permissionService.canDelete(migratedItinerary, userEmail)) {
+	if (!permissionService.canDelete(itinerary, userEmail)) {
 		throw error(403, { message: 'Access denied: Only owners can delete itineraries' });
 	}
 

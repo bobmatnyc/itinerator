@@ -309,10 +309,16 @@ export const handle: Handle = async ({ event, resolve }) => {
 		// Handle CORS preflight requests for API routes
 		// Return proper CORS headers to allow cross-origin requests (e.g., ngrok)
 		if (isOptionsRequest && event.url.pathname.startsWith('/api/')) {
+			const origin = event.request.headers.get('Origin');
+			if (!origin) {
+				console.warn('[CORS] OPTIONS request missing Origin header');
+				return new Response(null, { status: 400, statusText: 'Origin header required' });
+			}
+
 			return new Response(null, {
 				status: 204,
 				headers: {
-					'Access-Control-Allow-Origin': event.request.headers.get('Origin') || '*',
+					'Access-Control-Allow-Origin': origin,
 					'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
 					'Access-Control-Allow-Headers': 'Content-Type, X-User-Email, X-OpenRouter-API-Key',
 					'Access-Control-Allow-Credentials': 'true',
