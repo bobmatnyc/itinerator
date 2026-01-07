@@ -17,6 +17,7 @@
  */
 
 import type { Handle } from '@sveltejs/kit';
+import { env } from '$env/dynamic/private';
 import { join } from 'node:path';
 import { createItineraryStorage } from '../../src/storage/index.js';
 import type { ItineraryStorage } from '../../src/storage/index.js';
@@ -87,12 +88,12 @@ async function initializeServices(): Promise<Services> {
 		return servicesInstance;
 	}
 
-	const isVercel = process.env.VERCEL === '1';
+	const isVercel = env.VERCEL === '1';
 	const cwd = process.cwd();
 	console.log('Initializing services...', {
 		isVercel,
-		hasBlob: !!process.env.BLOB_READ_WRITE_TOKEN,
-		nodeEnv: process.env.NODE_ENV,
+		hasBlob: !!env.BLOB_READ_WRITE_TOKEN,
+		nodeEnv: env.NODE_ENV,
 		cwd
 	});
 
@@ -102,7 +103,7 @@ async function initializeServices(): Promise<Services> {
 		// Storage - auto-detects Blob vs JSON based on BLOB_READ_WRITE_TOKEN
 		// For local development, use absolute path to project root's data directory
 		// SvelteKit dev server runs from viewer-svelte/, so we need to go up one level
-		const storagePath = process.env.BLOB_READ_WRITE_TOKEN
+		const storagePath = env.BLOB_READ_WRITE_TOKEN
 			? undefined // Blob storage doesn't need a path
 			: join(process.cwd(), '..', 'data', 'itineraries');
 
@@ -127,7 +128,7 @@ async function initializeServices(): Promise<Services> {
 
 		// Import service - requires OPENROUTER_API_KEY
 		let importService: DocumentImportService | null = null;
-		const importApiKey = process.env.OPENROUTER_API_KEY;
+		const importApiKey = env.OPENROUTER_API_KEY;
 
 		if (importApiKey) {
 			const { DocumentImportService: ImportServiceClass } = await import(
@@ -145,7 +146,7 @@ async function initializeServices(): Promise<Services> {
 
 		// Travel Agent service - requires SERPAPI_KEY
 		let travelAgentService: TravelAgentService | null = null;
-		const serpApiKey = process.env.SERPAPI_KEY;
+		const serpApiKey = env.SERPAPI_KEY;
 
 		if (serpApiKey) {
 			const { TravelAgentService: TravelAgentServiceClass } = await import(
@@ -197,7 +198,7 @@ async function initializeServices(): Promise<Services> {
 
 		// Trip Designer service - requires OPENROUTER_API_KEY
 		let tripDesignerService: TripDesignerService | null = null;
-		const tripDesignerApiKey = process.env.OPENROUTER_API_KEY;
+		const tripDesignerApiKey = env.OPENROUTER_API_KEY;
 
 		if (tripDesignerApiKey) {
 			const { TripDesignerService: TripDesignerServiceClass } = await import(
@@ -299,9 +300,26 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 		// Check if route requires authentication
 		const isPublicRoute = PUBLIC_ROUTES.some(route => event.url.pathname.startsWith(route));
+		const isOptionsRequest = event.request.method === 'OPTIONS';
+
+		// Handle CORS preflight requests for API routes
+		// Return proper CORS headers to allow cross-origin requests (e.g., ngrok)
+		if (isOptionsRequest && event.url.pathname.startsWith('/api/')) {
+			return new Response(null, {
+				status: 204,
+				headers: {
+					'Access-Control-Allow-Origin': event.request.headers.get('Origin') || '*',
+					'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+					'Access-Control-Allow-Headers': 'Content-Type, X-User-Email, X-OpenRouter-API-Key',
+					'Access-Control-Allow-Credentials': 'true',
+					'Access-Control-Max-Age': '86400' // Cache preflight for 24 hours
+				}
+			});
+		}
 
 		// Redirect to login if not authenticated and not on a public route
-		if (!event.locals.isAuthenticated && !isPublicRoute) {
+		// Always allow OPTIONS preflight requests (they never include credentials)
+		if (!event.locals.isAuthenticated && !isPublicRoute && !isOptionsRequest) {
 			// Allow API routes to fail with 401 instead of redirecting
 			if (event.url.pathname.startsWith('/api/')) {
 				return new Response(JSON.stringify({ error: 'Unauthorized' }), {
@@ -331,6 +349,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 		const response = await resolve(event);
 		console.log(`Response: ${event.request.method} ${event.url.pathname} - ${response.status}`);
+
+		// Add CORS headers to API responses for cross-origin requests (e.g., ngrok)
+		if (event.url.pathname.startsWith('/api/')) {
+			const origin = event.request.headers.get('Origin');
+			if (origin) {
+				response.headers.set('Access-Control-Allow-Origin', origin);
+				response.headers.set('Access-Control-Allow-Credentials', 'true');
+			}
+		}
 
 		return response;
 	} catch (error) {

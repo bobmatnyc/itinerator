@@ -11,7 +11,8 @@
       // Call logout API to clear cookies
       await fetch('/api/auth/logout', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include' // Send cookies for proper deletion
       });
 
       // Clear localStorage (auth and user email)

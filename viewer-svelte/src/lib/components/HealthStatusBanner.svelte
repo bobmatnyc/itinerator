@@ -1,9 +1,18 @@
 <script lang="ts">
   import { healthStore } from '$lib/stores/health.svelte';
   import { onMount } from 'svelte';
+  import { browser } from '$app/environment';
 
   let showReconnected = $state(false);
   let dismissed = $state(false);
+
+  // Suppress HMR connection warnings when running through ngrok or other tunnels
+  // The actual API works fine, it's just Vite's HMR websocket that can't connect
+  const isProxyEnvironment = browser && (
+    window.location.hostname.includes('ngrok') ||
+    window.location.hostname.includes('tunnel') ||
+    (window.location.protocol === 'https:' && window.location.hostname !== 'localhost')
+  );
 
   // Watch for reconnection
   $effect(() => {
@@ -39,8 +48,8 @@
   });
 </script>
 
-<!-- Offline Banner -->
-{#if healthStore.isOffline && !dismissed}
+<!-- Offline Banner (hidden in proxy environments like ngrok where HMR doesn't work but API does) -->
+{#if healthStore.isOffline && !dismissed && !isProxyEnvironment}
   <div class="fixed top-0 left-0 right-0 z-50 bg-yellow-500 border-b-2 border-yellow-600 px-4 py-3 shadow-lg animate-slide-down">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 flex-1 min-w-0">

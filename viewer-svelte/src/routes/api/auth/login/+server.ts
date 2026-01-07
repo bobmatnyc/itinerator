@@ -45,8 +45,10 @@ const USER_EMAIL_COOKIE_NAME = 'itinerator_user_email';
  * - 400: { error: 'Email is required' }
  * - 401: { error: 'Invalid password' }
  */
-export const POST: RequestHandler = async ({ request, cookies }) => {
+export const POST: RequestHandler = async ({ request, cookies, url }) => {
 	const authMode = getAuthMode();
+	// Detect HTTPS (production OR ngrok/proxy) for secure cookies
+	const isSecure = import.meta.env.PROD || url.protocol === 'https:';
 
 	try {
 		const body = await request.json();
@@ -95,8 +97,8 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
 		cookies.set(SESSION_COOKIE_NAME, SESSION_SECRET, {
 			path: '/',
 			httpOnly: true,
-			secure: import.meta.env.PROD,
-			sameSite: 'lax',
+			secure: isSecure,
+			sameSite: isSecure ? 'none' : 'lax', // 'none' required for cross-site HTTPS
 			maxAge: 60 * 60 * 24 * 7 // 7 days
 		});
 
@@ -104,8 +106,8 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
 		cookies.set(USER_EMAIL_COOKIE_NAME, normalizedEmail, {
 			path: '/',
 			httpOnly: false, // Allow client-side access
-			secure: import.meta.env.PROD,
-			sameSite: 'lax',
+			secure: isSecure,
+			sameSite: isSecure ? 'none' : 'lax', // 'none' required for cross-site HTTPS
 			maxAge: 60 * 60 * 24 * 7 // 7 days
 		});
 
