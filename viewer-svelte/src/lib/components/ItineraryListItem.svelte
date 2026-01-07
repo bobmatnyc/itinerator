@@ -54,6 +54,9 @@
            (itinerary.permissions.viewers?.length || 0);
   });
 
+  // Derived role icon component
+  let RoleIcon = $derived(getRoleIcon(itinerary.userRole));
+
   // Format date for display - use UTC to avoid timezone issues
   function formatDate(dateStr?: string): string {
     if (!dateStr) return '';
@@ -125,7 +128,6 @@
       <div class="flex flex-col gap-1 text-xs text-minimal-text-muted">
         <div class="flex items-center gap-2 flex-wrap">
           <!-- Role badge -->
-          {@const RoleIcon = getRoleIcon(itinerary.userRole)}
           <span class="role-badge {getRoleClass(itinerary.userRole)}">
             <RoleIcon size={12} weight="bold" />
             <span>{getRoleName(itinerary.userRole)}</span>
