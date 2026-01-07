@@ -189,14 +189,14 @@ const PERSONAS: TravelerPersona[] = [
     },
     tripRequest: {
       origin: 'LAX',
-      destination: 'Italy',
-      duration: '10 days',
-      specialRequests: ['anniversary trip', 'prefer Amalfi Coast'],
+      destination: 'Tokyo',
+      duration: '1 week',
+      specialRequests: ['anniversary trip', 'romantic experiences in Tokyo'],
     },
     expectations: {
       minSegments: 8,
       expectedSegmentTypes: ['FLIGHT', 'HOTEL', 'ACTIVITY', 'TRANSFER'],
-      shouldInclude: ['romantic', 'wine', 'sunset'],
+      shouldInclude: ['romantic', 'tokyo', 'traditional'],
       shouldNotInclude: ['budget', 'hostel', 'family-friendly'],
     },
     communicationStyle: 'polite, detail-oriented, appreciates recommendations, romantic',
@@ -451,7 +451,7 @@ class TravelerPersonaAgent {
     this.apiBaseUrl = options.apiBaseUrl || 'http://localhost:5176/api/v1';
     this.maxTurns = options.maxTurns || 15;
     this.verbose = options.verbose ?? true;
-    this.userEmail = options.userEmail || 'test@test.com';
+    this.userEmail = options.userEmail || 'alejandrapollak3@gmail.com';
     this.conversationHistory = [];
     this.startTime = Date.now();
 
