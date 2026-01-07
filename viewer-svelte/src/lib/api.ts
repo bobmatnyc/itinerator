@@ -112,10 +112,52 @@ async function handleResponse<T>(response: Response): Promise<T> {
   return response.json();
 }
 
+/**
+ * Fetch wrapper with timeout support
+ */
+async function fetchWithTimeout(url: string, options: RequestInit, timeoutMs = 30000): Promise<Response> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal
+    });
+    return response;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+/**
+ * Fetch wrapper that includes credentials for cookie-based auth
+ * Required for cross-origin requests (e.g., ngrok tunnels)
+ * Includes timeout and better error classification
+ */
+async function fetchWithCredentials(url: string, options: RequestInit = {}): Promise<Response> {
+  try {
+    return await fetchWithTimeout(url, {
+      ...options,
+      credentials: 'include', // Always send cookies
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.name === 'AbortError') {
+        throw new Error('Request timed out. Please try again.');
+      }
+      if (error.message === 'Failed to fetch') {
+        throw new Error('Unable to connect to server. Please check your connection and try again.');
+      }
+    }
+    throw error;
+  }
+}
+
 export const apiClient = {
   // Health check
   async checkHealth(): Promise<{ status: string; timestamp: string; service: string }> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.HEALTH}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.HEALTH}`, {
       cache: 'no-store',
     });
     return handleResponse(response);
@@ -123,7 +165,7 @@ export const apiClient = {
 
   // Get all itineraries
   async getItineraries(): Promise<ItineraryListItem[]> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.ITINERARIES}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.ITINERARIES}`, {
       headers: getBaseHeaders(),
     });
     return handleResponse<ItineraryListItem[]>(response);
@@ -131,7 +173,7 @@ export const apiClient = {
 
   // Get single itinerary
   async getItinerary(id: string): Promise<Itinerary> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.ITINERARIES}/${id}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.ITINERARIES}/${id}`, {
       headers: getBaseHeaders(),
     });
     return handleResponse<Itinerary>(response);
@@ -144,7 +186,7 @@ export const apiClient = {
     startDate: string;
     endDate: string;
   }): Promise<Itinerary> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.ITINERARIES}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.ITINERARIES}`, {
       method: 'POST',
       headers: getBaseHeaders(),
       body: JSON.stringify(data),
@@ -165,7 +207,7 @@ export const apiClient = {
       tags?: string[];
     }
   ): Promise<Itinerary> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.ITINERARIES}/${id}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.ITINERARIES}/${id}`, {
       method: 'PATCH',
       headers: getBaseHeaders(),
       body: JSON.stringify(data),
@@ -175,7 +217,7 @@ export const apiClient = {
 
   // Delete itinerary
   async deleteItinerary(id: string): Promise<void> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.ITINERARIES}/${id}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.ITINERARIES}/${id}`, {
       method: 'DELETE',
       headers: getBaseHeaders(),
     });
@@ -196,7 +238,7 @@ export const apiClient = {
 
   // Add segment to itinerary
   async addSegment(itineraryId: string, segmentData: Partial<import('./types').Segment>): Promise<import('./types').Itinerary> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.ITINERARIES}/${itineraryId}/segments`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.ITINERARIES}/${itineraryId}/segments`, {
       method: 'POST',
       headers: getBaseHeaders(),
       body: JSON.stringify(segmentData),
@@ -210,7 +252,7 @@ export const apiClient = {
     segmentId: string,
     segmentData: Partial<import('./types').Segment>
   ): Promise<import('./types').Itinerary> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.ITINERARIES}/${itineraryId}/segments/${segmentId}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.ITINERARIES}/${itineraryId}/segments/${segmentId}`, {
       method: 'PATCH',
       headers: getBaseHeaders(),
       body: JSON.stringify(segmentData),
@@ -220,7 +262,7 @@ export const apiClient = {
 
   // Delete segment
   async deleteSegment(itineraryId: string, segmentId: string): Promise<import('./types').Itinerary> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.ITINERARIES}/${itineraryId}/segments/${segmentId}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.ITINERARIES}/${itineraryId}/segments/${segmentId}`, {
       method: 'DELETE',
       headers: getBaseHeaders(),
     });
@@ -238,7 +280,7 @@ export const apiClient = {
       phone?: string;
     }
   ): Promise<import('./types').Itinerary> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.ITINERARIES}/${itineraryId}/travelers`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.ITINERARIES}/${itineraryId}/travelers`, {
       method: 'POST',
       headers: getBaseHeaders(),
       body: JSON.stringify(travelerData),
@@ -258,7 +300,7 @@ export const apiClient = {
       phone?: string;
     }
   ): Promise<import('./types').Itinerary> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.ITINERARIES}/${itineraryId}/travelers/${travelerId}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.ITINERARIES}/${itineraryId}/travelers/${travelerId}`, {
       method: 'PATCH',
       headers: getBaseHeaders(),
       body: JSON.stringify(travelerData),
@@ -268,7 +310,7 @@ export const apiClient = {
 
   // Delete traveler
   async deleteTraveler(itineraryId: string, travelerId: string): Promise<import('./types').Itinerary> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.ITINERARIES}/${itineraryId}/travelers/${travelerId}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.ITINERARIES}/${itineraryId}/travelers/${travelerId}`, {
       method: 'DELETE',
       headers: getBaseHeaders(),
     });
@@ -280,7 +322,7 @@ export const apiClient = {
     itineraryId: string,
     preferences: Record<string, unknown>
   ): Promise<import('./types').Itinerary> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.ITINERARIES}/${itineraryId}/preferences`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.ITINERARIES}/${itineraryId}/preferences`, {
       method: 'PATCH',
       headers: getBaseHeaders(),
       body: JSON.stringify(preferences),
@@ -290,7 +332,7 @@ export const apiClient = {
 
   // Get available models
   async getModels(): Promise<ModelConfig[]> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.AGENT.MODELS}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.AGENT.MODELS}`, {
       headers: getBaseHeaders(),
     });
     return handleResponse<ModelConfig[]>(response);
@@ -326,7 +368,7 @@ export const apiClient = {
       headers['X-User-Email'] = userEmail;
     }
 
-    const response = await fetch(`${API_BASE_URL}${API_V1.AGENT.IMPORT_PDF}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.AGENT.IMPORT_PDF}`, {
       method: 'POST',
       headers,
       body: formData,
@@ -336,7 +378,7 @@ export const apiClient = {
 
   // Get cost summary
   async getCosts(): Promise<unknown> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.AGENT.COSTS}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.AGENT.COSTS}`, {
       headers: getBaseHeaders(),
     });
     return handleResponse(response);
@@ -344,7 +386,7 @@ export const apiClient = {
 
   // Chat endpoints (AI-powered - use getAIHeaders for API key)
   async createChatSession(itineraryId?: string, mode: 'trip-designer' | 'help' = 'trip-designer'): Promise<{ sessionId: string }> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}`, {
       method: 'POST',
       headers: getAIHeaders(),
       body: JSON.stringify({ itineraryId, mode }),
@@ -353,7 +395,7 @@ export const apiClient = {
   },
 
   async sendChatMessage(sessionId: string, message: string): Promise<AgentResponse> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}/${sessionId}/messages`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}/${sessionId}/messages`, {
       method: 'POST',
       headers: getAIHeaders(),
       body: JSON.stringify({ message }),
@@ -362,14 +404,14 @@ export const apiClient = {
   },
 
   async getChatSession(sessionId: string): Promise<unknown> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}/${sessionId}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}/${sessionId}`, {
       headers: getAIHeaders(),
     });
     return handleResponse(response);
   },
 
   async deleteChatSession(sessionId: string): Promise<void> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}/${sessionId}`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}/${sessionId}`, {
       method: 'DELETE',
       headers: getAIHeaders(),
     });
@@ -379,7 +421,7 @@ export const apiClient = {
   },
 
   async *sendChatMessageStream(sessionId: string, message: string): AsyncGenerator<ChatStreamEvent> {
-    const response = await fetch(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}/${sessionId}/messages/stream`, {
+    const response = await fetchWithCredentials(`${API_BASE_URL}${API_V1.DESIGNER.SESSIONS}/${sessionId}/messages/stream`, {
       method: 'POST',
       headers: getAIHeaders(),
       body: JSON.stringify({ message }),

@@ -731,8 +731,25 @@
     </div>
   {:else if $chatError}
     <div class="chatpanel-error">
-      <strong>Error:</strong>
-      {$chatError}
+      <div class="chatpanel-error-content">
+        <strong>Connection Error</strong>
+        <p class="chatpanel-error-message">{$chatError}</p>
+        {#if $chatError.includes('API key')}
+          <a href="/profile" class="chatpanel-error-link">Check Settings →</a>
+        {/if}
+      </div>
+      <button
+        class="chatpanel-retry-button"
+        onclick={async () => {
+          chatError.set(null);
+          if (itineraryId) {
+            await createChatSession(itineraryId, agent.mode);
+          }
+        }}
+        type="button"
+      >
+        Retry
+      </button>
     </div>
   {/if}
 
@@ -1169,11 +1186,62 @@
   }
 
   .chatpanel-error {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
     padding: 0.75rem 1rem;
     background-color: #fef2f2;
     border-bottom: 1px solid #fee2e2;
     color: #dc2626;
     font-size: 0.875rem;
+  }
+
+  .chatpanel-error-content {
+    flex: 1;
+  }
+
+  .chatpanel-error-content strong {
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .chatpanel-error-message {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #991b1b;
+  }
+
+  .chatpanel-error-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #dc2626;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .chatpanel-error-link:hover {
+    color: #991b1b;
+    text-decoration: underline;
+  }
+
+  .chatpanel-retry-button {
+    padding: 0.375rem 0.75rem;
+    background: white;
+    border: 1px solid #fecaca;
+    border-radius: 0.375rem;
+    color: #dc2626;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .chatpanel-retry-button:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
   }
 
   .chatpanel-updating-banner {

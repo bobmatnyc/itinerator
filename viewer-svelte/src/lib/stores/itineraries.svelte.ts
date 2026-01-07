@@ -56,6 +56,7 @@ export const importing = writable<boolean>(false);
 class ItinerariesStore {
   /**
    * Load all itineraries from API
+   * Gracefully handles errors by showing empty state instead of blocking UI
    */
   async loadAll(): Promise<void> {
     itinerariesLoading.set(true);
@@ -67,6 +68,9 @@ class ItinerariesStore {
       itineraries.set(data);
     } catch (err) {
       console.error('[Store] Failed to load itineraries:', err);
+      // Set empty array instead of error to show empty state UI
+      // This prevents API failures from blocking the entire view
+      itineraries.set([]);
       itinerariesError.set(err instanceof Error ? err.message : 'Failed to load itineraries');
     } finally {
       itinerariesLoading.set(false);
