@@ -156,3 +156,8 @@ test/data/05-versions-space.pdf
 tests/e2e/results/*.json
 tests/e2e/results/*.md
 data/itineraries/
+
+# Test result files (may contain API keys or sensitive data)
+*-results.txt
+test-*.txt
+*-test-results.*
