@@ -1,6 +1,6 @@
 {
   "name": "itinerator",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "A modern CLI tool for managing travel itineraries",
   "type": "module",
   "bin": {
