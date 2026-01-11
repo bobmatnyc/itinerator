@@ -1,39 +1,39 @@
 {
-	"name": "viewer-svelte",
-	"private": true,
-	"version": "0.2.6",
-	"type": "module",
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
-	},
-	"devDependencies": {
-		"@skeletonlabs/skeleton": "^4.8.0",
-		"@skeletonlabs/tw-plugin": "^0.4.1",
-		"@sveltejs/adapter-auto": "^7.0.0",
-		"@sveltejs/kit": "^2.49.1",
-		"@sveltejs/vite-plugin-svelte": "^6.2.1",
-		"@tailwindcss/postcss": "^4.1.18",
-		"autoprefixer": "^10.4.23",
-		"clsx": "^2.1.1",
-		"playwright": "^1.57.0",
-		"postcss": "^8.5.6",
-		"svelte": "^5.45.6",
-		"svelte-check": "^4.3.4",
-		"tailwindcss": "^4.1.18",
-		"typescript": "^5.9.3",
-		"vite": "^7.2.6"
-	},
-	"dependencies": {
-		"@sveltejs/adapter-vercel": "^6.2.0",
-		"@types/leaflet": "^1.9.21",
-		"leaflet": "^1.9.4",
-		"lucide-svelte": "^0.562.0",
-		"phosphor-svelte": "^3.0.1",
-		"swagger-ui-dist": "^5.17.14"
-	}
+  "name": "viewer-svelte",
+  "private": true,
+  "version": "0.2.7",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "prepare": "svelte-kit sync || echo ''",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+  },
+  "devDependencies": {
+    "@skeletonlabs/skeleton": "^4.8.0",
+    "@skeletonlabs/tw-plugin": "^0.4.1",
+    "@sveltejs/adapter-auto": "^7.0.0",
+    "@sveltejs/kit": "^2.49.1",
+    "@sveltejs/vite-plugin-svelte": "^6.2.1",
+    "@tailwindcss/postcss": "^4.1.18",
+    "autoprefixer": "^10.4.23",
+    "clsx": "^2.1.1",
+    "playwright": "^1.57.0",
+    "postcss": "^8.5.6",
+    "svelte": "^5.45.6",
+    "svelte-check": "^4.3.4",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.6"
+  },
+  "dependencies": {
+    "@sveltejs/adapter-vercel": "^6.2.0",
+    "@types/leaflet": "^1.9.21",
+    "leaflet": "^1.9.4",
+    "lucide-svelte": "^0.562.0",
+    "phosphor-svelte": "^3.0.1",
+    "swagger-ui-dist": "^5.17.14"
+  }
 }

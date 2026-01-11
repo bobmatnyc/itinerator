@@ -1,6 +1,6 @@
 {
   "name": "itinerator",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "A modern CLI tool for managing travel itineraries",
   "type": "module",
   "bin": {
@@ -38,12 +38,7 @@
     "typecheck": "tsc --noEmit",
     "version:bump": "node scripts/bump-version.js"
   },
-  "keywords": [
-    "cli",
-    "itinerary",
-    "travel",
-    "typescript"
-  ],
+  "keywords": ["cli", "itinerary", "travel", "typescript"],
   "author": "",
   "license": "MIT",
   "dependencies": {
